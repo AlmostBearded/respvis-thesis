@@ -1,0 +1,858 @@
+%----------------------------------------------------------------
+%
+%  File    :  thesis.tex
+%
+%  Author  :  Keith Andrews, ISDS, TU Graz, Austria
+%
+%  Created :  30 Jul 1997
+% 
+%  Changed :  22 Jan 2021
+%
+%----------------------------------------------------------------
+
+\documentclass[11pt]{book}
+\usepackage[
+  a4paper,
+  twoside,
+  top=5mm,                % top margin
+  bottom=7mm,             % bottom margin
+  inner=20mm,             % inner margin (next to binding)
+  outer=20mm,             % outer margin (opposite binding)
+  bindingoffset=10mm,     % on binding side
+  includeheadfoot,        % include head(er) and foot(er)
+  headheight=10mm,        % height of header
+  headsep=15mm,           % sep between header and text body
+  footskip=15mm,          % sep between body and baseline of footer
+  footnotesep = 10mm plus 2mm minus 0mm  % bottom of body to top of footnote
+]{geometry}
+% A4 paper is w=210m, h=297mm
+
+
+\newcommand{\thisdate}{22 Jan 2021}  % date of this version
+\newcommand{\thisyear}{2021}         % year of this version
+
+
+\newcommand{\fullh}{24cm}         % height of figures for 1 per page
+\newcommand{\halfh}{9.5cm}        % height of figures for 2 per page
+\newcommand{\thirdh}{6cm}         % height of figures for 3 per page
+
+
+\setlength{\parindent}{1em}       % less indentation
+\setlength{\parskip}{1.5ex plus 0.3ex minus 0.3ex}  % vert. space before para
+
+
+% \tolerance is set by LaTeX to 200
+% \sloppy sets \tolerance = 9999
+% which allows LaTeX more tolerance in adding word spacing
+
+% \sloppy
+% \fussy
+% \tolerance = 1000
+
+\tolerance=400 
+% makes some lines with lots of white space, but      
+% tends to prevent words from sticking out in the margin
+
+
+
+\setcounter{secnumdepth}{3}     % lowest section level still numbered
+\setcounter{tocdepth}{2}        % lowest section level entered in ToC
+
+
+
+
+\usepackage[T1]{fontenc}        % 8-bit output chars (must be before inputenx)
+\usepackage[utf8]{inputenx}     % input char encoding
+
+\usepackage[english,austrian,british]{babel}
+
+\usepackage{newtxtext}          % newer times fonts
+\usepackage{newtxmath}
+
+\usepackage{relsize}            % relative font sizes \smaller \larger
+\usepackage{float}              % H for float placement
+\usepackage{setspace}           % adjust line spacing
+
+\usepackage{textcomp}           % symbols such as \texttimes and \texteuro
+\usepackage{latexsym}
+\usepackage{fontawesome}        % fontawesome symbols
+
+\usepackage{siunitx}            % prettier number formatting
+\sisetup{%
+  group-separator={,},
+  group-minimum-digits=4,
+}
+\usepackage[super]{nth}         % 1st, 2nd, 3rd, etc.
+
+\usepackage{xspace}
+\usepackage{xstring}            % string manipulation macros
+\usepackage{xparse}             % commands with optional arguments
+\usepackage{etoolbox}           % for \newrobustcmd
+\usepackage{makecmds}           % for \makecommand
+\usepackage{calc}               % for math calculations
+
+
+\usepackage[svgnames,table,xcdraw]{xcolor}
+\definecolor{darkgreen}{rgb}{0.0,0.2,0.0}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.2}
+\definecolor{darkred}{rgb}{0.2,0.0,0.0}
+\definecolor{verylightgrey}{gray}{0.95}
+\definecolor{lightgrey}{gray}{0.9}
+\definecolor{grey}{gray}{0.7}
+\definecolor{black}{gray}{0.0}
+
+
+\usepackage{longtable}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\usepackage{verbdef}            % define robust verb strings
+\usepackage{verbatim}
+\usepackage{comment}
+
+
+
+% better lists
+\usepackage{enumitem}
+
+\setlist{
+  topsep=0pt,
+  partopsep=0pt,
+  parsep=0.6ex,
+  itemsep=1.2ex,
+  left=\parindent .. 2\parindent,    % bullet .. start ot text
+}
+
+\setlist[description]{
+  style=sameline,
+}
+
+
+
+
+\usepackage{listings}                 % for listings of source code
+
+\makeatletter
+\newlength{\numwidth}%
+\setlength{\numwidth}{\widthof{\normalfont{\lst@numberstyle{99}}}}% Up to 2-digit (99) line numbers
+\def\lst@PlaceNumber{%
+  \makebox[\numwidth+1em][l]{%
+    \makebox[\numwidth][r]{\normalfont\lst@numberstyle{\thelstnumber}}%
+  }%
+}
+\makeatother
+
+% lstset strategy: define defaults here for
+% all non-floating (displayed) listings
+% floated listings override these settings later
+
+\lstset{                              % set parameters for listings
+  floatplacement=tp,                  % default float placement
+  numberbychapter,
+  inputencoding=utf8,
+  language=,                          % empty = plain text
+  tabsize=2,
+  xleftmargin=2\parindent,
+  xrightmargin=2\parindent,
+  frame=none,
+  framexleftmargin=0mm,
+  rulesepcolor=\color{verylightgrey},
+  numbers=none,
+  numberstyle=\scriptsize,
+  numbersep=2ex,
+  breaklines,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  %
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{black},
+  identifierstyle=\color{black},
+  commentstyle=\color{SteelBlue},
+  stringstyle=\color{DarkOrange},
+  %
+  captionpos=b,
+  abovecaptionskip=\abovecaptionskip,
+  belowcaptionskip=\belowcaptionskip,
+  extendedchars=true,
+  literate=%
+    { }{{~}}1
+    {©}{{\textcopyright}}1
+    {€}{{\texteuro}}1
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ö}{{\"o}}1
+    {ä}{{\"a}}1
+    {ü}{{\"u}}1,       % map some utf8 chars for listings
+}
+
+
+\lstdefinelanguage{biblatex}   % based on biblatex v 2.7a from 2013-07-14
+{
+  keywords={%
+    @article,@book,@mvbook,@inbook,@bookinbook,@suppbook,%
+    @booklet,@collection,@mvcollection,@incollection,@suppcollection,%
+    @manual,@misc,@online,@patent,@periodical,@suppperiodical,%
+    @proceedings,@mvproceedings,@inproceedings,@reference,@mvreference,%
+    @inreference,@report,@set,@thesis,@unpublished,@xdata,%
+    @conference,@electronic,@mastersthesis,@phdthesis,@techreport,@www,%
+    @artwork,@audio,@bibnote,@commentary,@image,@jurisdiction,@legislation,%
+    @legal,@letter,@movie,@music,@performance,@review,@software,%
+    @standard,@video%
+  },
+  sensitive=false,
+  comment=[l][\itshape]{@comment},
+  morecomment=[l]{\%},
+}
+
+\lstdefinelanguage{CSS}
+{
+  alsoletter={-},
+  morekeywords={%
+  color,background,background-color,margin,padding,font,
+  font-family,weight,%
+  display,position,top,left,right,bottom,list,%
+  style,border,size,white,space,min,width%
+  },
+  sensitive=false,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]",
+}
+
+
+
+
+\usepackage[compact,nobottomtitles,pagestyles,explicit]{titlesec}
+% when using explicit, must explicitly include #1 for titlename
+
+% nobottomtitles
+% move section headings close to page bottom to next page
+\renewcommand{\bottomtitlespace}{2cm}
+
+% \chaptermark sets the value of \chaptertitle for later
+% \@chapapp is defined as \chaptername outside the appendix,
+% and as \appendixname within the appendix.
+\makeatletter
+\titleformat{\chapter}
+[display]                                            % shape
+{\chaptermark{\thechapter~~#1}\sffamily\bfseries}    % format
+{\huge\@chapapp\ \thechapter}                        % label
+{4ex}                                                % sep
+{\Huge#1}                                            % before-code
+\makeatother
+
+\titleformat{name=\chapter,numberless}
+[block]                                              % shape
+{\chaptermark{#1}\sffamily\bfseries}                 % format
+{}                                                   % label
+{0ex}                                                % sep
+{\Huge#1}                                            % before-code
+
+\titleformat{\section}
+{\normalfont\Large\sffamily\bfseries}{\thesection}{0.8em}{#1}
+
+\titleformat{\subsection}
+{\normalfont\large\sffamily\bfseries}{\thesubsection}{0.8em}{#1}
+
+\titleformat{\subsubsection}
+{\normalfont\normalsize\sffamily\bfseries}{\thesubsubsection}{0.8em}{#1}
+
+\titleformat{\paragraph}[runin]
+{\normalfont\normalsize\sffamily\bfseries}{\theparagraph}{0.8em}{#1}
+
+\titleformat{\subparagraph}[runin]
+{\normalfont\normalsize\sffamily\bfseries}{\thesubparagraph}{0.8em}{#1}
+
+
+% vertical spacing before and after section titles
+\titlespacing*{\section}
+{0pt}{3.5ex plus 0.5ex minus 0.5ex}{0ex plus 0ex minus 0.2ex}
+
+\titlespacing*{\subsection}
+{0pt}{2.5ex plus 0.5ex minus 0.5ex}{0ex plus 0ex minus 0.2ex}
+
+\titlespacing*{\subsubsection}
+{0pt}{2ex plus 0.5ex minus 0.5ex}{0ex plus 0ex minus 0.2ex}
+
+\titlespacing*{\paragraph}
+{0pt}{1.5ex plus 0.3ex minus 0.3ex}{0ex plus 0ex minus 0.15ex}
+
+\titlespacing*{\subparagraph}
+{0pt}{1ex plus 0.2ex minus 0.2ex}{0ex plus 0ex minus 0.1ex}
+
+
+% define page headings how I want them
+
+\newpagestyle{main}[\small]{
+% \addtolength\headheight{6.7pt}
+% \headrule
+\sethead%
+[{\parbox[t]{0.3\textwidth}%                    % even left
+  {\sffamily\thepage}}]
+[]%                                             % even centre
+[{\parbox[t]{0.6\textwidth}%                    % even right
+  {\raggedleft\sffamily\chaptertitle}}]
+{{\parbox[t]{0.6\textwidth}%                    % odd left
+  {\sffamily\sectiontitle}}}%
+{}%                                             % odd centre
+{{\parbox[t]{0.3\textwidth}%                    % odd right
+  {\raggedleft\sffamily\thepage}}}
+}
+
+
+
+
+
+\usepackage{titletoc}
+
+% \contentsmargin{2.55em}
+
+\titlecontents{chapter}%
+[1.5em]%                         % left indent to entry text
+{\addvspace{1em}\bfseries}%      % above-code per entry
+{\contentslabel{1.5em}}%         % format for numbered entry
+{\hspace*{-1.5em}}%              % format for unnumbered entry
+{\hfill\contentspage}%           % [no dots] and page num per entry
+
+
+% Note: \dottedcontents is short form of \titlecontents
+
+\dottedcontents{section}%
+[3.8em]%                         % left indent to entry text = 1.5 + 2.3
+{}%                              % above-code per entry
+{2.3em}%                         % label width
+{1pc}%                           % space around the dots
+
+\dottedcontents{subsection}%
+[7.4em]%                         % left indent to entry text = 3.8 + 3.6
+{}%                              % above-code per entry
+{3.6em}%                         % label width
+{1pc}%                           % space around the dots
+
+
+\dottedcontents{figure}%         % LoF entries
+[3.0em]%                         % left indent to entry text = 3.8 + 3.6
+{}%                              % above-code per entry
+{3.0em}%                         % label width
+{1pc}%                           % space around the dots
+
+\dottedcontents{table}%          % LoT entries
+[3.0em]%                         % left indent to entry text = 3.8 + 3.6
+{}%                              % above-code per entry
+{3.0em}%                         % label width
+{1pc}%                           % space around the dots
+
+
+
+% List of Listings is unknown to titletoc, define here
+
+% Add extra per-chapter space to LoL to mimic LoF and LoT
+% (requires package etoolbox)
+\makeatletter
+\patchcmd{\@chapter}% <cmd>
+  {\addtocontents}% <search>
+  {\addtocontents{lol}{\protect\addvspace{10\p@}}% add per-chapter space
+   \addtocontents}% <replace>
+  {}{}% <success><failure>
+\makeatother
+
+% Configure LoL to mimic LoF and LoT
+\contentsuse{lstlisting}{lol}
+
+\titlecontents{lstlisting}%
+[3.0em]%                              % left indent
+{\addvspace{1.5mm}}%                  % above-code per entry
+{\contentslabel{3.0em}}%              % format for numbered entry
+{\hspace*{-3.0em}}%                   % format for unnumbered entry
+{\titlerule*[1pc]{.} \contentspage}%  % dots and page num per entry
+[]%                                   % below-code per entry
+
+\renewcommand{\lstlistlistingname}{List of Listings}
+
+
+
+
+
+
+% sensible settings for floats
+
+\setlength{\textfloatsep}{9mm plus 2mm minus 2mm}
+\setlength{\floatsep}{9mm plus 2mm minus 2mm}
+\setlength{\intextsep}{9mm plus 2mm minus 2mm}
+
+\setlength{\dbltextfloatsep}{9mm plus 2mm minus 2mm}
+\setlength{\dblfloatsep}{9mm plus 2mm minus 2mm}
+
+\setlength{\abovecaptionskip}{4mm plus 2mm minus 1mm}
+\setlength{\belowcaptionskip}{0mm}
+
+% See http://www-rohan.sdsu.edu/~aty/bibliog/latex/floats.html
+% See https://robjhyndman.com/hyndsight/latex-floats/
+
+\setcounter{topnumber}{2}               % max num floats at top of page
+\setcounter{dbltopnumber}{2}            % max num floats on 2col page
+\setcounter{bottomnumber}{2}            % max num floats at bottom of page
+\setcounter{totalnumber}{4}             % max num floats on a page
+
+\renewcommand{\topfraction}{0.8}        % max fraction of floats at top
+\renewcommand{\dbltopfraction}{0.9}     % max fraction of floats at top 2col
+\renewcommand{\bottomfraction}{0.8}     % max fraction of floats at bottom
+\renewcommand{\textfraction}{0.2}       % min fraction of text
+
+% only for entirely float pages:
+\renewcommand{\floatpagefraction}{0.7}      % min page fraction having floats
+\renewcommand{\dblfloatpagefraction}{0.7}   % min 2col page fraction having floats
+
+
+\usepackage[section,above,below]{placeins}  % keep floats to their own section
+
+
+
+
+
+% use caption and subfig (caption2 and subfigure are now obsolete)
+
+\usepackage[
+  position=bottom,
+  margin=1cm,
+  font=small,
+  labelfont={bf,sf},
+  format=hang,        % or plain
+  indention=0mm,
+  aboveskip=4mm,
+  belowskip=0mm,
+]{caption,subfig}
+
+\captionsetup[subfigure]{
+  margin=0pt,
+  parskip=0pt,
+  hangindent=0pt,
+  indention=0pt,
+  singlelinecheck=true,
+  farskip=4mm,            % skip above subfig (assuming captions at bottom)
+  captionskip=2mm,        % skip between subfig and subcaption
+}
+
+
+
+
+\usepackage[hyphens,obeyspaces]{url}
+\def\UrlFont{\smaller\ttfamily}
+
+
+
+
+\usepackage[short]{datetime}   % load datetime *after* babel, requires fmtcount
+% \newdateformat{britdate}{%
+% \ordinaldate{\THEDAY} \,\monthname[\THEMONTH] \THEYEAR
+% }
+\newdateformat{unixdate}{%
+\twodigit{\THEDAY}~\shortmonthname[\THEMONTH]~\THEYEAR
+}
+
+% TODO: use new datetime2 instead of datetime
+
+
+
+\usepackage[
+  autostyle=true,          % adapt quote style to current language
+  english=british,         % british english as default
+  threshold=1,             % set block quotations >1 line in display mode
+  maxlevel=4,              % max nesting level
+]{csquotes}
+
+\usepackage[
+  indentfirst=false,
+  vskip=0pt,               % by default would be \topsep + \partopsep.
+]{quoting}
+
+% tell csquotes to use quoting environment
+% for \displayquote and \blockquote
+\SetBlockEnvironment{quoting}
+
+% if cite is issued by a csquote command
+\renewcommand{\mkcitation}[1]{\space#1}
+
+% I prefer double quotes as outer
+\DeclareQuoteStyle{keithbritish}%  [variant]{style}
+  {\textquotedblleft}%                      opening outer mark
+  {\textquotedblright}%                     closing outer mark
+  [0.05em]%
+  {\textquoteleft}%                         opening inner mark
+  {\textquoteright}%                        closing inner mark
+
+\ExecuteQuoteOptions{style=keithbritish}
+
+
+
+\usepackage[
+  backend=biber,
+%  style=ext-authoryear-comp,   % defined in biblatex-ext package
+  style=ext-authoryear,        % defined in biblatex-ext package
+  sorting=nyt,
+  useprefix,                   % van and von are part of second name
+  mergedate=false,             % only for authoryear style
+  dashed=false,                % only for authoryear style
+  abbreviate=false,
+  maxcitenames=2,              % if > 2 authors,
+  mincitenames=1,              % use first 1 then et al
+  maxbibnames=99,              % if > 99 authors,
+  minbibnames=6,               % use first 6 then et al
+  uniquelist=minyear,
+  uniquename=init,
+  hyperref=true,
+  backref=true,
+  backrefstyle=two,
+  sortlocale=en,
+]{biblatex}
+
+
+% set for csquotes, but \autocite only available
+% after biblatex is loaded
+\SetCiteCommand{\autocite}    % or maybe \parencite
+
+% more space between entries in bib
+\setlength\bibitemsep{1.5\itemsep}
+
+% kandrews: replace round brackets with square brackets in citations
+\DeclareOuterCiteDelims{parencite}{\bibopenbracket}{\bibclosebracket}
+\DeclareInnerCiteDelims{textcite}{\bibopenbracket}{\bibclosebracket}
+
+% kandrews: replace round brackets with square brackets in bibliography
+% biblabeldate is a biblatex-ext feature
+\DeclareFieldFormat{biblabeldate}{\mkbibbrackets{#1}}
+
+
+% remove URL: from in front of URLs
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{doi}{\doi{#1}}
+\DeclareFieldFormat{isbn}{\isbn{#1}}
+\DeclareFieldFormat{issn}{\issn{#1}}
+
+% suppress urldate field
+\AtEveryBibitem{\clearfield{urlyear}}
+
+% remove In: from aricles and inproceedings entries
+% https://tex.stackexchange.com/questions/10682/suppress-in-biblatex
+\renewbibmacro{in:}{%
+  \ifboolexpr{%
+     test {\ifentrytype{article}}%
+     or
+     test {\ifentrytype{inproceedings}}%
+  }{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
+
+% make all entry titles italic
+% (also removes quotation marks from around titles)
+% https://tex.stackexchange.com/questions/311816/want-title-in-simple-numeric-not-italic-through-bibliography
+\DeclareFieldFormat*{title}{\mkbibitalic{#1}}
+\DeclareFieldFormat*{citetitle}{\mkbibitalic{#1}}
+
+% make journal names non-italic
+\DeclareFieldFormat{journaltitle}{#1\isdot}
+
+% make proceedings names non-italic
+\DeclareFieldFormat[inproceedings]{booktitle}{#1\isdot}
+
+% use nth for edition
+\DeclareFieldFormat{edition}{%
+  \ifinteger{#1}
+    {\nth{#1}~\bibstring{edition}}
+    {#1\isdot}}
+
+% overwrite some standard strings in english.lbx
+\DefineBibliographyStrings{english}{%
+  edition          = {Edition},
+  mathesis         = {Master's Thesis},
+  phdthesis        = {PhD\addabbrvspace Thesis},
+}
+
+
+% kandrews
+% use Unix format for dates in biblio:
+% 29 Dec 2015, 01 Oct 2018, etc.
+
+% for now, define under lang english not british
+% due to bug in biblatex 3.11
+
+\DefineBibliographyStrings{english}{%
+  january          = {Jan},
+  february         = {Feb},
+  march            = {Mar},
+  april            = {Apr},
+  may              = {May},
+  june             = {Jun},
+  july             = {Jul},
+  august           = {Aug},
+  september        = {Sep},
+  october          = {Oct},
+  november         = {Nov},
+  december         = {Dec},
+}
+
+\DefineBibliographyExtras{english}{%
+% #1 = year, #2 = month, #3 = day
+\protected\def\mkbibdatelong#1#2#3{%
+  \iffieldundef{#3}
+    {}
+    {\mkdayzeros{\thefield{#3}}%
+     \iffieldundef{#2}{}{\nobreakspace}}%
+  \iffieldundef{#2}
+    {}
+    {\mkbibmonth{\thefield{#2}}%
+     \iffieldundef{#1}{}{\space}}%
+  \iffieldbibstring{#1}{\bibstring{\thefield{#1}}}{\mkyearzeros{\thefield{#1}}}}%
+%
+\protected\def\mkbibdateshort#1#2#3{%
+  \iffieldundef{#3}
+    {}
+    {\mkdayzeros{\thefield{#3}}%
+     \iffieldundef{#2}{}{\nobreakspace}}%
+  \iffieldundef{#2}
+    {}
+    {\mkbibmonth{\thefield{#2}}%
+     \iffieldundef{#1}{}{\space}}%
+  \iffieldbibstring{#1}{\bibstring{\thefield{#1}}}{\mkyearzeros{\thefield{#1}}}}%
+}
+
+
+% patch for biblatex 3.11 issue with babel .lbx files
+% https://github.com/plk/biblatex/issues/742
+% should no longer be necessary with biblatex 3.12
+%% \makeatletter
+%% \protected\long\def\blx@lbx@input@handler@simple#1#2#3#4#5#6{%
+%%   \blx@info@noline{Trying to load #2..}%
+%%   \IfFileExists{#1}
+%%     {\blx@info@noline{... file '#1' found}%
+%%      #3\@@input\@filef@und#4#5%
+%%      \ifcsundef{blx@file@lbx@simple@#1}
+%%        {\listxadd\blx@list@req@stat{#1}%
+%%         \@addtofilelist{#1}%
+%%         \global\cslet{blx@file@lbx@simple@#1}\@empty}
+%%        {}}
+%%     {\blx@info@noline{... file '#1' not found}#6}}
+%% 
+%% \protected\long\def\blx@lbx@input@handler@once#1#2#3#4#5#6{%
+%%   \ifcsundef{blx@file@lbx@once@#1}
+%%     {\blx@info@noline{Trying to load #2..}%
+%%      \IfFileExists{#1}
+%%        {\blx@info@noline{... file '#1' found}%
+%%         #3\@@input\@filef@und#4#5%
+%%         \ifcsundef{blx@file@lbx@simple@#1}
+%%           {\listxadd\blx@list@req@stat{#1}%
+%%            \@addtofilelist{#1}}
+%%           {}}
+%%        {\blx@info@noline{... file '#1' not found}#6}%
+%%      \global\cslet{blx@file@lbx@once@#1}\@empty
+%%      \global\cslet{blx@file@lbx@simple@#1}\@empty}
+%%     {#5}}
+%% \makeatother
+
+
+
+
+
+\addbibresource{writing.bib}
+\addbibresource{presentations.bib}
+\addbibresource{latex.bib}
+\addbibresource{kandrews.bib}
+\addbibresource{ivis.bib}
+
+
+
+
+
+% adapt pdftitle, pdfsubject, pdfauthor, pdfkeywords
+% for your survey paper
+
+\usepackage{ifpdf}
+
+\ifpdf
+  % pdflatex
+  \usepackage[pdftex]{graphicx}
+  \DeclareGraphicsExtensions{.pdf,.jpg,.png}
+  \pdfcompresslevel=9
+  \pdfobjcompresslevel=1  % also compress PDF object streams except embedded PDFs
+  \pdfpageheight=297mm
+  \pdfpagewidth=210mm
+  \usepackage[            % hyperref should be last package loaded
+    unicode,
+    pdftex,
+    pdfversion=1.7,
+    pdftitle={Guidelines for Writing a Master's Thesis},
+    pdfsubject={Master's Thesis Template},
+    pdfauthor={Keith Andrews},
+    pdfkeywords={master's thesis, skeleton, guidelines, template},
+    bookmarks,
+    bookmarksnumbered,
+    linktocpage,
+    colorlinks,
+    linkcolor=darkred,
+    anchorcolor=red,
+    citecolor=darkgreen,
+    urlcolor=darkblue,
+    pdfstartview=Fit,              % initial view
+    pdfview=Fit,                   % view after following a link
+    pdfpagelayout=SinglePage,      % single page, no scrolling
+    pdfpagemode=UseOutlines,       % open bookmarks in Acrobat
+    plainpages=false,              % avoids duplicate page number problem
+    pdfpagelabels,                 % avoids duplicate page number problem
+    breaklinks=true,               % allow links exceeding a single line
+  ]{hyperref}
+
+\else
+  % latex
+  \usepackage[dvips]{graphicx}
+  \DeclareGraphicsExtensions{.eps}
+  \usepackage[dvips]{hyperref}
+\fi
+
+
+
+% must be after \usepackage{graphicx}
+\usepackage[export]{adjustbox}    % export adjustbox keys to includegraphics
+
+
+
+
+
+\input{thesis-macros}
+
+
+
+
+\begin{document}
+
+\unixdate
+
+\frontmatter
+
+\normalsize
+\pagestyle{empty}             % for title pages
+\pagenumbering{Roman}         % for pdf labels
+
+\input{thesis-title}          % Title Pages, Abstracts, Pledge
+
+
+\cleardoublepage
+\pagestyle{plain}             % for preliminary pages
+\pagenumbering{roman}         % for preliminary pages
+
+
+\begin{spacing}{0.8}
+\tableofcontents
+\end{spacing}
+\addcontentsline{toc}{chapter}{Contents}
+
+\cleardoublepage
+\begin{spacing}{0.8}
+\listoffigures
+\end{spacing}
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\cleardoublepage
+\begin{spacing}{0.8}
+\listoftables
+\end{spacing}
+\addcontentsline{toc}{chapter}{List of Tables}
+
+\cleardoublepage
+\begin{spacing}{0.8}
+\lstlistoflistings
+\end{spacing}
+\addcontentsline{toc}{chapter}{List of Listings}
+
+
+
+\cleardoublepage
+\input{thesis-acknowl}        % Acknowledgements
+
+\cleardoublepage
+\input{thesis-credits}        % Credits
+
+
+
+\mainmatter
+
+\cleardoublepage
+\pagestyle{main}              % for main pages
+\pagenumbering{arabic}        % for main pages
+
+\cleardoublepage
+\input{thesis-intro}          % Introduction
+
+
+% Part 1 Embedding
+
+\cleardoublepage
+\input{thesis-embed}          %   Chapter 2
+
+\cleardoublepage
+\input{thesis-struc}          %   Chapter 3
+
+\cleardoublepage
+\input{thesis-academic}       %   Chapter 4
+
+\cleardoublepage
+\input{thesis-style}          %   Chapter 5
+
+\cleardoublepage
+\input{thesis-presentations}  %   Chapter 6
+
+% ....
+
+
+% Part 2 Original Work
+
+\cleardoublepage
+\input{thesis-tech}           %   Chapter N
+
+\cleardoublepage
+\input{thesis-details}        %   Selected Details
+
+\cleardoublepage
+\input{thesis-outlook}        %   Outlook
+
+\cleardoublepage
+\input{thesis-concl}          % Concluding Remarks
+
+
+
+\appendix
+
+\cleardoublepage
+\input{thesis-user}           % Appendix A
+
+\cleardoublepage
+\input{thesis-developer}      % Appendix B
+
+
+
+\backmatter
+
+% Ensure that certain references are listed in the bibliography,
+% even if they are not cited anywhere in the text.
+% \nocite{KeithMastersThesis}
+% \nocite{KeithPhdThesis}
+
+
+\cleardoublepage
+% for now, switch to language english
+% hack to force unix date for biblio, biblatex 3.11
+\begin{otherlanguage}{english}
+\printbibliography[heading=bibintoc]
+\end{otherlanguage}
+
+
+
+% \cleardoublepage
+% \input{glossary}      % Glossary
+ 
+% \cleardoublepage
+% \input{index}         % Index
+
+\end{document}
+

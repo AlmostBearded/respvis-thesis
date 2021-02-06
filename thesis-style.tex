@@ -1,0 +1,809 @@
+%----------------------------------------------------------------
+%
+%  File    :  thesis-style.tex
+%
+%  Author  :  Keith Andrews, ISDS, TU Graz, Austria
+% 
+%  Created :  27 May 1993
+% 
+%  Changed :  05 Nov 2018
+% 
+%----------------------------------------------------------------
+
+
+\chapter{Language and Writing Style}
+\label{chap:Style}
+
+
+\chapquote{
+It is an old observation that the best writers sometimes disregard the
+rules of rhetoric. When they do so, however, the reader will usually
+find in the sentence some compensating merit, attained at the cost of
+the violation.
+}
+{
+William Strunk, Jr., The Elements of Style, 1918.
+}
+
+
+A comprehensive guide to writing British English is the New Oxford
+Style Manual \parencite{NewOxfordStyleManual-3Ed}. The Economist Style
+Guide \parencite{EconomistStyleGuide-12Ed} provides a compact indexed guide
+to British English usage. \textcite{Zinsser-OnWritingWell-7Ed} is an
+easy to read companion.
+
+A comprehensive guide to writing American English is the Chicago
+Manual of Style \parencite{ChicagoManualStyle-17Ed}.  The classic
+compact reference for American English writing style and grammar is
+\textcite{StrunkWhite-4Ed}. The original text is now available for
+free online \parencite{Strunk-1Ed}. Another good free guide is
+\textcite{NASAGuide}.
+
+\textcite{Alley-CraftScientificWriting-4Ed} is a classic guide to
+scientific writing. Other good ones include
+\textcite{Booth-CraftResearch-4Ed} and
+\textcite{Booth-CommunicatingScience-2Ed}.
+%
+\textcite{Zobel-WritingCompSci} and \textcite{BugsInWriting} are guides
+specifically aimed at computer science students.
+\textcite{Phillips-HowGetPhD} gives practical advice for PhD
+students.
+%
+In 2017, Google made its internal Documentation Style Guide
+public \parencite{GoogleStyleGuide}.
+
+
+Sections~\ref{sec:Clear} and \ref{sec:Gender} of this chapter are
+adapted from the ACM CHI'94 conference language and writing style
+guidelines.
+
+
+
+% TODO
+% https://www.cs.ubc.ca/~tmm/writing.html
+
+
+
+
+
+
+\section{Paragraphs}
+
+Sentences should be grouped into paragraphs by topic. A new paragraph
+introduces a (slight) variation in topic. Paragraphs should consist of
+\emph{several} sentences. In general, short paragraphs of only one or
+two sentences should be merged topically with neighbouring paragraphs.
+%
+In \LaTeX, paragraphs are separated by a blank line. Random newlines
+({\smaller\verb|\newline|} or {\smaller\verb|\\|}) should \emph{never}
+be strewn throughout your text.
+
+% In LaTeX, use a single-line comment to merge two short, but
+% topically connected, paragraphs into one paragraph.
+
+
+
+
+
+\section{Some Basic Rules of English}
+
+There are a few basic rules of English for academic writing, which are
+broken regularly by my students, particularly if they are non-native
+speakers of English. Here are some classic and often encountered
+examples:
+
+\begin{itemize}[itemsep=2ex]
+
+\item \emph{Never} use I, we, or you.
+
+Write in the passive voice (third person).
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & You can do this in two ways.   \\
+\uthumb & There are two ways this can be done.  \\
+\end{tabular}
+
+
+
+\item \emph{Never} use he or she, his or her.
+
+Write in the passive voice (third person).
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The user speaks his thoughts out loud.   \\
+\uthumb & The thoughts of the user are spoken out loud.  \\
+\end{tabular}
+
+See Section~\ref{sec:Gender} for many more examples.
+
+
+
+\item Stick to a consistent dialect of English. Choose either
+  British or American English and keep to it throughout the
+  whole of your thesis.
+
+
+
+\item Do \emph{not} use slang abbreviations such as ``it's'',
+  ``doesn't'', or ``don't''.
+
+Write the words out in full: ``it is'', ``does not'', and ``do not''.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & It's very simple to\ldots       \\
+\uthumb & It is very simple to\ldots       \\
+\end{tabular}
+
+
+
+\item Do \emph{not} use abbreviations such as ``e.g.'' or
+  ``i.e.''. 
+
+Write the words out in full: ``for example'' and ``that is''.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & \ldots in a tree, e.g. the items\ldots        \\
+\uthumb & \ldots in a tree, for example the items\ldots   \\
+\end{tabular}
+
+
+
+\item Do \emph{not} use slang such as ``a lot of''.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & There are a lot of features\ldots       \\
+\uthumb & There are many features\ldots       \\
+\end{tabular}
+
+
+
+\item Do \emph{not} use slang such as ``OK'' or ``big''.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & \ldots are represented by big areas.    \\
+\uthumb & \ldots are represented by large areas.  \\
+\end{tabular}
+
+
+
+\item Do \emph{not} use slang such as ``gets'' or ``got''.
+
+Use ``becomes'' or ``obtains'', or use the passive voice (third
+person).
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The radius gets increased\ldots       \\
+\uthumb & The radius is increased\ldots         \\
+\end{tabular}
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The user gets disoriented\ldots       \\
+\uthumb & The user becomes disoriented\ldots    \\
+\end{tabular}
+
+
+
+
+\item \emph{Never} start a sentence with ``But''.
+
+Use ``However,'' or ``Nevertheless,''. Or consider joining the
+sentence to the previous sentence with a comma.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & But there are numerous possibilities\ldots       \\
+\uthumb & However, there are numerous possibilities\ldots  \\
+\end{tabular}
+
+
+
+\item \emph{Never} start a sentence with ``Because''.
+
+Use ``Since'', ``Owing to'', or ``Due to''. Or turn the two
+halves of the sentence around.
+
+
+
+
+\item \emph{Never} start a sentence with ``Also''. Also should
+be placed in the middle of the sentence.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Also the target users are considered. \\
+\uthumb & The target users are also considered. \\
+\end{tabular}
+
+
+
+\item Do \emph{not} use ``that'' as a connecting word.
+
+Use ``which''.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & \ldots a good solution that can be computed easily.  \\
+\uthumb & \ldots a good solution which can be computed easily.  \\
+\end{tabular}
+
+
+
+
+\item Do \emph{not} write single-sentence paragraphs. 
+
+Avoid writing two-sentence paragraphs. A paragraph should contain at
+least three, if not more, sentences.
+
+
+\end{itemize}
+
+
+
+% rules on the use of a comma in lists
+% http://en.wikipedia.org/wiki/Serial_comma
+
+
+
+
+
+
+
+\section{English Usage}
+\label{sec:EnglishUsage}
+
+I see these mistakes time and time again. Please do not
+let me read one of them in your work.
+
+
+
+\begin{itemize}[itemsep=2ex]
+
+
+\item ``allows to'' is not English.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The prototype allows to arrange components\ldots \\
+\uthumb & The prototype supports the arrangement of components\ldots \\[1ex]
+\dthumb & The system allows to identify issues\ldots \\
+\uthumb & Issues can be identified by the system\ldots \\
+\end{tabular}
+
+% they allow to achieve
+
+
+
+\item ``enables to'' is not English.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & it enables to recognise meanings\ldots \\
+\uthumb & it enables the recognition of meanings\ldots \\
+\end{tabular}
+
+
+
+\item ``per default'' is not English.
+
+Use ``by default''.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Per default, the cursor is red. \\
+\uthumb & By default, the cursor is red. \\
+\end{tabular}
+
+
+
+
+\item ``As opposed to'' is not English.
+
+Use ``In contrast to''.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & As opposed to C, Java is object-oriented. \\
+\uthumb & In contrast to C, Java is object-oriented. \\
+\end{tabular}
+
+
+
+
+
+
+
+\item ``actual'' \neqsym ``current'' 
+
+If you mean ``aktuell'' in German, you probably mean
+``current'' in English.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The actual selection is cancelled. \\
+\uthumb & The current selection is cancelled. \\
+\end{tabular}
+
+
+
+\item ``sensible'' \neqsym ``sensitive'' 
+
+If you mean ``sensibel'' in German, you probably mean
+``sensitive'' in English.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Store sensible data securely. \\
+\uthumb & Store sensitive data securely. \\
+\end{tabular}
+
+
+
+
+\item ``according'' \neqsym ``corresponding'' 
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & For each browser, an according package is created. \\
+\uthumb & For each browser, a corresponding package is created. \\
+\end{tabular}
+
+
+
+
+\item ``adopt'' \neqsym ``adapt'' 
+
+To ``adopt something'' means ``etwas übernehmen'' in German.
+To ``adapt something'' means ``etwas anpassen'' in German.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & This convention was adapted to show\ldots \\
+\uthumb & This convention was adopted to show\ldots \\[1ex]
+\dthumb & The diagram was adopted by the author. \\
+\uthumb & The diagram was adapted by the author. \\
+\end{tabular}
+
+
+
+% countable and uncountable nouns
+% https://english.stackexchange.com/questions/9439/amount-vs-number-vs-quantity
+% https://dictionary.cambridge.org/grammar/british-grammar/amount-of-number-of-or-quantity-of
+
+\item ``amount'' versus ``number'' 
+
+Use ``number'' for countable things.
+Use ``amount'' for uncountable things.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The amount of students\ldots \\
+\uthumb & The number of students\ldots \\[1ex]
+\dthumb & The number of time\ldots \\
+\uthumb & The amount of time\ldots \\
+\end{tabular}
+
+
+
+\item ``many'' versus ``much'' 
+
+Use ``many'' for countable things.
+Use ``much'' for uncountable things.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Much students failed\ldots \\
+\uthumb & Many students failed\ldots \\[1ex]
+\dthumb & Many time was spent\ldots \\
+\uthumb & Much time was spent\ldots \\
+\end{tabular}
+
+
+
+\item ``fewer'' versus ``less'' 
+
+Use ``fewer'' for countable things.
+Use ``less'' for uncountable things.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Less participants succeeded\ldots \\
+\uthumb & Fewer participants succeeded\ldots \\[1ex]
+\dthumb & Fewer sand was blown away\ldots \\
+\uthumb & Less sand was blown away\ldots \\
+\end{tabular}
+
+
+
+
+
+\item ``\emph{anything}-dimensional'' is spelt with a hyphen.
+
+For example: two-dimensional, three-dimensional.
+
+
+\item ``\emph{anything}-based'' is spelt with a hyphen.
+
+For example: tree-based, location-based.
+
+
+\item ``\emph{anything}-oriented'' is spelt with a hyphen.
+
+For example: object-oriented, display-oriented.
+
+
+\item ``\emph{anything}-side'' is spelt with a hyphen.
+
+For example: client-side, server-side.
+
+
+\item ``\emph{anything}-friendly'' is spelt with a hyphen.
+
+For example: user-friendly, customer-friendly.
+
+
+\item ``\emph{anything}-to-use'' is spelt with hyphens.
+
+For example: hard-to-use, easy-to-use.
+
+
+\item ``\emph{anything}-level'' is spelt with a hyphen.
+
+For example: low-level, high-level.
+
+
+
+\item ``realtime'' is spelt with a hyphen if used as
+  an adjective, or as two separate words if used as a noun.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & \ldots display the object in realtime.  \\
+\uthumb & \ldots display the object in real time. \\
+\dthumb & \ldots using realtime shadow casting.   \\
+\uthumb & \ldots using real-time shadow casting.  \\
+\end{tabular}
+
+
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Clear Writing}
+\label{sec:Clear}
+
+An academic thesis written in English should use simple and clear
+language appropriate for an international audience. In particular:
+
+\begin{itemize}[itemsep=2ex]
+
+\item Write simple, straightforward sentences. Do not use long,
+  convoluted sentences with many nested clauses, purely for the whim
+  of it, because, as is sometimes the case, it may seem like a good
+  idea at the time, even though it is not really.
+
+
+\item Use common and basic vocabulary. For example:
+  \begin{itemize}
+  \item ``unusual'' instead of ``arcane''
+  \item ``specialised'' instead of ``erudite''.
+  \item ``guideline'' instead of ``rule of thumb''.
+  \end{itemize}
+
+
+
+\item A technical term should be defined once at first usage.  It
+  should be placed in italics where it is defined, and in normal
+  script whenever used thereafter:
+
+\begin{tabular}{lp{0.9\linewidth}}
+\uthumb & A \emph{graph} is a set of vertices and edges.
+        A \emph{vertex} (or node) is an individual item. \newline
+        An \emph{edge} (or link) is a connection between two vertices.
+\end{tabular}
+
+  Any equivalent variant terms should be listed with the
+  definition. The preferred term should then be used consistently
+  throughout the text, rather than any of the variant terms.
+  Otherwise, readers are left wondering whether the variant term
+  refers to the same thing or is something different.
+
+
+
+\item For generic English text, rather than repeating the same word or
+  phrase too often, look in a thesaurus (see
+  Section~\ref{sec:thesaurus}) for an alternative word with the same
+  meaning.
+
+
+\item Explain any acronyms the first time they are used, by writing
+  out the full phrase followed by the acronym in parentheses.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & When using SVG, the figure scales freely. \\
+\uthumb & When using Scalable Vector Graphics (SVG), the figure scales freely.
+\end{tabular}
+
+
+\item Avoid local references. International readers will probably not
+  recognise the names of the provincial capitals of Austria, for
+  example. If local context is necessary for understanding, then
+  describe it fully.
+
+
+\item Avoid ``insider'' jargon. Do not assume knowledge of a
+  particular context. For example, do not assume the reader is
+  familiar with a particular operating system or application.
+
+
+\item Express culturally localised things such as times, dates,
+  currencies, and numbers in an unambiguous form. For example, 9/11 is
+  the \nth{9} of November in much of the world. In English, a period
+  ``.''  is used as the decimal point character and a comma ``,'' is
+  used as the thousands separator (in German, it is the other way
+  round).
+
+
+\item Do not use ``word plays'' or puns. Phrases such as ``red
+  herring'', ``taking the mickey'', and ``like watching paint dry''
+  require cultural knowledge of English to understand.
+
+
+\item Be careful with humour. Irony and sarcasm are sometimes hard to
+  detect for non-native speakers.
+
+\end{itemize}
+
+
+Part of writing usable documents is understanding and then addressing
+the characteristics of the intended audience.
+
+
+
+
+
+\section{Avoiding Gender Bias}
+\label{sec:Gender}
+
+Two issues should be considered with regard to avoiding gender bias:
+avoiding characterisations or stereotypes about men or women,
+and avoiding biases inherent in the English language.
+Here are some suggestions for handling the second issue:
+
+\begin{itemize}[itemsep=2ex]
+
+\item Refer to people generically using a gender-neutral term:
+
+\begin{tabular}{ll}
+   man                 &   the human race        \\
+   mankind             &   humankind, people     \\
+   manpower            &   workforce, personnel  \\
+   man on the street   &   average person        \\
+\end{tabular}
+
+
+
+\item Use gender-neutral terms for job titles or roles, where
+  possible:
+
+\begin{tabular}{ll}
+  chairman     &  chairperson \\
+  spokesman    &  spokesperson, representative \\
+  policeman    &  police officer \\
+  stewardess   &  flight attendant \\
+\end{tabular}
+
+
+
+\item When refering to the holder of a specific position and their
+  gender is known, use the correct gender pronoun. For example,
+  assuming the chairperson is known to be a man:
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The chairperson announced her resignation. \\
+\uthumb & The chairperson announced his resignation. \\
+\end{tabular}
+
+
+
+\item Avoid using a gender pronoun by repeating the job title or role
+  if possible:
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb&
+Interview the user first and then ask him to fill out a questionnaire. \\
+%
+\uthumb &
+Interview the user first and then ask the user to fill out a questionnaire. \\
+\end{tabular}
+
+
+
+\item Avoid using his or her by using the plural form:
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Each student should bring his text to class. \\
+\uthumb & All students should bring their texts to class. \\
+\end{tabular}
+
+
+\item Replace his or her with the article (the):
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Every student must hand his report in on Friday. \\
+\uthumb & Every student must hand the report in on Friday. \\
+\end{tabular}
+
+
+
+\item Avoid using his or her by rewriting in the passive voice:
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Each department head should do his own projections. \\
+\uthumb & Projections should be done by each department head. \\
+\end{tabular}
+
+
+\item Avoid awkward formulations such as ``s/he,'' ``he/she,'' or
+  ``his/her.'' As a last resort, use the less awkward ``he or she,''
+  or ``his or hers.''
+
+\end{itemize}
+
+
+
+
+
+
+\section{When to Use Capitalisation}
+
+\emph{Capitalisation} means using a capital (upper case) initial
+letter for a word. \emph{Lowercasing} means writing the entire word in
+lower case. In many common writing styles, headings and titles are
+partially capitalised: the first and the principal (main) words are
+capitalised and other words are lowercased.
+
+Proper names, such as the names of people, towns, and countries, are
+always capitalised (Keith Andrews, the United Kingdom). The first word
+in a heading or title is always capitalised.
+
+
+
+
+\subsection{Titles and Headings}
+
+Capitalise all principal words: nouns, pronouns, adjectives, verbs,
+and adverbs, and the first word. Lowercase all articles, coordinating
+conjunctions (``for'', ``and'', ``nor'', ``but'', ``or'', ``yet'',
+``so''), and prepositions.
+
+For example:
+\begin{itemize}[itemsep=2ex]
+
+\item Here, ``it'' is a pronoun, which should always be capitalised.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Saying it Directly \\
+\uthumb & Saying It Directly \\
+\end{tabular}
+
+
+
+\item Here, ``is'' is a verb, which should always be capitalised.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & When is Enough Enough? \\
+\uthumb & When Is Enough Enough? \\
+\end{tabular}
+
+
+
+\item Here, ``in'' is being used as a preposition and should be 
+lowercased.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & The Elephant In the Room. \\
+\uthumb & The Elephant in the Room. \\
+\end{tabular}
+
+
+\item Here, ``in'' is being used as an adverb and should be 
+capitalised.
+
+\begin{tabular}{lp{0.9\linewidth}}
+\dthumb & Handing in Your Work. \\
+\uthumb & Handing In Your Work. \\
+\end{tabular}
+
+
+\end{itemize}
+
+See \textcite{WB-Capitalisation} for some slightly different rules and
+some more examples.
+
+
+% Capitalization in Titles
+% http://www.writersblock.ca/tips/monthtip/tipmar98.htm
+
+
+
+
+\subsection{Captions}
+
+The short version (the optional parameter in square brackets) of a
+caption for a figure, table, or listing appears in the List of
+Figures, List of Tables, or List of Listings. The short caption is
+used like a heading and should be capitalised like a heading. The long
+version of a caption for a figure, table, or listing should be written
+as full sentences: only the first word of each sentence and any proper
+names are capitalised and (each sentence in) the caption ends with a
+full stop.
+
+
+
+\subsection{Chapters, Sections, Figures, and Tables}
+
+A specific, named or numbered entity, such as a particular chapter,
+appendix, section, figure, table, or listing is considered to be a
+proper name and thus \emph{should be capitalised}. For example,
+Chapter~\ref{chap:SelectedDetails}, Appendix~\ref{app:UserGuide},
+Section~\ref{sec:Gender}, Figure~\ref{fig:TeXnicCenter},
+Table~\ref{tab:WinIconicLang}, or Listing~\ref{list:BibFile}. However,
+if an entity is not specifically named or numbered, then it should
+\emph{not} be capitalised. For example, when refering to the first
+chapter or the next section, without giving a name or number.
+
+
+% Capitalization Rules
+% http://www.libraryonline.com/default.asp?pID=48
+
+% Chicago Manual of Style
+% http://www.chicagomanualofstyle.org/home.html
+
+% Associated Press Stylebook
+% http://www.apstylebook.com/
+
+
+
+
+
+
+
+\section{Use a Spelling Checker}
+
+In these days of high technology, spelling mistakes and typos are
+inexcusable. It is \emph{very} irritating for your supervisor to have
+to read through and correct spelling mistake after spelling mistake
+which could have been caught by an automated spelling checker.
+Believe me, irritating your supervisor is not a good idea.
+
+So, use a spelling checker \emph{before} you hand in \emph{any}
+version, whether it is a draft or a final version.
+Since this is apparently often forgotten, and sometimes even wilfully
+ignored, let me make it absolutely clear:
+\begin{quote}
+\begin{em}
+Use a spelling checker, please. \\
+Use a spelling checker! \\
+Use a spelling checker, you moron. \\
+\end{em}
+\end{quote}
+
+
+
+
+
+\section{Use a Dictionary}
+\label{sec:dictionary}
+
+If you are not quite sure of the meaning of a word, then use a
+dictionary. \website{dictionary.com} \parencite{DictionaryCom} is a
+free English dictionary, BEOLINGUS \parencite{DictChemnitz} and Leo
+\parencite{DictLeoOrg} are two very good English-German dictionaries.
+
+
+
+
+\section{Use a Thesaurus}
+\label{sec:thesaurus}
+
+If a word has been used several times already, and using another
+equivalent word might improve the readability of the text, then
+consult a thesaurus. \website{thesaurus.com} \parencite{ThesaurusCom}
+and Collins English Thesaurus \parencite{CollinsThesaurus} are free
+English thesauri.
+
+
