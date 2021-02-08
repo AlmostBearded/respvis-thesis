@@ -51,11 +51,11 @@ Carry out the following steps:
 
 4. Compile the PDF with the following sequence of commands
 
-   pdflatex survey
-   biber survey
-   pdflatex survey
-   pdflatex survey
-   pdflatex survey
+   pdflatex thesis
+   biber thesis
+   pdflatex thesis
+   pdflatex thesis
+   pdflatex thesis
 
 
   Running pdflatex (or biber) often creates intermediate files which
