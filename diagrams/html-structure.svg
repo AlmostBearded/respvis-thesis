@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="184.24419mm"
+   height="194.75986mm"
+   viewBox="0 0 184.24419 194.75986"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="html-structure.svg"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   inkscape:export-filename="\\wsl$\Ubuntu-20.04\home\almostbearded\workspaces\respvis-thesis\diagrams\html-structure.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="-227.59025"
+     inkscape:cy="414.36917"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1387"
+     inkscape:window-x="2552"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     lock-margins="false"
+     fit-margin-top="10"
+     fit-margin-left="10"
+     fit-margin-right="10"
+     fit-margin-bottom="10" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-14.15665,-46.144699)">
+    <g
+       id="g1019"
+       transform="translate(-40.624968,-97.553378)">
+      <rect
+         id="rect20-9-7-6"
+         width="163.9796"
+         height="174.49527"
+         x="64.91391"
+         y="153.83037"
+         style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+         x="68.663223"
+         y="323.48056"
+         id="text14-6-7-6-0"><tspan
+           sodipodi:role="line"
+           x="68.663223"
+           y="323.48056"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';stroke-width:0.264583;font-size:7.05555556px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+           id="tspan1010">&lt;/html&gt;</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+         x="68.134056"
+         y="164.56712"
+         id="text14-6-7-8"><tspan
+           sodipodi:role="line"
+           x="68.134056"
+           y="164.56712"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555556px;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583;"
+           id="tspan16-5-8-3">&lt;html&gt;</tspan></text>
+    </g>
+    <g
+       id="g967"
+       transform="translate(0,77.568798)"
+       style="stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none">
+      <rect
+         id="rect20-9-7"
+         width="148.60785"
+         height="76.18837"
+         x="31.358942"
+         y="59.140205"
+         style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+         x="35.306824"
+         y="130.467"
+         id="text14-6-7-6"><tspan
+           sodipodi:role="line"
+           x="35.306824"
+           y="130.467"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-size:7.05555556px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+           id="tspan16-5-8-6">&lt;/body&gt;</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+         x="34.777657"
+         y="68.655678"
+         id="text14-6-7"><tspan
+           sodipodi:role="line"
+           x="34.777657"
+           y="68.655678"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-size:7.05555556px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+           id="tspan16-5-8">&lt;body&gt;</tspan></text>
+      <g
+         id="g848"
+         transform="translate(-7.4083337)"
+         style="stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+           x="53.135345"
+           y="90.848999"
+           id="text14"><tspan
+             sodipodi:role="line"
+             x="53.135345"
+             y="90.848999"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-size:7.05555556px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+             id="tspan16">&lt;h1&gt;Heading&lt;/h1&gt;</tspan></text>
+        <rect
+           id="rect20"
+           width="133.1937"
+           height="18.497879"
+           x="47.636478"
+           y="79.008492"
+           style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+      <g
+         id="g848-2"
+         transform="translate(-7.4083337,18.520836)"
+         style="stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+           x="53.135345"
+           y="90.848999"
+           id="text14-6"><tspan
+             sodipodi:role="line"
+             x="53.135345"
+             y="90.848999"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-size:7.05555556px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+             id="tspan16-5">&lt;p&gt;Paragraph&lt;/p&gt;</tspan></text>
+        <rect
+           id="rect20-9"
+           width="133.1937"
+           height="18.497879"
+           x="47.636478"
+           y="79.008492"
+           style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+    </g>
+    <g
+       id="g967-7"
+       transform="translate(-0.35867381,13.415194)"
+       style="stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none">
+      <rect
+         id="rect20-9-7-5"
+         width="148.56163"
+         height="59.77166"
+         x="31.706903"
+         y="59.196842"
+         style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+         x="35.306824"
+         y="115.23264"
+         id="text14-6-7-6-6"><tspan
+           sodipodi:role="line"
+           x="35.306824"
+           y="115.23264"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-size:7.05555556px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+           id="tspan16-5-8-6-3">&lt;/head&gt;</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+         x="34.777657"
+         y="68.655678"
+         id="text14-6-7-2"><tspan
+           sodipodi:role="line"
+           x="34.777657"
+           y="68.655678"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;font-size:7.05555556px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
+           id="tspan16-5-8-34">&lt;head&gt;</tspan></text>
+      <g
+         id="g848-3"
+         transform="translate(-10.174086)"
+         style="stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none">
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;"
+           x="53.135345"
+           y="90.848999"
+           id="text14-3"><tspan
+             sodipodi:role="line"
+             x="53.135345"
+             y="90.848999"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:'Courier New';-inkscape-font-specification:'Courier New, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none"
+             id="tspan16-50">&lt;title&gt;Title&lt;/title&gt;</tspan></text>
+        <rect
+           id="rect20-1"
+           width="136.66452"
+           height="18.494186"
+           x="47.638321"
+           y="79.010338"
+           style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+    </g>
+  </g>
+</svg>
