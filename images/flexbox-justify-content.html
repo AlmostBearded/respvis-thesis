@@ -1,80 +1,79 @@
 <html>
-<head>
-<style>
+  <head>
+    <style>
+      body {
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-auto-rows: min-content;
+        align-items: center;
+        grid-gap: 0.25rem 1rem;
+      }
 
-body {
-  margin: 1rem;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-auto-rows: min-content;
-  align-items: center;
-  grid-gap: 0.25rem 1rem;
-}
+      .container {
+        display: flex;
+        flex-direction: row;
+        background-color: #ddd;
+        border: 1px solid #000;
+      }
 
-.container {
-  display: flex;
-  flex-direction: row;
-  background-color: #ddd;
-  border: 1px solid #000;
-}
+      .container div {
+        background-color: hsl(0, 100%, 70%);
+        border: 1px solid #000;
+        filter: hue-rotate(var(--hue-rotate));
+        text-align: center;
+        padding: 0.25rem;
+      }
 
-.container div {
-  background-color: hsl(0, 100%, 70%);
-  border: 1px solid #000;
-  filter: hue-rotate(var(--hue-rotate));
-  text-align: center;
-  padding: 0.25rem;
-}
+      .container div:nth-child(1) {
+        --hue-rotate: 90deg;
+      }
 
-.container div:nth-child(1) {
-  --hue-rotate: 90deg;
-}
+      .container div:nth-child(2) {
+        --hue-rotate: 180deg;
+      }
 
-.container div:nth-child(2) {
-  --hue-rotate: 180deg;
-}
-
-.container div:nth-child(3) {
-  --hue-rotate: 270deg;
-}
-</style>
-</head>
-<body>
-<div>justify-content: flex-start</div>
-<div class="container" style="justify-content: flex-start">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-<div>justify-content: center</div>
-<div class="container" style="justify-content: center">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-<div>justify-content: flex-end</div>
-<div class="container" style="justify-content: flex-end">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-<div>justify-content: space-between</div>
-<div class="container" style="justify-content: space-between">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-<div>justify-content: space-around</div>
-<div class="container" style="justify-content: space-around">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-<div>justify-content: space-evenly</div>
-<div class="container" style="justify-content: space-evenly">
-  <div>Item 1</div>
-  <div>Item 2</div>
-  <div>Item 3</div>
-</div>
-</body>
+      .container div:nth-child(3) {
+        --hue-rotate: 270deg;
+      }
+    </style>
+  </head>
+  <body>
+    <div>justify-content: flex-start</div>
+    <div class="container" style="justify-content: flex-start">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+    <div>justify-content: center</div>
+    <div class="container" style="justify-content: center">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+    <div>justify-content: flex-end</div>
+    <div class="container" style="justify-content: flex-end">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+    <div>justify-content: space-between</div>
+    <div class="container" style="justify-content: space-between">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+    <div>justify-content: space-around</div>
+    <div class="container" style="justify-content: space-around">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+    <div>justify-content: space-evenly</div>
+    <div class="container" style="justify-content: space-evenly">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+  </body>
 </html>

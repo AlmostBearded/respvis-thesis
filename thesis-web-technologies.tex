@@ -82,11 +82,12 @@ All elements in a HTML document are laid out as boxes, which is defined as the C
     \label{fig:BoxModel}
 \end{figure}
 
-In early versions of CSS, before the introduction of the Flexible Box Layout (Flexbox) Module \parencite{CSSFlexboxFirstDraft}, the box model was the only way to lay out elements. Style sheet authors had to meticulously define margins of elements and their relative (or absolute) positions in the document tree. The responsive capabilities of this kind of layouting are very limited because different configurations for varying screen sizes have to be done manually using media queries and more complex features, like filling the remaining space available, had to be implemented via scripting.
+In early versions of CSS, before the introduction of the Flexible Box (Flexbox) layout module \parencite{CSSFlexboxFirstDraft}, the box model was the only way to lay out elements. Style sheet authors had to meticulously define margins of elements and their relative (or absolute) positions in the document tree. The responsive capabilities of this kind of layouting are very limited because different configurations for varying screen sizes have to be done manually using media queries and more complex features, like filling the remaining space available, had to be implemented via scripting.
 
 \subsection{Flexible Box Layout (Flexbox)}
+\label{sec:Flexbox}
 
-Even though the first draft of the Flexbox Layout Module was already published in 2009 \parencite{CSSFlexboxFirstDraft}, browser implementations have been a slow and bug ridden process \parencite{CanIUseCSSFlexbox} that held back adoption by users for the first couple of years after its inception. Over the past few years, partly through the deprecation of Internet Explorer \parencite{IEDeprecation}, all major browser implementations of current Flexbox standards \parencite{CSSFlexbox} have become stable and, in most cases, fallback styling is not necessary anymore.
+Even though the first draft of the Flexbox layout module was already published in 2009 \parencite{CSSFlexboxFirstDraft}, browser implementations have been a slow and bug ridden process \parencite{CanIUseCSSFlexbox} that held back adoption by users for the first couple of years after its inception. Over the past few years, partly through the deprecation of Internet Explorer \parencite{IEDeprecation}, all major browser implementations of current Flexbox standards \parencite{CSSFlexbox} have become stable and, in most cases, fallback styling is not necessary anymore.
 
 Flexbox is a mechanism for one-dimensionally laying out elements in either rows or columns. This one-dimensionality is what separates it from grid-based layouting, which is inherently two-dimensional. Flexbox layouting can be enabled for child elements via setting the \lstinline{display: flex} property on a container element. The direction of the layout can then be specified using the \lstinline{flex-direction} property which can be set to either \lstinline{row} or \lstinline{column}.
 
@@ -106,37 +107,112 @@ Another important feature of Flexbox layouting is the controllable spacing of it
     \label{fig:FlexboxJustifyContent}
 \end{figure}
 
-This section only graced the surface of what is possible with the Flexbox Layout Module. Those properties that were discussed, were only discussed in a very broad sense and there are many useful properties like \lstinline{flex-grow}, \lstinline{flex-shrink} or \lstinline{flex-wrap} that weren't included in this overview. For a more detailed look at this topic it is recommended to review \cite{CSSFlexbox}.
+This section only graced the surface of what is possible with the Flexbox layout module. Those properties that were discussed, were only discussed in a very broad sense and there are many useful properties like \lstinline{flex-grow}, \lstinline{flex-shrink} or \lstinline{flex-wrap} that weren't included in this overview. For a more detailed look at this topic it is recommended to review \cite{CSSFlexbox}.
 
 \subsection{Grid Layout}
 
+Similar to the previous section about Flexbox layout, the goal of this section is not to be a comprehensive guide on the CSS Grid layout module but to provide a rough overview over its general characteristics. For more detailed information, other sources like \cite{GridLayoutInCSS} and \cite{CSSGrid} are recommended.
+
+The initial proposal of the CSS Grid layout module has already been published in 2011 \parencite{CSSGridFirstDraft} and it has been further refined over the years. At the time of writing, even though it still exists as merely a candidate recommendation for standardization \parencite{CSSGrid}, many browser have already adopted it. The history of browser adoption has been, similar o the one of Flexbox layout, filled with inconsistencies and bugs. However, browser support has been considered stable and safe to use since 2017 when Chrome, Firefox, Safari and Edge removed the need for vendor prefixes and the deprecation of IE was announced \parencite{CanIUseCSSGrid}.
+
+The Grid layout module defines laying out elements in a two-dimensional grid, which differences it from the one-dimensional layouting that can be achieved with a Flexbox layout. Grid layouting of elements can be enabled by setting the \lstinline{display:grid} property on their container. The grid in which items shall be laid out is then defined using the \lstinline{grid-template-rows} and \lstinline{grid-template-columns} properties. There also exists the \lstinline{grid-template} property, which can be used as a shorthand to simultaneously specify both rows and columns of a grid.
+
+Item elements need to specify the cell of the grid into which they shall be positioned. This is done with the \lstinline{grid-row} and \lstinline{grid-column} properties, which take the corresponding row and column indices as values. Items can also be configured to span multiple cells by not only specifying single indices but whole index ranges as the values of those properties.
+
+Every cell in a grid can also be assigned a specific name via the \lstinline{grid-template-areas} property on the grid container element. The items within the grid can then position themselves in specifically named grid cells using the \lstinline{grid-area} property instead of directly setting the row and column indices. The benefit of positioning items this way, is that the structure of the grid can freely be changed without having to respecify the cells in which items belong. As long as the new layout still specifies the same names of cells somewhere in the grid, the items will be automatically placed at their new positions.
+
+There are also properties that allow to control the layout of items within grid cells and the layout of grid cells themselves. Similar to how it is described in Section \ref{sec:Flexbox}, this can be configured with the \lstinline{align-items} and \lstinline{justify-items} properties for laying out within grid cells, and the \lstinline{align-content} and \lstinline{justify-content} props for laying out the grid cells themselves. The latter \lstinline{*-content} props only make sense when the cells don't cover the full area of the grid. For a visual comparison between the \lstinline{*-items} and \lstinline{*-content} properties, see Figure \ref{fig:GridLayoutProperties}.
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 2]
+    {images/grid-layout-properties.png}
+
+    \caption[Grid Layout Property Comparision]{
+        The \lstinline{*-items} properties are used to lay out items within their grid cells, whereas the \lstinline{*-content} properties are used to lay out the grid cells themselves.
+    \imgcredit{Image created by the author of this thesis.}
+    }
+    \label{fig:GridLayoutProperties}
+\end{figure}
+
+There is a lot of overlap between the CSS Grid and Flexbox layout modules and, at first sight, it seems like Grid layout supersedes Flexbox layout because everything that can be done using Flexbox layout can also be done with Grid layout. While that is true, the inherent difference in dimensionality and the resulting syntactical characteristics lead to better suitability of one technology over the other other, depending on the situational requirements. As a general rule \parencite{CSSGridVsFlexbox}, top-level layouts that require two-dimensional positioning of elements are usually implemented using a Grid layout, whereas low-level layouts that merely need laying out on an one-dimensional axis are more expressively described using a Flexbox layout.
+
 \section{JavaScript (JS)}
+
+JavaScript (JS) is one of the three core technologies of the web: HTML for content, CSS for presentation and JS for behavior. the goal of this section is to briefly summarize JS, its history and the specific Web APIs that are relevant for this work.
+
+JavaScript is a client-side scripting language, which requires an engine that interprets it. These engines are usually provided by browsers but there are also standalone engines, like NodeJS, available. It is a multi-paradigm language that supports event-driven, as well as functional and imperative programming. Undoubtedly influenced by the popularity of the web, JavaScript is currently the most used programming language worldwide \parencite{StatisticProgrammingLanguageUsage}.
+
+JavaScript has initially been created by Netscape in 1995 \parencite{JSFirstRelease} and before that, websites were only able to display static content, which drastically limited the usefulness of the web. Seemingly, Microsoft saw JavaScript as a potentially revolutionary development because they reverse-engineered the implementation of Netscape and published their own version of the language for Internet Explorer in 1996 \parencite{JSIERelease}. Both implementations were noticeably different from one another but the uncontested monopoly of the Internet Explorer \parencite{BrowserMarketShareEarly} held back the standardization efforts undertaken by Netscape \parencite{ECMAScript1}. When Firefox was released in 2004 \parencite{FirefoxFirstRelease} and Chrome in 2008 \parencite{ChromeFirstRelease}, they gained a considerable share of the market \parencite{BrowserMarketShare} (see Figure \ref{fig:BrowserMarketShare}) and all the major browser vendors collaborated on the standardization of JavaScript as ECMAScript 5 in 2009 \parencite{ECMAScript5}. Since then, JavaScript has been continuously developed and it's latest version was released as ECMAScript 6 in 2015 \parencite{ECMAScript6}.
+
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 2]
+    {images/browser-market-share.png}
+
+    \caption[Desktop Browser Market Share]{
+        Since their release, Firefox and Chrome have contested the monopoly of the Internet Explorer and continuously gained more market share. Recently, Chrome seems to be gaining an increasingly strong position within the market.
+        \imgcredit{Image taken from \cite{BrowserMarketShare}}
+    }
+    \label{fig:BrowserMarketShare}
+\end{figure}
+
+RespVis is a browser-based library, which is designed run within the JavaScript engine of a browser. Therefore, it builds heavily on widely supported Web APIs, which are JavaScript modules that are specifically meant for the development of web pages. These Web APIs are standardized by the W3C and each browser has to individually implement them in their JavaScript engine.
+
+Undoubtedly the most popular Web API, that every web developer must be familiar with, is the Document Object Model (DOM). The DOM is the programming interface and data representation of a document. Internally, a document is modeled as a tree of objects, where each object corresponds to a specific element in the document hierarchy and its associated data and functions. In addition to the querying of elements, the DOM also defines the functionality to mutate them and their attributes, as well as the functionality for handling and dispatching of events. It also exposes the mechanism of \lstinline{MutationObserver}s, which are used to observe attribute or children changes in the document tree. The initial publication of the DOM dates back to 1998 \parencite{DOM1} and currently it is maintained as a living standard by the WHATWG \parencite{DOM}.
+
+A second important Web API in the context of this work is the \lstinline{ResizeObserver} API. Its purpose is the ability to observe an elements size and respond to changes, which increases the responsive capabilities of web sites. Previously, scripts could only respond to changes in the overall viewport size via the \lstinline{resize} event on the \lstinline{window} object but this meant, that changes of an individual element's size through attribute changes could not be detected. This is fixed by the \lstinline{ResizeObserver} API, which is already fully supported by all modern browsers, even though it has so far only been published as an editor's draft \parencite{ResizeObserver}.
 
 \section{TypeScript (TS)}
 
+TypeScript (TS) is a strongly-typed programming language, that is designed as an extension of JavaScript. Syntactically, it is a superset of JavaScript that enables the annotation of properties, variables, parameters and return values with types. Because it is a superset of JavaScript, TypeScript requires a compiler that transpiles the code into valid JavaScript code, which can either be based on ECMAScript 5 \parencite{ECMAScript5} or ECMAScript 6 \parencite{ECMAScript6}.
+
+Initially, TypeScript has been released by Microsoft in 2012 \parencite{TSFirstRelease} to extend JavaScript with features that were already present in more mature languages, and whose absence in JavaScript caused difficulties when working on larger codebases. At the time of the initial development, ECMAScript 6 hasn't been published yet and TypeScript was used to already be able to use features that would later be implemented by ECMAScript 6. These features included a module system to be able to split source code into reusable chunks and a class system to aid object-oriented development. The TypeScript code using these features could then be translated via the compiler into standard-conform ECMAScript 5 code, which could be interpreted by current JavaScript engines at the time. At the time of writing, ECMAScript 6 is already supported by all modern browsers and therefore the main benefit of TypeScript over JavaScript resides primarily in the addition of a static type system.
+
+The extension of JavaScript with a type system brings many benefits. One such a benefit is the improved tooling that comes with type annotated code. Tools will be able to point out errors during development and assist you with automated fixes and improved code completion and navigation. Additionally, studies like \cite{ToTypeOrNotToType} have evaluated software bugs in publicly available codebases and found that 15\% of them could have been prevented with static type checking.
+
+The TypeScript type system has been designed to support the constructs that are possible in JavaScript as completely as possible, which is achieved via structural types and unified object types. Another goal has also been to make the type annotation of JavaScript code as effortless as possible to improve adoption by already existing projects. This is done by consciously allowing the type system to be statically unsound via gradual typing and also by employing type inference to reduce the amount of necessary annotations. The major properties of the type system's design are summarized in Table \ref{tab:TSTypeSystemDesignProperties}.
+
+\begin{table}[tp]
+    \centering
+    \begin{tabularx}{\linewidth}{| l | X |}
+        \hline
+        \textbf{Design Property} & \textbf{Description}                                                                                                                                                                                                        \\ \hline
+        Full erasure             & Types are completely removed by the compiler and therefore there is also no type checking at runtime.                                                                                                                       \\ \hline
+        Type inference           & A big portion of types can be inferred from usage, which minimizes the number of types that have to be explicitly written. E.                                                                                               \\ \hline
+        Gradual typing           & Type checking can be selectively prevented by using the dynamic \lstinline{any} type.                                                                                                                                       \\ \hline
+        Structural types         & Types are defined via their structure as opposed to nominal type systems, which define types via their names. This better fits to JavaScript because here, objects are usually custom built and used based on their shapes. \\ \hline
+        Unified object types     & A type can simultaneously describe objects, functions and arrays. These constructs are common in JavaScript and therefore TypeScript needs to enable their typing.                                                          \\ \hline
+    \end{tabularx}
+    \caption[TypeScript Type System Design Properties]
+    {
+        A summary over the major design properties on which TypeScript's type system is built.
+        \imgcredit{Table created by the author of this thesis with data from \parencite{UnderstandingTS}}
+    }
+    \label{tab:TSTypeSystemDesignProperties}
+\end{table}
+
+
 \section{Web Graphics}
+
+Graphics are used as a medium for visual expression to enhance the representation of information on the web. There are versatile fields of application like the integration of maps, photographs or charts in a web site. Multiple complementary technologies exist and each solves particular use cases of web authors. The different ways of embedding graphics in a document are raster images, Scalable Vector Graphics (SVG) and through the Canvas API. These technologies are described in more detailed in the following sections. 
 
 \subsection{Raster Images}
 
-\TODO{Describe raster images}
+Raster images represent graphics as a rectangular, two-dimensional grid of pixels with a fixed size. This fixed grid size results in limited scalability and, whenever an image is displayed in a different size, visual scaling artifacts will be noticeable. Raster images are either created by image capturing devices or special editing software and saved as binary files in varying formats. The most widely used format for raster images is Portable Network Graphics (PNG), which is standardized by the W3C \parencite{PNG} and optimized for usage on the web. It features a lossless compression and streaming capabilities, which enable progressive rendering of images during loading. 
 
-\TODO{Mention JPEG}
-
-\TODO{Mention PNG}
+Raster images are embedded into documents in binary format. This means that the contents of the graphic are not accessible in a non-visual representation. To make the information accessible to visually impaired people it is required to provide an additional textual description of the graphic's content on the embedding element via the \lstinline{alt} and \lstinline{longdesc} attributes.
 
 \subsection{Scalable Vector Graphics (SVG)}
 
-\TODO{Define detail in which to write about SVG}
+Scalable Vector Graphics (SVG) is an XML-based format for vector graphics, which describe an image as a set of shapes. It was initially published by the W3C in 1999 \parencite{SVG1.0} and the most recent version SVG 1.1 was released in 20?? \parencite{SVG1.1}. Because SVG is based on XML, SVG files can be created with any text editor. However, there is also specialized software available that helps with the composition of more complex images.
 
-\TODO{Describe SVG}
+The encoding in XML leads to SVG being the best format to represent graphics in terms of accessibility. Graphics are directly saved in a hierarchical and textual form, which describes their shapes and how they are composed. In addition to the shapes being inherently accessible, the various elements of an SVG document can be annotated with further information that aids comprehension when consumed in a non-visual way. 
 
-\TODO{Describe filters}
+SVG files are XML documents whose meta format is described in special SVG namespaces. Therefore the elements of SVG documents can be accessed in scripts via the DOM Web API.  
 
-\TODO{Talk about issues with using CSS for styling}
-
-
-
-SVG elements can be styled with CSS which is highly convenient as it brings all the benefits of CSS like allowing users to override parts of the styling in their own style sheets. SVG styles defined as CSS can also be animated using CSS animations and transitions. This is recommendable to manual animations using JavaScript because external configuration is inherently supported and the declarative syntax of CSS animations is powerful enough to define complex animations.
+% SVG elements can be styled with CSS which is highly convenient as it brings all the benefits of CSS like allowing users to override parts of the styling in their own style sheets. SVG styles defined as CSS can also be animated using CSS animations and transitions. This is recommendable to manual animations using JavaScript because external configuration is inherently supported and the declarative syntax of CSS animations is powerful enough to define complex animations.
 
 % However, SVG 1.1 \TODO{Cite spec} only supports configuration of presentation attributes via CSS and it is not possible to . Other types of attributes, like geometric attributes, can't be styled using CSS and require actual configuaration via HTML attributes. SVG 2 will support styling and animating non-presentation attributes with CSS. \TODO{Add (partial?) list of presentation attributes}\TODO{Add (partial?) list of presentation attributes}
 
@@ -145,8 +221,6 @@ SVG elements can be styled with CSS which is highly convenient as it brings all 
 
 
 \subsection{Canvas}
-
-\subsection{WebGL}
 
 \section{Layout Engines}
 
@@ -162,8 +236,8 @@ SVG elements can be styled with CSS which is highly convenient as it brings all 
 \subsection{D3}
 \TODO{Mention that D3 is successor of Protovis}
 
-\section{Tools}
-\subsection{Node}
-\subsection{Rollup}
-\subsection{Gulp}
+% \section{Tools}
+% \subsection{Node}
+% \subsection{Rollup}
+% \subsection{Gulp}
 
