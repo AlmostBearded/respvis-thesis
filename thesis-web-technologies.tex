@@ -30,6 +30,7 @@ A strong pillar of HTML's design is extensibility. There are multiple mechanisms
 
 
 \section{Cascading Style Sheets (CSS)}
+\label{sec:CSS}
 
 This section is not meant as a comprehensive guide to CSS but to give an overview and reiterate over the concepts that are important in the context of this thesis. In particular, the history of CSS is briefly summarized, a refresher on selectors and cascades is given and the different modules of CSS-based layouting are compared.
 
@@ -196,21 +197,23 @@ The TypeScript type system has been designed to support the constructs that are 
 
 \section{Web Graphics}
 
-Graphics are used as a medium for visual expression to enhance the representation of information on the web. There are versatile fields of application like the integration of maps, photographs or charts in a web site. Multiple complementary technologies exist and each solves particular use cases of web authors. The different ways of embedding graphics in a document are raster images, Scalable Vector Graphics (SVG) and through the Canvas API. These technologies are described in more detailed in the following sections. 
+Graphics are used as a medium for visual expression to enhance the representation of information on the web. There are versatile fields of application like the integration of maps, photographs or charts in a web site. Multiple complementary technologies exist and each solves particular use cases of web authors. The different ways of embedding graphics in a document are raster images, Scalable Vector Graphics (SVG) and through the Canvas API. These technologies are described in more detailed in the following sections.
 
 \subsection{Raster Images}
 
-Raster images represent graphics as a rectangular, two-dimensional grid of pixels with a fixed size. This fixed grid size results in limited scalability and, whenever an image is displayed in a different size, visual scaling artifacts will be noticeable. Raster images are either created by image capturing devices or special editing software and saved as binary files in varying formats. The most widely used format for raster images is Portable Network Graphics (PNG), which is standardized by the W3C \parencite{PNG} and optimized for usage on the web. It features a lossless compression and streaming capabilities, which enable progressive rendering of images during loading. 
+Raster images represent graphics as a rectangular, two-dimensional grid of pixels with a fixed size. This fixed grid size results in limited scalability and, whenever an image is displayed in a different size, visual scaling artifacts will be noticeable. Raster images are either created by image capturing devices or special editing software and saved as binary files in varying formats. The most widely used format for raster images is Portable Network Graphics (PNG), which is standardized by the W3C \parencite{PNG} and optimized for usage on the web. It features a lossless compression and streaming capabilities, which enable progressive rendering of images during loading.
 
 Raster images are embedded into documents in binary format. This means that the contents of the graphic are not accessible in a non-visual representation. To make the information accessible to visually impaired people it is required to provide an additional textual description of the graphic's content on the embedding element via the \lstinline{alt} and \lstinline{longdesc} attributes.
 
 \subsection{Scalable Vector Graphics (SVG)}
 
-Scalable Vector Graphics (SVG) is an XML-based format for vector graphics, which describe an image as a set of shapes and which can be scaled without loss of quality. It was initially published by the W3C in 1999 \parencite{SVG1.0} and the most recent version SVG 1.1 was released in 20?? \parencite{SVG1.1}. Because SVG is based on XML, SVG files can be created with any text editor. However, there is also specialized software available that helps with the composition of more complex images.
+Scalable Vector Graphics (SVG) is an XML-based format for vector graphics, which describe images as sets of shapes and which can be scaled without loss of quality. It was initially published by the W3C in 1999 \parencite{SVG1.0} and the most recent version SVG 1.1 was released in 20?? \parencite{SVG1.1}. Because SVG is based on XML, SVG files can be created with any text editor. However, there is also specialized software available that helps with the composition of more complex images.
 
-The encoding in XML leads to SVG being the best format to represent graphics in terms of accessibility. Graphics are directly saved in a hierarchical and textual form, which describes their shapes and how they are composed. In addition to the shapes being inherently accessible, the various elements of an SVG document can be annotated with further information that aids comprehension when consumed in a non-visual way. 
+The encoding in XML leads to SVG being the best format to represent graphics in terms of accessibility. Graphics are directly saved in a hierarchical and textual form, which describes their shapes and how they are composed. In addition to the shapes being inherently accessible, the various elements of an SVG document can be annotated with further information that aids comprehension when consumed in a non-visual way.
 
-SVG files are XML documents whose meta format is described in special SVG namespaces. Therefore, the elements of SVG documents can be accessed in scripts via the DOM Web API. 
+SVG files are XML documents whose meta format is described in special SVG namespaces. Therefore, the elements of SVG documents can be accessed in scripts via the DOM Web API.  This means that elements can be completely controlled by scripts, which enables similar levels of interactivity than for HTML documents.
+
+The most widely supported way of Styling SVG elements is via attributes, which is supported by every software dealing with SVG files. However, the specification aims for maximum compatibility with HTML and therefore it is also possible to use CSS to style SVG elements when they are rendered in a browser. Using CSS to separate presentation from content has many benefits that were already described in Section \ref{sec:CSS}. The only attributes that can be styled with CSS are presentation attributes like fill and stroke-width. These attributes are taxonomically listed in the specification \parencite{CSS1.1} and and have been extended by additional attributes like x, y, width and height in upcoming releases \parencite{CSS2}.
 
 % SVG elements can be styled with CSS which is highly convenient as it brings all the benefits of CSS like allowing users to override parts of the styling in their own style sheets. SVG styles defined as CSS can also be animated using CSS animations and transitions. This is recommendable to manual animations using JavaScript because external configuration is inherently supported and the declarative syntax of CSS animations is powerful enough to define complex animations.
 
@@ -221,6 +224,10 @@ SVG files are XML documents whose meta format is described in special SVG namesp
 
 
 \subsection{Canvas}
+
+The canvas element has been introduced in HTML5 and is used to define a two-dimensional, rectangular region in a document that can be drawn into by scripts. Even though the rendering of dynamic graphics as canvas elements is faster than representing them as SVG documents, their use is explicitly discouraged by the WHATWG when another suitable representation is possible. The reasons for this are that canvas elements are not compatible with other web technologies like CSS or the DOM Web API and because the resulting rendering as a raster image provides only very limited possibilities for accessibility.
+
+The rendering is done via a low-level API, which depends on the type of rendering context of a particular canvas.
 
 \section{Layout Engines}
 
