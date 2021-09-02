@@ -36,9 +36,9 @@ This section is not meant as a comprehensive guide to CSS but to give an overvie
 
 Cascading Style Sheets (CSS) is a style sheet language that is used to specify the presentation of HTML documents. It can either be embedded directly in HTML documents using \lstinline{<style>} elements or it can be defined externally and linked into them using \lstinline{<link>} elements. This characteristic of being able to externally describe the presentation of documents yields a lot of flexibility because multiple documents with different content can reuse the same presentation by linking to the same CSS file. This solved the problem of having to individually define the presentation of every page with presentation elements like \lstinline{<strong>} or \lstinline{<em>}, as was the case in earlier versions of HTML \parencite{HTML32}.
 
-CSS was initially proposed by Håkon Wium Lie in 1994 \parencite{CSSProposal} and standardized into CSS1 by the W3C in 1996 \parencite{CSS1}. Throughout its history, the adoption of CSS by browser vendors was fraught with complications and even though most major browsers soon supported almost the full CSS standard, their implementations sometimes behaved vastly different than their competitor's. This meant that authors of web pages usually had to resort to workarounds and provide different style sheets for different browsers. In recent years, CSS specifications have become much more detailed \parencite{CSS21} and browser implementations have become more stable with less inconsistencies. It has therefore become much rarer that browser-specific workarounds have to be applied, which drastically improves the development experience.
+CSS was initially proposed by \cite{CSSProposal} and standardized into CSS1 by the W3C in 1996 \parencite{CSS1}. Throughout its history, the adoption of CSS by browser vendors was fraught with complications and even though most major browsers soon supported almost the full CSS standard, their implementations sometimes behaved vastly different from their competitor's. This meant that authors of web pages usually had to resort to workarounds and provide different style sheets for different browsers. In recent years, CSS specifications have become much more detailed \parencite{CSS21} and browser implementations have become more stable with fewer inconsistencies. It has therefore become much rarer that browser-specific workarounds have to be applied, which drastically improves the development experience.
 
-A CSS style sheet contains a collection of rules and each rule consists of a selector and a block of style declarations. Selectors are defined in a custom syntax and are used to match HTML elements. All elements that are matched by the selector of a rule will have the rule's style declarations applied on them. The selector syntax is fairly simple when merely selecting elements of a certain type but it also provides the means for selecting elements based on their contexts or attributes. For a summary of the CSS 2.1 selector syntax, see Table \ref{tab:CSSSelectorSyntax}.
+A CSS style sheet contains a collection of rules and each rule consists of a selector and a block of style declarations. Selectors are defined in a custom syntax and are used to match HTML elements. All elements that are matched by the selector of a rule will have the rule's style declarations applied to them. The selector syntax is fairly simple when merely selecting elements of a certain type, but it also provides the means for selecting elements based on their contexts or attributes. For a summary of the CSS 2.1 selector syntax, see Table \ref{tab:CSSSelectorSyntax}.
 
 \begin{table}[tp]
     \centering
@@ -52,7 +52,7 @@ A CSS style sheet contains a collection of rules and each rule consists of a sel
         E + F            & Any element of type F that is a directly preceded by a sibling element of type E. \\ \hline
         E:P              & Elements of type E that also have the pseudo class P.                             \\ \hline
         .C               & Elements that have the class  C.                                                  \\ \hline
-        \#I              & Elements that have the id I.                                                      \\ \hline
+        \#I              & Elements that have the ID I.                                                      \\ \hline
         [A]              & Elements that have an attribute A.                                                \\ \hline
         [A=V]            & Elements that have an attribute A with a value of V.                              \\ \hline
         S1, S2           & Elements that match either the selector S1 or the selector S2.                    \\ \hline
@@ -69,7 +69,7 @@ Another important characteristic of CSS is the cascading of styles. There's a lo
 
 \subsection{Box Layout}
 
-All elements in a HTML document are laid out as boxes, which is defined as the CSS box model. The box model states that every element is wrapped in a rectangular box and every box is described by its content and the optional surrounding margin, border and padding areas. Margins are used to specify the invisible spacing between boxes, whereas the border is meant as a visible containment around the content of a box and the padding describes the invisible spacing between the content and the border. A visual representation of these concepts can be seen in Figure \ref{fig:BoxModel}.
+All elements in an HTML document are laid out as boxes, which is defined as the CSS box model. The box model states that every element is wrapped in a rectangular box and every box is described by its content and the optional surrounding margin, border and padding areas. Margins are used to specify the invisible spacing between boxes, whereas the border is meant as a visible containment around the content of a box and the padding describes the invisible spacing between the content and the border. A visual representation of these concepts can be seen in Figure \ref{fig:BoxModel}.
 
 \begin{figure}[tp]
     \centering
@@ -111,10 +111,11 @@ Another important feature of Flexbox layouting is the controllable spacing of it
 This section only graced the surface of what is possible with the Flexbox layout module. Those properties that were discussed, were only discussed in a very broad sense and there are many useful properties like \lstinline{flex-grow}, \lstinline{flex-shrink} or \lstinline{flex-wrap} that weren't included in this overview. For a more detailed look at this topic it is recommended to review \cite{CSSFlexbox}.
 
 \subsection{Grid Layout}
+\label{sec:Grid}
 
 Similar to the previous section about Flexbox layout, the goal of this section is not to be a comprehensive guide on the CSS Grid layout module but to provide a rough overview over its general characteristics. For more detailed information, other sources like \cite{GridLayoutInCSS} and \cite{CSSGrid} are recommended.
 
-The initial proposal of the CSS Grid layout module has already been published in 2011 \parencite{CSSGridFirstDraft} and it has been further refined over the years. At the time of writing, even though it still exists as merely a candidate recommendation for standardization \parencite{CSSGrid}, many browser have already adopted it. The history of browser adoption has been, similar o the one of Flexbox layout, filled with inconsistencies and bugs. However, browser support has been considered stable and safe to use since 2017 when Chrome, Firefox, Safari and Edge removed the need for vendor prefixes and the deprecation of IE was announced \parencite{CanIUseCSSGrid}.
+The initial proposal of the CSS Grid layout module has already been published in 2011 \parencite{CSSGridFirstDraft} and it has been further refined over the years. At the time of writing, even though it still exists as merely a candidate recommendation for standardization \parencite{CSSGrid}, many browsers have already adopted it. The history of browser adoption has been, similar o the one of Flexbox layout, filled with inconsistencies and bugs. However, browser support has been considered stable and safe to use since 2017 when Chrome, Firefox, Safari and Edge removed the need for vendor prefixes and the deprecation of IE was announced \parencite{CanIUseCSSGrid}.
 
 The Grid layout module defines laying out elements in a two-dimensional grid, which differences it from the one-dimensional layouting that can be achieved with a Flexbox layout. Grid layouting of elements can be enabled by setting the \lstinline{display:grid} property on their container. The grid in which items shall be laid out is then defined using the \lstinline{grid-template-rows} and \lstinline{grid-template-columns} properties. There also exists the \lstinline{grid-template} property, which can be used as a shorthand to simultaneously specify both rows and columns of a grid.
 
@@ -136,15 +137,15 @@ There are also properties that allow to control the layout of items within grid 
     \label{fig:GridLayoutProperties}
 \end{figure}
 
-There is a lot of overlap between the CSS Grid and Flexbox layout modules and, at first sight, it seems like Grid layout supersedes Flexbox layout because everything that can be done using Flexbox layout can also be done with Grid layout. While that is true, the inherent difference in dimensionality and the resulting syntactical characteristics lead to better suitability of one technology over the other other, depending on the situational requirements. As a general rule \parencite{CSSGridVsFlexbox}, top-level layouts that require two-dimensional positioning of elements are usually implemented using a Grid layout, whereas low-level layouts that merely need laying out on an one-dimensional axis are more expressively described using a Flexbox layout.
+There is a lot of overlap between the CSS Grid and Flexbox layout modules and, at first sight, it seems like Grid layout supersedes Flexbox layout because everything that can be done using Flexbox layout can also be done with Grid layout. While that is true, the inherent difference in dimensionality and the resulting syntactical characteristics lead to better suitability of one technology over the other, depending on the situational requirements. As a general rule \parencite{CSSGridVsFlexbox}, top-level layouts that require two-dimensional positioning of elements are usually implemented using a Grid layout, whereas low-level layouts that merely need laying out on a one-dimensional axis are more expressively described using a Flexbox layout.
 
 \section{JavaScript (JS)}
 
 JavaScript (JS) is one of the three core technologies of the web: HTML for content, CSS for presentation and JS for behavior. the goal of this section is to briefly summarize JS, its history and the specific Web APIs that are relevant for this work.
 
-JavaScript is a client-side scripting language, which requires an engine that interprets it. These engines are usually provided by browsers but there are also standalone engines, like NodeJS, available. It is a multi-paradigm language that supports event-driven, as well as functional and imperative programming. Undoubtedly influenced by the popularity of the web, JavaScript is currently the most used programming language worldwide \parencite{StatisticProgrammingLanguageUsage}.
+JavaScript is a client-side scripting language, which requires an engine that interprets it. These engines are usually provided by browsers, but there are also standalone engines, like NodeJS, available. It is a multi-paradigm language that supports event-driven, as well as functional and imperative programming and undoubtedly influenced by the popularity of the web, JavaScript is currently the most used programming language worldwide \parencite{StatisticProgrammingLanguageUsage}.
 
-JavaScript has initially been created by Netscape in 1995 \parencite{JSFirstRelease} and before that, websites were only able to display static content, which drastically limited the usefulness of the web. Seemingly, Microsoft saw JavaScript as a potentially revolutionary development because they reverse-engineered the implementation of Netscape and published their own version of the language for Internet Explorer in 1996 \parencite{JSIERelease}. Both implementations were noticeably different from one another but the uncontested monopoly of the Internet Explorer \parencite{BrowserMarketShareEarly} held back the standardization efforts undertaken by Netscape \parencite{ECMAScript1}. When Firefox was released in 2004 \parencite{FirefoxFirstRelease} and Chrome in 2008 \parencite{ChromeFirstRelease}, they gained a considerable share of the market \parencite{BrowserMarketShare} (see Figure \ref{fig:BrowserMarketShare}) and all the major browser vendors collaborated on the standardization of JavaScript as ECMAScript 5 in 2009 \parencite{ECMAScript5}. Since then, JavaScript has been continuously developed and it's latest version was released as ECMAScript 6 in 2015 \parencite{ECMAScript6}.
+JavaScript has initially been created by Netscape in 1995 \parencite{JSFirstRelease} and before that, websites were only able to display static content, which drastically limited the usefulness of the web. Seemingly, Microsoft saw JavaScript as a potentially revolutionary development because they reverse-engineered the implementation of Netscape and published their own version of the language for Internet Explorer in 1996 \parencite{JSIERelease}. Both implementations were noticeably different from one another but the uncontested monopoly of the Internet Explorer \parencite{BrowserMarketShareEarly} held back the standardization efforts undertaken by Netscape \parencite{ECMAScript1}. When Firefox was released in 2004 \parencite{FirefoxFirstRelease} and Chrome in 2008 \parencite{ChromeFirstRelease}, they gained a considerable share of the market \parencite{BrowserMarketShare} (see Figure \ref{fig:BrowserMarketShare}) and all the major browser vendors collaborated on the standardization of JavaScript as ECMAScript 5 in 2009 \parencite{ECMAScript5}. Since then, JavaScript has been continuously developed, and its latest version was released as ECMAScript 6 in 2015 \parencite{ECMAScript6}.
 
 
 \begin{figure}[tp]
@@ -159,11 +160,11 @@ JavaScript has initially been created by Netscape in 1995 \parencite{JSFirstRele
     \label{fig:BrowserMarketShare}
 \end{figure}
 
-RespVis is a browser-based library, which is designed run within the JavaScript engine of a browser. Therefore, it builds heavily on widely supported Web APIs, which are JavaScript modules that are specifically meant for the development of web pages. These Web APIs are standardized by the W3C and each browser has to individually implement them in their JavaScript engine.
+RespVis is a browser-based library, which is designed to run within the JavaScript engine of a browser. Therefore, it builds heavily on widely supported Web APIs, which are JavaScript modules that are specifically meant for the development of web pages. These Web APIs are standardized by the W3C and each browser has to individually implement them in their JavaScript engine.
 
 Undoubtedly the most popular Web API, that every web developer must be familiar with, is the Document Object Model (DOM). The DOM is the programming interface and data representation of a document. Internally, a document is modeled as a tree of objects, where each object corresponds to a specific element in the document hierarchy and its associated data and functions. In addition to the querying of elements, the DOM also defines the functionality to mutate them and their attributes, as well as the functionality for handling and dispatching of events. It also exposes the mechanism of \lstinline{MutationObserver}s, which are used to observe attribute or children changes in the document tree. The initial publication of the DOM dates back to 1998 \parencite{DOM1} and currently it is maintained as a living standard by the WHATWG \parencite{DOM}.
 
-A second important Web API in the context of this work is the \lstinline{ResizeObserver} API. Its purpose is the ability to observe an elements size and respond to changes, which increases the responsive capabilities of web sites. Previously, scripts could only respond to changes in the overall viewport size via the \lstinline{resize} event on the \lstinline{window} object but this meant, that changes of an individual element's size through attribute changes could not be detected. This is fixed by the \lstinline{ResizeObserver} API, which is already fully supported by all modern browsers, even though it has so far only been published as an editor's draft \parencite{ResizeObserver}.
+A second important Web API in the context of this work is the \lstinline{ResizeObserver} API. Its purpose is the ability to observe an element's size and respond to changes, which increases the responsive capabilities of websites. Previously, scripts could only respond to changes in the overall viewport size via the \lstinline{resize} event on the \lstinline{window} object, but this meant, that changes of an individual element's size through attribute changes could not be detected. This is fixed by the \lstinline{ResizeObserver} API, which is already fully supported by all modern browsers, even though it has so far only been published as an editor's draft \parencite{ResizeObserver}.
 
 \section{TypeScript (TS)}
 
@@ -183,7 +184,7 @@ The TypeScript type system has been designed to support the constructs that are 
         Full erasure             & Types are completely removed by the compiler and therefore there is also no type checking at runtime.                                                                                                                       \\ \hline
         Type inference           & A big portion of types can be inferred from usage, which minimizes the number of types that have to be explicitly written. E.                                                                                               \\ \hline
         Gradual typing           & Type checking can be selectively prevented by using the dynamic \lstinline{any} type.                                                                                                                                       \\ \hline
-        Structural types         & Types are defined via their structure as opposed to nominal type systems, which define types via their names. This better fits to JavaScript because here, objects are usually custom built and used based on their shapes. \\ \hline
+        Structural types         & Types are defined via their structure as opposed to nominal type systems, which define types via their names. This better fits to JavaScript because here, objects are usually custom-built and used based on their shapes. \\ \hline
         Unified object types     & A type can simultaneously describe objects, functions and arrays. These constructs are common in JavaScript and therefore TypeScript needs to enable their typing.                                                          \\ \hline
     \end{tabularx}
     \caption[TypeScript Type System Design Properties]
@@ -197,46 +198,120 @@ The TypeScript type system has been designed to support the constructs that are 
 
 \section{Web Graphics}
 
-Graphics are used as a medium for visual expression to enhance the representation of information on the web. There are versatile fields of application like the integration of maps, photographs or charts in a web site. Multiple complementary technologies exist and each solves particular use cases of web authors. The different ways of embedding graphics in a document are raster images, Scalable Vector Graphics (SVG) and through the Canvas API. These technologies are described in more detailed in the following sections.
+Graphics are used as a medium for visual expression to enhance the representation of information on the web. There are versatile fields of application like the integration of maps, photographs or charts in a website. Multiple complementary technologies exist and each solves particular use cases of web authors. The different ways of embedding graphics in a document are raster images, Scalable Vector Graphics (SVG) and through the Canvas API. These technologies are described in more detailed in the following sections.
 
 \subsection{Raster Images}
 
-Raster images represent graphics as a rectangular, two-dimensional grid of pixels with a fixed size. This fixed grid size results in limited scalability and, whenever an image is displayed in a different size, visual scaling artifacts will be noticeable. Raster images are either created by image capturing devices or special editing software and saved as binary files in varying formats. The most widely used format for raster images is Portable Network Graphics (PNG), which is standardized by the W3C \parencite{PNG} and optimized for usage on the web. It features a lossless compression and streaming capabilities, which enable progressive rendering of images during loading.
+Raster images represent graphics as a rectangular, two-dimensional grid of pixels with a fixed size. This fixed grid size results in limited scalability and, whenever an image is displayed in a different size, visual scaling artifacts will be noticeable as can be seen in Figure \ref{fig:RasterImage}. Raster images are either created by image capturing devices or special editing software and saved as binary files in varying formats. The most widely used format for raster images is Portable Network Graphics (PNG), which is standardized by the W3C \parencite{PNG} and optimized for usage on the web. It features a lossless compression and streaming capabilities, which enable progressive rendering of images during loading.
 
 Raster images are embedded into documents in binary format. This means that the contents of the graphic are not accessible in a non-visual representation. To make the information accessible to visually impaired people it is required to provide an additional textual description of the graphic's content on the embedding element via the \lstinline{alt} and \lstinline{longdesc} attributes.
 
+\begin{figure}[tp]
+    \centering
+    \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]
+    {images/raster-image.png}
+
+    \caption[Raster Image Scaling Artifacts]{
+        This figure demonstrates the artifacts that occur when scaling raster images to a size that is different from the size they were encoded in. The left shows a raster image of a circle in its original size and the right shows the same image scaled to ten times its size.
+        \imgcredit{Image created by the author of this thesis.}
+    }
+    \label{fig:RasterImage}
+\end{figure}
+
 \subsection{Scalable Vector Graphics (SVG)}
 
-Scalable Vector Graphics (SVG) is an XML-based format for vector graphics, which describe images as sets of shapes and which can be scaled without loss of quality. It was initially published by the W3C in 1999 \parencite{SVG1.0} and the most recent version SVG 1.1 was released in 20?? \parencite{SVG1.1}. Because SVG is based on XML, SVG files can be created with any text editor. However, there is also specialized software available that helps with the composition of more complex images.
+Scalable Vector Graphics (SVG) is an XML-based format for vector graphics, which describe images as sets of shapes that can be scaled without loss of quality. It was initially published by the W3C in 1999 \parencite{SVG1.0} and the most recent version SVG 1.1 was released in 2011 \parencite{SVG1.1}. Because SVG is based on XML, SVG files can be created with any text editor and a simple example of an SVG document can be seen in Listing \ref{list:SVG} with its visualization being shown in Figure \ref{fig:SVG}. In addition to being able to write SVG documents manually, there is also specialized software available that helps with the composition of more complex images.
+
+\begin{samepage}
+      \lstinputlisting[%
+            float=tp,
+            aboveskip=\floatsep,
+            belowskip=\floatsep,
+            xleftmargin=0cm,              % no extra margins for floats
+            xrightmargin=0cm,             % no extra margins for floats
+            %
+            language=XML,
+            basicstyle=\footnotesize\ttfamily,
+            frame=shadowbox,
+            numbers=left,
+            label=list:SVG,
+            caption={[SVG Document Containing a Circle Element]%
+                        A simple SVG document containing a circle element. The visual representation of this document in different sizes is shown in Figure \ref{fig:SVG}},
+      ]
+      {listings/circle.svg}
+\end{samepage}
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]
+    {images/svg.png}
+
+    \caption[SVG Scaling]{
+        SVG documents can be scaled freely without any artifacts occurring. This figure represents the visual representation of the SVG document in Listing \ref{list:SVG} scaled to different sizes.
+        \imgcredit{Image created by the author of this thesis.}
+    }
+    \label{fig:SVG}
+\end{figure}
 
 The encoding in XML leads to SVG being the best format to represent graphics in terms of accessibility. Graphics are directly saved in a hierarchical and textual form, which describes their shapes and how they are composed. In addition to the shapes being inherently accessible, the various elements of an SVG document can be annotated with further information that aids comprehension when consumed in a non-visual way.
 
 SVG files are XML documents whose meta format is described in special SVG namespaces. Therefore, the elements of SVG documents can be accessed in scripts via the DOM Web API. This means that elements can be completely controlled by scripts, which enables similar levels of interactivity than for HTML documents.
 
-The most widely supported way of styling SVG elements is via attributes, which is supported by every software dealing with SVG files. However, the specification aims for maximum compatibility with HTML and therefore it is also possible to use CSS to style and animate SVG elements, when they are rendered in a browser. Using CSS to separate presentation from content has many benefits that were already described in Section \ref{sec:CSS} but this can not be done with all attributes because only the so-called presentation attributes like \lstinline{fill} and \lstinline{stroke-width} are available in CSS. These attributes are taxonomically listed in the specification \parencite{CSS1.1} and and have been extended by additional attributes like \lstinline{x}, \lstinline{y}, \lstinline{width} and \lstinline{height} in upcoming releases \parencite{CSS2}.
+The most widely supported way of styling SVG elements is via attributes, which is supported by every software dealing with SVG files. However, the specification aims for maximum compatibility with HTML, and therefore it is also possible to use CSS to style and animate SVG elements when they are rendered in a browser. Using CSS to separate presentation from content has many benefits that were already described in Section \ref{sec:CSS}, but this can not be done for all attributes because only the so-called presentation attributes like \lstinline{fill} and \lstinline{stroke-width} are available in CSS. These attributes are taxonomically listed in the specification \parencite{CSS1.1} and have been extended by additional attributes like \lstinline{x}, \lstinline{y}, \lstinline{width} and \lstinline{height} in upcoming releases \parencite{CSS2}.
 
 \subsection{Canvas}
 
-The canvas element has been introduced in HTML5 and is used to define a two-dimensional, rectangular region in a document that can be drawn into by scripts. Even though the rendering of dynamic graphics as canvas elements is faster than representing them as SVG documents, their use is explicitly discouraged by the WHATWG when another suitable representation is possible. The reasons for this are that canvas elements are not compatible with other web technologies like CSS or the DOM Web API and because the resulting rendering as a raster image provides only very limited possibilities for accessibility.
+The canvas element has been introduced in HTML5 \parencite{HTMLSpec} and is used to define a two-dimensional, rectangular region in a document that can be drawn into by scripts. Even though the rendering of dynamic graphics as canvas elements is faster than representing them as SVG documents, their use is explicitly discouraged by the WHATWG when another suitable representation is possible. The reasons for this are that canvas elements are not compatible with other web technologies like CSS or the DOM Web API and because the resulting rendering as a raster image provides only very limited possibilities for accessibility.
 
-Rendering is done via a low-level API, which is provided by the rendering context of a particular canvas. The type of render context depends on the context mode of a canvas and the two most significant ones are the 2d and webgl context modes. A two-dimensional render context (created with the 2d context mode) enables platform-independent rendering via a software renderer, whose API is standardized directly in the canvas specification. If even faster or three-dimensional rendering is required, a WebGL render context (created with the webgl context mode) provides access to a hardware-accelerated renderer, whose API is standardized in its own specification \parencite{WebGL}. The availability of individual features on a WebGL render context depends on the client's hardware and therefore 
+Rendering is done via a low-level API, which is provided by the rendering context of a particular canvas. The type of render context depends on the context mode of a canvas with the two most significant ones being \lstinline{2d} and \lstinline{webgl}. A two-dimensional render context (created with the \lstinline{2d} context mode) enables platform-independent rendering via a software renderer, whose API is standardized directly in the canvas specification. If even faster or three-dimensional rendering is required, a WebGL render context (created with the \lstinline{webgl} context mode) provides access to a hardware-accelerated renderer, whose API is standardized in its own specification \parencite{WebGL}. The availability of individual features on a WebGL render context depends on the client's hardware and therefore, it should only be used if the requirements don't allow for any of the alternatives. An example of an HTML document containing two differently sized canvases into which responsive circles are drawn using a two-dimensional rendering context can be seen in Listing \ref{list:Canvas} with the corresponding visualization displayed in Figure \ref{fig:Canvas}.
+
+\begin{samepage}
+      \lstinputlisting[%
+            float=tp,
+            aboveskip=\floatsep,
+            belowskip=\floatsep,
+            xleftmargin=0cm,              % no extra margins for floats
+            xrightmargin=0cm,             % no extra margins for floats
+            %
+            language=HTML,
+            basicstyle=\footnotesize\ttfamily,
+            frame=shadowbox,
+            numbers=left,
+            label=list:Canvas,
+            caption={[Canvas With Responsive Circles]%
+                        A basic HTML document containing two canvases of different sizes that render circles relative to the canvas size. The visual representation of this document is shown in Figure \ref{fig:Canvas}},
+      ]
+      {listings/canvas.html}
+\end{samepage}
+
+\begin{figure}[tp]
+    \centering
+    \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]
+    {images/canvas.png}
+
+    \caption[Canvas With Responsive Circles]{
+        Responsive rendering of graphics inside canvas elements has to be implemented manually by calculating everything as ratios of the canvas' dimensions. This figure represents the visual representation of the canvas example in Listing \ref{list:Canvas}.
+        \imgcredit{Image created by the author of this thesis.}
+    }
+    \label{fig:Canvas}
+\end{figure}
 
 \section{Layout Engines}
 
-\subsection{Yoga Layout}
+A layout engine is used to calculate the boundary coordinates of visual components based on some form of input components that are annotated with layout constraints. These layout constraints describe the size and position of components and their relationships between each other in a syntax that is understood by the layout engine. For browser-based layout engines these input components are normally declared as HTML documents which are constrained using CSS. More low-level layout engines require custom formats, which usually involve a hierarchy of objects that is constrained using specific properties. The most relevant layout engines in the context of this work are summarized in the following sections.
+
+\subsection{Browser Engines}
+
+The purpose of a browser engine is to transform documents including their additional resources, like CSS, into visual representations. A browser engine is a core component of every web browser, and it is responsible for laying out elements and rendering them. The terminology of browser engines is very vague with them sometimes also being referred to as layout or render engines. Theoretically, the layout and render processes could be separated into different components but in practice they are tightly-coupled into a combined component, which will be referred to as a browser engine in this work. Some notable browser engines are WebKit \parencite{WebKit}, Blink \parencite{Blink} and Gecko \parencite{Gecko}.
+
+In a browser engine the layout of elements is constrained with CSS, which gives website authors a lot of flexibility as already described in Section \ref{sec:CSS}. They are offered a range of mechanisms to precisely control the layout of elements, like the flexible box and grid layout modules, which don't have to be applied exclusively but can also be used in combination. 
+
+The layout module of a browser engine can only be invoked directly by browsers to position HTML elements in actively rendered documents. To use it for calculating layouts of non-HTML constructs, they must be replicated in active documents so that they can be parsed, laid out and rendered by the browser engine. These replicated constructs do not have to be visible, and they can be removed from the document after the layout has been acquired, which means they do not need to be noticeable at all. A strong limitation of using browser engines to calculate layouts is that it requires a browser runtime to work and, even though there are solutions like Electron available that enable development of native applications using web technologies, this forces applications into this very specific stack of technologies. 
+
+\subsection{Yoga}
+
+Yoga \parencite{Yoga} is a layout engine that enables the computation of layouts that are constrained using the grammar of the flexible box layout CSS module (see Section \ref{sec:Flexbox}). It is maintained by Facebook as an open source project since 2016 \parencite{YogaRelease} with the goal of providing a small and high performance library that can be used across all platforms. This is achieved through the implementation being programmed in the C/C++ programming language, which works on a myriad of devices, with bindings available for other platforms like JavaScript, Android and iOS. Yoga has been very well adopted and is used to perform layouting in major frameworks, such as React Native \parencite{ReactNative}, Litho \parencite{Litho} and ComponentKit \parencite{ComponentKit}.
+
 \subsection{FaberJS}
 
-\section{Visualization Libraries}
-
-\subsection{Chartist}
-\subsection{Highcharts}
-\subsection{ECharts}
-\subsection{...?}
-\subsection{D3}
-\TODO{Mention that D3 is successor of Protovis}
-
-% \section{Tools}
-% \subsection{Node}
-% \subsection{Rollup}
-% \subsection{Gulp}
-
+FaberJS \parencite{FaberJS} is a layout engine that is very similar to the Yoga layout engine in the fact that it enables the computation of layouts for constructs other than HTML documents using a layout grammar that has originally been created for CSS. In contrast to Yoga, which is used to create one-dimensional layouts using the flexible box layout grammar, FaberJS implements a two-dimensional layout algorithm that is built on the grammar of the grid layout CSS module (see Section \ref{sec:Grid}). In the context of two-dimensional information visualization, this inherently two-dimensional approach to layouting makes more sense than trying to achieve two-dimensionality using a one-dimensional one. FaberJS is an open source JavaScript project that has been developed since 2019 by Idera, Inc. Even though the layouts it computes are constrained with the grid layout grammar, it only supports a subset of all the functionalities that are defined in the original CSS module. Some examples of missing functionalities include missing support for margins, gaps and the \lstinline{*-content} and \lstinline{grid-auto-*} properties. Working around the limitations caused by these missing features is not trivial, and it seems unlikely that support for them will be added by the FaberJS maintainers in the near future because, at the time of writing, the project has not been updated in nearly two years. 
