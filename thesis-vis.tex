@@ -51,14 +51,14 @@ Visualizations presented in an interactive medium do not merely consist of visua
     \label{tab:UserIntentCategories}
 \end{table}
 
-The history of Information Visualization goes back a long time with one of the earliest examples dating back to the 10th century, when an unknown astronomer created a chart about the movement of the most prominent planets \parencite{InSomniumScripionus}, shown in Figure \ref{fig:PlanetaryMovements}. Other noteworthy early visualizations include the first occurrence of the principle \cite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in a 1626 chart demonstrating sunspot changes (Figure \ref{fig:SunspotChanges}) by \cite{RosaUrsina} and a 1644 chart displaying longitudinal distance determinations between Toledo and Rome (Figure \ref{fig:RomeToledoLongitude}) by Michael Florent van Langren. One of the forefathers of modern visualizations and the inventor of many graphical forms used today is William Playfair, who has published works containing the first occurrences of line, bar (Figure \ref{fig:PlayfairBarChart}) and area charts \parencite{CommercialAndPoliticalAtlas} as well as pie and circle charts \parencite{StatisticalBreviary}. Undoubtedly one of the most famous and influential visualizations in history is accounted to \cite{ModeOfCommunicationOfCholera}, who created a dot map to trace cholera outbreaks (Figure \ref{fig:CholeraDotMap}) leading to the identification of a contaminated water pump on Broad Street in London. This whole paragraph only provides a brief and selective view on the long history of Data Visualization, and it is recommended to review other sources \parencite{BriefHistoryOfDataVis} for a more comprehensive account on this topic.  
+The history of Information Visualization goes back a long time with one of the earliest examples dating back to the 10th century, when an unknown astronomer created a chart about the movement of the most prominent planets \parencite{CommentariiInSomniumScipionis}, shown in Figure \ref{fig:PlanetaryMovements}. Other noteworthy early visualizations include the first occurrence of the principle \cite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in a 1626 chart demonstrating sunspot changes (Figure \ref{fig:SunspotChanges}) by \cite{RosaUrsina} and a 1644 chart displaying longitudinal distance determinations between Toledo and Rome (Figure \ref{fig:RomeToledoLongitude}) by Michael Florent van Langren. One of the forefathers of modern visualizations and the inventor of many graphical forms used today is William Playfair, who has published works containing the first occurrences of line, bar (Figure \ref{fig:PlayfairBarChart}) and area charts \parencite{CommercialAndPoliticalAtlas} as well as pie and circle charts \parencite{StatisticalBreviary}. Undoubtedly one of the most famous and influential visualizations in history is accounted to \cite{ModeOfCommunicationOfCholera}, who created a dot map to trace cholera outbreaks (Figure \ref{fig:CholeraDotMap}) leading to the identification of a contaminated water pump on Broad Street in London. This whole paragraph only provides a brief and selective view on the long history of Data Visualization, and it is recommended to review other sources \parencite{BriefHistoryOfDataVis} for a more comprehensive account on this topic.  
 
 \begin{figure}[tp]
     \centering
     \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]
     {images/planetary-movements.png}
     \caption[Chart of Planetary Movements from the Tenth Century]{
-        A chart created by an unknown astronomer in the tenth century depicting the movements of the seven most prominent planets. \imgcredit{Image extracted from \cite{BriefHistoryOfDataVis}. Original appearance in \cite{NoteOnTenthCenturyGraph}.}
+        A chart created by an unknown astronomer in the tenth century depicting the movements of the seven most prominent planets. \imgcredit{Image extracted from \cite{BriefHistoryOfDataVis}. Original appearance in \cite{CommentariiInSomniumScipionis}.}
     }
     \label{fig:PlanetaryMovements}
 \end{figure}
@@ -98,18 +98,14 @@ The history of Information Visualization goes back a long time with one of the e
     \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]
     {images/cholera-dot-map.png}
     \caption[Dot Map Plotting Cholera Deaths in London From 1855]{
-        This iconic chart was created by Dr. John Snow to identify a clustering of cholera-related deaths near Broad Street in London. It was used to identify a contaminated water pump and to illustrate the waterborne nature of the disease. \imgcredit{Image extracted from \cite{IVISCourseNotes}. Original appearance in \cite{ModeOfCommunicationOfCholera}.}
+        This iconic chart was created by Dr. John Snow to identify a clustering of cholera-related deaths near Broad Street in London. It was used to identify a contaminated water pump and to illustrate the waterborne nature of the disease. The data being map-based, this chart is an example of a data visualization rather than an information visualization. \imgcredit{Image extracted from \cite{IVISCourseNotes}. Original appearance in \cite{ModeOfCommunicationOfCholera}.}
     }
     \label{fig:CholeraDotMap}
 \end{figure}
 
 \section{Responsive Web Design}
 
-\TODO{Define responsive web design} \TODO{Mention adapting to characteristics of consuming device} \TODO{Mention text wrapping} \TODO{Mention }
-
-\TODO{Mention importance of responsive web design} \TODO{Add chart showing the rise of mobile devices} 
-
-https://i.imgur.com/25ZpmBn.png
+Influenced by the increasing use of mobile devices and their vastly varying screen sizes, responsive web design has established itself as the predominant way of designing web pages. The core idea of responsive web design is that instead of designing pages for different types of devices, website authors create a single design for a page that adapts to the characteristics of the consuming device. The term "Responsive Web Design" has been defined by \cite{ResponsiveWebDesign} where the author differentiates between flexible and responsive web designs. It states that a flexible web design, which merely fluidly scales blocks of content to make them fit into the width of a browser window, is not enough to provide a good experience for users. Such designs will work well enough for similarly sized viewports to the one they were created for, but they will lead to noticeable artifacts on lower resolutions. These problems can be avoided by positioning the individual components of a page in a manner that provides them with enough space to render correctly, which can be achieved by using CSS media queries to adapt the overall layout of a page to the dimensions of the consuming device. Another crucial part of responsive web design is to support the different modes of interaction inherent to the various types of devices used to access the web. Desktop users might access a website using a mouse; mobile device users are usually interacting via touchscreens, and yet others might consume a page in a purely textual form via a screen reader that requires interaction via keyboard. It is one of the mantras of responsive web design to ensure a smooth and complete experience for all users, regardless of the device they use to access the web. 
 
 \section{Responsive Information Visualization}
 
