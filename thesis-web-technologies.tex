@@ -182,7 +182,7 @@ The TypeScript type system has been designed to support the constructs that are 
         \hline
         \textbf{Design Property} & \textbf{Description}                                                                                                                                                                                                        \\ \hline
         Full erasure             & Types are completely removed by the compiler and therefore there is also no type checking at runtime.                                                                                                                       \\ \hline
-        Type inference           & A big portion of types can be inferred from usage, which minimizes the number of types that have to be explicitly written. E.                                                                                               \\ \hline
+        Type inference           & A big portion of types can be inferred from usage, which minimizes the number of types that have to be explicitly written.                                                                                               \\ \hline
         Gradual typing           & Type checking can be selectively prevented by using the dynamic \lstinline{any} type.                                                                                                                                       \\ \hline
         Structural types         & Types are defined via their structure as opposed to nominal type systems, which define types via their names. This better fits to JavaScript because here, objects are usually custom-built and used based on their shapes. \\ \hline
         Unified object types     & A type can simultaneously describe objects, functions and arrays. These constructs are common in JavaScript and therefore TypeScript needs to enable their typing.                                                          \\ \hline
@@ -213,12 +213,10 @@ Raster images are embedded into documents in binary format. This means that the 
 
     \caption[Raster Image Scaling Artifacts]{
         This figure demonstrates the artifacts that occur when scaling raster images to a size that is different from the size they were encoded in. The left shows a raster image of a circle in its original size and the right shows the same image scaled to ten times its size.
-        \imgcredit{Image created by the author of this thesis.}
+        \imgcredit{Image created by the author of this thesis.} \TODO{Create these figures using subfigures. See thesis-details.tex in template} 
     }
     \label{fig:RasterImage}
 \end{figure}
-
-\TODO{Create these figures using subfigures. See thesis-details.tex in template} 
 
 \subsection{Scalable Vector Graphics (SVG)}
 
@@ -250,7 +248,7 @@ Scalable Vector Graphics (SVG) is an XML-based format for vector graphics, which
 
     \caption[SVG Scaling]{
         SVG documents can be scaled freely without any artifacts occurring. This figure represents the visual representation of the SVG document in Listing \ref{list:SVG} scaled to different sizes.
-        \imgcredit{Image created by the author of this thesis.}
+        \imgcredit{Image created by the author of this thesis.} \TODO{Create these figures using subfigures. See thesis-details.tex in template} 
     }
     \label{fig:SVG}
 \end{figure}
@@ -262,6 +260,8 @@ SVG files are XML documents whose meta format is described in special SVG namesp
 The most widely supported way of styling SVG elements is via attributes, which is supported by every software dealing with SVG files. However, the specification aims for maximum compatibility with HTML, and therefore it is also possible to use CSS to style and animate SVG elements when they are rendered in a browser. Using CSS to separate presentation from content has many benefits that were already described in Section \ref{sec:CSS}, but this can not be done for all attributes because only the so-called presentation attributes like \lstinline{fill} and \lstinline{stroke-width} are available in CSS. These attributes are taxonomically listed in the specification \parencite{CSS1.1} and have been extended by additional attributes like \lstinline{x}, \lstinline{y}, \lstinline{width} and \lstinline{height} in upcoming releases \parencite{CSS2}.
 
 \subsection{Canvas}
+
+\TODO{Split canvas section into Canvas 2D and Canvas 3D}
 
 The canvas element has been introduced in HTML5 \parencite{HTMLSpec} and is used to define a two-dimensional, rectangular region in a document that can be drawn into by scripts. Even though the rendering of dynamic graphics as canvas elements is faster than representing them as SVG documents, their use is explicitly discouraged by the WHATWG when another suitable representation is possible. The reasons for this are that canvas elements are not compatible with other web technologies like CSS or the DOM Web API and because the resulting rendering as a raster image provides only very limited possibilities for accessibility.
 
@@ -293,12 +293,11 @@ Rendering is done via a low-level API, which is provided by the rendering contex
 
     \caption[Canvas With Responsive Circles]{
         Responsive rendering of graphics inside canvas elements has to be implemented manually by calculating everything as ratios of the canvas' dimensions. This figure represents the visual representation of the canvas example in Listing \ref{list:Canvas}.
-        \imgcredit{Image created by the author of this thesis.}
+        \imgcredit{Image created by the author of this thesis.} \TODO{Create these figures using subfigures. See thesis-details.tex in template} 
     }
     \label{fig:Canvas}
 \end{figure}
 
-\TODO{Split canvas section into Canvas 2D and Canvas 3D}
 
 \section{Layout Engines}
 
