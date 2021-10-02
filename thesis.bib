@@ -39,6 +39,18 @@
   doi          = "10.1109/ICSE.2017.75",
 }
 
+% https://osf.io/zrqfy/
+% https://arxiv.org/pdf/2104.07724.pdf
+@article{DesignPatternsTradeOffsRespVis,
+  journal = {Computer Graphics Forum},
+  title = {{Design Patterns and Trade-Offs in Responsive Visualization   for Communication}},
+  author = {Kim, Hyeok and Moritz, Dominik and Hullman, Jessica},
+  year = {2021},
+  publisher = {The Eurographics Association and John Wiley & Sons   Ltd.},
+  ISSN = {1467-8659},
+  DOI = {10.1111/cgf.14321}
+}
+
 
 % Online Resources
 % ----------------
@@ -117,7 +129,7 @@
 } 
 
 @booklet{CanIUseCSSFlexbox,
-  author       = "Can I Use",
+  author       = {{Can I Use}},
   title        = "Can I use CSS Flexible Box Layout Module",
   date         = "2021-08-13",
   url          = "https://caniuse.com/flexbox",
@@ -141,7 +153,7 @@
 } 
 
 @booklet{CanIUseCSSGrid,
-  author       = "Can I Use",
+  author       = {{Can I Use}},
   title        = "Can I use CSS Grid Layout",
   date         = "2021-08-19",
   url          = "https://caniuse.com/css-grid",
@@ -291,21 +303,18 @@
 % RoleOfInteractionInInformationVisualization 
 % https://ieeexplore.ieee.org/abstract/document/4376144?casa_token=SaN3cvfV_ooAAAAA:8ivAHV04aBTy3WsnjJJL1r0xs9U43GALQM19HfmS-EPFOzyQASQ-wlNzopNVL4hTR7wALKEuYsP7
 
-% Responsive Data Visualization: 
+% RespVis: 
 % https://mobilevis.github.io/assets/mobilevis2018_paper_4.pdf
 % https://www.youtube.com/watch?v=cQKzpKfea-E
 
-
-% Techniques for Flexible Responsive Visualization Design: 
+% TechniquesForFlexibleRespVisDesign: 
 % https://jhoffswell.github.io/website/resources/papers/2020-ResponsiveVisualization-CHI.pdf
 
-% Design Patterns and Trade-Offs in Responsive Visualization for Communication: 
-% https://osf.io/zrqfy/
-% https://arxiv.org/pdf/2104.07724.pdf
-
 % IVIS group work: 
-% https://courses.isds.tugraz.at/ivis/surveys/ss2021/ivis-ss2021-g2-survey-resp-datavis.pdf
 % https://courses.isds.tugraz.at/ivis/projects/ss2021/ivis-ss2021-g2-project-respvis.pdf
+
+% RespVisSurvey
+% https://courses.isds.tugraz.at/ivis/surveys/ss2021/ivis-ss2021-g2-survey-resp-datavis.pdf
 
 % PreattentiveProcessing https://www.sciencedirect.com/science/article/abs/pii/S0734189X85800049
 
@@ -346,3 +355,115 @@
 
 % ResponsiveWebDesign
 % https://abookapart.com/products/responsive-web-design
+
+% HistoryOfDataVisAndGraphicCommunication
+% https://www.amazon.de/History-Data-Visualization-Graphic-Communication/dp/0674975235/ref=sr_1_1?__mk_de_DE=%C3%85M%C3%85%C5%BD%C3%95%C3%91&dchild=1&keywords=friendly+history+of+data+visualization&qid=1631707810&sr=8-1
+
+% HistoryOfInformationGraphics
+% https://www.amazon.com/History-Information-Graphics-multilingual-Rendgen/dp/3836567679/ref=sr_1_1?dchild=1&keywords=history+of+information+graphics&qid=1631710079&s=books&sr=1-1
+
+% HighD
+% https://www.high-d.com/
+
+% EdgeBundlingParCoord
+% parcoord 
+% https://www.researchgate.net/publication/261958582_An_Edge-Bundling_Layout_for_Interactive_Parallel_Coordinates
+
+%
+% RESPONSIVE CHARTS 
+%
+
+% NickRabinowitzRDV
+% http://nrabinowitz.github.io/rdv/
+
+% RespHBars %
+% reduce width, recompose ticks
+% https://www.wsj.com/graphics/french-assembly-2017/
+
+% RespHBar %
+% reduce width, serialize ticks and bars
+% http://graphics.wsj.com/how-the-worlds-best-fighter-jets-measure-up/
+
+% RespHStackedBar %
+% reduce width, remove redundant annotations
+% https://www.nytimes.com/2021/08/12/upshot/covid-return-to-office.html
+
+% RespVBar %
+% reduce width, simplify annotations, relocate annotations, recompose ticks, simplify tick labels, 
+% https://www.wsj.com/articles/octobers-not-as-bleak-as-its-reputation-for-stock-markets-1507384342
+
+% RespHBarHLine % 
+% bar: reduce width, recompose ticks %
+% line: reduce width, recompose ticks, reposition annotations %
+% https://www.wsj.com/graphics/big-companies-get-bigger/
+
+% RespHLines %
+% recompose ticks, simplify tick labels, reposition annotations, increase height, simplify annotations
+% https://www.nytimes.com/interactive/2016/05/18/us/chicago-murder-problem.html
+
+% RespHLineHStackedBar %
+% bar: reduce width, remove annotation %
+% line: externalize annotations %
+% https://www.nytimes.com/interactive/2017/01/18/upshot/some-colleges-have-more-students-from-the-top-1-percent-than-the-bottom-60.html
+
+% RespHLine %
+% reduce width, internalize annotations
+% https://www.nytimes.com/interactive/2021/07/14/upshot/drug-overdose-deaths.html
+
+% RespRadialScatterHLine %
+% radial scatter: serialize legend, recompose ticks %
+% line: reduce width % 
+% Barton, Susanne and Hannah Recht [2018]. The Massive Prize Luring Miners to the Stars. 08 Mar 2018. https://bloomberg.com/graphics/2018-asteroid-mining/ .
+
+% RespScatter %
+% reduce width, externalize annotations, disable hover interactions
+% https://www.wsj.com/graphics/house-health-care-holdouts-round-two/
+
+% RespScatter2 %
+% reduce width, remove annotations, disable hover interactions
+% https://www.wsj.com/graphics/elections/2016/divided-america/
+
+% RespSmallMultiples
+% internalize labels, recompose ticks, fluid small multiples
+% https://www.nytimes.com/interactive/2016/05/22/world/europe/europe-right-wing-austria-hungary.html
+
+% RespSmallMultiples2
+% fluid small multiples, fix tooltip position
+% https://www.nytimes.com/interactive/2017/05/25/sports/basketball/lebron-career-playoff-points-record.html
+
+%
+% SCALING NON-RESPONSIVE CHARTS 
+%
+
+% HVBar %
+% https://www.nytimes.com/interactive/2019/02/13/upshot/engagement-rings-cost-two-weeks-pay.html
+
+% HBar %
+% https://www.nytimes.com/2018/11/29/learning/whats-going-on-in-this-graph-dec-5-2018.html
+
+% VBar %
+% https://www.nytimes.com/2020/02/27/learning/whats-going-on-in-this-graph-voters-by-age-group.html
+
+% GroupedBar %
+% https://datavizproject.com/data-type/grouped-bar-chart/
+
+% StackedBar %
+% https://datavizproject.com/data-type/stacked-bar-chart/
+
+% MapBarLine %
+% https://www.nytimes.com/2020/01/09/learning/whats-going-on-in-this-graph-north-american-bird-populations.html
+
+% HLine % 
+% https://www.nytimes.com/2019/09/12/learning/whats-going-on-in-this-graph-sept-18-2019.html
+
+% HLine2 %
+% https://www.nytimes.com/2019/02/28/learning/whats-going-on-in-this-graph-march-6-2019.html
+
+% VLine %
+% https://xkcd.com/1732/
+
+% Scatter %
+% https://www.nytimes.com/2018/03/08/learning/whats-going-on-in-this-graph-march-13-2018.html
+
+% Scatter2 %
+% https://www.nytimes.com/2018/10/16/learning/whats-going-on-in-this-graph-oct-17-2018.html
