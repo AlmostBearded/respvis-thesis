@@ -101,10 +101,32 @@
 \definecolor{grey}{gray}{0.7}
 \definecolor{black}{gray}{0.0}
 
+\definecolor{tableheadercolour}{gray}{0.8}
+\definecolor{tablerowcolour}{gray}{0.93}
+
+
+
 
 \usepackage{longtable}
 \usepackage{multirow}
 \usepackage{tabularx}
+
+% Define some new column types for tables:
+% like X but flushleft (= raggedright) rather than justified
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+% a p column but flushleft (= raggedright) rather than justified
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+% a p column but flushright (= raggedleft) rather than justified
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+
+\usepackage{booktabs}           % nicer tables
+
+\newcommand{\tablestretch}
+{\renewcommand{\arraystretch}{1.20}}  % spacing between table rows
+
+
+
 
 \usepackage{verbdef}            % define robust verb strings
 \usepackage{verbatim}
