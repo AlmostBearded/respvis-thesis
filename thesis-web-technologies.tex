@@ -11,8 +11,7 @@ Nowadays, HTML exists as a continuously evolving living standard without specifi
 
 The primary purpose of HTML is to define the content and structure of web pages.
 This is achieved with the help of HTML elements, which are composed in a hierarchical tree structure and define modular pieces of content which can be interpreted by web browsers.
-A strong pillar of HTML's design is extensibility. 
-There are multiple mechanisms in place to ensure applicability to a vast range of use cases.
+A strong pillar of HTML's design is extensibility and there are multiple mechanisms in place to ensure applicability to a vast range of use cases.
 These mechanisms include:
 
 \begin{itemize}
@@ -29,13 +28,13 @@ The HTML standard guarantees that these attributes are ignored by browsers.
 \section{Cascading Style Sheets (CSS)}
 \label{sec:CSS}
 
-This section is not meant to be a comprehensive guide to CSS but to give an overview and reiterate over the concepts which are important in the context of this thesis.
+This section is meant to give an overview and reiterate over the CSS concepts which are important in the context of this thesis.
 In particular, the history of CSS is briefly summarized, a refresher on selectors and cascades is given and the different modules of CSS-based layouting are compared.
 
 Cascading Style Sheets (CSS) is a style sheet language which is used to specify the presentation of HTML documents. 
-It can either be embedded directly in HTML documents using \lstinline{<style>} elements or it can be defined externally and linked into them using \lstinline{<link>} elements. 
+It can either be embedded directly in HTML documents using \elname{<style>} elements or it can be defined externally and linked into them using \elname{<link>} elements. 
 This characteristic of being able to externally describe the presentation of documents yields a lot of flexibility because multiple documents with different content can reuse the same presentation by linking to the same CSS file. 
-This solved the problem of having to individually define the presentation of every page with presentation elements like \lstinline{<strong>} or \lstinline{<em>}, as was the case in earlier versions of HTML \parencite{HTML32}.
+This solved the problem of having to individually define the presentation of every page with presentation elements like \elname{<strong>} or \elname{<em>}, as was the case in earlier versions of HTML \parencite{HTML32}.
 
 CSS was initially proposed by \cite{CSSProposal} and standardized into CSS1 by the W3C in 1996 \parencite{CSS1}. 
 Throughout its history, the adoption of CSS by browser vendors was fraught with complications and even though most major browsers soon supported almost the full CSS standard, their implementations sometimes behaved vastly different from their competitor's. 
@@ -105,7 +104,7 @@ A visual representation of these properties can be seen in Figure \ref{fig:BoxMo
 In early versions of CSS, before the introduction of the Flexible Box (Flexbox) layout module \parencite{CSSFlexboxFirstDraft}, the box model was the only way to lay out elements. 
 Style sheet authors had to meticulously define margins of elements and their relative (or absolute) positions in the document tree. 
 The responsive capabilities of this kind of layouting are very limited because different configurations for varying screen sizes have to be specified manually using media queries.
-More complex features, like the filling of available space, had to be implemented via scripting.
+More complex features, like the filling of available space, require manual implementations via scripting.
 
 \subsection{Flexible Box (Flexbox) Layout }
 \label{sec:Flexbox}
@@ -195,17 +194,17 @@ These engines are usually provided by browsers, but there are also standalone en
 JavaScript is a multi-paradigm language which supports event-driven, as well as functional and imperative programming.
 Undoubtedly influenced by the popularity of the web, JavaScript is currently the most used programming language worldwide \parencite{StatisticProgrammingLanguageUsage}.
 
-JavaScript has initially been created by Netscape in 1995 \parencite{JSFirstRelease}.
+It has initially been created by Netscape in 1995 \parencite{JSFirstRelease}.
 Before that, websites were only able to display static content, which drastically limited the usefulness of the web. 
 Seemingly, Microsoft saw JavaScript as a potentially revolutionary development because they reverse-engineered the implementation of Netscape and published their own version of the language for Internet Explorer in 1996 \parencite{JSIERelease}. 
 Both implementations were noticeably different from one another and the uncontested monopoly of the Internet Explorer \parencite{BrowserMarketShareEarly} held back standardization efforts undertaken by Netscape \parencite{ECMAScript1}. 
 When Firefox was released in 2004 \parencite{FirefoxFirstRelease} and Chrome in 2008 \parencite{ChromeFirstRelease}, they quickly gained a considerable share of the market \parencite{BrowserMarketShare} (see Figure \ref{fig:BrowserMarketShare}).
 Driven by this new market segmentation, all major browser vendors collaborated on the standardization of JavaScript as ECMAScript 5 in 2009 \parencite{ECMAScript5}. 
-Since then, JavaScript has been continuously developed with its latest version has been released as ECMAScript 6 in 2015 \parencite{ECMAScript6}.
+Since then, JavaScript has been continuously developed and its latest, widely support version, ECMAScript 6, has been released in 2015 \parencite{ECMAScript6}.
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 2]{diagrams/browser-market-share.pdf}
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{diagrams/browser-market-share.pdf}
 \caption[Desktop Browser Market Share]{
   Since their release, Firefox and Chrome have contested the monopoly of the Internet Explorer and continuously gained more market share. 
   Recently, Chrome seems to be gaining an increasingly strong position within the market. 
@@ -217,17 +216,17 @@ RespVis is a browser-based library which is designed to run within the JavaScrip
 Therefore, it builds heavily on widely supported Web APIs which are JavaScript modules which are specifically meant for the development of web pages. 
 These Web APIs are standardized by the W3C and each browser has to individually implement them in their JavaScript engine.
 
-The most popular Web API which every web developer is familiar with is the Document Object Model (DOM). 
+The most popular Web API which every web developer is familiar with is the Document Object Model (DOM).
 The DOM is the programming interface and data representation of a document. 
 Internally, a document is modeled as a tree of objects, where each object corresponds to a specific element in the document hierarchy and its associated data and functions. 
 In addition to the querying of elements, the DOM also defines the functionality to mutate them and their attributes, as well as the functionality for handling and dispatching of events. 
-It also exposes the mechanism of \modname{MutationObserver}s, which are used to observe changes of attribute and children in the document tree. 
+It also exposes the mechanism of \modname{MutationObservers}, which are used to observe changes of attribute and children in the document tree. 
 The initial publication of the DOM dates back to 1998 \parencite{DOM1} and currently it is maintained as a living standard by the WHATWG \parencite{DOM}.
 
-A second important Web API in the context of this work is the \modname{ResizeObserver} API. 
+Another important Web API in the context of this work is the \modname{ResizeObserver} API. 
 Its purpose is the ability to observe an element's size and respond to changes, which increases the responsive capabilities of websites. 
 Previously, scripts could only respond to changes in the overall viewport size via the \lstinline{resize} event on the \lstinline{window} object, but this meant that changes of an individual element's size through attribute changes could not be detected. 
-This is fixed by the \modname{ResizeObserver} API, which is already fully supported by all modern browsers, even though it has so far only been published as an editor's draft \parencite{ResizeObserver}.
+This limitation is fixed by the \modname{ResizeObserver} API, which is already fully supported by all modern browsers, even though it has so far only been published as an editor's draft \parencite{ResizeObserver}.
 
 \section{TypeScript (TS)}
 \label{sec:TS}
@@ -237,10 +236,10 @@ Syntactically, it is a superset of JavaScript which enables the annotation of pr
 It requires a compiler which transpiles TypeScript code into valid JavaScript code based on specific ECMAScript versions.
 
 Initially, TypeScript has been released by Microsoft in 2012 \parencite{TSFirstRelease} to extend JavaScript with features which were already present in more mature languages, and whose absence in JavaScript caused difficulties when working on larger codebases. 
-At the time of the initial development, ECMAScript 6 hasn't been published yet and TypeScript was used to already be able to use features which would later be implemented by ECMAScript 6.
+At the time of TypeScript's initial development, it was used to already be able to use features which would later be offered by ECMAScript 6.
 These features included a module system to be able to split source code into reusable chunks and a class system to aid object-oriented development. 
-The TypeScript code using these features could then be translated via a compiler into standard-conform ECMAScript 5 code, which could be interpreted by JavaScript engines at the time. 
-At the time of writing, ECMAScript 6 is already widely supported by all modern browsers and therefore the main benefit of TypeScript over JavaScript primarily resides in the addition of a static type system.
+The TypeScript code using these features could then be translated via a compiler into standard-conform JavaScript code, which could be interpreted by JavaScript engines at the time. 
+At the time of writing, ECMAScript 6 is already widely supported by all modern browsers and therefore the main benefit of TypeScript over JavaScript resides primarily in the addition of a static type system.
 
 The extension of JavaScript with a type system brings many benefits. 
 One such a benefit is the improved tooling which comes with type annotated code. 
@@ -349,7 +348,7 @@ A simple example of an SVG document containing a single circle can be seen in Li
 \label{fig:SVG}
 \end{figure}
 
-The encoding in XML leads to SVG being the best format to represent graphics in terms of accessibility. 
+The encoding in XML leads to SVG being the best format to represent graphics in terms of accessibility.
 Graphics are directly saved in a hierarchical and textual form which describes their shapes and how they are composed. 
 In addition to the shapes being inherently accessible, the various elements of an SVG document can be annotated with further information which aids comprehension when consumed in a non-visual way.
 
@@ -361,7 +360,7 @@ The most widely supported way of styling SVG elements is via attributes, which i
 However, the specification aims for maximum compatibility with HTML, and therefore it is also possible to use CSS to style and animate SVG elements when they are rendered in a browser. 
 Using CSS to separate presentation from content has many benefits which were already described in Section \ref{sec:CSS}.
 Unfortunately it is not possible to style every SVG attribute with CSS because only the so-called presentation attributes like \cssname{fill} and \cssname{stroke-width} are available in CSS. 
-These attributes are taxonomically listed in the SVG specification \parencite{SVG11} and have been extended by additional attributes like \cssname{x}, \cssname{y}, \cssname{width} and \cssname{height} in upcoming releases \parencite{SVG2}.
+These presentation attributes are taxonomically listed in the SVG specification \parencite{SVG11} and will be extended by additional attributes like \cssname{x}, \cssname{y}, \cssname{width} and \cssname{height} in upcoming releases \parencite{SVG2}.
 
 \subsection{Canvas (2D)}
 \label{sec:Canvas2D}
@@ -420,7 +419,7 @@ It is therefore recommendable to only use three-dimensional rendering when the r
 A layout engine is used to calculate the boundary coordinates of visual components based on some form of input components which are annotated with layout constraints. 
 These layout constraints describe the size and position of components and their relationships between each other in a syntax which is understood by the layout engine. 
 For browser-based layout engines these input components are normally declared as HTML documents which are constrained using CSS. 
-More low-level layout engines require custom formats, which usually involve a hierarchy of objects which is constrained using specific properties. 
+More low-level layout engines require custom formats, which usually involve a hierarchy of objects which are constrained using specific properties. 
 The most relevant layout engines in the context of this work are summarized in the following sections.
 
 \subsection{Browser Engines}
@@ -429,16 +428,16 @@ The most relevant layout engines in the context of this work are summarized in t
 The purpose of a browser engine is to transform documents including their additional resources, like CSS, into visual representations. 
 A browser engine is a core component of every web browser, and it is responsible for laying out elements and rendering them. 
 The terminology of browser engines is very vague with them sometimes also being referred to as layout or render engines. 
-Theoretically, the layout and render processes could be separated into different components but in practice they are tightly-coupled into a combined component, which will be referred to as a browser engine in this work. 
+Theoretically, the layout and render processes could be separated into different components, but in practice they are tightly-coupled into a combined component, which will be referred to as a browser engine in this work. 
 Some notable browser engines are WebKit \parencite{WebKit}, Blink \parencite{Blink} and Gecko \parencite{Gecko}.
 
 In a browser engine the layout of elements is constrained with CSS, which gives website authors a lot of flexibility as already described in Section \ref{sec:CSS}. 
 They are offered a range of mechanisms to precisely control the layout of elements, like the flexible box and grid layout modules, which do not have to be applied exclusively but can also be used in combination. 
 
 The layout module of a browser engine can only be invoked directly by browsers to position HTML elements in actively rendered documents. 
-To use it for calculating layouts of non-HTML constructs, they must be replicated in active documents so they can be parsed, laid out and rendered by the browser engine. 
-These replicated constructs do not have to be visible, and they can be removed from the document after the layout has been acquired, which means they do not need to be noticeable at all. 
-A strong limitation of using browser engines to calculate layouts is that it requires a browser runtime to work and, even though there are solutions like Electron available which enable development of native applications using web technologies, this forces applications into this very specific stack of technologies. 
+To use it for calculating layouts of non-HTML constructs, they must be replicated in active documents, so they can be parsed, laid out and rendered by the browser engine. 
+These replicated constructs do not have to be visible, and they could also be removed from the document after the layout has been acquired, meaning they do not need to be noticeable at all. 
+A strong limitation of using browser engines to calculate layouts is that it requires a browser runtime to work and, even though there are solutions like Electron available which enable development of desktop applications using web technologies, this limitation forces applications into a very specific stack of technologies. 
 
 \subsection{Yoga}
 \label{sec:Yoga}
@@ -453,11 +452,11 @@ Yoga has been very well adopted and is used to perform layouting in major framew
 
 FaberJS \parencite{FaberJS} is a layout engine which is very similar to the Yoga layout engine in the fact that it enables the computation of layouts for constructs other than HTML documents, using a layout grammar which has originally been created for CSS. 
 In contrast to Yoga, which is used to create one-dimensional layouts using the Flexbox layout grammar, FaberJS implements a two-dimensional layout algorithm which is built on the grammar of the Grid layout module (see Section \ref{sec:Grid}). 
-In the context of two-dimensional information visualization, this inherently two-dimensional approach to layouting makes more sense than trying to achieve two-dimensionality using a one-dimensional one. 
-FaberJS is an open-source JavaScript project which has been developed since 2019 by Idera, Inc.
-Even though the layouts it computes are constrained with the grid layout grammar, it only supports a subset of all the functionalities which are defined in the original CSS module. 
+This inherently two-dimensional approach to layouting is more suited to information visualization than trying to achieve two-dimensionality using a one-dimensional one. 
+FaberJS is an open-source JavaScript project and has been developed since 2019 by Idera, Inc.
+Even though the layouts it computes are constrained with the grid layout grammar, it only supports a subset of all the functionalities defined in the original CSS module. 
 Some examples of missing functionalities include missing support for margins, gaps and the \cssname{*-content} and \cssname{grid-auto-*} properties. 
-Working around the limitations caused by these missing features is not trivial, and it seems unlikely which support for them will be added by the FaberJS maintainers in the near future because, at the time of writing, the project has not been updated in nearly two years. 
+Working around the limitations caused by these missing features is not trivial, and it seems unlikely that support for them will be added by the FaberJS maintainers in the near future because, at the time of writing, the project has not been updated in nearly two years. 
 
 \section{Responsive Web Design}
 \label{sec:RWD}
@@ -467,7 +466,8 @@ The core idea of responsive web design is that instead of designing pages for di
 The term "Responsive Web Design" has been defined by \cite{ResponsiveWebDesign} where the author differentiates between flexible and responsive web designs. 
 It states that a flexible web design, which merely fluidly scales blocks of content to make them fit into the width of a browser window, is not enough to provide a good experience for users. 
 Such designs will work well enough for similarly sized viewports to the one they were created for, but they will lead to noticeable artifacts on lower resolutions. 
-These problems can be avoided by positioning the individual components of a page in a manner which provides them with enough space to render correctly, which can be achieved by using CSS media queries to adapt the overall layout of a page to the dimensions of the consuming device. 
+These problems can be avoided by positioning the individual components of a page in a manner which provides them with enough space to render correctly.
+This can be achieved by using CSS media queries to adapt the overall layout of a page to the dimensions of the consuming device. 
 Another crucial part of responsive web design is to support the different modes of interaction inherent to the various types of devices used to access the web. 
-Desktop users might access a website using a mouse; mobile device users are usually interacting via touchscreens, and yet others might consume a page in a purely textual form via a screen reader which requires interaction via keyboard. 
-It is one of the mantras of responsive web design to ensure a smooth and complete experience for all users, regardless of the devices they use to access the web. 
+Desktop users might access a website using a mouse, mobile device users are usually interacting via touchscreens, and yet others might consume a page in a purely textual form with a screen reader which requires interaction via keyboard. 
+It is one of the mantras of responsive web design to provide smooth and complete access to information to all users, regardless of the device they are using. 
