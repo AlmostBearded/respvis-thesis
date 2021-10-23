@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="chart"
+   viewBox="0 0 60.813305 80.163384"
+   width="247.87755"
+   height="312.63721"
+   version="1.1"
+   sodipodi:docname="resp-line-3.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <metadata
+     id="metadata143">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs141" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="748"
+     inkscape:window-height="559"
+     id="namedview139"
+     showgrid="false"
+     fit-margin-top="10"
+     fit-margin-right="10"
+     fit-margin-bottom="10"
+     fit-margin-left="10"
+     inkscape:zoom="0.60512821"
+     inkscape:cx="293.73321"
+     inkscape:cy="197.12725"
+     inkscape:window-x="1916"
+     inkscape:window-y="3"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g136" />
+  <g
+     transform="translate(3.5708076,2.5715424)"
+     id="g136">
+    <path
+       d="M 0,72.395833 1.6282051,60.416667 3.2564103,75 4.8846154,0 l 1.6282051,54.6875 3.2564103,-1.041667 1.6282052,4.6875 1.628205,7.291667 1.628205,2.083333 1.628205,1.041667 4.884616,-4.6875 1.628205,6.25 1.628205,-6.770833 1.628205,2.083333 1.628205,1.041667 1.628205,2.604166 1.628205,-2.604166 1.628206,2.604166 1.628205,-4.166666 1.628205,-8.333334 1.628205,6.770834 1.628205,2.083333 1.628205,2.604167 1.628205,-6.770834 1.628205,-1.041666 1.628206,-8.854167 1.628205,-9.375 1.628205,-1.041667"
+       class="line"
+       id="path2"
+       inkscape:connector-curvature="0"
+       style="fill:none;stroke:#4682b4;stroke-width:0.5px" />
+    <circle
+       class="dots"
+       transform="translate(0,72.395833)"
+       r="1.25"
+       id="circle4"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(1.6282051,60.416667)"
+       r="1.25"
+       id="circle6"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(3.2564103,75)"
+       r="1.25"
+       id="circle8"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(4.8846154)"
+       r="1.25"
+       id="circle10"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(6.5128205,54.6875)"
+       r="1.25"
+       id="circle12"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(9.7692308,53.645833)"
+       r="1.25"
+       id="circle14"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(11.397436,58.333333)"
+       r="1.25"
+       id="circle16"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(13.025641,65.625)"
+       r="1.25"
+       id="circle18"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(14.653846,67.708333)"
+       r="1.25"
+       id="circle20"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(16.282051,68.75)"
+       r="1.25"
+       id="circle22"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(21.166667,64.0625)"
+       r="1.25"
+       id="circle24"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(22.794872,70.3125)"
+       r="1.25"
+       id="circle26"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(24.423077,63.541667)"
+       r="1.25"
+       id="circle28"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(26.051282,65.625)"
+       r="1.25"
+       id="circle30"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(27.679487,66.666667)"
+       r="1.25"
+       id="circle32"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(29.307692,69.270833)"
+       r="1.25"
+       id="circle34"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(30.935897,66.666667)"
+       r="1.25"
+       id="circle36"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(32.564103,69.270833)"
+       r="1.25"
+       id="circle38"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(34.192308,65.104167)"
+       r="1.25"
+       id="circle40"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(35.820513,56.770833)"
+       r="1.25"
+       id="circle42"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(37.448718,63.541667)"
+       r="1.25"
+       id="circle44"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(39.076923,65.625)"
+       r="1.25"
+       id="circle46"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(40.705128,68.229167)"
+       r="1.25"
+       id="circle48"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(42.333333,61.458333)"
+       r="1.25"
+       id="circle50"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(43.961538,60.416667)"
+       r="1.25"
+       id="circle52"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(45.589744,51.5625)"
+       r="1.25"
+       id="circle54"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(47.217949,42.1875)"
+       r="1.25"
+       id="circle56"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <circle
+       class="dots"
+       transform="translate(48.846154,41.145833)"
+       r="1.25"
+       id="circle58"
+       cx="0"
+       cy="0"
+       style="opacity:0;stroke:#ee82ee;stroke-width:5px;stroke-opacity:0" />
+    <g
+       class="x axis"
+       transform="translate(0,75)"
+       font-size="4"
+       style="font-size:4px;font-family:Verdana;text-anchor:middle;opacity:0;fill:none;stroke-width:0.5px"
+       id="g100">
+      <path
+         class="domain"
+         d="m 0.5,1.5 v -1 h 48.846154 v 1"
+         id="path60"
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#555555;stroke-width:0.5px" />
+      <g
+         class="tick"
+         transform="translate(2.1282051)"
+         id="g66"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           y2="1.5"
+           id="line62"
+           x1="0"
+           y1="0"
+           x2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           y="3"
+           dy="0.70999998em"
+           transform="rotate(-90,2.5,6.5)"
+           id="text64"
+           style="fill:#555555;stroke-width:0.5px">1900</text>
+      </g>
+      <g
+         class="tick"
+         transform="translate(10.269231)"
+         id="g72"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           y2="1.5"
+           id="line68"
+           x1="0"
+           y1="0"
+           x2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           y="3"
+           dy="0.70999998em"
+           transform="rotate(-90,2.5,6.5)"
+           id="text70"
+           style="fill:#555555;stroke-width:0.5px">1920</text>
+      </g>
+      <g
+         class="tick"
+         transform="translate(18.410256)"
+         id="g78"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           y2="1.5"
+           id="line74"
+           x1="0"
+           y1="0"
+           x2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           y="3"
+           dy="0.70999998em"
+           transform="rotate(-90,2.5,6.5)"
+           id="text76"
+           style="fill:#555555;stroke-width:0.5px">1940</text>
+      </g>
+      <g
+         class="tick"
+         transform="translate(26.551282)"
+         id="g84"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           y2="1.5"
+           id="line80"
+           x1="0"
+           y1="0"
+           x2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           y="3"
+           dy="0.70999998em"
+           transform="rotate(-90,2.5,6.5)"
+           id="text82"
+           style="fill:#555555;stroke-width:0.5px">1960</text>
+      </g>
+      <g
+         class="tick"
+         transform="translate(34.692308)"
+         id="g90"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           y2="1.5"
+           id="line86"
+           x1="0"
+           y1="0"
+           x2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           y="3"
+           dy="0.70999998em"
+           transform="rotate(-90,2.5,6.5)"
+           id="text88"
+           style="fill:#555555;stroke-width:0.5px">1980</text>
+      </g>
+      <g
+         class="tick"
+         transform="translate(42.833333)"
+         id="g96"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           y2="1.5"
+           id="line92"
+           x1="0"
+           y1="0"
+           x2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           y="3"
+           dy="0.70999998em"
+           transform="rotate(-90,2.5,6.5)"
+           id="text94"
+           style="fill:#555555;stroke-width:0.5px">2000</text>
+      </g>
+      <text
+         class="xlabel"
+         style="text-anchor:middle;fill:#555555;stroke-width:0.5px"
+         transform="translate(65.448715,21)"
+         id="text98">Year</text>
+    </g>
+    <g
+       class="y axis"
+       font-size="4"
+       style="font-size:4px;font-family:Verdana;text-anchor:end;opacity:0;fill:none;stroke-width:0.5px"
+       id="g118">
+      <path
+         class="domain"
+         d="m -1.5,75.5 h 2 v -75 h -2"
+         id="path102"
+         inkscape:connector-curvature="0"
+         style="fill:none;stroke:#555555;stroke-width:0.5px" />
+      <g
+         class="tick"
+         transform="translate(0,50.5)"
+         id="g108"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           x2="-1.5"
+           id="line104"
+           x1="0"
+           y1="0"
+           y2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           x="-3"
+           dy="0.31999999em"
+           id="text106"
+           style="fill:#555555;stroke-width:0.5px">50</text>
+      </g>
+      <g
+         class="tick"
+         transform="translate(0,24.458333)"
+         id="g114"
+         style="opacity:1;fill:none;stroke-width:0.5px">
+        <line
+           x2="-1.5"
+           id="line110"
+           x1="0"
+           y1="0"
+           y2="0"
+           style="fill:none;stroke:#555555;stroke-width:0.5px" />
+        <text
+           x="-3"
+           dy="0.31999999em"
+           id="text112"
+           style="fill:#555555;stroke-width:0.5px">100</text>
+      </g>
+      <text
+         transform="rotate(-90,-1.75,11.75)"
+         style="text-anchor:end;fill:#555555;stroke-width:0.5px"
+         id="text116">Number of medals</text>
+    </g>
+    <g
+       class="title"
+       style="font-family:Verdana;text-anchor:middle;opacity:0"
+       transform="translate(65.448718,0.25)"
+       id="g122">
+      <text
+         font-size="4"
+         style="font-size:4px;text-anchor:middle;opacity:1"
+         id="text120">Total Olympic Medals for GB</text>
+    </g>
+    <g
+       class="first"
+       transform="translate(48.846154,41.145833)"
+       style="opacity:1"
+       id="g128">
+      <text
+         x="1.25"
+         y="2.5"
+         font-size="4"
+         style="font-size:4px;font-family:Verdana;text-anchor:start"
+         id="text124">67</text>
+      <circle
+         r="1.25"
+         id="circle126"
+         cx="0"
+         cy="0" />
+    </g>
+    <g
+       class="last"
+       transform="translate(0,72.395833)"
+       style="opacity:1"
+       id="g134">
+      <text
+         x="-1.25"
+         y="2.5"
+         font-size="4"
+         style="font-size:4px;font-family:Verdana;text-anchor:end"
+         id="text130">7</text>
+      <circle
+         r="1.25"
+         id="circle132"
+         cx="0"
+         cy="0" />
+    </g>
+  </g>
+</svg>
