@@ -48,7 +48,7 @@
 @book{RosaUrsina,
   title = {Rosa Ursina sive Sol ex Admirando Facularum \& Macularum Suarum Phoenomeno Varius},
   author = {Scheiner, Christoph},
-  year = {1626--1630},
+  year = {1630},
 }
  
 @book{VisualDisplayOfQuantitativeInformation,
@@ -80,7 +80,7 @@
 @book{CommentariiInSomniumScipionis,
   title = {Commentarii in somnium Scipionis},
   author = {Macrobius, Ambrosius Theodosius},
-  year = {1175--1199},
+  year = {1175},
   publisher = {De Gruyter},
   isbn = {3598715269}, 
   doi = {10.1515/9783110951899},
@@ -136,7 +136,6 @@
   doi = {10.1109/ICSE.2017.75},
 }
 
-% https://osf.io/zrqfy/
 % https://arxiv.org/pdf/2104.07724.pdf
 @article{DesignPatternsTradeOffsRespVis,
   journal = {Computer Graphics Forum},
@@ -147,7 +146,6 @@
   doi = {10.1111/cgf.14321},
 }
 
-% https://jhoffswell.github.io/website/resources/papers/2020-ResponsiveVisualization-CHI.pdf
 @inproceedings{TechniquesForFlexibleRespVisDesign,
   title = {Techniques for Flexible Responsive Visualization Design},
   author = {Hoffswell, Jane and Li, Wilmot and Liu, Zhicheng},
@@ -157,7 +155,6 @@
   doi = {10.1145/3313831.3376777},
 }
 
-%  https://www.sciencedirect.com/science/article/abs/pii/S0734189X85800049
 @article{PreattentiveProcessing,
   title = {Preattentive Processing in Vision},
   author = {Treisman, Anne},
@@ -374,6 +371,18 @@
   doi = {10.1016/j.visinf.2018.04.011},
 }
 
+@article{Gecko,
+  title = {Netscape's Gecko and You},
+  author = {Sikorski, Robert and Peters, Richard},
+  journal = {Science},
+  volume = {283},
+  number = {5409},
+  pages = {1871--1872},
+  date = {1999-03-19},
+  publisher = {American Association for the Advancement of Science},
+  doi = {10.1126/science.283.5409.1871b},
+}
+
 
 % Technical Reports
 % ----------------
@@ -484,6 +493,7 @@
 } 
 
 @TechReport{ECMAScript1,
+  author = {{Ecma International}},
   institution = {Ecma International},
   title = {ECMAScript: A general purpose, cross-platform programming language},
   type = {ECMA-262},
@@ -493,6 +503,7 @@
 } 
 
 @TechReport{ECMAScript5,
+  author = {{Ecma International}},
   institution = {Ecma International},
   title = {ECMAScript 5th Edition Language Specification},
   type = {ECMA-262},
@@ -502,6 +513,7 @@
 } 
 
 @TechReport{ECMAScript6,
+  author = {{Ecma International}},
   institution = {Ecma International},
   title = {ECMAScript 6th Edition Language Specification},
   type = {ECMA-262},
@@ -510,6 +522,50 @@
   url = {https://262.ecma-international.org/6.0/},
 } 
 
+@TechReport{PNG,
+  author = {Boutell, Thomas},
+  institution = {W3C},
+  title = {Portable Network Graphics (PNG) Specification (Second Edition)},
+  type = {W3C Recommendation},
+  date = {2003-11-10},
+  url = {https://www.w3.org/TR/PNG/},
+} 
+
+@TechReport{SVG1,
+  author = {Ferraiolo, Jon},
+  institution = {W3C},
+  title = {Scalable Vector Graphics (SVG) Specification},
+  type = {W3C Working Draft},
+  date = {1999-02-11},
+  url = {https://www.w3.org/TR/1999/WD-SVG-19990211/},
+} 
+
+@TechReport{SVG11,
+  author = {Dahlström, Erik and Dengler, Patrick and Grasso, Anthony and Lilley, Chris and McCormack, Cameron and Schepers, Doug and Watt, Jonathan},
+  institution = {W3C},
+  title = {Scalable Vector Graphics (SVG) 1.1 (Second Edition)},
+  type = {W3C Recommendation},
+  date = {2011-08-16},
+  url = {https://www.w3.org/TR/SVG11/},
+} 
+
+@TechReport{SVG2,
+  author = {Bellamy-Royds, Amelia and Brinza, Bogdan and Lilley, Chris and Schulze, Dirk and Storey, David and Willigers, Eric},
+  institution = {W3C},
+  title = {Scalable Vector Graphics (SVG) 2},
+  type = {W3C Candidate Recommendation},
+  date = {2018-10-04},
+  url = {https://www.w3.org/TR/SVG2/},
+}
+
+@TechReport{WebGL,
+  author = {Jackson, Dean and Gilbert, Jeff},
+  institution = {Khronos Group},
+  title = {WebGL 2.0 Specification},
+  type = {Khronos Editor's Draft},
+  date = {2021-08-12},
+  url = {https://www.khronos.org/registry/webgl/specs/latest/2.0/},
+} 
 
 % Online Resources
 % ----------------
@@ -769,13 +825,39 @@
   url = {https://d3fc.io/},
 }
 
+@booklet{DesignPatternsTradeOffsRespVisGallery,
+  author = {Kim, Hyeok and Moritz, Dominik and Hullman, Jessica},
+  title = {Responsive Visualization Gallery},
+  year = {2021},
+  url = {https://mucollective.github.io/responsive-vis-gallery/},
+}
+
+@booklet{WebKit,
+  author = {{Apple Inc.}},
+  title = {WebKit - A fast, open-source web browser engine},
+  date = {2021-10-22},
+  url = {https://webkit.org/},
+}
+
+@booklet{Blink,
+  author = {{Chromium Project}},
+  title = {Blink - Rendering Engine},
+  date = {2021-10-22},
+  url = {https://www.chromium.org/blink/},
+}
+
 
 %
 % RESPONSIVE CHARTS 
 %
 
-% NickRabinowitzRDV
-% http://nrabinowitz.github.io/rdv/
+@booklet{NickRabinowitzRDV,
+  author = {Rabinowitz, Nick},
+  title = {Responsive Data Visualization},
+  date = {2021-10-22},
+  howpublished = {GitHub},
+  url = {http://nrabinowitz.github.io/rdv/},
+}
 
 % reduce width, recompose ticks
 @booklet{RespHBars,
@@ -795,9 +877,14 @@
   url = {http://graphics.wsj.com/how-the-worlds-best-fighter-jets-measure-up},
 }
 
-% RespHStackedBar %
 % reduce width, remove redundant annotations
-% https://www.nytimes.com/2021/08/12/upshot/covid-return-to-office.html
+@booklet{RespHStackedBar,
+  author = {Bui, Quoctrung},
+  title = {Delta Variant Hasn’t Yet Changed Many Return-to-Office Plans},
+  date = {2021-08-23},
+  howpublished = {The New York Times},
+  url = {https://www.nytimes.com/2021/08/12/upshot/covid-return-to-office.html},
+}
 
 % reduce width, simplify annotations, relocate annotations, recompose ticks, simplify tick labels
 @booklet{RespVBar,
@@ -818,7 +905,6 @@
   url = {https://www.wsj.com/graphics/big-companies-get-bigger/},
 }
 
-%  %
 % recompose ticks, simplify tick labels, reposition annotations, increase height, simplify annotations
 @booklet{RespHLines,
   author = {Fessenden, Ford and Park, Haeyoun},
@@ -839,7 +925,7 @@
 }
 
 % reduce width, internalize annotations
-@booklet{RespHLiner,
+@booklet{RespHLine,
   author = {Katz, Josh and Sanger-Katz, Margot},
   title = {‘It’s Huge, It’s Historic, It’s Unheard-of’: Drug Overdose Deaths Spike},
   date = {2021-07-14},
@@ -922,11 +1008,21 @@
   url = {https://www.nytimes.com/2020/02/27/learning/whats-going-on-in-this-graph-voters-by-age-group.html},
 }
 
-% GroupedBar %
-% https://datavizproject.com/data-type/grouped-bar-chart/
+@booklet{GroupedBar,
+  author = {{Ferdio ApS}},
+  title = {Grouped Bar Chart},
+  date = {2021-10-22},
+  howpublished = {Data Viz Project},
+  url = {https://datavizproject.com/data-type/grouped-bar-chart/},
+}
 
-% StackedBar %
-% https://datavizproject.com/data-type/stacked-bar-chart/
+@booklet{StackedBar,
+  author = {{Ferdio ApS}},
+  title = {Stacked Bar Chart},
+  date = {2021-10-22},
+  howpublished = {Data Viz Project},
+  url = {https://datavizproject.com/data-type/stacked-bar-chart/},
+}
 
 
 @booklet{MapBarLine,
@@ -954,8 +1050,13 @@
   url = {https://www.nytimes.com/2019/09/12/learning/whats-going-on-in-this-graph-sept-18-2019.html},
 }
 
-% VLine %
-% https://xkcd.com/1732/
+@booklet{VLine,
+  author = {Munroe, Randall},
+  title = {Earth Temperature Timeline},
+  date = {2021-10-21},
+  howpublished = {xkcd},
+  url = {https://xkcd.com/1732/},
+}
 
 
 @booklet{Scatter,
@@ -974,13 +1075,6 @@
   howpublished = {The New York Times},
   url = {https://www.nytimes.com/2018/10/16/learning/whats-going-on-in-this-graph-oct-17-2018.html},
 }
-
-
-
-
-% http://taligarsiel.com/Projects/howbrowserswork1.htm
-% https://engineering.fb.com/2016/12/07/android/yoga-a-cross-platform-layout-engine/
-% https://github.com/fusioncharts/faberjs
 
 % Florence Nightingale: 
 % {she may have been the first to use them for persuading people of the need for change} 
