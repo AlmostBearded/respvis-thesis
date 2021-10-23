@@ -3,10 +3,13 @@
 
 Information visualization is the science of representing abstract information as interactive graphics to present and analyze it more efficiently.
 These two goals of presenting and analyzing abstract information in a visual form are built on the properties of human visual perception, which include the rapid scanning, recognition and recollection of visual information as well as the automatic detection of patterns in it.
-In contrast to textual representations of data, the processing of well-designed visualizations requires much less cognitive effort because it leverages features of the human visual processing system such as preattentive processing, meaning that certain visual attributes can be processed very quickly and without any conscious effort \parencite{PreattentiveProcessing}.
+In contrast to textual representations of data, the processing of well-designed visualizations requires much less cognitive effort because it leverages features of the human visual processing system.
+One of these features is preattentive processing, which means that certain visual attributes can be processed very quickly and without any conscious effort \parencite{PreattentiveProcessing}.
 
 In addition to visuals being easier to assimilate by humans, a purely textual and statistical view on data can also lead to erroneous assumptions as demonstrated by \cite{AnscombesQuartet} in the infamous visualization of four completely different datasets which have identical summary statistics, called Anscombe's Quartet.
-An observer trying to understand these sets of data purely from their statistics would mistakenly deem them to be identical because their inequality will only become obvious after carefully examining and comparing the individual entries in the datasets themselves, which is a tedious and error-prone task when not aided by visual representations like Figure \ref{fig:AnscombesQuartet}.
+An observer trying to understand these sets of data purely from their statistics would mistakenly deem them to be identical.
+Their inequality will only become obvious after carefully examining and comparing the individual entries in the datasets themselves.
+This is a tedious and error-prone task when not aided by visual representations like Figure \ref{fig:AnscombesQuartet}.
 Even though Anscombe's Quartet is very likely the most famous example to demonstrate this characteristic, it is certainly not the only set of datasets which possesses it, as has been shown by \cite{GenDataIdenticalStatisticsDissimilarGraphics}.
 
 \begin{figure}[tp]
@@ -20,24 +23,26 @@ Even though Anscombe's Quartet is very likely the most famous example to demonst
 \label{fig:AnscombesQuartet}
 \end{figure}
 
-Regarding terminology, this work adheres to the separation of the field of visualization into three main subfields as described by \cite{IVISCourseNotes}.
+This thesis adheres to the separation of the field defined by \cite{IVISCourseNotes}. 
+They state that the field of visualization is segmented into the three main subfields of information visualization, geographic visualization and scientific visualization. 
+Furthermore, they define the often used term "data visualization" as the intersection of geographic visualization and information visualization.
 
 \begin{enumerate}
 \item Information Visualization: Deals with abstract data, which has no inherent presentation and for which a suitable type of visualization has to be chosen.
 \item Geographic Visualization: Deals with map-based data which has an inherent spatial dimension. 
-\item Scientific Visualization: Deals with object-related data which has inherent presentation, which is usually related to the object's real world representation.
+\item Scientific Visualization: Deals with object-related data which has inherent presentation, which is usually related to the object's real-world representation.
 \end{enumerate}
 
-In addition to these three subfields, \cite{IVISCourseNotes} defines the often used term Data Visualization as the intersection of Geographic Visualization and Information Visualization.
-Therefore, it deals with visualizing spatial as well as abstract data.
-
 Visualizations presented in an interactive medium do not merely consist of visual representations.
-In order to analyze more complex datasets, it is equally important to provide means for interacting with these representations because without interaction, a visualization becomes a static image, which has only very limited usefulness when dealing with large and multidimensional data.
-Even though the majority of the attention in the field of Information Visualization has been put on the presentational aspect of visualizations, a lot of research has also been conducted on their interactive aspects.
+It is equally important to provide means for interacting with these representations to analyze more complex datasets.
+Without interactions, a visualization is just a static image and has only very limited use when dealing with large and multidimensional data.
+Even though the majority of the attention in the field of information visualization has been put on the presentational aspect of visualizations, a lot of research has also been conducted on their interactive aspects.
 Many taxonomies have been formulated with the goal of defining the design space of interactions to support analytic reasoning, but they vary greatly depending on the concepts they are focusing on.
-Some taxonomies have been defined on the concept of low-level interaction techniques \parencite{TheEyesHaveIt,GrammarOfGraphics}, providing a very system-centric view on interaction, while other taxonomies focus on user tasks \parencite{LowLevelComponentsOfAnalyticActivity} without them being tightly bound to interacting with visualizations.
-\cite{RoleOfInteractionInInformationVisualization} aims to provide a view which is in between the purely system-centric and purely user-centric extremes by defining a taxonomy based on user intent.
-The categories of this taxonomy are listed in Table \ref{tab:UserIntentCategories}, and they form a good framework with which interactivity in the context of Information Visualization can be discussed.
+Some taxonomies have been defined on the concept of low-level interaction techniques \parencite{TheEyesHaveIt,GrammarOfGraphics}, providing a very system-centric view on interaction. 
+Other taxonomies focus on user tasks \parencite{LowLevelComponentsOfAnalyticActivity} which are not necessarily strongly related to interacting with visualizations.
+\cite{RoleOfInteractionInInformationVisualization} aims to provide a view in between the purely system-centric and purely user-centric extremes by defining a taxonomy based on user intent.
+The categories of this taxonomy are listed in Table \ref{tab:UserIntentCategories}
+They form a good framework for the discussion of interactivity in the context of information visualization.
 
 \begin{table}[tp]
 \tablestretch
@@ -57,7 +62,7 @@ Connect & Show related items. & Highlight connected items, highlight item in dif
 \bottomrule
 \end{tabularx}
 \caption[Categories of Interaction Based on User Intent]{
-  This table shows the different categories of interacting with visualizations based on user intent.
+  This table shows the categories of interacting with visualizations based on user intent.
   \imgcredit{Table adapted from \cite{RoleOfInteractionInInformationVisualization}}
 }
 \label{tab:UserIntentCategories}
@@ -67,14 +72,14 @@ Connect & Show related items. & Highlight connected items, highlight item in dif
 
 \section{History of Information Visualization}
 
-The history of Information Visualization goes back a long time with one of the earliest examples dating back to the 10th century, when an unknown astronomer created a chart about the movement of the most prominent planets \parencite{CommentariiInSomniumScipionis}, shown in Figure \ref{fig:PlanetaryMovements}.
+The history of Information Visualization goes back a long time with one of the earliest examples dating back to the 10th century, when an unknown astronomer created a chart about the movement of prominent planets \parencite{CommentariiInSomniumScipionis}, shown in Figure \ref{fig:PlanetaryMovements}.
 Other noteworthy early visualizations include the first occurrence of the principle \cite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in a 1626 chart demonstrating sunspot changes (Figure \ref{fig:SunspotChanges}) by \cite{RosaUrsina} and a 1644 chart displaying longitudinal distance determinations between Toledo and Rome (Figure \ref{fig:RomeToledoLongitude}) by Michael Florent van Langren.
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/planetary-movements.png}
 \caption[Chart of Planetary Movements from the Tenth Century]{
-  A chart created by an unknown astronomer in the tenth century depicting the movements of the seven most prominent planets.
+  A chart created by an unknown astronomer in the tenth century depicting the movements of seven prominent planets.
   \imgcredit{Image extracted from \cite{BriefHistoryOfDataVis}. Original appearance in \cite{CommentariiInSomniumScipionis}.}
 }
 \label{fig:PlanetaryMovements}
@@ -103,17 +108,18 @@ Other noteworthy early visualizations include the first occurrence of the princi
 \label{fig:RomeToledoLongitude}
 \end{figure}
 
-William Playfair (1759 - 1823) is by many considered to be one of the forefathers of modern visualizations because his published works contain the first occurrences of many graphical forms which are still widely used today.
+William Playfair (1759 - 1823) is by many considered to be one of the forefathers of modern visualizations.
+His published works contain the first occurrences of many graphical forms still widely used today.
 In one of his earlier works \parencite{CommercialAndPoliticalAtlas} he introduced the concepts of line (Figure \ref{fig:PlayfairLineChart}), bar (Figure \ref{fig:PlayfairBarChart}) and area charts (Figure \ref{fig:PlayfairAreaChart}) to communicate economic factors of England during the eighteenth century.
 In a related later work \parencite{StatisticalBreviary} he uses the first ever published pie and circle charts to show and compare the resources of states and kingdoms in Europe.
-The charts he created are very similar to modern ones because they already contain all the major elements found in today's visualizations, such as labeled axes, grids, titles and color-based categorization.
+The charts he created are very similar to modern ones because they already contain major concepts found in today's visualizations, such as labeled axes, grids, titles and color-based categorization.
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/playfair-line-chart.png}
 \caption[Line Chart by William Playfair From 1786]{
   This chart shows the expenditure of the British navy during the eighteenth century as a line chart.
-  It was published in 1786 and is considered to be one of the first occurrences of a line chart which contains all components found in modern visualizations.
+  It was published in 1786 and is considered to be one of the first occurrences of a line chart containing most components found in modern visualizations.
   \imgcredit{Image extracted from Schoenberg Center for Electronic Text and Image (SCETI). Used under the terms of Creative Commons CC BY 2.5.}
 }
 \label{fig:PlayfairLineChart}
@@ -124,7 +130,7 @@ The charts he created are very similar to modern ones because they already conta
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/playfair-bar-chart.png}
 \caption[Bar Chart by William Playfair from 1786]{
   This chart shows England's exports and imports from and to Scotland in 1781 visualized as a bar chart.
-  It was published in 1786 and is considered to be one of the first occurrences of a bar chart which contains all components found in modern visualizations.
+  It was published in 1786 and is considered to be one of the first occurrences of a bar chart containing most components found in modern visualizations.
   \imgcredit{Image extracted from Schoenberg Center for Electronic Text and Image (SCETI). Used under the terms of Creative Commons CC BY 2.5.}
 }
 \label{fig:PlayfairBarChart}
@@ -135,14 +141,15 @@ The charts he created are very similar to modern ones because they already conta
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/playfair-area-chart.png}
 \caption[Area Chart by William Playfair from 1786]{
   This chart shows the annual revenues of England and France between 1550 and 1800 visualized as an area chart.
-  It was published in 1786 and is considered to be one of the first occurrences of an area chart which contains all components found in modern visualizations.
+  It was published in 1786 and is considered to be one of the first occurrences of an area chart containing most components found in modern visualizations.
   \imgcredit{Image extracted from Schoenberg Center for Electronic Text and Image (SCETI). Used under the terms of Creative Commons CC BY 2.5.}
 }
 \label{fig:PlayfairAreaChart}
 \end{figure}
 
-Albeit not directly an information visualization but rather a geographic one, the dot map created by \cite{ModeOfCommunicationOfCholera} in 1855 to trace cholera outbreaks in London (Figure \ref{fig:CholeraDotMap}) is undoubtedly one of the most famous and influential visualizations in history.
-It was used to identify a cluster of cholera-related deaths near a contaminated water pump on Broad Street, leading to the recognition of cholera as a waterborne disease.
+The dot map created by \cite{ModeOfCommunicationOfCholera} in 1855 to trace cholera outbreaks in London (Figure \ref{fig:CholeraDotMap}) is undoubtedly one of the most famous and influential visualizations in history.
+Even though it is not directly an information visualization but rather a geographic one, it has been included here because of its historic relevance.
+This iconic dot map was used to identify a cluster of cholera-related deaths near a contaminated water pump on Broad Street, leading to the recognition of cholera as a waterborne disease.
 
 \begin{figure}[tp]
 \centering
@@ -150,7 +157,7 @@ It was used to identify a cluster of cholera-related deaths near a contaminated 
 \caption[Dot Map Plotting Cholera Deaths in London From 1855]{
   This iconic chart was created by Dr. John Snow in 1855 to identify a clustering of cholera-related deaths near Broad Street in London.
   It was used to identify a contaminated water pump and to illustrate the waterborne nature of the disease.
-  The data being map-based, this chart is an example of a data visualization rather than an information visualization.
+  Since the data is map-based, this chart is an example of a geographic visualization rather than an information visualization.
   \imgcredit{Image extracted from \cite{IVISCourseNotes}. Original appearance in \cite{ModeOfCommunicationOfCholera}.}
 }
 \label{fig:CholeraDotMap}
@@ -160,14 +167,14 @@ It would go amiss not to mention Florence Nightingale (1820 - 1910) \parencite{F
 She was a British statistician, social reformer, founder of modern nursing and might be the first person who used visualizations to persuade others of a need for change.
 During her service as a superintendent of nurses in the Crimean War, she realized that a large share of deaths in hospitals resulted from preventable diseases which originated in poor sanitary conditions.
 One of her contributions to the field of information visualization was the creation of a new type of diagram, called a rose or polar-area chart.
-These charts were used to communicate the data she collected on the mortality of soldiers during the war and to grab the attention of politicians and the public.
+She used these charts to communicate data she collected on the mortality of soldiers during the war and to grab the attention of politicians and the public.
 One of these charts can be seen in Figure \ref{fig:NightingalePolarAreaChart}.
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/nightingale.png}
 \caption[Polar-Area Chart by Florence Nightingale From 1859]{
-  This is one of the polar-area charts that Florence Nightingale created in 1859 to convince others of a need for more sanitary conditions in hospitals.
+  This is one of the polar-area charts that Florence Nightingale created in 1859 to convince people of a need for more sanitary conditions in hospitals.
   It visualizes the causes of mortality for soldiers during the Crimean War and demonstrates that a large percentage of patients died from preventable diseases which are linked to unsanitary environments.
   \imgcredit{Image extracted from Harvard Library. Used under the terms of Creative Commons Attribution 4.0.}
 }
@@ -176,20 +183,20 @@ One of these charts can be seen in Figure \ref{fig:NightingalePolarAreaChart}.
 
 Modern visualizations benefit from the interactive nature of the devices used to consume them.
 They are allowed to be a lot more complex than static visualizations because various interaction techniques enable users to navigate large amounts of data and make sense of it.
-High-D by the company Macrofocus \parencite{HighD} has been chosen as a representative example of such a visual analytics tool and a screenshot of its interface during the analysis of a sample dataset can be seen in Figure \ref{fig:HighD}.
+High-D by the company Macrofocus \parencite{HighD} has been chosen as a representative example of such visual analytics tools, and a screenshot of its interface during the analysis of a sample dataset can be seen in Figure \ref{fig:HighD}.
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/high-d.png}
 \caption[Screenshot of High-D]{
-  High-D from the company Macrofocus is a visual analytics tool which is specialized in analyzing multidimensional data.
+  High-D from the company Macrofocus is a visual analytics tool specialized in analyzing multidimensional data.
   \imgcredit{Screenshot of \cite{HighD} taken by the author of this work.} \TODO{How to cite this? Copyright?}
 }
 \label{fig:HighD}
 \end{figure}
 
-It is out of the scope of this work to provide a detailed account over the long and eventful history of information visualization and this section only provides a brief and very selective view on the topic.
-Much more comprehensive works exist which go significantly deeper into details of the various actors and the intricate influences they had on each other.
+It is out of the scope of this work to provide a full account over the long and eventful history of information visualization.
+This section only provides a brief and very selective view on the topic and much more comprehensive works exist which go significantly deeper into details of the various actors and the intricate influences they had on each other.
 Recommendable sources for further reading on the history of visualization include \cite{BriefHistoryOfDataVis}, \cite{HistoryOfDataVisAndGraphicCommunication} and \cite{HistoryOfInformationGraphics}.
 
 \section{Information Visualization Libraries for the Web}
