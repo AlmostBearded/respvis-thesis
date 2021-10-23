@@ -233,18 +233,18 @@ This is fixed by the \modname{ResizeObserver} API, which is already fully suppor
 \section{TypeScript (TS)}
 \label{sec:TS}
 
-TypeScript (TS) is a strongly-typed programming language, that is designed as an extension of JavaScript. 
-Syntactically, it is a superset of JavaScript that enables the annotation of properties, variables, parameters and return values with types. 
-Because it is a superset of JavaScript, TypeScript requires a compiler that transpiles the code into valid JavaScript code, which can either be based on ECMAScript 5 \parencite{ECMAScript5} or ECMAScript 6 \parencite{ECMAScript6}.
+TypeScript (TS) is a strongly-typed programming language which is designed as an extension of JavaScript. 
+Syntactically, it is a superset of JavaScript which enables the annotation of properties, variables, parameters and return values with types. 
+It requires a compiler which transpiles TypeScript code into valid JavaScript code based on specific ECMAScript versions.
 
-Initially, TypeScript has been released by Microsoft in 2012 \parencite{TSFirstRelease} to extend JavaScript with features that were already present in more mature languages, and whose absence in JavaScript caused difficulties when working on larger codebases. 
-At the time of the initial development, ECMAScript 6 hasn't been published yet and TypeScript was used to already be able to use features that would later be implemented by ECMAScript 6.
+Initially, TypeScript has been released by Microsoft in 2012 \parencite{TSFirstRelease} to extend JavaScript with features which were already present in more mature languages, and whose absence in JavaScript caused difficulties when working on larger codebases. 
+At the time of the initial development, ECMAScript 6 hasn't been published yet and TypeScript was used to already be able to use features which would later be implemented by ECMAScript 6.
 These features included a module system to be able to split source code into reusable chunks and a class system to aid object-oriented development. 
 The TypeScript code using these features could then be translated via a compiler into standard-conform ECMAScript 5 code, which could be interpreted by JavaScript engines at the time. 
 At the time of writing, ECMAScript 6 is already widely supported by all modern browsers and therefore the main benefit of TypeScript over JavaScript primarily resides in the addition of a static type system.
 
 The extension of JavaScript with a type system brings many benefits. 
-One such a benefit is the improved tooling that comes with type annotated code. 
+One such a benefit is the improved tooling which comes with type annotated code. 
 Tools will be able to point out errors early during development and assist developers with automated fixes, improved code completion, and code navigation. 
 Additionally, studies like \cite{ToTypeOrNotToType} have evaluated software bugs in publicly available codebases and found that 15\% of them could have been prevented with static type checking.
 
@@ -313,10 +313,10 @@ To make the information accessible to visually impaired people it is required to
 \subsection{Scalable Vector Graphics (SVG)}
 \label{sec:SVG}
 
-Scalable Vector Graphics (SVG) is an XML-based format for vector graphics, which describe images as sets of shapes that can be scaled without loss of quality. 
+Scalable Vector Graphics (SVG) is an XML-based format for vector graphics which describe images as sets of shapes which can be scaled without loss of quality. 
 It was initially published by the W3C in 1999 \parencite{SVG1} and the most recent version SVG 1.1 was released in 2011 \parencite{SVG11}. 
-Because SVG is based on XML, SVG files can be created with any text editor and a simple example of an SVG document can be seen in Listing \ref{list:SVG} with its visualization being shown in Figure \ref{fig:SVG}. 
-In addition to being able to write SVG documents manually, there is also specialized software available that helps with the composition of more complex images.
+SVG files are based on XML and therefore can be created with any text editor but there is also specialized software available which helps with the composition of more complex images.
+A simple example of an SVG document containing a single circle can be seen in Listing \ref{list:SVG} with its visualization being shown in Figure \ref{fig:SVG}. 
 
 \begin{samepage}
 \lstinputlisting[%
