@@ -31,26 +31,30 @@ In addition to these three subfields, \cite{IVISCourseNotes} defines the often u
 Visualizations presented in an interactive medium do not merely consist of visual representations. In order to analyze more complex datasets, it is equally important to provide means for interacting with these representations because without interaction, a visualization becomes a static image, which has only very limited usefulness when dealing with large and multidimensional data. Even though the majority of the attention in the field of Information Visualization has been put on the presentational aspect of visualizations, a lot of research has also been conducted on their interactive aspects. Many taxonomies have been formulated with the goal of defining the design space of interactions to support analytic reasoning, but they vary greatly depending on the concepts they are focusing on. Some taxonomies have been defined on the concept of low-level interaction techniques \parencite{TheEyesHaveIt,GrammarOfGraphics}, providing a very system-centric view on interaction, while other taxonomies focus on user tasks \parencite{LowLevelComponentsOfAnalyticActivity} without them being tightly bound to interacting with visualizations. \cite{RoleOfInteractionInInformationVisualization} aims to provide a view that is in between the purely system-centric and purely user-centric extremes by defining a taxonomy based on user intent. The categories of this taxonomy are listed in Table \ref{tab:UserIntentCategories}, and they form a good framework with which interactivity in the context of Information Visualization can be discussed. 
 
 \begin{table}[tp]
-    \centering
-    \begin{tabularx}{\linewidth}{| l | X | X |}
-        \hline
-        \textbf{Category} & \textbf{Description} & \textbf{Examples} \\ \hline
-        Select & Mark items as interesting. &  \\ \hline
-        Explore & Show different items. & Panning, direct-walk  \\ \hline
-        Reconfigure & Show a different arrangement. & Dimension configuration, position adjustments \\ \hline
-        Encode & Show a different representation. & Change chart type, orientation, colors, shapes, ... \\ \hline
-        Abstract/Elaborate & Show more or less detail. & Details-on-demand (drill-down, sunburst, tooltips, zooming)  \\ \hline
-        Filter & Show items based on conditions. & Dynamic query controls   \\ \hline
-        Connect & Show related items. & Highlight connected items, highlight item in different representations   \\ \hline
-        
-    \end{tabularx}
-    \caption[Categories of Interaction Based on User Intent]
-    {
-        This table shows the different categories of interacting with visualizations based on user intent.
-        \imgcredit{Table adapted from \cite{RoleOfInteractionInInformationVisualization}}
-    }
-    \label{tab:UserIntentCategories}
+\tablestretch
+\rowcolors{2}{}{tablerowcolour}
+\centering
+\begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}lXX<{\kern-\tabcolsep}}
+\toprule
+Category & Description & Examples \\
+\midrule
+Select & Mark items as interesting. & \\
+Explore & Show different items. & Panning, direct-walk \\
+Reconfigure & Show a different arrangement. & Dimension configuration, position adjustments \\
+Encode & Show a different representation. & Change chart type, orientation, colors, shapes, ... \\
+Abstract/Elaborate & Show more or less detail. & Details-on-demand (drill-down, sunburst, tooltips, zooming) \\
+Filter & Show items based on conditions. & Dynamic query controls \\
+Connect & Show related items. & Highlight connected items, highlight item in different representations \\
+\bottomrule
+\end{tabularx}
+\caption[Categories of Interaction Based on User Intent]{
+  This table shows the different categories of interacting with visualizations based on user intent.
+  \imgcredit{Table adapted from \cite{RoleOfInteractionInInformationVisualization}}
+}
+\label{tab:UserIntentCategories}
 \end{table}
+
+
 
 \section{History of Information Visualization}
 
