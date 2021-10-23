@@ -1,9 +1,7 @@
 const data = [
   { category: 'A', value: 107 },
   { category: 'B', value: 31 },
-  { category: 'C', value: 635 },
-  { category: 'D', value: 203 },
-  { category: 'E', value: 50 },
+  { category: 'C', value: 635 }
 ];
 
 const bar = fc

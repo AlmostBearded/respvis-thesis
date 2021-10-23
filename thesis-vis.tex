@@ -10,10 +10,10 @@ In addition to visuals being easier to assimilate by humans, a purely textual an
 \begin{figure}[tp]
     \centering
     \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]
-    {images/anscombes-quartet.png}
+    {diagrams/anscombe.pdf}
 
     \caption[Anscombe's Quartet]{
-        Anscombe's Quartet consists of four distinct sets of data that share identical summary statistics. The difference between these datasets is only obvious by carefully examining the textual data or by plotting it. \imgcredit{Image extracted from \cite{IVISCourseNotes} with kind permission by Keith Andrews. \TODO{Embed Keith's SVG version}}
+        Anscombe's Quartet consists of four distinct sets of data that share identical summary statistics. The difference between these datasets is only obvious by carefully examining the textual data or by plotting it. \imgcredit{Image extracted from \cite{IVISCourseNotes}. Used with kind permission by Keith Andrews.}
     }
     \label{fig:AnscombesQuartet}
 \end{figure}
@@ -130,7 +130,7 @@ Albeit not directly an information visualization but rather a geographic one, th
     \label{fig:CholeraDotMap}
 \end{figure}
 
-It would go amiss not to mention Florence Nightingale (1820 - 1910) when talking about the history of information visualization. She was a British statistician, social reformer, founder of modern nursing and might be the first person who used visualizations to persuade others of a need for change. During her service as a superintendent of nurses in the Crimean War, she realized that a large share of deaths in hospitals resulted from preventable diseases that originated in poor sanitary conditions. One of her contributions to the field of information visualization was the creation of a new type of diagram, called a rose or polar-area chart. These charts were used to communicate the data she collected on the mortality of soldiers during the war and to grab the attention of politicians and the public. One of those charts can be seen in Figure \ref{fig:NightingalePolarAreaChart}. \TODO{Cite Nightingale paper}
+It would go amiss not to mention Florence Nightingale (1820 - 1910) \parencite{FlorenceNightingale} when talking about the history of information visualization. She was a British statistician, social reformer, founder of modern nursing and might be the first person who used visualizations to persuade others of a need for change. During her service as a superintendent of nurses in the Crimean War, she realized that a large share of deaths in hospitals resulted from preventable diseases that originated in poor sanitary conditions. One of her contributions to the field of information visualization was the creation of a new type of diagram, called a rose or polar-area chart. These charts were used to communicate the data she collected on the mortality of soldiers during the war and to grab the attention of politicians and the public. One of those charts can be seen in Figure \ref{fig:NightingalePolarAreaChart}.
 
 \begin{figure}[tp]
     \centering
@@ -257,7 +257,8 @@ To demonstrate how the various aspects of a Vega specification are defined, an e
   numbers=left,
   label=list:VegaStaticBarChart,
   caption={
-    [Static Bar Chart in Vega] The Vega specification of a static bar chart. Demonstrates the principle of data, scales, axes and marks. \TODO{Adapt source code to make it your own or cite source}
+    [Static Bar Chart in Vega] The Vega specification of a static bar chart. 
+    Demonstrates the principle of data, scales, axes and marks.
   },
 ]{listings/vega-static-bar-chart.json}
 \end{samepage}
@@ -283,7 +284,7 @@ An example of how the previously demonstrated bar chart specification can be ext
   numbers=left,
   label=list:VegaBarChart,
   caption={
-    [Bar Chart with Tooltip in Vega] The necessary changes to the bar chart specification in Listing \ref{list:VegaStaticBarChart} to add show a tooltip when hovering over bars. It demonstrates the basic functionality of signals in Vega. When the mouse hovers over a rect mark, the tooltip signal will receive the value of the rect's bound data record and when the mouse leaves the rect mark, the variable will be reset to an empty object. The tooltip signal is then used in the newly added text mark to define the position, text and visibility of it whenever an update occurs. \TODO{Adapt source code to make it your own or cite source}
+    [Bar Chart with Tooltip in Vega] The necessary changes to the bar chart specification in Listing \ref{list:VegaStaticBarChart} to add show a tooltip when hovering over bars. It demonstrates the basic functionality of signals in Vega. When the mouse hovers over a rect mark, the tooltip signal will receive the value of the rect's bound data record and when the mouse leaves the rect mark, the variable will be reset to an empty object. The tooltip signal is then used in the newly added text mark to define the position, text and visibility of it whenever an update occurs.
   },
 ]{listings/vega-bar-chart.json}
 \end{samepage}
@@ -303,7 +304,7 @@ Visualizations created with Vega closely follow their specifications and minimal
   numbers=left,
   label=list:VegaLiteBarChart,
   caption={
-    [Bar Chart with Tooltip in Vega-Lite] This is a Vega-Lite specification of the Vega bar chart specification seen in Listing \ref{list:VegaStaticBarChart} combined with Listing \ref{list:VegaBarChart}. \TODO{Adapt source code to make it your own or cite source}
+    [Bar Chart with Tooltip in Vega-Lite] This is a Vega-Lite specification of the Vega bar chart specification seen in Listing \ref{list:VegaStaticBarChart} combined with Listing \ref{list:VegaBarChart}.
   },
 ]{listings/vega-lite-bar-chart.json}
 \end{samepage}

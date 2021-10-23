@@ -6,9 +6,7 @@ function renderCircles(container, positions) {
       .attr('stroke', 'darkgray')
       .attr('cx', d => d.x)
       .attr('cy', d => d.y),
-    (update) => update
-      .attr('cx', d => d.x)
-      .attr('cy', d => d.y),
+    (update) => update.attr('cx', d => d.x).attr('cy', d => d.y),
     (exit) => exit.remove()
   );
 }

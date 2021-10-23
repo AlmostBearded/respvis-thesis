@@ -1,34 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
-  <head>
-    <title>Canvas</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="UTF-8" />
-    <style>
-      body {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-items: center;
-        gap: 1rem;
-      }
-    </style>
-  </head>
-  <body>
-    <canvas width="64" height="64"></canvas>
-    <canvas width="640" height="640"></canvas>
-    <script>
-      const canvases = Array.from(document.getElementsByTagName('canvas'));
-      canvases.forEach((canvas) => {
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
-        const context = canvas.getContext('2d');
-        context.fillStyle = '#7c66ff';
-        context.beginPath();
-        context.arc(width / 2, height / 2, width / 2, 0, Math.PI * 2);
-        context.fill();
-        context.closePath();
-      });
-    </script>
-  </body>
+<body>
+  <canvas width="64" height="64"></canvas>
+  <canvas width="640" height="640"></canvas>
+  <script>
+    const canvases = Array.from(document.getElementsByTagName('canvas'));
+    canvases.forEach((canvas) => {
+      const width = canvas.clientWidth;
+      const height = canvas.clientHeight;
+      const context = canvas.getContext('2d');
+      context.fillStyle = '#7c66ff';
+      context.beginPath();
+      context.arc(width / 2, height / 2, width / 2, 0, Math.PI * 2);
+      context.fill();
+      context.closePath();
+    });
+  </script>
+</body>
 </html>
