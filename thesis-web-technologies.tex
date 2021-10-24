@@ -1,6 +1,14 @@
 \chapter{Web Technologies}
 \label{chap:WebTechnologies}
 
+RespVis is a web-based framework.
+As such, it builds on a stack of technologies which is native to the web. 
+The first sections in this chapter introduce the web's core technologies such as HTML in Section \ref{sec:HTML}, CSS in Section \ref{sec:CSS} and JavaScript in \ref{sec:JS}. 
+Furthermore, the concepts and importance of TypeScript are introduced in Section \ref{sec:TS}, and the different technologies to embed graphics in web pages are discussed in Section \ref{sec:WebGraphics}.
+Lastly, due to the importance of layouting in this work, three different forms of layout engines are compared in Section \ref{sec:LayoutEngines}, and the concept of responsive web design is summarized in \ref{sec:RWD}.
+Since there are many things to examine, none of the following sections go into too much detail, and mainly aim to give a summary over the concepts that are introduced in them.
+For more in-depth information on the various topics, the works referenced in the sections below should be consulted. 
+
 \section{HyperText Markup Language (HTML)}
 \label{sec:HTML}
 
@@ -415,6 +423,7 @@ Even though the API of the WebGL renderer is also standardized \parencite{WebGL}
 It is therefore recommendable to only use three-dimensional rendering when the requirements do not allow for any of the alternatives.
 
 \section{Layout Engines}
+\label{sec:LayoutEngines}
 
 A layout engine is used to calculate the boundary coordinates of visual components based on some form of input components which are annotated with layout constraints. 
 These layout constraints describe the size and position of components and their relationships between each other in a syntax which is understood by the layout engine. 
