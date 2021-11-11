@@ -1,0 +1,199 @@
+\chapter{RespVis}
+\label{chap:RespVis}
+
+\section{Design}
+
+\section{Project Setup}
+\label{sec:ProjectSetup}
+
+RespVis is set up as a NodeJS \parencite{NodeJS} project that is hosted as an open-source project on GitHub \parencite{RespVisGitHub}.
+The implementation is written in TypeScript and grouped into different modules by thematic affinity. 
+These TypeScript source files must be compiled to JavaScript and bundled into one combined package, so that users can import the library in their projects.
+To perform this compilation and bundling, the Rollup module bundler \parencite{Rollup} is used.
+In addition to the bundled JavaScript library, users are required to import an accompanying CSS file containing default styling for the generated visualizations.
+The project also contains examples to demonstrate usage of the library by creating various charts.
+These examples are HTML files which import the required files and contain JavaScript that invokes RespVis functionality to create and update visualizations.
+The build process of the library contains multiple steps involving output directory preparation, bundling of library code and copying of various files to the correct locations in the output directory.
+It would be tedious to manually perform all these steps every time the library needs to be rebuilt, and therefore this process is automated using Gulp \parencite{Gulp}, a task-based workflow automation tool.
+The following sections will briefly introduce the setup of RespVis and the tools used in the development process.  
+
+\subsection{Directory Structure}
+
+The goal of this section is to give an overview over the directory structure of the RespVis project.
+Roughly summarized, the project contains configuration files for various tools, a \code{src/} directory containing the source code for the whole library and accompanying examples, a \code{node_modules} directory containing the project's cached NodeJS dependencies, and a \code{dist/} directory containing built versions of the library and examples ready for distribution.
+The configuration files are only discussed broadly here, as later sections go into more details about the setup of the various tools.
+A tree visualization of the whole directory structure, including all important files and directories but excluding individual source files, can be seen in Figure \ref{fig:RespVisDirTree}.
+
+\begin{figure}[tp]
+\centering
+\framebox[\textwidth]{%
+\begin{minipage}{0.9\textwidth}
+  \dirtree{%
+  .1 package.json.
+  .1 gulpfile.js.
+  .1 tsconfig.json.
+  .1 src/.
+  .2 index.html.
+  .2 respvis.css.
+  .2 lib/.
+  .3 core/.
+  .3 legend/.
+  .3 bars/.
+  .3 points/.
+  .3 tooltip/.
+  .2 examples/.
+  .3 data/.
+  .3 vendor/.
+  .3 bar.html.
+  .3 \dots.
+  .1 dist/.
+  .2 respvis.js.
+  .2 respvis.js.map.
+  .2 respvis.min.js.
+  .2 respvis.min.js.gz.
+  .2 respvis.min.js.map.
+  .2 respvis.css.
+  .2 index.html.
+  .2 examples/.
+  .3 data/.
+  .3 vendor/.
+  .3 bar.html.
+  .3 \dots.
+  .1 node\_modules.
+  }
+\end{minipage}
+}
+\caption[RespVis Directory Structure]{
+  The directory structure of RespVis project. 
+  Only important files are shown here for readability reasons.
+  \imgcredit{Figure created by the author of this thesis.}
+}
+\label{fig:RespVisDirTree}
+\end{figure}
+
+At the root directory of the RespVis project reside the necessary project configuration files for NodeJS, TypeScript and Gulp.
+The NodeJS configuration file, \code{package.json}, describes the meta-data of the NodeJS project.
+It is used to specify the project's dependencies to other packages and is required for every NodeJS project so that it can be uploaded to the npm package registry \parencite{npm}.
+The TypeScript configuration file, \code{tsconfig.json}, specifies the configuration the TypeScript compiler uses to compile the libraries' TypeScript source files into their JavaScript counterparts.
+The Gulp configuration file, \code{gulpfile.js}, is used to describe atomic, recurring tasks and compositions of them.
+These tasks can then be invoked via the Gulp command line tool to automate otherwise tedious workflow processes.
+
+The \code{src/} directory at the root of the project contains all the implementation files of the library in the \code{src/lib/} directory and examples in the \code{src/examples/} directory.
+The \code{src/lib/} directory contains all TypeScript source files of the library.
+They have been partitioned into modules formed around thematic affinity of the various components.
+The \code{core} module contains the core functionality of the library and is a prerequisite for all the other modules.
+It includes the layouter implementation, D3 selection extensions, chart base components, and assorted utility functions that simplify diverse tasks when creating visualizations.
+The \code{legend} module contains a basic legend component which renders a color legend consisting of a title, colored rectangles and corresponding labels.
+The \code{tooltip} module contains functions to show and hide tooltips, modify tooltip contents, and position tooltips.
+It also contains helper functions for series components which render tooltips, to simplify data creation and rendering of those series, so that tooltip-related code does not have to be repeated in various places.
+The \code{bars} and \code{points} modules contain the necessary series, chart and chart window components to render bar, grouped bar, stacked bar and point visualizations. 
+At the moment, all these modules are being built into a combined package, but there are plans to distribute them separately to allow users of the library to only import those packages they need to not unnecessarily increase their own bundle sizes with code they do not require.
+Beside the \code{src/lib/} directory, the \code{src/} directory also contains the \code{src/examples/} directory, which holds the source files of the developed examples.
+These examples are distributed alongside the library files, so they are copied to the \code{dist/examples/} directory upon building the project.
+Every example consists of an HTML file, which imports all the requirements such as \code{respvis.js} and \code{respvis.css} as well as external dependencies such as D3.
+It then invokes the necessary RespVis functionality within a \code{<script>} tag, which is embedded in the body of the document.
+In addition to the individual example files, the \code{examples} directory also contains a \code{vendor} directory, which contains third-party dependencies, and a \code{data} directory containing data, which is imported by individual examples to make it reusable.
+
+In addition to configuration files and the \code{src/} directory, the root directory also contains two directories that are automatically generated during the build process.
+These are the \code{node_modules/} and \code{dist/} directories.
+The \code{node_modules/} directory is a directory which exists in every NodeJS project.
+It is created when installing the dependencies of a NodeJS project and contains a cached copy of every direct and indirect dependency.
+The \code{dist/} directory is generated by the Gulp build tasks and contains all the files necessary to distribute a built version of the library.
+The code of RespVis is distributed as JavaScript bundles of different formats which can be used depending on the situation.
+Currently, all these bundles are based on Immediately Invoked Function Expressions (IIFE), which are explained in more detail in Section \ref{sec:Rollup}.
+These bundles are also distributed in gradually more minimized versions.
+The \code{dist/respvis.js} file contains the unmodified JavaScript bundle which can be used by library consumers who require readable code, \code{dist/respvis.min.js} contains the minified JavaScript bundle, and \code{dist/respvis.min.js.gz} contains the minified JavaScript bundle that has additionally been compressed in the GZIP format \parencite{GZIP}.
+Beside these code bundles, the Rollup module bundler has been configured to create source maps for the \code{dist/respvis.js} and \code{dist/respvis.min.js} bundles: \code{dist/respvis.js.map} and \code{dist/respvis.min.js.map}.
+These source maps can be interpreted by developer tools in browsers to map from certain instructions in the bundled JavaScript code to the exact instruction in the original TypeScript code.
+They are an immense help when developing the library because, without them, debugging in browsers would be virtually impossible.
+Since RespVis aims to perform all possible styling in CSS, the distribution also contains a \code{dist/respvis.css} file which contains all the default styles of visualizations created with RespVis. 
+Currently, this file is written manually as a whole in the \code{src/} directory and merely copied to the \code{dist/} directory during the build process.
+In the future, this process should be improved by employing a CSS preprocessing tool such as SASS \parencite{SASS} so that the CSS can be split into multiple files during development.
+Beside the bundled library source code and stylesheets, the \code{dist/} directory also contains usage examples of the library within the \code{dist/examples/} directory.
+This directory is identical to the one under \code{src/examples/} because it is merely being copied to the \code{dist/} folder during the build process.
+
+
+
+% @misc{GZIP,
+%   title={RFC1952: GZIP File Format Specification Version 4.3},
+%   author={Deutsch, Peter},
+%   year={1996}
+% }
+
+% @article{SASS,
+%   title={SASS (Syntactically Awesome Style Sheets)},
+%   author={O'Donnell, Jane},
+%   journal={Journal of Computing Sciences in Colleges},
+%   volume={34},
+%   number={4},
+%   pages={101--102},
+%   year={2019},
+%   publisher={Consortium for Computing Sciences in Colleges}
+% }
+
+
+\subsection{NodeJS}
+
+\subsection{Rollup}
+
+\subsection{Gulp}
+
+% bundleJSLib
+% bundleJSLibMin
+% bundleJSLibMinZipped
+
+% copyHtmlFiles
+%   necessary because of examples
+% copyCssFiles
+%   necessary because of examples and respvis.css
+% copyJsFiles
+%   necessary because of examples
+
+% reloadBrowser
+%   Browsersync
+
+% cleanDist
+% cleanNodeModules
+
+% clean = cleanDist
+% cleanAll = cleanDist + cleanNodeModules
+
+% build = clean + bundleJSLib + bundleJSLibMin + bundleJSLibMinZipped + copyHtmlFiles + copyCssFiles + copyJsFiles
+
+% serve
+%   starts dev server from dist folder
+%   change in src/ detected → build + reloadBrowser
+
+
+
+
+
+
+
+
+
+% \TODO{Checkout these resources: bocoup.com/blog/reusability-with-d3, bocoup.com/blog/introducing-d3-chart}
+
+% \TODO{Add software architecture diagram}
+
+% \TODO{Describe relationship to D3}
+
+% \TODO{Describe storing data on elements}
+
+% \TODO{Describe using DOM events for callbacks}
+
+% \TODO{Describe components}
+
+
+
+% \section{Components}
+
+
+
+% \subsection{Lifecycle}
+
+% events
+
+% updating on data change
+
+% updating on bounds change
