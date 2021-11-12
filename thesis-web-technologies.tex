@@ -1,61 +1,102 @@
+
 \chapter{Web Technologies}
 \label{chap:WebTechnologies}
 
-RespVis is a web-based framework.
-As such, it builds on a stack of technologies which is native to the web. 
-The first sections in this chapter introduce the web's core technologies such as HTML in Section \ref{sec:HTML}, CSS in Section \ref{sec:CSS} and JavaScript in \ref{sec:JS}. 
-Furthermore, the concepts and importance of TypeScript are introduced in Section \ref{sec:TS}, and the different technologies to embed graphics in web pages are discussed in Section \ref{sec:WebGraphics}.
-Lastly, due to the importance of layouting in this work, three different forms of layout engines are compared in Section \ref{sec:LayoutEngines}, and the concept of responsive web design is summarized in \ref{sec:RWD}.
-Since there are many things to examine, none of the following sections go into too much detail, and mainly aim to give a summary over the concepts that are introduced in them.
-For more in-depth information on the various topics, the works referenced in the sections below should be consulted. 
+RespVis is a web-based framework. As such, it builds on a stack of
+technologies which are native to the web. The first sections in this
+chapter introduce the web's core technologies: HTML, CSS, and
+JavaScript. Then the concepts and importance of TypeScript are
+introduced, and the different technologies to embed graphics in web
+pages are discussed. Due to the importance of layouting in this work,
+three different forms of layout engines are compared. Finally, the
+concept of responsive web design is summarized. Since there are many
+things to examine, none of the following sections goes into too much
+detail, the aim is to give a summary of the concepts that are
+introduced. For more in-depth information, works referenced in the
+sections below should be consulted.
+
 
 \section{HyperText Markup Language (HTML)}
 \label{sec:HTML}
 
-HTML is a document markup language for documents which are meant to be displayed in web browsers.
-The original proposal and implementation in 1989 came from Tim Berners-Lee who was a contractor at CERN at the time \parencite{TBLProposal}.
-Over the years, the standard has been developed by a range of different entities like the CERN and the Internet Engineering Task Force (IETF). 
-Nowadays, HTML exists as a continuously evolving living standard without specific version releases which is maintained by the Web Hypertext Application Technology Working Group (WHATWG) and the World Wide Web Consortium (W3C) \parencite{HTML}.
+HTML is a document markup language for documents which are to be
+displayed in web browsers. The original proposal and implementation in
+1989 came from Tim Berners-Lee who was a contractor at CERN at the
+time \parencite{TBLProposal}. Over the years, the standard was further
+developed by a range of different entities like the CERN and the
+Internet Engineering Task Force (IETF). Nowadays, HTML exists as a
+continuously evolving living standard without specific version
+releases, which is maintained by the Web Hypertext Application
+Technology Working Group (WHATWG) and the World Wide Web Consortium
+(W3C) \parencite{HTML}.
 
-The primary purpose of HTML is to define the content and structure of web pages.
-This is achieved with the help of HTML elements, which are composed in a hierarchical tree structure and define modular pieces of content which can be interpreted by web browsers.
-A strong pillar of HTML's design is extensibility and there are multiple mechanisms in place to ensure applicability to a vast range of use cases.
-These mechanisms include:
-
+The primary purpose of HTML is to define the content and structure of
+web pages. This is achieved with the help of HTML elements, such as
+\elname{<section>}, \elname{<h1>}, \elname{<p>}, and \elname{<img>},
+which are composed into a hierarchical tree structure of modular
+content, and which is then interpreted by web browsers. A strong
+pillar of HTML's design is extensibility. There are multiple
+mechanisms in place to ensure its applicability to a vast range of use
+cases, including:
 \begin{itemize}
-\item Specifying classes of elements using the \attrname{class} attribute.
-This effectively creates custom elements while still basing them on the most related, already existing elements.
+\item Specifying classes of elements using the \attrname{class}
+  attribute. This effectively creates custom elements based on the
+  closest standard elements.
 
-\item Using \attrname{data-*} attributes to decorate elements with additional data which can be used by scripts.
-The HTML standard guarantees that these attributes are ignored by browsers.
+\item Using \attrname{data-*} attributes to decorate elements with
+  additional data which can be used by scripts. The HTML standard
+  guarantees that these attributes are ignored by browsers.
 
-\item Embedding custom data using \elname{<script type="">} elements which can be accessed by scripts.
+\item Embedding custom data using \elname{<script type="">} elements,
+  which can be accessed by scripts.
 \end{itemize}
+
+
+
 
 
 \section{Cascading Style Sheets (CSS)}
 \label{sec:CSS}
 
-This section is meant to give an overview and reiterate over the CSS concepts which are important in the context of this thesis.
-In particular, the history of CSS is briefly summarized, a refresher on selectors and cascades is given and the different modules of CSS-based layouting are compared.
+Cascading Style Sheets (CSS) apply styling to HTML elements,
+effectively separating presentation from content. In earlier versions
+of HTML \parencite{HTML32}, elements like \elname{<strong>} and
+\elname{<em>} prevented the clean separation of presentation from
+content.
 
-Cascading Style Sheets (CSS) is a style sheet language which is used to specify the presentation of HTML documents. 
-It can either be embedded directly in HTML documents using \elname{<style>} elements or it can be defined externally and linked into them using \elname{<link>} elements. 
-This characteristic of being able to externally describe the presentation of documents yields a lot of flexibility because multiple documents with different content can reuse the same presentation by linking to the same CSS file. 
-This solved the problem of having to individually define the presentation of every page with presentation elements like \elname{<strong>} or \elname{<em>}, as was the case in earlier versions of HTML \parencite{HTML32}.
+A CSS style sheet can either be embedded directly in HTML documents
+using \elname{<style>} elements or can be defined externally and
+linked to using \elname{<link>} elements. This characteristic of being
+able to externally describe the presentation of documents brings great
+flexibility. Multiple documents with different content can reuse the
+same presentation by linking to the same CSS file. Conversely,
+alternative style sheets can be applied to the same HTML content to
+achieve a different styling.
 
-CSS was initially proposed by \cite{CSSProposal} and standardized into CSS1 by the W3C in 1996 \parencite{CSS1}. 
-Throughout its history, the adoption of CSS by browser vendors was fraught with complications and even though most major browsers soon supported almost the full CSS standard, their implementations sometimes behaved vastly different from their competitor's. 
-This meant that authors of web pages usually had to resort to workarounds and provide different style sheets for different browsers. 
-In recent years, CSS specifications have become much more detailed \parencite{CSS21} and browser implementations have become more stable with fewer inconsistencies. 
-It has therefore become much rarer that browser-specific workarounds need to be applied, which
-drastically improves the development experience.
+CSS was initially proposed by \cite{CSSProposal} and standardized into
+CSS1 by the W3C in 1996 \parencite{CSS1}. Throughout its history, the
+adoption of CSS by browser vendors was fraught with complications and
+even though most major browsers soon supported almost the full CSS
+standard, their implementations sometimes behaved differently. This
+meant that authors of web pages often had to resort to workarounds,
+including providing different style sheets for different browsers. In
+recent years, CSS specifications have become much more detailed
+\parencite{CSS21} and browser implementations have become more stable
+with fewer inconsistencies. It has therefore become much rarer that
+browser-specific workarounds need to be applied, dramatically
+improving the developer experience.
 
-A CSS style sheet contains a collection of rules and each rule consists of a selector and a block of style declarations. 
-Selectors are defined in a custom syntax and are used to match HTML elements. 
-All elements which are matched by the selector of a rule will have the rule's style declarations applied to them. 
-The selector syntax is fairly simple when merely selecting elements of a certain type, but it also provides the means for selecting elements based on their contexts or attributes. 
-For a summary of the CSS 2.1 selector syntax, see Table \ref{tab:CSSSelectorSyntax}.
+A CSS style sheet contains a collection of rules. Each rule consists
+of a selector and a block of style declarations. Selectors are defined
+in a custom syntax and are used to match HTML elements.  All elements
+which are matched by the selector of a rule will have the rule's style
+declarations applied to them. The selector syntax is fairly
+straightforward when selecting elements of a certain type, but also
+has more sophisticated mechanisms for selecting elements based on
+their contexts or attributes. Table~\ref{tab:CSSSelectorSyntax}
+summarizes the selector syntax in CSS 2.1 \parencite{CSS21}.
+
+% KA: why only talk about CSS 2.1 here?  What about CSS 3 ?
 
 \begin{table}[tp]
 \tablestretch
@@ -79,136 +120,249 @@ Pattern & Matches \\
 \bottomrule
 \end{tabularx}
 \caption[CSS Selector Syntax]{
-  A summary of the CSS 2.1 selector syntax.
-  \imgcredit{Table created by the author of this thesis with data from \cite{CSS21}}
+A summary of the CSS 2.1 selector syntax.
+\imgcredit{Table created by the author of this thesis with data from \parencite{CSS21}.}
 }
 \label{tab:CSSSelectorSyntax}
 \end{table}
 
-Another important characteristic of CSS is the cascading of styles. 
-There's a lot of depth to how the final style of an element is calculated and \cite{CSS21} should be consulted for detailed notes on this topic. 
-The most important thing to state in the context of this work, is that styles can be overwritten. 
-When multiple rules match an element and define different values for the same style property, the values of the rule with higher specificity will be applied. 
-If multiple rules have the same specificity, the one defined last in the document tree will overwrite all previous ones.
 
-\subsection{Box Layout}
+Another important characteristic of CSS is the cascading of styles.
+The exact rules for calculating the final style to be applied to an
+element are quite involved, and the CSS specification \cite{CSS21}
+should be consulted for a detailed description. The most important
+aspect in the context of this work is that styles can be
+overwritten. When multiple rules match an element and define different
+values for the same property, the values of the rule with higher
+specificity will be applied. If multiple rules have the same
+specificity, the one defined last in the document tree will overwrite
+all previous ones.
+
+
+
+
+\subsection{CSS Box Model}
 \label{sec:BoxLayout}
 
-All elements in an HTML document are laid out as boxes. 
-This is defined as the CSS box model which means that every element is wrapped in a rectangular box and every box is described by its content and the optional surrounding margin, border and padding areas.
-Margins are used to specify the invisible spacing between boxes, whereas the border is meant as a visible containment around the content of a box and the padding describes the invisible spacing between the content and the border. 
-A visual representation of these properties can be seen in Figure \ref{fig:BoxModel}.
+All elements in an HTML document are laid out as boxes. The CSS box
+model specifies how every element is wrapped in a rectangular box and
+every box is described by its content and optional surrounding margin,
+border and padding areas. Margins are used to specify invisible
+spacing between boxes, whereas the border is meant as a visible
+containment around the content of a box, and the padding describes the
+invisible spacing between the content and the border. A visual
+representation of these properties can be seen in
+Figure~\ref{fig:BoxModel}.
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 4]{diagrams/box-model.pdf}
+\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
+{diagrams/box-model.pdf}
 \caption[CSS Box Model]{
-  The CSS box model is used to define the properties of boxes which wrap around HTML elements.
-  \imgcredit{Image drawn by the author of this thesis.}
+The CSS box model defines the properties of boxes which wrap around HTML elements.
+\imgcredit{Image drawn by the author of this thesis.}
 }
 \label{fig:BoxModel}
 \end{figure}
 
-In early versions of CSS, before the introduction of the Flexible Box (Flexbox) layout module \parencite{CSSFlexboxFirstDraft}, the box model was the only way to lay out elements. 
-Style sheet authors had to meticulously define margins of elements and their relative (or absolute) positions in the document tree. 
-The responsive capabilities of this kind of layouting are very limited because different configurations for varying screen sizes have to be specified manually using media queries.
-More complex features, like the filling of available space, require manual implementations via scripting.
+In early versions of CSS, before the introduction of the Flexible Box
+(Flexbox) layout module \parencite{CSSFlexboxFirstDraft}, the box
+model was the only way to lay out elements. Style sheet authors had to
+meticulously define margins of elements and their relative (or
+absolute) positions in the document tree. The responsive capabilities
+of this kind of layouting were very limited, because different
+configurations for varying screen sizes had to be specified manually
+using media queries. More complex features, like the filling of
+available space, required manual implementation via scripting.
 
-\subsection{Flexible Box (Flexbox) Layout }
+
+
+
+
+\subsection{CSS Flexbox Layout}
 \label{sec:Flexbox}
 
-Even though the first draft of the Flexbox layout module was already published in 2009 \parencite{CSSFlexboxFirstDraft}, implementations by browser vendors have been a slow and bug ridden process \parencite{CanIUseCSSFlexbox} which held back adoption by users for the first couple of years after its inception. 
-Over the past few years, partly through the deprecation of Internet Explorer \parencite{IEDeprecation}, all major browser implementations of current Flexbox standards \parencite{CSSFlexbox} have reached maturity and, in most cases, fallback styling is not necessary anymore.
+CSS Flexible Box layout (Flexbox) \parencite{CSSFlexbox} is a
+mechanism for one-dimensional layout of elements in either rows or
+columns. This one-dimensionality is what separates it from grid-based
+layout, which is inherently two-dimensional.
+%
+Even though the first draft of the Flexbox layout module was already
+published in 2009 \parencite{CSSFlexboxFirstDraft}, implementations by
+browser vendors have been a slow and bug-ridden process
+\parencite{CanIUseCSSFlexbox}, which held back adoption by users for
+several years after its inception. More recently though, partly
+through the deprecation of Internet Explorer
+\parencite{IEDeprecation}, all major browser implementations of
+current Flexbox standards \parencite{CSSFlexbox} have reached maturity
+and, in most cases, fallback styling is not necessary anymore.
 
-Flexbox is a mechanism for one-dimensionally laying out elements in either rows or columns. 
-This one-dimensionality is what separates it from grid-based layouting, which is inherently two-dimensional. 
-Flexbox layouting can be enabled for child elements via setting the \cssname{display:flex} property on a container element. 
-The direction of the layout can then be specified using the \cssname{flex-direction} property which can be set to either \cssname{row} or \cssname{column}.
+Flexbox layouting is enabled for child elements by setting the
+\cssname{display:flex} property on a container element. The direction
+of the layout can then be specified using the \cssname{flex-direction}
+property which can be set to either \cssname{row} or \cssname{column}.
 
-The items inside a Flexbox container can have either a fixed or a relative size. 
-When items should be sized relative to the size of their containers, the proportions of how the available space should be divided can be controlled using ratios. 
-These ratios can be set on item elements via the \cssname{flex} property.
+The items inside a Flexbox container can have either a fixed or a
+relative size. When items should be sized relative to the size of
+their containers, the proportions of how the available space should be
+divided can be controlled using ratios. These ratios can be set on
+item elements via the \cssname{flex} property.
 
-Another important feature of Flexbox layouting is the controllable spacing of items which can be specified separately for both the main and the cross axis of the layout. 
-Spacing along the main axis can be configured with the \cssname{justify-content} property which can take a number of different values which are demonstrated in Figure \ref{fig:FlexboxJustifyContent}. 
-The property which controls alignment of items on the cross axis is either the \cssname{align-items} property on container elements or the \cssname{align-self} property on the items themselves.
+Another important feature of Flexbox layout is the controllable
+spacing of items, which can be specified separately for both the main
+and the cross axis of the layout. Spacing along the main axis can be
+configured with the \cssname{justify-content} property, which can take
+a number of different values and is illustrated in
+Figure~\ref{fig:FlexboxJustifyContent}. Alignment of items on the
+cross axis is achieved either by the \cssname{align-items} property on
+the container element or the \cssname{align-self} property on the
+items themselves.
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/flexbox-justify-content.png}
-\caption[Flexbox Justify Content Property]{
-  The \cssname{justify-content} property is used to distribute items along the main axis of a Flexbox container. 
-  \imgcredit{Image created by the author of this thesis.}
+\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
+{images/flexbox-justify-content.png}
+\caption[Flexbox \cssname{justify-content} Property]{
+The \cssname{justify-content} property is used to distribute
+items along the main axis of a Flexbox container. 
+\imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:FlexboxJustifyContent}
 \end{figure}
 
-This section only graced the surface of what is possible with the Flexbox layout module. 
-Those properties which were discussed, were only discussed in a very broad sense and there are many useful properties like \cssname{flex-grow}, \cssname{flex-shrink} or \cssname{flex-wrap} which were not included in this overview. 
-For a more detailed look at this topic it is recommended to review \cite{CSSFlexbox}.
 
-\subsection{Grid Layout}
+This section only grazed the surface of what is possible with the
+Flexbox layout module. There are many more useful properties like
+\cssname{flex-grow}, \cssname{flex-shrink}, and \cssname{flex-wrap}.
+For a more detailed look at this topic it is recommended to review the
+specification \parencite{CSSFlexbox} and read the excellent tutorial
+by Chris Coyier \parencite{Coyier-FlexboxGuide}.
+
+
+
+
+
+\subsection{CSS Grid Layout}
 \label{sec:Grid}
 
-Similar to the previous section about Flexbox layout, the goal of this section is not to be a comprehensive guide on the CSS Grid layout module but to provide a rough overview over its general characteristics. 
-For more detailed information, other sources like \cite{GridLayoutInCSS} and \cite{CSSGrid} are recommended.
+The CSS Grid Layout Module \parencite{CSSGrid} defines the layout of
+elements in a two-dimensional grid. The initial proposal of the CSS
+Grid layout module was published in 2011 \parencite{CSSGridFirstDraft}
+and has been further refined over the years. At the time of writing,
+even though it still exists as merely a candidate recommendation for
+standardization \parencite{CSSGrid}, many browsers have already
+adopted it. Similar to the adoption of Flexbox, the history of browser
+adoption of CSS Grid was initially strewn with inconsistencies and
+bugs. However, in 2017 the major browsers Chrome, Firefox, Safari and
+Edge removed the need for vendor prefixes and implementations are now
+considered stable \parencite{CanIUseCSSGrid}.
 
-The initial proposal of the CSS Grid layout module has already been published in 2011 \parencite{CSSGridFirstDraft} and it has been further refined over the years. 
-At the time of writing, even though it still exists as merely a candidate recommendation for standardization \parencite{CSSGrid}, many browsers have already adopted it. 
-The history of browser adoption has been, similar o the one of Flexbox layout, filled with inconsistencies and bugs. 
-However, browser support has been considered stable and safe to use since 2017 when Chrome, Firefox, Safari and Edge removed the need for vendor prefixes and the deprecation of IE was announced \parencite{CanIUseCSSGrid}.
+Grid layout of elements is enabled by setting the
+\cssname{display:grid} property on their container. The grid in which
+items shall be laid out is then defined using the
+\cssname{grid-template-rows} and \cssname{grid-template-columns}
+properties. In addition, the \cssname{grid-template} property can be
+used as a shorthand to simultaneously specify both the rows and
+columns of a grid.
 
-The Grid layout module defines laying out elements in a two-dimensional grid, which differences it from the one-dimensional layouting which can be achieved with a Flexbox layout. 
-Grid layouting of elements can be enabled by setting the \cssname{display:grid} property on their container. 
-The grid in which items shall be laid out is then defined using the \cssname{grid-template-rows} and \cssname{grid-template-columns} properties. 
-There also exists the \cssname{grid-template} property, which can be used as a shorthand to simultaneously specify both rows and columns of a grid.
+Item elements need to specify the cell of the grid into which they
+shall be positioned. This is done with the \cssname{grid-row} and
+\cssname{grid-column} properties, which take the corresponding row and
+column indices as values. Items can also be configured to span
+multiple cells by specifying index ranges as the values of those
+properties.
 
-Item elements need to specify the cell of the grid into which they shall be positioned. 
-This is done with the \cssname{grid-row} and \cssname{grid-column} properties, which take the corresponding row and column indices as values. 
-Items can also be configured to span multiple cells by not only specifying single indices but whole index ranges as the values of those properties.
+Every cell in a grid can also be assigned a specific name via the
+\cssname{grid-template-areas} property on the grid container element.
+The items within the grid can then position themselves in specifically
+named grid cells using the \cssname{grid-area} property instead of
+directly setting the row and column indices. The benefit of
+positioning items this way is that the structure of the grid can
+be freely changed without having to respecify the cells in which items
+belong. As long as the new layout still specifies the same names of
+cells somewhere in the grid, the items will be automatically placed at
+their new positions.
 
-Every cell in a grid can also be assigned a specific name via the \cssname{grid-template-areas} property on the grid container element. 
-The items within the grid can then position themselves in specifically named grid cells using the \cssname{grid-area} property instead of directly setting the row and column indices. 
-The benefit of positioning items this way is that the structure of the grid can freely be changed without having to respecify the cells in which items belong. 
-As long as the new layout still specifies the same names of cells somewhere in the grid, the items will be automatically placed at their new positions.
+There are also properties which control the layout of items within
+grid cells and the layout of grid cells themselves. Similar to
+Flexbox, this can be configured with the \cssname{align-items} and
+\cssname{justify-items} properties for laying out within grid cells,
+and the \cssname{align-content} and \cssname{justify-content}
+properties for laying out the grid cells themselves. The latter
+\cssname{*-content} properties only make sense when the cells do not
+cover the full area of the grid. For a visual comparison between the
+\cssname{*-items} and \cssname{*-content} properties, see
+Figure~\ref{fig:GridLayoutProperties}.
 
-There are also properties which allow to control the layout of items within grid cells and the layout of grid cells themselves. 
-Similar to how it is described in Section \ref{sec:Flexbox}, this can be configured with the \cssname{align-items} and \cssname{justify-items} properties for laying out within grid cells, and the \cssname{align-content} and \cssname{justify-content} properties for laying out the grid cells themselves. 
-The latter \cssname{*-content} properties only make sense when the cells do not cover the full area of the grid. 
-For a visual comparison between the \cssname{*-items} and \cssname{*-content} properties, see Figure \ref{fig:GridLayoutProperties}.
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 2]{images/grid-layout-properties.png}
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+{images/grid-layout-properties.png}
 \caption[Grid Layout Property Comparision]{
-  The \cssname{*-items} properties are used to lay out items within their grid cells, whereas the \cssname{*-content} properties are used to lay out the grid cells themselves. 
-  \imgcredit{Image created by the author of this thesis.}
+The \cssname{*-items} properties are used to lay out items within
+their grid cells, whereas the \cssname{*-content} properties are
+used to lay out the grid cells themselves. 
+\imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:GridLayoutProperties}
 \end{figure}
 
-There is a large overlap between the CSS Grid and Flexbox layout modules and, at first sight, it seems like Grid layout supersedes Flexbox layout because everything which can be done using Flexbox layout can also be done with Grid layout. 
-While that is true, the inherent difference in dimensionality and the resulting syntactical characteristics lead to better suitability of one technology over the other, depending on the situational requirements. 
-As a general rule \parencite{CSSGridVsFlexbox}, top-level layouts which require two-dimensional positioning of elements are usually implemented using a Grid layout, whereas low-level layouts which merely need laying out on a one-dimensional axis are more expressively described using a Flexbox layout.
+
+There is some apparent overlap between the CSS Grid and Flexbox layout
+modules. At first sight, it seems like Grid layout supersedes Flexbox
+layout, because everything which can be done using Flexbox layout can
+also be done with Grid layout. While that is true, the inherent
+difference in dimensionality and the resulting syntactic
+characteristics lead to better suitability of one technology over the
+other, depending on the context of use. As a general rule
+\parencite{CSSGridVsFlexbox}, top-level layouts which require
+two-dimensional positioning of elements are usually best implemented
+using a Grid layout, whereas low-level layouts which merely need
+laying out on a one-dimensional axis are better implemented using a
+Flexbox layout.
+
+For more details, the CSS Grid specification \parencite{CSSGrid} and
+other sources like \textcite{GridLayoutInCSS} and
+\textcite{House-GridGuide} are recommended.
+
+
+
 
 \section{JavaScript (JS)}
 \label{sec:JS}
 
-JavaScript (JS) is one of the three core technologies of the web: HTML for content, CSS for presentation and JS for behavior. 
-the goal of this section is to briefly summarize JS, its history and the specific Web APIs which are relevant for this work.
+JavaScript (JS) is one of the three core technologies of the web: HTML
+for content, CSS for presentation, and JS for behavior. JavaScript is
+a client-side scripting language which requires an engine which
+interprets it. These engines are usually provided by browsers, but
+there are also standalone engines, like NodeJS \parencite{NodeJS},
+available.  JavaScript is a multi-paradigm language which supports
+event-driven, as well as functional and imperative programming.
+Undoubtedly influenced by the popularity of the web, JavaScript is
+currently the most used programming language worldwide
+\parencite{StatisticProgrammingLanguageUsage}.
 
-JavaScript is a client-side scripting language which requires an engine which interprets it. 
-These engines are usually provided by browsers, but there are also standalone engines, like NodeJS \parencite{NodeJS}, available. 
-JavaScript is a multi-paradigm language which supports event-driven, as well as functional and imperative programming.
-Undoubtedly influenced by the popularity of the web, JavaScript is currently the most used programming language worldwide \parencite{StatisticProgrammingLanguageUsage}.
-
-It has initially been created by Netscape in 1995 \parencite{JSFirstRelease}.
-Before that, websites were only able to display static content, which drastically limited the usefulness of the web. 
-Seemingly, Microsoft saw JavaScript as a potentially revolutionary development because they reverse-engineered the implementation of Netscape and published their own version of the language for Internet Explorer in 1996 \parencite{JSIERelease}. 
-Both implementations were noticeably different from one another and the uncontested monopoly of the Internet Explorer \parencite{BrowserMarketShareEarly} held back standardization efforts undertaken by Netscape \parencite{ECMAScript1}. 
-When Firefox was released in 2004 \parencite{FirefoxFirstRelease} and Chrome in 2008 \parencite{ChromeFirstRelease}, they quickly gained a considerable share of the market \parencite{BrowserMarketShare} (see Figure \ref{fig:BrowserMarketShare}).
-Driven by this new market segmentation, all major browser vendors collaborated on the standardization of JavaScript as ECMAScript 5 in 2009 \parencite{ECMAScript5}. 
-Since then, JavaScript has been continuously developed and its latest, widely support version, ECMAScript 6, has been released in 2015 \parencite{ECMAScript6}.
+It has initially been created by Netscape in 1995
+\parencite{JSFirstRelease}.  Before that, websites were only able to
+display static content, which drastically limited the usefulness of
+the web.  Seemingly, Microsoft saw JavaScript as a potentially
+revolutionary development because they reverse-engineered the
+implementation of Netscape and published their own version of the
+language for Internet Explorer in 1996 \parencite{JSIERelease}.  Both
+implementations were noticeably different from one another and the
+uncontested monopoly of the Internet Explorer
+\parencite{BrowserMarketShareEarly} held back standardization efforts
+undertaken by Netscape \parencite{ECMAScript1}.  When Firefox was
+released in 2004 \parencite{FirefoxFirstRelease} and Chrome in 2008
+\parencite{ChromeFirstRelease}, they quickly gained a considerable
+share of the market \parencite{BrowserMarketShare} (see Figure
+\ref{fig:BrowserMarketShare}).  Driven by this new market
+segmentation, all major browser vendors collaborated on the
+standardization of JavaScript as ECMAScript 5 in 2009
+\parencite{ECMAScript5}.  Since then, JavaScript has been continuously
+developed and its latest, widely support version, ECMAScript 6, has
+been released in 2015 \parencite{ECMAScript6}.
 
 \begin{figure}[tp]
 \centering
@@ -220,34 +374,67 @@ Since then, JavaScript has been continuously developed and its latest, widely su
 \label{fig:BrowserMarketShare}
 \end{figure}
 
-RespVis is a browser-based library which is designed to run within the JavaScript engine of a browser. 
-Therefore, it builds heavily on widely supported Web APIs which are JavaScript modules which are specifically meant for the development of web pages. 
-These Web APIs are standardized by the W3C and each browser has to individually implement them in their JavaScript engine.
 
-The most popular Web API which every web developer is familiar with is the Document Object Model (DOM).
-The DOM is the programming interface and data representation of a document. 
-Internally, a document is modeled as a tree of objects, where each object corresponds to a specific element in the document hierarchy and its associated data and functions. 
-In addition to the querying of elements, the DOM also defines the functionality to mutate them and their attributes, as well as the functionality for handling and dispatching of events. 
-It also exposes the mechanism of \modname{MutationObservers}, which are used to observe changes of attribute and children in the document tree. 
-The initial publication of the DOM dates back to 1998 \parencite{DOM1} and currently it is maintained as a living standard by the WHATWG \parencite{DOM}.
+RespVis is a browser-based library which is designed to run within the
+JavaScript engine of a browser.  Therefore, it builds heavily on
+widely supported Web APIs which are JavaScript modules which are
+specifically meant for the development of web pages.  These Web APIs
+are standardized by the W3C and each browser has to individually
+implement them in their JavaScript engine.
 
-Another important Web API in the context of this work is the \modname{ResizeObserver} API. 
-Its purpose is the ability to observe an element's size and respond to changes, which increases the responsive capabilities of websites. 
-Previously, scripts could only respond to changes in the overall viewport size via the \lstinline{resize} event on the \lstinline{window} object, but this meant that changes of an individual element's size through attribute changes could not be detected. 
-This limitation is fixed by the \modname{ResizeObserver} API, which is already fully supported by all modern browsers, even though it has so far only been published as an editor's draft \parencite{ResizeObserver}.
+The most popular Web API which every web developer is familiar with is
+the Document Object Model (DOM).  The DOM is the programming interface
+and data representation of a document.  Internally, a document is
+modeled as a tree of objects, where each object corresponds to a
+specific element in the document hierarchy and its associated data and
+functions.  In addition to the querying of elements, the DOM also
+defines the functionality to mutate them and their attributes, as well
+as the functionality for handling and dispatching of events.  It also
+exposes the mechanism of \modname{MutationObservers}, which are used
+to observe changes of attribute and children in the document tree.
+The initial publication of the DOM dates back to 1998 \parencite{DOM1}
+and currently it is maintained as a living standard by the WHATWG
+\parencite{DOM}.
+
+Another important Web API in the context of this work is the
+\modname{ResizeObserver} API.  Its purpose is the ability to observe
+an element's size and respond to changes, which increases the
+responsive capabilities of websites.  Previously, scripts could only
+respond to changes in the overall viewport size via the
+\lstinline{resize} event on the \lstinline{window} object, but this
+meant that changes of an individual element's size through attribute
+changes could not be detected.  This limitation is fixed by the
+\modname{ResizeObserver} API, which is already fully supported by all
+modern browsers, even though it has so far only been published as an
+editor's draft \parencite{ResizeObserver}.
+
+
+
 
 \section{TypeScript (TS)}
 \label{sec:TS}
 
-TypeScript (TS) is a strongly-typed programming language which is designed as an extension of JavaScript. 
-Syntactically, it is a superset of JavaScript which enables the annotation of properties, variables, parameters and return values with types. 
-It requires a compiler which transpiles TypeScript code into valid JavaScript code based on specific ECMAScript versions.
+TypeScript (TS) is a strongly-typed programming language which is
+designed as an extension of JavaScript.  Syntactically, it is a
+superset of JavaScript which enables the annotation of properties,
+variables, parameters and return values with types.  It requires a
+compiler which transpiles TypeScript code into valid JavaScript code
+based on specific ECMAScript versions.
 
-Initially, TypeScript has been released by Microsoft in 2012 \parencite{TSFirstRelease} to extend JavaScript with features which were already present in more mature languages, and whose absence in JavaScript caused difficulties when working on larger codebases. 
-At the time of TypeScript's initial development, it was used to already be able to use features which would later be offered by ECMAScript 6.
-These features included a module system to be able to split source code into reusable chunks and a class system to aid object-oriented development. 
-The TypeScript code using these features could then be translated via a compiler into standard-conform JavaScript code, which could be interpreted by JavaScript engines at the time. 
-At the time of writing, ECMAScript 6 is already widely supported by all modern browsers and therefore the main benefit of TypeScript over JavaScript resides primarily in the addition of a static type system.
+Initially, TypeScript has been released by Microsoft in 2012
+\parencite{TSFirstRelease} to extend JavaScript with features which
+were already present in more mature languages, and whose absence in
+JavaScript caused difficulties when working on larger codebases.  At
+the time of TypeScript's initial development, it was used to already
+be able to use features which would later be offered by ECMAScript 6.
+These features included a module system to be able to split source
+code into reusable chunks and a class system to aid object-oriented
+development.  The TypeScript code using these features could then be
+translated via a compiler into standard-conform JavaScript code, which
+could be interpreted by JavaScript engines at the time.  At the time
+of writing, ECMAScript 6 is already widely supported by all modern
+browsers and therefore the main benefit of TypeScript over JavaScript
+resides primarily in the addition of a static type system.
 
 The extension of JavaScript with a type system brings many benefits. 
 One such a benefit is the improved tooling which comes with type annotated code. 
@@ -440,8 +627,12 @@ The terminology of browser engines is very vague with them sometimes also being 
 Theoretically, the layout and render processes could be separated into different components, but in practice they are tightly-coupled into a combined component, which will be referred to as a browser engine in this work. 
 Some notable browser engines are WebKit \parencite{WebKit}, Blink \parencite{Blink} and Gecko \parencite{Gecko}.
 
-In a browser engine the layout of elements is constrained with CSS, which gives website authors a lot of flexibility as already described in Section \ref{sec:CSS}. 
-They are offered a range of mechanisms to precisely control the layout of elements, like the flexible box and grid layout modules, which do not have to be applied exclusively but can also be used in combination. 
+In a browser engine the layout of elements is constrained with CSS,
+which gives website authors a lot of flexibility as already described
+in Section \ref{sec:CSS}.  They are offered a range of mechanisms to
+precisely control the layout of elements, like the flexible box and
+grid layout modules, which do not have to be applied exclusively but
+can also be used in combination.
 
 The layout module of a browser engine can only be invoked directly by browsers to position HTML elements in actively rendered documents. 
 To use it for calculating layouts of non-HTML constructs, they must be replicated in active documents, so they can be parsed, laid out and rendered by the browser engine. 
