@@ -1,6 +1,29 @@
 \chapter{RespVis}
 \label{chap:RespVis}
 
+RespVis is a D3 library for creating responsive SVG charts.
+It enables the use of CSS, which is a core pillar of designing responsive HTML documents, for the design of visualizations.
+CSS already has the capability to modify the visual appearance of elements and to lay them out.
+Unfortunately, CSS-based layouting does not affect SVG elements, which seriously limits responsive possibilities of styling SVG charts with CSS.
+Without powerful CSS layout technologies like Flexbox or Grid, all the individual components of a SVG chart would have to be positioned manually via JavaScript.
+To enable laying out of SVG elements with CSS, a special Layouter component has been developed which calculates positions of SVG elements via their CSS configuration and applies them.
+This offers visualization authors comparable configurability to what they are used to when styling HTML documents when styling SVG charts without them having to understand library specific APIs.
+
+Since CSS can only be applied to documents, RespVis does not support rendering to HTML canvas elements because graphics rendered there are not exposed to the document and therefore can not be affected by CSS.
+
+In contrast to many other visualization libraries that are built on top of D3, RespVis is designed as an extension of it.
+This means that instead of wrapping around D3 and providing an entirely new interface to library consumers, the core interface that users interact with are D3 Selections.
+RespVis has a strong focus on SVG-based rendering and aims to style rendered SVGs as much as possible via CSS.
+It does not support rendering to HTML canvas elements because those require that every aspect of the rendering is performed via JavaScript.
+
+One of the design goals of the library is that everything that can be done in CSS should be done in CSS.
+
+
+
+% Components in RespVis are formed by data objects and render functions.
+% It is designed to be very low-level and is built from components.
+
+
 \section{Design}
 
 \section{Project Setup}
@@ -111,8 +134,6 @@ Currently, this file is written manually as a whole in the \code{src/} directory
 In the future, this process should be improved by employing a CSS preprocessing tool such as SASS \parencite{SASS} so that the CSS can be split into multiple files during development.
 Beside the bundled library source code and stylesheets, the \code{dist/} directory also contains usage examples of the library within the \code{dist/examples/} directory.
 This directory is identical to the one under \code{src/examples/} because it is merely being copied to the \code{dist/} folder during the build process.
-
-
 
 % @misc{GZIP,
 %   title={RFC1952: GZIP File Format Specification Version 4.3},
