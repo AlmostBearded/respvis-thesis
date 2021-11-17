@@ -1,30 +1,77 @@
-\chapter{RespVis}
+\chapter{The RespVis Library}
 \label{chap:RespVis}
 
-RespVis is a D3 library for creating responsive SVG charts.
+RespVis is an open-source D3 library for creating responsive SVG charts.
 It enables the use of CSS, which is a core pillar of designing responsive HTML documents, for the design of visualizations.
-CSS already has the capability to modify the visual appearance of elements and to lay them out.
-Unfortunately, CSS-based layouting does not affect SVG elements, which seriously limits responsive possibilities of styling SVG charts with CSS.
-Without powerful CSS layout technologies like Flexbox or Grid, all the individual components of a SVG chart would have to be positioned manually via JavaScript.
-To enable laying out of SVG elements with CSS, a special Layouter component has been developed which calculates positions of SVG elements via their CSS configuration and applies them.
-This offers visualization authors comparable configurability to what they are used to when styling HTML documents when styling SVG charts without them having to understand library specific APIs.
-
-Since CSS can only be applied to documents, RespVis does not support rendering to HTML canvas elements because graphics rendered there are not exposed to the document and therefore can not be affected by CSS.
-
-In contrast to many other visualization libraries that are built on top of D3, RespVis is designed as an extension of it.
-This means that instead of wrapping around D3 and providing an entirely new interface to library consumers, the core interface that users interact with are D3 Selections.
-RespVis has a strong focus on SVG-based rendering and aims to style rendered SVGs as much as possible via CSS.
-It does not support rendering to HTML canvas elements because those require that every aspect of the rendering is performed via JavaScript.
-
-One of the design goals of the library is that everything that can be done in CSS should be done in CSS.
-
-
-
-% Components in RespVis are formed by data objects and render functions.
-% It is designed to be very low-level and is built from components.
-
+Since CSS can only be applied to documents, RespVis focuses on rendering visualizations as pure and complete SVG documents, meaning that the whole visualization is contained in one SVG document that includes no elements of other XML namespaces.
+RespVis is designed as an extension library of D3. 
+Unlike most other visualization libraries that are built on top of D3, RespVis does not hide it behind a custom API.
+Rather than that, users invoke RespVis functionalities by working directly with D3 Selections. 
+Using D3 Selections, specially structured data is set, and visual components are rendered on elements with render functions that transform the set data into some form of visual representation.
+This separation between data and code and the application of strongly-typed TypeScript are the main principles guiding the software design of RespVis.
 
 \section{Design}
+
+The design of the RespVis library is guided by five main concepts, which are further discussed in the later paragraphs of this section:
+
+\begin{enumerate}
+\item CSS should be used as much as possible for describing the style and layout of visualizations.
+\item Visualizations should be rendered as pure and complete SVG documents.
+\item RespVis is an extension of D3 rather than a wrapper around it.
+\item Data and code are treated as separate entities.
+\item Every aspect of the library should be as strongly-typed as possible.
+\end{enumerate}
+
+Firstly, everything that can be configured using CSS should be done so.
+CSS already has the capability to modify the visual appearance of elements and to lay them out.
+Unfortunately, CSS-based layouting does not affect SVG elements.
+This seriously limits responsive possibilities of styling SVG charts with CSS.
+Without powerful CSS layout technologies like Flexbox or Grid, all the individual components of an SVG chart would have to be positioned manually via JavaScript.
+To enable laying out of SVG elements with CSS, a special Layouter component has been developed which calculates positions of SVG elements via their CSS configuration and applies them.
+This offers visualization authors comparable configurability to what they are used to when styling HTML documents for when they are styling SVG charts.
+With this approach, visualization authors are not required to understand any library specific APIs and can simply apply the knowledge of CSS-based styling they most likely already possess.
+Since CSS can only be applied to documents, RespVis does not support rendering to HTML canvas elements because graphics rendered there are not exposed to the document and therefore can not be affected by CSS.
+
+Secondly, every visualization should be rendered as a pure and complete SVG document.
+An SVG document is considered pure if it contains only elements defined in the SVG namespace.
+This means that it must not contain any \code{<foreignObject>} elements that nest elements of an XML namespace other than SVG.
+When an SVG document represents a visualization, it is considered to be complete if it contains all the components of the visualization within it.
+Different components must not be split into multiple SVG documents because they conceptually belong together and should be represented as a whole.
+This allows complete visualizations to be exported and stored as standard-compliant SVG files that can be further processed using the wide range of tools supporting them.
+
+Thirdly, RespVis has been designed as a library that extends D3.
+Compared to other visualization libraries that are built on top of D3, RespVis does not represent a wrapping layer around it. 
+Instead of providing an entirely new interface to consumers of the library, the core interface they interact with are D3 Selections.
+The typical workflow of invoking RespVis functionality is to bind data objects of a specific structure onto the elements of a Selection, and visualize this data by calling a render function that transforms it into visual marks.
+This design decision has been made because D3 offers powerful capabilities for the rendering of documents that would be lost when hiding it behind a custom API.
+By designing RespVis as an extension of D3, users can continue to leverage its expressive and concise API and design their documents using data joins and the general update pattern.
+
+Fourthly, data and code are separated from each other.
+Everything in RespVis is built from basic functions and objects, without using any classes at all. 
+Classes have been avoided because they are not common when working with D3, and also because they lead to a tight coupling between data and functionality, which has been deemed undesirable.
+When data and code are treated as separate entities, it results in various benefits compared to the prevalent object-oriented way of building software.
+Among these benefits are easier reuse and testing of functions, and less complexity in terms of effort to understand a system. 
+Functions are easier to reuse because they only require input data of a certain shape to perform their task, and no mechanisms like inheritance or composition, which tend to dramatically increase the complexity of a system, are required.
+Compared to class-based code, where an object needs to be instantiated before being able to test its methods, it is easier to test functions in isolation when they are not coupled to their data. 
+The reason for this is that the instantiation of an object might be a complex operation that depends on other methods and could affect the results of a test case. 
+Possibly the greatest benefit of such a separation lies in the reduced complexity of the resulting system.
+A system that treats data and code as different entities might be composed of more entities than a system that does not, but individual entities have fewer dependencies between one another.
+This is because, on the highest level, entities of such a system are separated into at least two groups with no relationships between them.
+The research related to software complexity is difficult to convey in simple terms.
+However, one rule that is related to this concept of data and code separation is well summarized by \textquote{DataCodeSeparation} as: "A system made of disjoint simple parts is less complex than a system made of a single complex part."
+Of course, there are also various drawbacks when designing a system adhering to this concept, but they are not too severe and are therefore not listed here.
+For further research on this topic, readers are advised to review \textquote{DataCodeSeparation} and \textquote{OutOfTarPit}, which have acted as references for this paragraph.
+
+Fifthly, the library is written in TypeScript and everything is as strongly-typed as possible.
+For the most part, interfaces are used to describe the structure of data objects and function parameters are annotated with types.
+Whenever working with D3 Selections, all required type contracts of a Selection are specified using the generic type variables available on them.
+Most of the time, it is sufficient to only specify the type of elements contained in a Selection and the structure of the data bound on them.
+Using these annotations, the various functions can assume that parameters passed to them are of specific types, and they do not have to worry about dynamic type checking.
+The application of a strongly-typed type system has many advantages like better development tooling and the compile-time identification of type-related bugs.
+These advantages have already been described in Section \ref{sec:TS}.
+
+% https://github.com/papers-we-love/papers-we-love/blob/master/design/out-of-the-tar-pit.pdf
+% https://blog.klipse.tech/databook/2020/10/02/separate-code-data.html
 
 \section{Project Setup}
 \label{sec:ProjectSetup}
@@ -35,7 +82,7 @@ These TypeScript source files must be compiled to JavaScript and bundled into on
 To perform this compilation and bundling, the Rollup module bundler \parencite{Rollup} is used.
 In addition to the bundled JavaScript library, users are required to import an accompanying CSS file containing default styling for the generated visualizations.
 The project also contains examples to demonstrate usage of the library by creating various charts.
-These examples are HTML files which import the required files and contain JavaScript that invokes RespVis functionality to create and update visualizations.
+These examples are HTML files that import required files and contain JavaScript that invokes RespVis functionality to create and update visualizations.
 The build process of the library contains multiple steps involving output directory preparation, bundling of library code and copying of various files to the correct locations in the output directory.
 It would be tedious to manually perform all these steps every time the library needs to be rebuilt, and therefore this process is automated using Gulp \parencite{Gulp}, a task-based workflow automation tool.
 The following sections will briefly introduce the setup of RespVis and the tools used in the development process.  
@@ -106,26 +153,28 @@ The \code{src/lib/} directory contains all TypeScript source files of the librar
 They have been partitioned into modules formed around thematic affinity of the various components.
 The \code{core} module contains the core functionality of the library and is a prerequisite for all the other modules.
 It includes the layouter implementation, D3 selection extensions, chart base components, and assorted utility functions that simplify diverse tasks when creating visualizations.
-The \code{legend} module contains a basic legend component which renders a color legend consisting of a title, colored rectangles and corresponding labels.
+The \code{legend} module contains a basic legend component, which renders a color legend consisting of a title, colored rectangles and corresponding labels.
 The \code{tooltip} module contains functions to show and hide tooltips, modify tooltip contents, and position tooltips.
-It also contains helper functions for series components which render tooltips, to simplify data creation and rendering of those series, so that tooltip-related code does not have to be repeated in various places.
+It also contains helper functions for series components that render tooltips, to simplify data creation and rendering of those series, so that tooltip-related code does not have to be repeated in various places.
 The \code{bars} and \code{points} modules contain the necessary series, chart and chart window components to render bar, grouped bar, stacked bar and point visualizations. 
 At the moment, all these modules are being built into a combined package, but there are plans to distribute them separately to allow users of the library to only import those packages they need to not unnecessarily increase their own bundle sizes with code they do not require.
+
 Beside the \code{src/lib/} directory, the \code{src/} directory also contains the \code{src/examples/} directory, which holds the source files of the developed examples.
 These examples are distributed alongside the library files, so they are copied to the \code{dist/examples/} directory upon building the project.
-Every example consists of an HTML file, which imports all the requirements such as \code{respvis.js} and \code{respvis.css} as well as external dependencies such as D3.
+Every example consists of an HTML file that imports all the requirements such as \code{respvis.js} and \code{respvis.css} as well as external dependencies such as D3.
 It then invokes the necessary RespVis functionality within a \code{<script>} tag, which is embedded in the body of the document.
 In addition to the individual example files, the \code{examples} directory also contains a \code{vendor} directory, which contains third-party dependencies, and a \code{data} directory containing data, which is imported by individual examples to make it reusable.
 
 In addition to configuration files and the \code{src/} directory, the root directory also contains two directories that are automatically generated during the build process.
 These are the \code{node_modules/} and \code{dist/} directories.
-The \code{node_modules/} directory is a directory which exists in every NodeJS project.
+The \code{node_modules/} directory is a directory that exists in every NodeJS project.
 It is created when installing the dependencies of a NodeJS project and contains a cached copy of every direct and indirect dependency.
 The \code{dist/} directory is generated by the Gulp build tasks and contains all the files necessary to distribute a built version of the library.
-The code of RespVis is distributed as JavaScript bundles of different formats which can be used depending on the situation.
+
+The code of RespVis is distributed as JavaScript bundles of different formats that can be used depending on the situation.
 Currently, all these bundles are based on Immediately Invoked Function Expressions (IIFE), which are explained in more detail in Section \ref{sec:Rollup}.
 These bundles are also distributed in gradually more minimized versions.
-The \code{dist/respvis.js} file contains the unmodified JavaScript bundle which can be used by library consumers who require readable code, \code{dist/respvis.min.js} contains the minified JavaScript bundle, and \code{dist/respvis.min.js.gz} contains the minified JavaScript bundle that has additionally been compressed in the GZIP format \parencite{GZIP}.
+The \code{dist/respvis.js} file contains the unmodified JavaScript bundle that can be used by library consumers who require readable code, \code{dist/respvis.min.js} contains the minified JavaScript bundle, and \code{dist/respvis.min.js.gz} contains the minified JavaScript bundle that has additionally been compressed in the GZIP format \parencite{GZIP}.
 Beside these code bundles, the Rollup module bundler has been configured to create source maps for the \code{dist/respvis.js} and \code{dist/respvis.min.js} bundles: \code{dist/respvis.js.map} and \code{dist/respvis.min.js.map}.
 These source maps can be interpreted by developer tools in browsers to map from certain instructions in the bundled JavaScript code to the exact instruction in the original TypeScript code.
 They are an immense help when developing the library because, without them, debugging in browsers would be virtually impossible.
