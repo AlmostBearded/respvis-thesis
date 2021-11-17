@@ -9,7 +9,7 @@ One of these features is preattentive processing, which means that certain visua
 In addition to visuals being easier to assimilate by humans, a purely textual and statistical view on data can also lead to erroneous assumptions as demonstrated by \cite{AnscombesQuartet} in the infamous visualization of four completely different datasets which have identical summary statistics, called Anscombe's Quartet.
 An observer trying to understand these sets of data purely from their statistics would mistakenly deem them to be identical.
 Their inequality will only become obvious after carefully examining and comparing the individual entries in the datasets themselves.
-This is a tedious and error-prone task when not aided by visual representations like Figure \ref{fig:AnscombesQuartet}.
+This is a tedious and error-prone task when not aided by visual representations like Figure~\ref{fig:AnscombesQuartet}.
 Even though Anscombe's Quartet is very likely the most famous example to demonstrate this characteristic, it is certainly not the only set of datasets which possesses it, as has been shown by \cite{GenDataIdenticalStatisticsDissimilarGraphics}.
 
 \begin{figure}[tp]
@@ -41,7 +41,7 @@ Many taxonomies have been formulated with the goal of defining the design space 
 Some taxonomies have been defined on the concept of low-level interaction techniques \parencite{TheEyesHaveIt,GrammarOfGraphics}, providing a very system-centric view on interaction. 
 Other taxonomies focus on user tasks \parencite{LowLevelComponentsOfAnalyticActivity} which are not necessarily strongly related to interacting with visualizations.
 \cite{RoleOfInteractionInInformationVisualization} aims to provide a view in between the purely system-centric and purely user-centric extremes by defining a taxonomy based on user intent.
-The categories of this taxonomy are listed in Table \ref{tab:UserIntentCategories}
+The categories of this taxonomy are listed in Table~\ref{tab:UserIntentCategories}
 They form a good framework for the discussion of interactivity in the context of information visualization.
 
 \begin{table}[tp]
@@ -73,8 +73,8 @@ Connect & Show related items. & Highlight connected items, highlight item in dif
 \section{History of Information Visualization}
 
 The history of information visualization goes back a long time.
-One of its earliest examples dates back to the 10th century, when an unknown astronomer created the chart about the movement of prominent planets \parencite{CommentariiInSomniumScipionis} shown in Figure \ref{fig:PlanetaryMovements}.
-Other noteworthy early visualizations include the first occurrence of the principle \cite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in the 1626 chart demonstrating sunspot changes seen in Figure \ref{fig:SunspotChanges} by \cite{RosaUrsina}, and the 1644 chart displaying longitudinal distance determinations between Toledo and Rome seen in Figure \ref{fig:RomeToledoLongitude} by Michael Florent van Langren.
+One of its earliest examples dates back to the 10th century, when an unknown astronomer created the chart about the movement of prominent planets \parencite{CommentariiInSomniumScipionis} shown in Figure~\ref{fig:PlanetaryMovements}.
+Other noteworthy early visualizations include the first occurrence of the principle \cite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in the 1626 chart demonstrating sunspot changes seen in Figure~\ref{fig:SunspotChanges} by \cite{RosaUrsina}, and the 1644 chart displaying longitudinal distance determinations between Toledo and Rome seen in Figure~\ref{fig:RomeToledoLongitude} by Michael Florent van Langren.
 
 \begin{figure}[tp]
 \centering
@@ -111,7 +111,7 @@ Other noteworthy early visualizations include the first occurrence of the princi
 
 William Playfair (1759 - 1823) is by many considered to be one of the forefathers of modern visualizations.
 His published works contain the first occurrences of many graphical forms still widely used today.
-In one of his earlier works \parencite{CommercialAndPoliticalAtlas} he introduced the concepts of line (Figure \ref{fig:PlayfairLineChart}), bar (Figure \ref{fig:PlayfairBarChart}) and area charts (Figure \ref{fig:PlayfairAreaChart}) to communicate economic factors of England during the eighteenth century.
+In one of his earlier works \parencite{CommercialAndPoliticalAtlas} he introduced the concepts of line (Figure~\ref{fig:PlayfairLineChart}), bar (Figure~\ref{fig:PlayfairBarChart}) and area charts (Figure~\ref{fig:PlayfairAreaChart}) to communicate economic factors of England during the eighteenth century.
 In a related later work \parencite{StatisticalBreviary} he uses the first ever published pie and circle charts to show and compare the resources of states and kingdoms in Europe.
 The charts he created are very similar to modern ones because they already contain major concepts found in today's visualizations, such as labeled axes, grids, titles and color-based categorization.
 
@@ -148,7 +148,7 @@ The charts he created are very similar to modern ones because they already conta
 \label{fig:PlayfairAreaChart}
 \end{figure}
 
-The dot map created by \cite{ModeOfCommunicationOfCholera} in 1855 to trace cholera outbreaks in London (Figure \ref{fig:CholeraDotMap}) is undoubtedly one of the most famous and influential visualizations in history.
+The dot map created by \cite{ModeOfCommunicationOfCholera} in 1855 to trace cholera outbreaks in London (Figure~\ref{fig:CholeraDotMap}) is undoubtedly one of the most famous and influential visualizations in history.
 Even though it is not directly an information visualization but rather a geographic one, it has been included here because of its historic relevance.
 This iconic dot map was used to identify a cluster of cholera-related deaths near a contaminated water pump on Broad Street, leading to the recognition of cholera as a waterborne disease.
 
@@ -169,7 +169,7 @@ She was a British statistician, social reformer, founder of modern nursing and m
 During her service as a superintendent of nurses in the Crimean War, she realized that a large share of deaths in hospitals resulted from preventable diseases which originated in poor sanitary conditions.
 One of her contributions to the field of information visualization was the creation of a new type of diagram, called a rose or polar-area chart.
 She used these charts to communicate data she collected on the mortality of soldiers during the war and to grab the attention of politicians and the public.
-One of these charts can be seen in Figure \ref{fig:NightingalePolarAreaChart}.
+One of these charts can be seen in Figure~\ref{fig:NightingalePolarAreaChart}.
 
 \begin{figure}[tp]
 \centering
@@ -184,7 +184,7 @@ One of these charts can be seen in Figure \ref{fig:NightingalePolarAreaChart}.
 
 Modern visualizations benefit from the interactive nature of the devices used to consume them.
 They are allowed to be much more complex than static visualizations because various interaction techniques enable users to navigate large amounts of data and make sense of it.
-High-D by the company Macrofocus \parencite{HighD} has been chosen as a representative example of such visual analytics tools, and a screenshot of its interface during the analysis of a sample dataset can be seen in Figure \ref{fig:HighD}.
+High-D by the company Macrofocus \parencite{HighD} has been chosen as a representative example of such visual analytics tools, and a screenshot of its interface during the analysis of a sample dataset can be seen in Figure~\ref{fig:HighD}.
 
 \begin{figure}[tp]
 \centering
@@ -236,7 +236,7 @@ It is implemented in D3 by returning the \lstinline{Selection} on which a modify
 Methods that insert new elements into the DOM, such as \lstinline{Selection.append} and \lstinline{Selection.insert}, return a Selection of the newly added elements to enable the creation of nested structures.
 This method chaining syntax is further aided by the \lstinline{Selection.call} method, which invokes a callback receiving the current Selection as a parameter and returns the original Selection to further chain methods on it after the callback has been executed.
 The \lstinline{Selection.call} method enables the creation of complex method chaining structures and is widely used by developers.
-A simple example of method chaining in D3 and the application of the \lstinline{Selection.call} method can be seen in Listing \ref{list:D3MethodChaining}.
+A simple example of method chaining in D3 and the application of the \lstinline{Selection.call} method can be seen in Listing~\ref{list:D3MethodChaining}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -260,7 +260,7 @@ A simple example of method chaining in D3 and the application of the \lstinline{
 Selections have already been mentioned in the previous paragraphs.
 They are the atomic building blocks of D3 and are used to access almost any functionality.
 Selections are created using the \lstinline{d3.select} or \lstinline{d3.selectAll} methods.
-These methods are built on the DOM Selectors API, namely the \lstinline{querySelector} and \lstinline{querySelectorAll} methods, which allow the selection of elements via CSS selectors (see Section \ref{sec:CSS}).
+These methods are built on the DOM Selectors API, namely the \lstinline{querySelector} and \lstinline{querySelectorAll} methods, which allow the selection of elements via CSS selectors (see Section~\ref{sec:CSS}).
 The \lstinline{d3.select} and \lstinline{d3.selectAll} methods respectively create a Selection containing either a single element matching the provided selector, or multiple elements matching it.
 A Selection acts as a wrapper container around selected elements to perform frequently performed DOM operations on them.
 Among others, the element operations provided by a Selection include the setting and getting of: Attributes using the \lstinline{Selection.attr} method, styles using the \lstinline{Selection.style} method, properties using the \lstinline{Selection.property} method, text or HTML content using the \lstinline{Selection.text} or \lstinline{Selection.html} methods, and event listeners using the \lstinline{Selection.on} method.
@@ -272,7 +272,7 @@ The \lstinline{Selection.datum} method binds a single provided data record to al
 The \lstinline{Selection.data} method performs a join operation between data and elements to ensure that exactly one element per data record exists.
 This data join results in three separate Selections: the enter Selection, containing the elements which were newly created, the update Selection, containing the elements which merely receive new data, and the exit Selection, containing the elements which are being removed.
 Each of these Selections can be individually transformed using the \lstinline{Selection.join} method, which can receive three callbacks each being respectively invoked with the enter, update and exit Selections of the data join.
-This ability of individually controlling updates of entering, updating and exiting elements is being referred to as the general update pattern in D3 and a simple demonstration of how it is used can be seen in Figure \ref{list:D3GeneralUpdatePattern}.
+This ability of individually controlling updates of entering, updating and exiting elements is being referred to as the general update pattern in D3 and a simple demonstration of how it is used can be seen in Figure~\ref{list:D3GeneralUpdatePattern}.
 All the previously mentioned DOM wrapper methods can receive either constant values or dynamic ones, which are defined as functions.
 These functions receive the bound element data, the element's index in the group of nodes represented by the Selection, and the group of nodes themselves as input and calculate a dynamic value based on these parameters, which is then forwarded to the corresponding DOM methods.
 
@@ -333,7 +333,7 @@ At the core of every visualization lies the encoding of data as visual primitive
 Marks use scales to encode data fields as properties of their shapes.
 Based on the general update pattern of the underlying D3 library, the encoding of marks can be separately controlled for newly created (entering) marks, existing and not exiting (updating) marks, and to-be-removed (exiting) marks.
 In addition to these basic visualization components, the Vega grammar contains further capabilities to describe interactions (via signals, triggers and event streams), cartographic projections, sequential or layered views (via mark groups), layouts and color schemes.
-To demonstrate how the various aspects of a Vega specification are defined, an example which represents a static bar chart can be seen in Listing \ref{list:VegaStaticBarChart}.
+To demonstrate how the various aspects of a Vega specification are defined, an example which represents a static bar chart can be seen in Listing~\ref{list:VegaStaticBarChart}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -361,7 +361,7 @@ The grammar to define interactions is based on the syntax of event-driven functi
 In Vega, the primitives to express interactions are called signals.
 Signals can be seen as dynamic variables which change their values based on input events or other signals.
 These signals and the way their values change are declaratively defined, and they can be used as dynamic variables throughout most places in a Vega specification to change various characteristics of a visualization dynamically.
-An example of how the previously demonstrated static bar chart specification can be extended with signals to display a tooltip when hovering over bars can be seen in Listing \ref{list:VegaBarChart}.
+An example of how the previously demonstrated static bar chart specification can be extended with signals to display a tooltip when hovering over bars can be seen in Listing~\ref{list:VegaBarChart}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -376,7 +376,7 @@ An example of how the previously demonstrated static bar chart specification can
   numbers=left,
   label=list:VegaBarChart,
   caption={[Bar Chart with Tooltip in Vega] 
-    The necessary additions to the static bar chart specification in Listing \ref{list:VegaStaticBarChart} to display a tooltip when hovering over bars.
+    The necessary additions to the static bar chart specification in Listing~\ref{list:VegaStaticBarChart} to display a tooltip when hovering over bars.
     It demonstrates the basic functionality of signals in Vega.
     When the mouse hovers over a rect mark, the tooltip signal will receive the value of the rect's bound data record.
     The tooltip signal will be reset to an empty object when the mouse leaves the rect mark.
@@ -397,7 +397,7 @@ During compilation, the compiler automatically derives default configurations fo
 This makes Vega-Lite more convenient to use for quick authoring of visualizations because many details which need to be explicitly stated in a Vega specification can be omitted.
 In those cases where the derived default configurations are not suitable, Vega-Lite also offers the possibility to override them.
 Since Vega-Lite specifications are simply being compiled into Vega ones, it is a sensible choice to use Vega-Lite as a primary tool to describe visualizations, and switch to Vega for more exotic cases which are not easily achievable in Vega-Lite.
-To properly compare the difference between Vega and Vega-Lite specifications, a Vega-Lite version of the Vega bar chart specification seen in Listing \ref{list:VegaStaticBarChart} combined with Listing \ref{list:VegaBarChart} can be seen in Listing \ref{list:VegaLiteBarChart}.
+To properly compare the difference between Vega and Vega-Lite specifications, a Vega-Lite version of the Vega bar chart specification seen in Listing~\ref{list:VegaStaticBarChart} combined with Listing~\ref{list:VegaBarChart} can be seen in Listing~\ref{list:VegaLiteBarChart}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -412,7 +412,7 @@ To properly compare the difference between Vega and Vega-Lite specifications, a 
   numbers=left,
   label=list:VegaLiteBarChart,
   caption={[Bar Chart with Tooltip in Vega-Lite] 
-    This is a Vega-Lite specification of the Vega bar chart specification seen in Listing \ref{list:VegaStaticBarChart} combined with Listing \ref{list:VegaBarChart}.
+    This is a Vega-Lite specification of the Vega bar chart specification seen in Listing~\ref{list:VegaStaticBarChart} combined with Listing~\ref{list:VegaBarChart}.
   },
 ]{listings/vega-lite-bar-chart.json}
 \end{samepage}
@@ -451,7 +451,7 @@ In many cases it makes sense to provide additional imperative APIs for users whi
 All evaluated libraries, except D3FC, expose declarative interfaces in the form of nested configuration objects which are used to specify the characteristics of individual visualizations.
 Apart from Chartist, all those libraries feature generic high-level creation functions. 
 These functions create charts from declarative configuration objects, which allow the specification of different forms of visualization for different data dimensions.
-This type of interface is demonstrated by the Highcharts code seen in Listing \ref{list:Highcharts}.
+This type of interface is demonstrated by the Highcharts code seen in Listing~\ref{list:Highcharts}.
 Generic chart creation functions seem to be correlated with the ability of dynamically changing the type of visualization.
 In Chartist, for instance, which provides separate chart creation functions for each type of chart, it is not possible to alter the type of chart after it has been created.
 Another limitation which may originate in this interface partitioning via chart types is that mixed charts which combine multiple forms of visualization in one composite visualization can not be expressed.
@@ -461,7 +461,7 @@ Even though many visualization libraries are implemented on top of D3, it is usu
 D3FC exposes a component-based interface which closely follows design patterns frequently encountered when working with D3. 
 These components form higher-level building blocks on which advanced visualizations can be built. 
 They are also highly configurable and in those cases where the options for configuration are not sufficient, a decorator pattern is used to allow users to hook into the underlying D3 functionality and inject custom code into the various stages of the general update pattern at the core of D3.
-Code which demonstrates the usage of D3FC can be seen in Listing \ref{list:D3FC}. 
+Code which demonstrates the usage of D3FC can be seen in Listing~\ref{list:D3FC}. 
 The only evaluated library which exposes a hybrid API with the possibility of configuring visualizations using both declarative configuration objects and manually composing higher-level visualizations from lower-level components, such as axes and series, is amCharts.
 Its component-based interface is still rather declarative, with most options being configurable by modifying certain properties on the components.
 However, modifying only the properties which require changing instead of processing a full configuration object and figuring out the necessary changes from it is less costly in terms of performance. 
@@ -506,9 +506,9 @@ In addition to these performance benefits, the components provide additional fun
 When comparing the evaluated libraries by their responsive configurability, most libraries offer similar capabilities albeit in slightly different ways.
 Six libraries (Highcharts, C3JS, Chartist, amCharts, billboardJS, D3FC) support the styling of elements in their created visualizations with CSS, which requires rendering as SVG documents because only document-based visualizations can be affected by CSS.
 The styling of visualizations with CSS is powerful because it leads to a separation of concerns and designers can make use of CSS-inherent mechanisms to configure responsive styles.
-Unfortunately, CSS-based styling is only of limited applicability because not all CSS properties affect SVG elements, which has already been described in Section \ref{sec:SVG}.
+Unfortunately, CSS-based styling is only of limited applicability because not all CSS properties affect SVG elements, which has already been described in Section~\ref{sec:SVG}.
 To responsively configure other visualization characteristics, such as their type, data, and layout, designers have to resort to configuration mechanisms offered by the libraries. 
-Four libraries (Highcharts, ApexCharts, Chartist, amCharts) provide the possibility to specify rule-based responsive configurations as part of their declarative interfaces, demonstrated in the Highcharts example in Listing \ref{list:HighchartsResponsive}.
+Four libraries (Highcharts, ApexCharts, Chartist, amCharts) provide the possibility to specify rule-based responsive configurations as part of their declarative interfaces, demonstrated in the Highcharts example in Listing~\ref{list:HighchartsResponsive}.
 These declarative rules consist of a condition part which specifies when to apply the rule, and a configuration part which specifies the configuration options which should be set when applying the rule.
 Even though this is a convenient form of responsive configuration, if the desired conditions can not be expressed via the provided declarative properties, designers have to fall back to more generic mechanisms which are also applicable to other libraries. 
 The mechanisms for responsive configuration in the other libraries are more generic because they do not offer these configurations as part of their declarative interfaces. 

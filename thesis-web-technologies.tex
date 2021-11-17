@@ -449,7 +449,7 @@ Additionally, studies like \cite{ToTypeOrNotToType} have evaluated software bugs
 The TypeScript type system has been designed to support the constructs which are possible in JavaScript as completely as possible, which is achieved via structural types and unified object types. 
 Another goal has also been to make the type annotation of JavaScript code as effortless as possible to improve adoption by already existing projects. 
 This is done by consciously allowing the type system to be statically unsound via gradual typing and also by employing type inference to reduce the amount of necessary annotations. 
-The major properties of TypeScript's type system design are summarized in Table \ref{tab:TSTypeSystemDesignProperties}.
+The major properties of TypeScript's type system design are summarized in Table~\ref{tab:TSTypeSystemDesignProperties}.
 
 \begin{table}[tp]
 \tablestretch
@@ -486,7 +486,7 @@ These technologies are described in the following sections.
 \label{sec:RasterImages}
 
 Raster images represent graphics as a rectangular, two-dimensional grid of pixels with a fixed size. 
-This fixed grid size results in limited scalability and whenever an image is displayed in a different size, visual scaling artifacts will be noticeable as can be seen in Figure \ref{fig:RasterImage}. 
+This fixed grid size results in limited scalability and whenever an image is displayed in a different size, visual scaling artifacts will be noticeable as can be seen in Figure~\ref{fig:RasterImage}. 
 Raster images are either created by image capturing devices or special editing software and saved as binary files in varying formats. 
 The most widely used format for raster images is Portable Network Graphics (PNG), which is standardized by the W3C \parencite{PNG} and optimized for usage on the web. 
 It features a lossless compression and streaming capabilities, which enable progressive rendering of images while they are loaded.
@@ -514,7 +514,7 @@ To make the information accessible to visually impaired people it is required to
 The Scalable Vector Graphics (SVG) format is an XML-based format for vector graphics which describe images as sets of shapes that can be scaled without loss of quality. 
 It was initially published by the W3C in 1999 \parencite{SVG1} and the most recent version SVG 1.1 was released in 2011 \parencite{SVG11}. 
 SVG files are based on XML and therefore can be created with any text editor, but there is also specialized software available which helps with the composition of more complex images.
-A simple example of an SVG document containing a single circle can be seen in Listing \ref{list:SVG} with its visualization being shown in Figure \ref{fig:SVG}. 
+A simple example of an SVG document containing a single circle can be seen in Listing~\ref{list:SVG} with its visualization being shown in Figure~\ref{fig:SVG}. 
 
 \begin{samepage}
 \lstinputlisting[%
@@ -531,7 +531,7 @@ A simple example of an SVG document containing a single circle can be seen in Li
   caption={
     [SVG Document Containing a Circle]%
     A simple SVG document containing a circle element. 
-    The visual representation of this document in different sizes is shown in Figure \ref{fig:SVG}
+    The visual representation of this document in different sizes is shown in Figure~\ref{fig:SVG}
   }
 ]{listings/circle.svg}
 \end{samepage}
@@ -542,7 +542,7 @@ A simple example of an SVG document containing a single circle can be seen in Li
 \subfloat[][]{\includegraphics[keepaspectratio,width=0.5\linewidth,height=\fullh / 4]{images/circle.pdf}}
 \caption[SVG Scaling]{
   SVG documents can be scaled freely without any artifacts occurring. 
-  This figure displays the visual representation of the SVG document in Listing \ref{list:SVG} scaled to different sizes. 
+  This figure displays the visual representation of the SVG document in Listing~\ref{list:SVG} scaled to different sizes. 
   \imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:SVG}
@@ -558,7 +558,7 @@ This means that elements can be completely controlled by scripts, which enables 
 
 The most widely supported way of styling SVG elements is via attributes, which is supported by every software dealing with SVG files. 
 However, the specification aims for maximum compatibility with HTML, and therefore it is also possible to use CSS to style and animate SVG elements when they are rendered in a browser. 
-Using CSS to separate presentation from content has many benefits which were already described in Section \ref{sec:CSS}.
+Using CSS to separate presentation from content has many benefits which were already described in Section~\ref{sec:CSS}.
 Unfortunately it is not possible to style every SVG attribute with CSS because only the so-called presentation attributes like \cssname{fill} and \cssname{stroke-width} are available in CSS. 
 These presentation attributes are taxonomically listed in the SVG specification \parencite{SVG11} and will be extended by additional attributes like \cssname{x}, \cssname{y}, \cssname{width} and \cssname{height} in upcoming releases \parencite{SVG2}.
 
@@ -573,7 +573,7 @@ Rendering is programmed via a low-level API which is provided by the rendering c
 The type of render context depends on the context mode of a canvas with the two most significant ones being \lstinline{2d} and \lstinline{webgl}. 
 A two-dimensional render context is created for canvases which have the \lstinline{2d} context mode set on them.
 It enables platform-independent rendering via a software renderer, whose API is standardized directly in the canvas specification. 
-An example of an HTML document containing two differently sized canvases into which responsive circles are drawn using a two-dimensional rendering context can be seen in Listing \ref{list:Canvas} with the corresponding visualization displayed in Figure \ref{fig:Canvas}.
+An example of an HTML document containing two differently sized canvases into which responsive circles are drawn using a two-dimensional rendering context can be seen in Listing~\ref{list:Canvas} with the corresponding visualization displayed in Figure~\ref{fig:Canvas}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -589,7 +589,7 @@ An example of an HTML document containing two differently sized canvases into wh
   caption={
     [Canvas With Responsive Circles]%
     A basic HTML document containing two canvases of different sizes which render circles relative to the canvas size. 
-    The visual representation of this document is shown in Figure \ref{fig:Canvas}.
+    The visual representation of this document is shown in Figure~\ref{fig:Canvas}.
   }
 ]{listings/canvas.html}
 \end{samepage}
@@ -599,7 +599,7 @@ An example of an HTML document containing two differently sized canvases into wh
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 4]{images/canvas.png}
 \caption[Canvas With Responsive Circles]{
   Responsive rendering of graphics inside canvas elements has to be implemented manually by calculating everything as ratios of the canvas' dimensions. 
-  This figure represents the visual representation of the canvas example in Listing \ref{list:Canvas}. 
+  This figure represents the visual representation of the canvas example in Listing~\ref{list:Canvas}. 
   \imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:Canvas}
@@ -633,7 +633,7 @@ Theoretically, the layout and render processes could be separated into different
 Some notable browser engines are WebKit \parencite{WebKit}, Blink \parencite{Blink} and Gecko \parencite{Gecko}.
 
 In a browser engine the layout of elements is constrained with CSS, which yields
-great flexibility as already described in Section \ref{sec:CSS}. They are
+great flexibility as already described in Section~\ref{sec:CSS}. They are
 offered a range of mechanisms to precisely control the layout of elements, like
 the flexible box and grid layout modules, which do not have to be applied
 exclusively but can also be used in combination.
@@ -646,7 +646,7 @@ A strong limitation of using browser engines to calculate layouts is that it req
 \subsection{Yoga}
 \label{sec:Yoga}
 
-Yoga \parencite{Yoga} is a layout engine which enables the computation of layouts which are constrained using the grammar defined in the Flexbox layout module (see Section \ref{sec:Flexbox}). 
+Yoga \parencite{Yoga} is a layout engine which enables the computation of layouts which are constrained using the grammar defined in the Flexbox layout module (see Section~\ref{sec:Flexbox}). 
 It is maintained by Facebook as an open-source project since 2016 \parencite{YogaRelease} with the goal of providing a small and high-performance library which can be used across all platforms. 
 This is achieved through the implementation being programmed in the C/C++ programming language, which works on a myriad of devices, with bindings available for other platforms like JavaScript, Android and iOS.
 Yoga has been very well adopted and is used to perform layouting in major frameworks such as React Native \parencite{ReactNative}, Litho \parencite{Litho} and ComponentKit \parencite{ComponentKit}.
@@ -655,7 +655,7 @@ Yoga has been very well adopted and is used to perform layouting in major framew
 \label{sec:FaberJS}
 
 FaberJS \parencite{FaberJS} is a layout engine which is very similar to the Yoga layout engine in the fact that it enables the computation of layouts for constructs other than HTML documents, using a layout grammar which has originally been created for CSS. 
-In contrast to Yoga, which is used to create one-dimensional layouts using the Flexbox layout grammar, FaberJS implements a two-dimensional layout algorithm which is built on the grammar of the Grid layout module (see Section \ref{sec:Grid}). 
+In contrast to Yoga, which is used to create one-dimensional layouts using the Flexbox layout grammar, FaberJS implements a two-dimensional layout algorithm which is built on the grammar of the Grid layout module (see Section~\ref{sec:Grid}). 
 This inherently two-dimensional approach to layouting is more suited to information visualization than trying to achieve two-dimensionality using a one-dimensional one. 
 FaberJS is an open-source JavaScript project and has been developed since 2019 by Idera, Inc.
 Even though the layouts it computes are constrained with the grid layout grammar, it only supports a subset of all the functionalities defined in the original CSS module. 
