@@ -6,11 +6,11 @@ These two goals of presenting and analyzing abstract information in a visual for
 In contrast to textual representations of data, the processing of well-designed visualizations requires much less cognitive effort because it leverages features of the human visual processing system.
 One of these features is preattentive processing, which means that certain visual attributes can be processed very quickly and without any conscious effort \parencite{PreattentiveProcessing}.
 
-In addition to visuals being easier to assimilate by humans, a purely textual and statistical view on data can also lead to erroneous assumptions as demonstrated by \cite{AnscombesQuartet} in the infamous visualization of four completely different datasets which have identical summary statistics, called Anscombe's Quartet.
+In addition to visuals being easier to assimilate by humans, a purely textual and statistical view on data can also lead to erroneous assumptions as demonstrated by \textcite{AnscombesQuartet} in the infamous visualization of four completely different datasets which have identical summary statistics, called Anscombe's Quartet.
 An observer trying to understand these sets of data purely from their statistics would mistakenly deem them to be identical.
 Their inequality will only become obvious after carefully examining and comparing the individual entries in the datasets themselves.
 This is a tedious and error-prone task when not aided by visual representations like Figure~\ref{fig:AnscombesQuartet}.
-Even though Anscombe's Quartet is very likely the most famous example to demonstrate this characteristic, it is certainly not the only set of datasets which possesses it, as has been shown by \cite{GenDataIdenticalStatisticsDissimilarGraphics}.
+Even though Anscombe's Quartet is very likely the most famous example to demonstrate this characteristic, it is certainly not the only set of datasets which possesses it, as has been shown by \textcite{GenDataIdenticalStatisticsDissimilarGraphics}.
 
 \begin{figure}[tp]
 \centering
@@ -18,12 +18,12 @@ Even though Anscombe's Quartet is very likely the most famous example to demonst
 \caption[Anscombe's Quartet]{
   Anscombe's Quartet consists of four distinct sets of data which share identical summary statistics.
   The difference between these datasets is only obvious by carefully examining the textual data or by plotting it.
-  \imgcredit{Image extracted from \cite{IVISCourseNotes}. Used with kind permission by Keith Andrews.}
+  \imgcredit{Image extracted from \textcite{IVISCourseNotes}. Used with kind permission by Keith Andrews.}
 }
 \label{fig:AnscombesQuartet}
 \end{figure}
 
-This thesis adheres to the separation of the field defined by \cite{IVISCourseNotes}. 
+This thesis adheres to the separation of the field defined by \textcite{IVISCourseNotes}. 
 It is stated that the field of visualization is segmented into the three main subfields of information visualization, geographic visualization and scientific visualization. 
 Furthermore, the often used term "data visualization" is defined as the intersection of geographic visualization and information visualization.
 
@@ -40,7 +40,7 @@ Even though the majority of the attention in the field of information visualizat
 Many taxonomies have been formulated with the goal of defining the design space of interactions to support analytic reasoning, but they vary greatly depending on the concepts they are focusing on.
 Some taxonomies have been defined on the concept of low-level interaction techniques \parencite{TheEyesHaveIt,GrammarOfGraphics}, providing a very system-centric view on interaction. 
 Other taxonomies focus on user tasks \parencite{LowLevelComponentsOfAnalyticActivity} which are not necessarily strongly related to interacting with visualizations.
-\cite{RoleOfInteractionInInformationVisualization} aims to provide a view in between the purely system-centric and purely user-centric extremes by defining a taxonomy based on user intent.
+\textcite{RoleOfInteractionInInformationVisualization} aims to provide a view in between the purely system-centric and purely user-centric extremes by defining a taxonomy based on user intent.
 The categories of this taxonomy are listed in Table~\ref{tab:UserIntentCategories}
 They form a good framework for the discussion of interactivity in the context of information visualization.
 
@@ -63,7 +63,7 @@ Connect & Show related items. & Highlight connected items, highlight item in dif
 \end{tabularx}
 \caption[Categories of Interaction Based on User Intent]{
   This table shows the categories of interacting with visualizations based on user intent.
-  \imgcredit{Table adapted from \cite{RoleOfInteractionInInformationVisualization}}
+  \imgcredit{Table adapted from \textcite{RoleOfInteractionInInformationVisualization}}
 }
 \label{tab:UserIntentCategories}
 \end{table}
@@ -74,14 +74,14 @@ Connect & Show related items. & Highlight connected items, highlight item in dif
 
 The history of information visualization goes back a long time.
 One of its earliest examples dates back to the 10th century, when an unknown astronomer created the chart about the movement of prominent planets \parencite{CommentariiInSomniumScipionis} shown in Figure~\ref{fig:PlanetaryMovements}.
-Other noteworthy early visualizations include the first occurrence of the principle \cite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in the 1626 chart demonstrating sunspot changes seen in Figure~\ref{fig:SunspotChanges} by \cite{RosaUrsina}, and the 1644 chart displaying longitudinal distance determinations between Toledo and Rome seen in Figure~\ref{fig:RomeToledoLongitude} by Michael Florent van Langren.
+Other noteworthy early visualizations include the first occurrence of the principle \textcite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in the 1626 chart demonstrating sunspot changes seen in Figure~\ref{fig:SunspotChanges} by \textcite{RosaUrsina}, and the 1644 chart displaying longitudinal distance determinations between Toledo and Rome seen in Figure~\ref{fig:RomeToledoLongitude} by Michael Florent van Langren.
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/planetary-movements.png}
 \caption[Chart of Planetary Movements from the Tenth Century]{
   A chart created by an unknown astronomer in the tenth century depicting the movements of seven prominent planets.
-  \imgcredit{Image extracted from \cite{BriefHistoryOfDataVis}. Original appearance in \cite{CommentariiInSomniumScipionis}.}
+  \imgcredit{Image extracted from \textcite{BriefHistoryOfDataVis}. Original appearance in \textcite{CommentariiInSomniumScipionis}.}
 }
 \label{fig:PlanetaryMovements}
 \end{figure}
@@ -91,8 +91,8 @@ Other noteworthy early visualizations include the first occurrence of the princi
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/sunspot-changes.png}
 \caption[Chart of Changes in Sunspots from 1626]{
   This chart shows the observed changes in sunspots based on recordings of two months of data from 1611.
-  It is the first occurrence of the principle later called "small multiples" by \cite{VisualDisplayOfQuantitativeInformation}.
-  \imgcredit{Image extracted from \cite{BriefHistoryOfDataVis}. Original appearance in \cite{RosaUrsina}.}
+  It is the first occurrence of the principle later called "small multiples" by \textcite{VisualDisplayOfQuantitativeInformation}.
+  \imgcredit{Image extracted from \textcite{BriefHistoryOfDataVis}. Original appearance in \textcite{RosaUrsina}.}
 }
 \label{fig:SunspotChanges}
 \end{figure}
@@ -104,7 +104,7 @@ Other noteworthy early visualizations include the first occurrence of the princi
   This chart compares the twelve known estimates in longitudinal distance between Rome and Toledo by various astronomers.
   The correct distance is marked by the arrow beneath.
   It is considered to be the first visual representation of statistical data.
-  \imgcredit{Image extracted from \cite{BriefHistoryOfDataVis}. Original appearance in \cite{VisualExplanations}.}
+  \imgcredit{Image extracted from \textcite{BriefHistoryOfDataVis}. Original appearance in \textcite{VisualExplanations}.}
 }
 \label{fig:RomeToledoLongitude}
 \end{figure}
@@ -148,7 +148,7 @@ The charts he created are very similar to modern ones because they already conta
 \label{fig:PlayfairAreaChart}
 \end{figure}
 
-The dot map created by \cite{ModeOfCommunicationOfCholera} in 1855 to trace cholera outbreaks in London (Figure~\ref{fig:CholeraDotMap}) is undoubtedly one of the most famous and influential visualizations in history.
+The dot map created by \textcite{ModeOfCommunicationOfCholera} in 1855 to trace cholera outbreaks in London (Figure~\ref{fig:CholeraDotMap}) is undoubtedly one of the most famous and influential visualizations in history.
 Even though it is not directly an information visualization but rather a geographic one, it has been included here because of its historic relevance.
 This iconic dot map was used to identify a cluster of cholera-related deaths near a contaminated water pump on Broad Street, leading to the recognition of cholera as a waterborne disease.
 
@@ -159,7 +159,7 @@ This iconic dot map was used to identify a cluster of cholera-related deaths nea
   This iconic chart was created by Dr. John Snow in 1855 to identify a clustering of cholera-related deaths near Broad Street in London.
   It was used to identify a contaminated water pump and to illustrate the waterborne nature of the disease.
   Since the data is map-based, this chart is an example of a geographic visualization rather than an information visualization.
-  \imgcredit{Image extracted from \cite{IVISCourseNotes}. Original appearance in \cite{ModeOfCommunicationOfCholera}.}
+  \imgcredit{Image extracted from \textcite{IVISCourseNotes}. Original appearance in \textcite{ModeOfCommunicationOfCholera}.}
 }
 \label{fig:CholeraDotMap}
 \end{figure}
@@ -191,14 +191,14 @@ High-D by the company Macrofocus \parencite{HighD} has been chosen as a represen
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/high-d.png}
 \caption[Screenshot of High-D]{
   High-D from the company Macrofocus is a visual analytics tool specialized in analyzing multidimensional data.
-  \imgcredit{Screenshot of \cite{HighD} taken by the author of this work.} \TODO{How to cite this? Copyright?}
+  \imgcredit{Screenshot of \textcite{HighD} taken by the author of this work.} \TODO{How to cite this? Copyright?}
 }
 \label{fig:HighD}
 \end{figure}
 
 It is out of the scope of this work to provide a full account over the long and eventful history of information visualization.
 This section only provides a brief and very selective view on the topic and much more comprehensive works exist which go significantly deeper into details of the various actors and the intricate influences they had on each other.
-Recommendable sources for further reading on the history of visualization include \cite{BriefHistoryOfDataVis}, \cite{HistoryOfDataVisAndGraphicCommunication} and \cite{HistoryOfInformationGraphics}.
+Recommendable sources for further reading on the history of visualization include \textcite{BriefHistoryOfDataVis}, \textcite{HistoryOfDataVisAndGraphicCommunication} and \textcite{HistoryOfInformationGraphics}.
 
 \section{Information Visualization Libraries for the Web}
 
@@ -320,7 +320,7 @@ Its syntax is based on the easy-to-read JavaScript Object Notation (JSON), which
 Vega builds on previous research in the field of declarative visualization design \parencite{GrammarOfGraphics}.
 Compared to previous works, it contains powerful capabilities to declaratively describe interactions \parencite{ReactiveVega} in addition to describing visual appearances.
 
-The visual aspects of a visualization are described in a grammar similar to the one defined by \cite{GrammarOfGraphics}.
+The visual aspects of a visualization are described in a grammar similar to the one defined by \textcite{GrammarOfGraphics}.
 At its top level, a Vega specification contains properties to configure sizing and padding of the container of a visualization.
 Every specification will also contain a data section which either defines data or specifies where to load it from.
 The Vega grammar also supports various forms of data transformation which can successively be applied to a dataset to perform various transformations like filtering, deriving additional fields or deriving additional datasets.
