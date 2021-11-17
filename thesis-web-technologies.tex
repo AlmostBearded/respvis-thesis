@@ -511,7 +511,7 @@ To make the information accessible to visually impaired people it is required to
 \subsection{Scalable Vector Graphics (SVG)}
 \label{sec:SVG}
 
-Scalable Vector Graphics (SVG) is an XML-based format for vector graphics which describe images as sets of shapes which can be scaled without loss of quality. 
+The Scalable Vector Graphics (SVG) format is an XML-based format for vector graphics which describe images as sets of shapes that can be scaled without loss of quality. 
 It was initially published by the W3C in 1999 \parencite{SVG1} and the most recent version SVG 1.1 was released in 2011 \parencite{SVG11}. 
 SVG files are based on XML and therefore can be created with any text editor, but there is also specialized software available which helps with the composition of more complex images.
 A simple example of an SVG document containing a single circle can be seen in Listing \ref{list:SVG} with its visualization being shown in Figure \ref{fig:SVG}. 
@@ -632,12 +632,11 @@ The terminology of browser engines is very vague with them sometimes also being 
 Theoretically, the layout and render processes could be separated into different components, but in practice they are tightly-coupled into a combined component, which will be referred to as a browser engine in this work. 
 Some notable browser engines are WebKit \parencite{WebKit}, Blink \parencite{Blink} and Gecko \parencite{Gecko}.
 
-In a browser engine the layout of elements is constrained with CSS,
-which gives website authors a lot of flexibility as already described
-in Section \ref{sec:CSS}.  They are offered a range of mechanisms to
-precisely control the layout of elements, like the flexible box and
-grid layout modules, which do not have to be applied exclusively but
-can also be used in combination.
+In a browser engine the layout of elements is constrained with CSS, which yields
+great flexibility as already described in Section \ref{sec:CSS}. They are
+offered a range of mechanisms to precisely control the layout of elements, like
+the flexible box and grid layout modules, which do not have to be applied
+exclusively but can also be used in combination.
 
 The layout module of a browser engine can only be invoked directly by browsers to position HTML elements in actively rendered documents. 
 To use it for calculating layouts of non-HTML constructs, they must be replicated in active documents, so they can be parsed, laid out and rendered by the browser engine. 
