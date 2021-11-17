@@ -84,7 +84,12 @@ recent years, CSS specifications have become much more detailed
 \parencite{CSS21} and browser implementations have become more stable
 with fewer inconsistencies. It has therefore become much rarer that
 browser-specific workarounds need to be applied, dramatically
-improving the developer experience.
+improving the developer experience. CSS 2.1 \parencite{CSS21} was the last
+CSS standard that has been published as a single, monolithic specification.
+Since then, the specification has been modularized into different
+documents, each describing a specific module of the overall CSS 
+specification.
+ 
 
 A CSS style sheet contains a collection of rules. Each rule consists
 of a selector and a block of style declarations. Selectors are defined
@@ -94,7 +99,7 @@ declarations applied to them. The selector syntax is fairly
 straightforward when selecting elements of a certain type, but also
 has more sophisticated mechanisms for selecting elements based on
 their contexts or attributes. Table~\ref{tab:CSSSelectorSyntax}
-summarizes the selector syntax in CSS 2.1 \parencite{CSS21}.
+summarizes the selector syntax of \textcite{CSSSelectors3}.
 
 % KA: why only talk about CSS 2.1 here?  What about CSS 3 ?
 
@@ -121,7 +126,7 @@ Pattern & Matches \\
 \end{tabularx}
 \caption[CSS Selector Syntax]{
 A summary of the CSS 2.1 selector syntax.
-\imgcredit{Table created by the author of this thesis with data from \parencite{CSS21}.}
+\imgcredit{Table created by the author of this thesis with data from \parencite{CSSSelectors3}.}
 }
 \label{tab:CSSSelectorSyntax}
 \end{table}
@@ -129,7 +134,7 @@ A summary of the CSS 2.1 selector syntax.
 
 Another important characteristic of CSS is the cascading of styles.
 The exact rules for calculating the final style to be applied to an
-element are quite involved, and the CSS specification \cite{CSS21}
+element are quite involved, and \textcite{CSSCascading3}
 should be consulted for a detailed description. The most important
 aspect in the context of this work is that styles can be
 overwritten. When multiple rules match an element and define different
