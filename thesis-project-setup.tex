@@ -204,6 +204,46 @@ This directory is identical to the one under \code{src/examples/} because it is 
 
 \subsection{NodeJS}
 
+NodeJS is a standalone JavaScript runtime that is built on top of the V8 JavaScript engine \parencite{V8}.
+It is an open-source and multi-platform runtime that enables the execution of JavaScript code outside of web browsers.
+NodeJS is heavily used for server-side development to unify the technology stack of web developers and allow them to use JavaScript for both client-side and server-side development.
+However, with the appropriate project setup, NodeJS can be used for any kind of development.
+It can even be set up as a very powerful framework to develop client-side applications, like it has been done in the RespVis library.
+One of the most important tools in the NodeJS environment is the npm package manager \parencite{npm}.
+It was created in 2009 to simplify the sharing of source code modules and the management of the dependencies of a module.
+The npm package registry hosts a huge number of open-source modules for NodeJS projects, which can easily be imported and used to create new ones.
+
+RespVis is developed as a npm package.
+Every npm package is configured via a \code{package.json} file.
+This file contains all the necessary meta-data of a package to make it identifiable and provide enough information about what the package contains.
+It also lists all the dependencies of a package, so they easily be updated and downloaded during the installation process.
+A package can include normal dependencies and development dependencies.
+The difference between those two types of dependencies is that normal dependencies of a package will always be installed alongside of it, whereas the development dependencies will only be installed when installing a local package.
+The \code{package.json} file that is located in the root directory of the RespVis package can be seen in Listing~\ref{list:PackageJSON}.
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:PackageJSON,
+  caption={[RespVis' \code{package.json} File] 
+    The \code{package.json} file of the RespVis library.
+    This file contains all the meta-data to describe the package and it's dependencies.
+  },
+]{listings/package.json}
+\end{samepage}
+
+
+
+% V8 https://v8.dev/
+
 \subsection{Rollup}
 
 \subsection{Gulp}
