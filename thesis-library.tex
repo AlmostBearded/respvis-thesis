@@ -11,8 +11,9 @@ Using D3 Selections, specially structured data is set, and visual components are
 This separation between data and code and the application of strongly-typed TypeScript are the main principles guiding the software design of RespVis.
 
 \section{Design}
+\label{sec:Design}
 
-The design of the RespVis library is guided by five main concepts, which are further discussed in the later paragraphs of this section:
+The design of the RespVis library is guided by six main concepts, which are further discussed in the later paragraphs of this section:
 
 \begin{enumerate}
 \item CSS should be used as much as possible for describing the style and layout of visualizations.
@@ -20,6 +21,7 @@ The design of the RespVis library is guided by five main concepts, which are fur
 \item RespVis is an extension of D3 rather than a wrapper around it.
 \item Data and code are treated as separate entities.
 \item Every aspect of the library should be as strongly-typed as possible.
+\item Components are structured in layers with different levels of abstraction.
 \end{enumerate}
 
 Firstly, everything that can be configured using CSS should be done so.
@@ -60,7 +62,7 @@ This is because, on the highest level, entities of such a system are separated i
 The research related to software complexity is difficult to convey in simple terms.
 However, one rule that is related to this concept of data and code separation is well summarized by \textquote{DataCodeSeparation} as: "A system made of disjoint simple parts is less complex than a system made of a single complex part."
 Of course, there are also various drawbacks when designing a system adhering to this concept, but they are not too severe and are therefore not listed here.
-For further research on this topic, readers are advised to review \textquote{DataCodeSeparation} and \textquote{OutOfTarPit}, which have acted as references for this paragraph.
+For further research on this topic, readers are advised to review \textquote{DataCodeSeparation} and \textquote{OutOfTarPit}.
 
 Fifthly, the library is written in TypeScript and everything is as strongly-typed as possible.
 For the most part, interfaces are used to describe the structure of data objects and function parameters are annotated with types.
@@ -70,8 +72,67 @@ Using these annotations, the various functions can assume that parameters passed
 The application of a strongly-typed type system has many advantages like better development tooling and the compile-time identification of type-related bugs.
 These advantages have already been described in Section~\ref{sec:TS}.
 
+Sixthly, components in RespVis are structured in layers with different levels of abstraction.
+Components in higher layers need to make more assumtions about their content than components in lower layers.
+The bottom-most layer with the lowest level of abstraction consists of visual primitives that are represented by basic SVG elements like \code{<rect>}, \code{<circle>}, and \code{<text>} elements.
+They do not require any special data to be bound on them and are simply rendered by setting their attributes to the desired values.
+The layer above primitive elements is formed by composite components that only contain primitive elements.
+Composite components are usually rendered as \code{<svg>} or \code{<g>} elements.
+This layer includes components such as axes, legends, and series and is the lowest layer that is configured using structured data bound on the composite elements.
+Series components are composite elements that render a series of underlying elements using a data join and the general update pattern.
+The next higher layer consists of chart components.
+Charts are composite components that can also include other composite components. 
+In many other visualization libraries, charts are the highest-level component.
+They are the visual entity that represents a complete visualization and are usually composed of axes, series, and legend components.
+RespVis contains an additional layer of components above charts.
+This highest layer is formed by chart window components.
+These are also composite components, but unlike all previously discussed layers, they are not rendered as SVG elements but as HTML \code{<div>} elements.
+Their purpose is to nest charts into a layouter component, render them in a two-phase rendering process, and provide a toolbar for them.
+Toolbars are customizable and will hold different tools for different types of charts.
+The hierarchy of component layers in the RespVis library can be seen in Figure~\ref{fig:Layers}. 
+
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{diagrams/respvis-layers.pdf}
+\caption[Component Layers of RespVis]{
+  This diagram shows the different layers of components of the RespVis library.
+  Layers that are higher in the hierarchy contain increasingly higher-level components that make more assumtions than components in lower layers.
+  The lowest level of components are primitives that are merely rendered SVG elements such as \code{<rect>}, \code{<circle>}, and \code{<text>} elements.
+  Axes, legends and series are composite components that only contain primitives.
+  Charts are composite components that are composed of lower-level primitives or other composite components to form a complete visualization.
+  Chart windows are wrapper components around charts, manage their rendering process and provide a toolbar for them.  
+  \imgcredit{Image created by the author of this thesis.}
+}
+\label{fig:Layers}
+\end{figure}
+
+\section{Naming Conventions}
+\label{sec:NamingConventions}
+
+The naming of entities in RespVis follows the same naming conventions that are used in D3 modules.
+In D3-related modules, it is common that entity names start with their general type and are further narrowed down until the exact entity is described accurately.
+This convention does not have a name, but it is referred to as "top-down naming" in this work.
+An example of the top-down naming convention can be seen in the \code{d3-scale} \parencite{D3Scale} and \code{d3-axis} \parencite{D3Axis} modules, in which entities are called things like \code{scaleLinear}, \code{scaleOrdinal}, \code{axisBottom}, and \code{axisLeft} rather than \code{linearScale}, \code{ordinalScale}, \code{bottomAxis}, and \code{leftAxis}.
+Since this is the exact opposite of how these entities would be called in the natural english language, using such names can feel odd for the uninitiated. 
+However, the experience of working with APIs following such a naming convention is superior to when they do not.
+The reason for this is that users of such APIs can easily discover specialized entities by inputting the general entity type and browsing through code completion suggestions provided by their development tools.
+Due to this superiority and to stay consistent with other D3 modules, the decision has been made that entity names in RespVis should also follow this convention.
+The public interface of the library is mostly made up of types and functions.
+Types are usually written as interfaces and represent the shape of an object. 
+Their names are written in \code{PascalCase} and adhere to the top-down naming convention.
+They always start with the group a type belongs to and further words are successively added to distinguish gradually more specialized types.
+The naming of types can best be demostrated by the different names given to different kinds of bar charts.
+Normal bar charts are called \code{ChartBar}, grouped bar charts are called \code{ChartBarGrouped}, and stacked bar charts are called \code{ChartBarStacked}.
+The API of RespVis is mainly composed of functions.
+Function names are always written in \code{camelCase} and also follow the top-down naming convention.
+They always start with the type of object they operate followed by the operation they perform.
+Names of functions that create the data of a specific component are always in the form of \code{componentNameData}, such as \code{chartBarData} or \code{chartBarGroupedData}.
+The names of functions that render specific components are always in the form of \code{componentNameRender}, such as \code{chartBarRender} or \code{chartBarGroupedRender}. 
+
 % https://github.com/papers-we-love/papers-we-love/blob/master/design/out-of-the-tar-pit.pdf
 % https://blog.klipse.tech/databook/2020/10/02/separate-code-data.html
+
 
 \section{Project Setup}
 \label{sec:ProjectSetup}
@@ -84,7 +145,7 @@ In addition to the bundled JavaScript library, users are required to import an a
 The project also contains examples to demonstrate usage of the library by creating various charts.
 These examples are HTML files that import required files and contain JavaScript that invokes RespVis functionality to create and update visualizations.
 The build process of the library contains multiple steps involving output directory preparation, bundling of library code and copying of various files to the correct locations in the output directory.
-It would be tedious to manually perform all these steps every time the library needs to be rebuilt, and therefore this process is automated using Gulp \parencite{Gulp}, a task-based workflow automation tool.
+It would be tedious to manually perform all these steps every time the library needs to be rebuilt, and therefore this process is automated using the Gulp \parencite{Gulp} task runner, a task-based workflow automation tool.
 The following sections will briefly introduce the setup of RespVis and the tools used in the development process.  
 
 \subsection{Directory Structure}
@@ -251,6 +312,8 @@ The \code{package.json} file that is located in the root directory of the RespVi
 \subsection{Rollup}
 \label{sec:Rollup}
 
+\TODO{Mention tree shaking}
+
 The Rollup module bundler is used to bundle the source code of the RespVis library.
 Bundling is used to combine code that is written as multiple smaller modules to make it easier to distribute.
 It also takes care of the necessary transformations to bundle code in different formats, without developers having to worry about the details of how their code will be packaged.
@@ -351,7 +414,9 @@ This bundle can then be written to the target destination via the \code{Bundle.w
 \subsection{Gulp}
 \label{sec:Gulp}
 
-Gulp is a task-based workflow automation tool.
+\TODO{Add figure of npx gulp --tasks}
+
+Gulp is a task runner that automates workflow processes via a set of named tasks.
 It is used to automate processes like building the library and serving the examples on a development server.
 Tasks perform a certain operation that needs to be carried out recurringly.
 They can perform an atomic operation or represent a composition of other tasks.  
