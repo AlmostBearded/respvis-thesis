@@ -519,37 +519,33 @@ A summary of the major design properties on which TypeScript's type system is bu
 \label{sec:WebGraphics}
 
 Graphics are used as a medium for visual expression to enhance the
-representation of information on the web. There are versatile fields
-of application like the integration of maps, photographs or charts in
-a website. Multiple complementary technologies exist and each solves
-particular use cases of web authors. The different ways of embedding
-graphics in a document are raster images, Scalable Vector Graphics
-(SVG) and through the Canvas API. These technologies are described in
-the following sections.
+representation of information on the web. There are many fields of
+application like the integration of maps, photographs, or charts in a
+web page. Multiple complementary technologies exist for web graphics,
+each with particular strengths and weaknesses depending on the use
+case. These technologies include pixel-based raster images, Scalable
+Vector Graphics (SVG), and 2d and 3d graphics through the Canvas API.
 
 
 
 \subsection{Raster Images}
 \label{sec:RasterImages}
 
-Raster images represent graphics as a rectangular, two-dimensional
-grid of pixels with a fixed size. This fixed grid size results in
-limited scalability and whenever an image is displayed in a different
-size, visual scaling artifacts will be noticeable as can be seen in
+A raster image represents a graphic as a rectangular, two-dimensional
+grid of pixels with a fixed size (resolution) in each dimension.
+Whenever a raster image is scaled up or down to a different size,
+visual artifacts become very apparent, as can be seen in
 Figure~\ref{fig:RasterImage}. Raster images are either created by
 image capturing devices or special editing software and saved as
-binary files in varying formats. The most widely used format for
-raster images is Portable Network Graphics (PNG), which is
-standardized by the W3C \parencite{PNG} and optimized for usage on the
-web. It features a lossless compression and streaming capabilities,
-which enable progressive rendering of images while they are loaded.
+binary files in varying formats. The most widely used formats for
+raster images are JPEG \parencite{JPEG} and PNG (Portable Network
+Graphics) \parencite{PNG}. JPEG has lossy compression, which achieves
+low file sizes whilst retaining reasonable image quality, and is
+typically used for photographs. PNG has lossless compression, which
+compresses well whilst preserving every original pixel as is, and also
+supports transparency. Both formats support progressive rendering as
+an image is loaded.
 
-Raster images are embedded into documents in binary format. This
-means that the contents of the graphic are not accessible in a
-non-visual representation. To make the information accessible to
-visually impaired people it is required to provide an additional
-textual description of the graphic's content on the embedding element
-via the \attrname{alt} and \attrname{longdesc} attributes.
 
 \begin{figure}[tp]
 \centering
@@ -560,34 +556,51 @@ via the \attrname{alt} and \attrname{longdesc} attributes.
 \label{fig:RasterImage1}
 }
 \hspace{1cm}
-\subfloat[Three times intended size.]{%
-\includegraphics[scale=3]{images/circle.png}
+\subfloat[Two and a half times intended size.]{%
+\hspace{1cm}
+\includegraphics[scale=2.5]{images/circle.png}
+\hspace{1cm}
 \label{fig:RasterImage2}
 }
 \caption[Raster Image Scaling]{%
 A raster image of a circle.
-Pixelation artifacts occur when a raster image is scaled up to a size
-beyond the size it was designed for.
+Pixelation artifacts become very apparent when a raster image
+is scaled to a different size.
 \imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:RasterImage}
 \end{figure}
 
 
+Raster images are embedded into documents in binary format. This means
+that the contents of the graphic are not accessible in a non-visual
+representation. To make the information accessible to visually
+impaired people, an additional textual description of the graphic's
+content must be provided via the \attrname{alt} and
+\attrname{longdesc} attributes.
+
+
+
+
 
 \subsection{Scalable Vector Graphics (SVG)}
 \label{sec:SVG}
 
-The Scalable Vector Graphics (SVG) format is an XML-based format for
-vector graphics which describe images as sets of shapes that can be
-scaled without loss of quality. It was initially published by the W3C
-in 1999 \parencite{SVG1} and the most recent version SVG 1.1 was
-released in 2011 \parencite{SVG11}. SVG files are based on XML and
-therefore can be created with any text editor, but there is also
-specialized software available which helps with the composition of
-more complex images. A simple example of an SVG document containing a
-single circle can be seen in Listing~\ref{list:SVG} with its
-visualization being shown in Figure~\ref{fig:SVG}.
+Vector graphics describe an image in terms of objects and shapes, such
+as lines, circles, polygons, and text. They can be scaled freely
+without loss of quality. Scalable Vector Graphics (SVG) is an
+XML-based format for vector graphics. It was initially published by
+the W3C in 1999 \parencite{SVG1} and the most recent version SVG 1.1
+was released in 2011 \parencite{SVG11}.
+% KA not true: SVG 2
+Graphics in an SVG file can be specified in a normalised coordinate
+space (inside a viewBox), enabling them to be freely scaled. Since
+SVG files are XML, they can be created with any text editor, but
+numerous tools and editors exist which create or export SVG.
+% KA list some examples: Illustrator, Inkscape, a charting tool
+A simple example of an SVG document containing a single circle can be
+seen in Listing~\ref{list:SVG}, with its visualization shown in
+Figure~\ref{fig:SVG}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -620,13 +633,15 @@ is shown in Figure~\ref{fig:SVG}.
 \label{fig:SVG1}
 }
 \hspace{1cm}
-\subfloat[Three times intended size.]{%
-\includegraphics[scale=3]{images/circle.pdf}
+\subfloat[Two and a half times intended size.]{%
+\hspace{1cm}
+\includegraphics[scale=2.5]{images/circle.pdf}
+\hspace{1cm}
 \label{fig:SVG2}
 }
 \caption[SVG Scaling]{%
 SVG documents can be scaled freely without pixelation artifacts.
-Here, the SVG document from Listing~\ref{list:SVG}.
+Here, the SVG document from Listing~\ref{list:SVG} is shown.
 \imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:SVG}
@@ -634,68 +649,66 @@ Here, the SVG document from Listing~\ref{list:SVG}.
 
 
 
-
 The encoding in XML leads to SVG being the best format to represent
-graphics in terms of accessibility.  Graphics are directly saved in a
+graphics in terms of accessibility. Graphics are directly saved in a
 hierarchical and textual form which describes their shapes and how
-they are composed.  In addition to the shapes being inherently
+they are composed. In addition to the shapes being inherently
 accessible, the various elements of an SVG document can be annotated
-with further information which aids comprehension when consumed in a
+with further information to aid comprehension when consumed in a
 non-visual way.
 
-SVG files are XML documents whose meta format is described in special
-SVG namespaces.  Therefore, the elements of SVG documents can be
-accessed in scripts via the DOM Web API.  This means that elements can
-be completely controlled by scripts, which enables similar levels of
-interactivity than for HTML documents.
+SVG files are XML documents whose meta format is described in a
+special SVG namespace. Web browsers support mixing of HTML and SVG
+elements in a web page, and the SVG elements can be accessed by
+scripts via the DOM Web API just like HTML elements.
 
 The most widely supported way of styling SVG elements is via
 attributes, which is supported by every software dealing with SVG
-files.  However, the specification aims for maximum compatibility with
+files. However, the specification aims for maximum compatibility with
 HTML, and therefore it is also possible to use CSS to style and
-animate SVG elements when they are rendered in a browser.  Using CSS
-to separate presentation from content has many benefits which were
-already described in Section~\ref{sec:CSS}. Unfortunately it is not
-possible to style every SVG attribute with CSS because only the
-so-called presentation attributes like \cssname{fill} and
-\cssname{stroke-width} are available in CSS.  These presentation
-attributes are taxonomically listed in the SVG specification
-\parencite{SVG11} and will be extended by additional attributes like
-\cssname{x}, \cssname{y}, \cssname{width} and \cssname{height} in
-upcoming releases \parencite{SVG2}.
+animate SVG elements when they are rendered in a browser. Using CSS to
+separate presentation from content has many benefits, which were
+already described in Section~\ref{sec:CSS}. Unfortunately, it is not
+possible to style every SVG attribute with CSS, only so-called
+presentation attributes like \cssname{fill} and \cssname{stroke-width}
+are available through CSS. These presentation attributes are listed in
+the SVG specification \parencite{SVG11} and will be extended by
+additional attributes like \cssname{x}, \cssname{y}, \cssname{width}
+and \cssname{height} in upcoming releases \parencite{SVG2}.
+% KA what does SVG2 say about presentation attributes
+
+
 
 
 
 \subsection{Canvas (2D)}
 \label{sec:Canvas2D}
 
-The canvas element has been introduced in HTML5 \parencite{HTML} and
-is used to define a two-dimensional, rectangular region in a document
-which can be drawn into by scripts.  Even though the rendering of
-dynamic graphics as canvas elements is faster than representing them
-as SVG documents, their use is explicitly discouraged by the WHATWG
-when another suitable representation is possible.  The reasons for
-this are that canvas elements are not compatible with other web
-technologies like CSS or the DOM Web API and because the resulting
-rendering as a raster image provides only very limited possibilities
-for accessibility.
+The canvas element was introduced in HTML5 \parencite{HTML} and is
+used to define a two-dimensional, rectangular region in a document
+which can be drawn into by scripts. Even though rendering of dynamic
+graphics as canvas elements is often faster than representing them as
+SVG documents, their use is explicitly discouraged by the WHATWG when
+another suitable representation is possible. The reasons for this are
+that canvas elements are not compatible with other web technologies
+like CSS or the DOM Web API and because the resulting rendering
+provides only very limited possibilities for accessibility.
 
-Rendering is programmed via a low-level API which is provided by the
-rendering context of a particular canvas. The type of render context
-depends on the context mode of a canvas with the two most significant
-ones being \lstinline{2d} and \lstinline{webgl}.  A two-dimensional
-render context is created for canvases which have the \lstinline{2d}
-context mode set on them.  It enables platform-independent rendering
-via a software renderer, whose API is standardized directly in the
-canvas specification.  An example of an HTML document containing two
-differently sized canvases into which responsive circles are drawn
-using a two-dimensional rendering context can be seen in
-Listing~\ref{list:Canvas} with the corresponding visual output
-in Figure~\ref{fig:Canvas}.
+The graphics are drawn via a low-level API provided by the rendering
+context of a particular canvas. The two most significant rendering
+contexts are \lstinline{2d} and \lstinline{webgl}.
+
+The \lstinline{2d} rendering context enables platform-independent 2d
+rendering via a software renderer, whose API is standardized directly
+in the canvas specification \parencite{Canvas2D}. An example of an
+HTML document containing two differently sized canvases into which
+responsive circles are drawn using a 2d rendering context can be seen
+in Listing~\ref{list:Canvas} with the corresponding visual output in
+Figure~\ref{fig:Canvas}.
 
 
 % KA TODO
-% make this example 100x100 and 300x300 pixel canvases.
+% make this example 100x100 and 250x250 pixel canvases.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -710,7 +723,8 @@ in Figure~\ref{fig:Canvas}.
   label=list:Canvas,
   caption={%
 [Canvas With Responsive Circles]%
-A basic HTML document containing two canvases of different sizes which render circles relative to the canvas size. 
+A basic HTML document containing two canvases of different sizes
+which render circles relative to the canvas size. 
 The visual representation of this document is shown in Figure~\ref{fig:Canvas}.
 }
 ]{listings/canvas.html}
@@ -749,17 +763,23 @@ of the canvas example in Listing~\ref{list:Canvas}.
 \subsection{Canvas (WebGL)}
 \label{sec:CanvasWebGL}
 
-A three-dimensional render context is created for canvas elements
-which have their context mode set to \lstinline{webgl} .
-Three-dimensional rendering is even faster than two-dimensional
-rendering via the platform-independent software renderer provided for
-two-dimensional render contexts.  The reason for this is that
-three-dimensional rendering is performed via a hardware-accelerated
-WebGL renderer.  Even though the API of the WebGL renderer is also
-standardized \parencite{WebGL}, the availability of individual
-features depends on the client's hardware.  It is therefore
-recommendable to only use three-dimensional rendering when the
-requirements do not allow for any of the alternatives.
+The \lstinline{webgl} rendering context enables 3d drawing through the
+WebGL version 1 API \parencite{WebGL1}. The \lstinline{webgl2}
+rendering context enables 3d drawing through the WebGL version 2 API
+\parencite{WebGL2}. Three-dimensional rendering through WebGL
+hardware-accelerated and is often much faster than rendering via
+Canvas 2d or SVG.
+
+% KA  this is not true: the features are there, just not always
+%     accelerated by hardware.
+%
+% The availability of individual features depends on the client's
+% hardware. It is therefore recommendable to only use three-dimensional
+% rendering when the requirements do not allow for any of the
+% alternatives.
+
+% No: in terms of performance, prefer WebGL if it is available.
+
 
 
 
@@ -770,20 +790,32 @@ requirements do not allow for any of the alternatives.
 \section{Layout Engines}
 \label{sec:LayoutEngines}
 
-A layout engine is used to calculate the boundary coordinates of visual components based on some form of input components which are annotated with layout constraints. 
-These layout constraints describe the size and position of components and their relationships between each other in a syntax which is understood by the layout engine. 
-For browser-based layout engines these input components are normally declared as HTML documents which are constrained using CSS. 
-More low-level layout engines require custom formats, which usually involve a hierarchy of objects which are constrained using specific properties. 
-The most relevant layout engines in the context of this work are summarized in the following sections.
+A layout engine is used to calculate the boundary coordinates of
+visual components based on some form of input components which are
+annotated with layout constraints.  These layout constraints describe
+the size and position of components and their relationships between
+each other in a syntax which is understood by the layout engine.  For
+browser-based layout engines these input components are normally
+declared as HTML documents which are constrained using CSS.  More
+low-level layout engines require custom formats, which usually involve
+a hierarchy of objects which are constrained using specific
+properties.  The most relevant layout engines in the context of this
+work are summarized in the following sections.
 
 \subsection{Browser Engines}
 \label{sec:BrowserEngines}
 
-The purpose of a browser engine is to transform documents including their additional resources, like CSS, into visual representations. 
-A browser engine is a core component of every web browser, and it is responsible for laying out elements and rendering them. 
-The terminology of browser engines is very vague with them sometimes also being referred to as layout or render engines. 
-Theoretically, the layout and render processes could be separated into different components, but in practice they are tightly-coupled into a combined component, which will be referred to as a browser engine in this work. 
-Some notable browser engines are WebKit \parencite{WebKit}, Blink \parencite{Blink} and Gecko \parencite{Gecko}.
+The purpose of a browser engine is to transform documents including
+their additional resources, like CSS, into visual representations.  A
+browser engine is a core component of every web browser, and it is
+responsible for laying out elements and rendering them.  The
+terminology of browser engines is very vague with them sometimes also
+being referred to as layout or render engines.  Theoretically, the
+layout and render processes could be separated into different
+components, but in practice they are tightly-coupled into a combined
+component, which will be referred to as a browser engine in this work.
+Some notable browser engines are WebKit \parencite{WebKit}, Blink
+\parencite{Blink} and Gecko \parencite{Gecko}.
 
 In a browser engine the layout of elements is constrained with CSS, which yields
 great flexibility as already described in Section~\ref{sec:CSS}. They are
