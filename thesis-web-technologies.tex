@@ -524,7 +524,8 @@ application like the integration of maps, photographs, or charts in a
 web page. Multiple complementary technologies exist for web graphics,
 each with particular strengths and weaknesses depending on the use
 case. These technologies include pixel-based raster images, Scalable
-Vector Graphics (SVG), and 2d and 3d graphics through the Canvas API.
+Vector Graphics (SVG), and 2d and 3d graphics through the
+\elname{<canvas>} element.
 
 
 
@@ -684,6 +685,7 @@ and \cssname{height} in upcoming releases \parencite{SVG2}.
 \subsection{Canvas (2D)}
 \label{sec:Canvas2D}
 
+% HERE this ref is to living standard, not to HTML5
 The canvas element was introduced in HTML5 \parencite{HTML} and is
 used to define a two-dimensional, rectangular region in a document
 which can be drawn into by scripts. Even though rendering of dynamic
@@ -791,72 +793,129 @@ Canvas 2d or SVG.
 \label{sec:LayoutEngines}
 
 A layout engine is used to calculate the boundary coordinates of
-visual components based on some form of input components which are
-annotated with layout constraints.  These layout constraints describe
-the size and position of components and their relationships between
-each other in a syntax which is understood by the layout engine.  For
-browser-based layout engines these input components are normally
-declared as HTML documents which are constrained using CSS.  More
-low-level layout engines require custom formats, which usually involve
-a hierarchy of objects which are constrained using specific
-properties.  The most relevant layout engines in the context of this
-work are summarized in the following sections.
+visual components based on input components annotated with layout
+constraints. These layout constraints describe the size and position
+of components and their relationships between each other in a syntax
+understood by the layout engine. For browser-based layout engines, the
+input components are normally declared as HTML documents which are
+constrained using CSS. More low-level layout engines require custom
+formats, which usually involve a hierarchy of objects constrained
+using specific properties. The most relevant layout engines in the
+context of this work are summarized in the following sections.
+
 
 \subsection{Browser Engines}
 \label{sec:BrowserEngines}
 
-The purpose of a browser engine is to transform documents including
-their additional resources, like CSS, into visual representations.  A
+The purpose of a browser engine is to transform document and any
+additional resources, like CSS, into a visual representation. A
 browser engine is a core component of every web browser, and it is
 responsible for laying out elements and rendering them.  The
-terminology of browser engines is very vague with them sometimes also
-being referred to as layout or render engines.  Theoretically, the
+terminology of browser engines is ill-defined, with them sometimes
+also being referred to as layout or render engines. Theoretically, the
 layout and render processes could be separated into different
 components, but in practice they are tightly-coupled into a combined
 component, which will be referred to as a browser engine in this work.
 Some notable browser engines are WebKit \parencite{WebKit}, Blink
-\parencite{Blink} and Gecko \parencite{Gecko}.
+\parencite{Blink}, and Gecko \parencite{Gecko}.
 
-In a browser engine the layout of elements is constrained with CSS, which yields
-great flexibility as already described in Section~\ref{sec:CSS}. They are
-offered a range of mechanisms to precisely control the layout of elements, like
-the flexible box and grid layout modules, which do not have to be applied
-exclusively but can also be used in combination.
+In a browser engine, the layout of elements is constrained with CSS,
+which yields great flexibility as already described in
+Section~\ref{sec:CSS}. A range of mechanisms is available to precisely
+control the layout of elements, like the Flexible Box and Grid Layout
+modules, which can also be used in combination.
 
-The layout module of a browser engine can only be invoked directly by browsers to position HTML elements in actively rendered documents. 
-To use it for calculating layouts of non-HTML constructs, they must be replicated in active documents, so they can be parsed, laid out and rendered by the browser engine. 
-These replicated constructs do not have to be visible, and they could also be removed from the document after the layout has been acquired, meaning they do not need to be noticeable at all. 
-A strong limitation of using browser engines to calculate layouts is that it requires a browser runtime to work and, even though there are solutions like Electron available which enable development of desktop applications using web technologies, this limitation forces applications into a very specific stack of technologies. 
+The layout module of a browser engine can only be invoked directly by
+browsers to position HTML elements in actively rendered documents. To
+use it for calculating layouts of non-HTML constructs, they must be
+replicated in active documents, so they can be parsed, laid out and
+rendered by the browser engine. These replicated constructs do not
+necessarily have to be visible, and they could also be removed from
+the document after the layout has been acquired, meaning they do not
+need to be noticeable at all. A strong limitation of using browser
+engines to calculate layouts is that it requires a browser runtime to
+work and, even though there are solutions like Electron available,
+which enable development of desktop applications using web
+technologies, this limitation forces applications into a very specific
+stack of technologies.
+
+
 
 \subsection{Yoga}
 \label{sec:Yoga}
 
-Yoga \parencite{Yoga} is a layout engine which enables the computation of layouts which are constrained using the grammar defined in the Flexbox layout module (see Section~\ref{sec:Flexbox}). 
-It is maintained by Facebook as an open-source project since 2016 \parencite{YogaRelease} with the goal of providing a small and high-performance library which can be used across all platforms. 
-This is achieved through the implementation being programmed in the C/C++ programming language, which works on a myriad of devices, with bindings available for other platforms like JavaScript, Android and iOS.
-Yoga has been very well adopted and is used to perform layouting in major frameworks such as React Native \parencite{ReactNative}, Litho \parencite{Litho} and ComponentKit \parencite{ComponentKit}.
+Yoga \parencite{Yoga} is a layout engine which enables the computation
+of layouts constrained using the grammar defined in the CSS Flexible
+Box layout module (see Section~\ref{sec:Flexbox}). It has been
+maintained by Facebook as an open-source project since 2016
+\parencite{YogaRelease}, with the goal of providing a small and
+high-performance library which can be used across all platforms. Yoga
+is implemented in C/C++, which works on a myriad of devices, with
+bindings available for other platforms like JavaScript, Android, and
+iOS. Yoga has been widely adopted and is used to perform layouting in
+major frameworks such as React Native \parencite{ReactNative}, Litho
+\parencite{Litho}, and ComponentKit \parencite{ComponentKit}.
+
+
 
 \subsection{FaberJS}
 \label{sec:FaberJS}
 
-FaberJS \parencite{FaberJS} is a layout engine which is very similar to the Yoga layout engine in the fact that it enables the computation of layouts for constructs other than HTML documents, using a layout grammar which has originally been created for CSS. 
-In contrast to Yoga, which is used to create one-dimensional layouts using the Flexbox layout grammar, FaberJS implements a two-dimensional layout algorithm which is built on the grammar of the Grid layout module (see Section~\ref{sec:Grid}). 
-This inherently two-dimensional approach to layouting is more suited to information visualization than trying to achieve two-dimensionality using a one-dimensional one. 
-FaberJS is an open-source JavaScript project and has been developed since 2019 by Idera, Inc.
-Even though the layouts it computes are constrained with the grid layout grammar, it only supports a subset of all the functionalities defined in the original CSS module. 
-Some examples of missing functionalities include missing support for margins, gaps and the \cssname{*-content} and \cssname{grid-auto-*} properties. 
-Working around the limitations caused by these missing features is not trivial, and it seems unlikely that support for them will be added by the FaberJS maintainers in the near future because, at the time of writing, the project has not been updated in nearly two years. 
+FaberJS \parencite{FaberJS} is a layout engine very similar to the
+Yoga layout engine in that it enables the computation of layouts for
+constructs other than HTML documents, using a layout grammar
+originally created for CSS. In contrast to Yoga, which is used to
+create one-dimensional layouts using the Flexbox layout grammar,
+FaberJS implements a two-dimensional layout algorithm built on the
+grammar of the CSS Grid layout module (see Section~\ref{sec:Grid}).
+This inherently two-dimensional approach to layouting is more suited
+to information visualization than a one-dimensional approach. FaberJS
+is an open-source JavaScript project developed since 2019 by
+Idera. Even though the layouts it computes are constrained with the
+Grid Layout grammar, it only supports a subset the functionality
+defined in the original CSS module. Some examples of missing
+functionaly include missing support for margins, gaps, and the
+\cssname{*-content} and \cssname{grid-auto-*} properties. Working
+around the limitations caused by these missing features is
+non-trivial, and it seems unlikely that support for them will be added
+by the FaberJS maintainers in the near future because, at the time of
+writing, the project has not been updated in nearly two years.
+
+
+
+
+
 
 \section{Responsive Web Design}
 \label{sec:RWD}
 
-Influenced by the increasing use of mobile devices and their vastly varying screen sizes, responsive web design has established itself as the predominant way of designing web pages. 
-The core idea of responsive web design is that instead of designing pages for different types of devices, website authors create a single design for a page which adapts to the characteristics of the consuming device. 
-The term "Responsive Web Design" has been defined by \textcite{ResponsiveWebDesign} where the author differentiates between flexible and responsive web designs. 
-It states that a flexible web design, which merely fluidly scales blocks of content to make them fit into the width of a browser window, is not enough to provide a good experience for users. 
-Such designs will work well enough for similarly sized viewports to the one they were created for, but they will lead to noticeable artifacts on lower resolutions. 
-These problems can be avoided by positioning the individual components of a page in a manner which provides them with enough space to render correctly.
-This can be achieved by using CSS media queries to adapt the overall layout of a page to the dimensions of the consuming device. 
-Another crucial part of responsive web design is to support the different modes of interaction inherent to the various types of devices used to access the web. 
-Desktop users might access a website using a mouse, mobile device users are usually interacting via touchscreens, and yet others might consume a page in a purely textual form with a screen reader which requires interaction via keyboard. 
-It is one of the mantras of responsive web design to provide smooth and complete access to information to all users, regardless of the device they are using. 
+Influenced by the increasing use of mobile devices and their vastly
+varying screen sizes, responsive web design has established itself as
+the predominant way of designing web pages. The core idea of
+responsive web design is that instead of designing pages for different
+types of devices, website authors create a single design for a page,
+which adapts to the characteristics of the consuming device. The term
+\enquote{Responsive Web Design} was defined by
+\textcite{Marcotte-ALA-RWD}, where the author differentiates between
+flexible and responsive web designs. A flexible web design, which
+merely fluidly scales blocks of content to make them fit into the
+width of a browser window, is not enough to provide a good experience
+for users. Such designs will work well enough for similarly sized
+viewports to the one they were created for, but they will lead to
+noticeable artifacts on lower resolutions.
+
+These problems can be avoided by positioning the individual components
+of a page in a manner which provides them with enough space to render
+correctly. This can be achieved by using CSS media queries to adapt
+the overall layout of a page to the dimensions of the consuming
+device. Another crucial part of responsive web design is to support
+the different modes of interaction inherent to the various types of
+devices used to access the web. Desktop users might access a website
+using a mouse, mobile device users typically interact via a
+touchscreen, and yet others might consume a page in a purely textual
+form with a screen reader and interact via a keyboard. It is one of
+the mantras of responsive web design to provide smooth and complete
+access to information to all users, regardless of the device they are
+using.
+
+
