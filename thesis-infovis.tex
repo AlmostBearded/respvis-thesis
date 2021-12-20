@@ -41,40 +41,49 @@ is certainly not the only example, as has been shown by
 \centering
 \tablestretch
 \rowcolors{3}{tablerowcolour}{}
-\begin{tabular}{rrrrrrrrr}
+\begin{small}
+\begin{tabular}{>{\kern-\tabcolsep}rcrrcrrcrrcrr<{\kern-\tabcolsep}}
 \toprule
 \hiderowcolors
-  & \multicolumn{2}{c}{$\mathbf{v_1}$} &
-    \multicolumn{2}{c}{$\mathbf{v_2}$} &
-    \multicolumn{2}{c}{$\mathbf{v_3}$} &
-    \multicolumn{2}{c}{$\mathbf{v_4}$} \\
-\cmidrule(l{1em}r){2-3}\cmidrule(l{1em}r){4-5}\cmidrule(l{1em}r){6-7}\cmidrule(l{1em}r){8-9}
-  & $x_1$ &  $y_1$ &   $x_2$ & $y_2$ &  $x_3$ &  $y_3$ &   $x_4$ &  $y_4$ \\
+  & \phantom{i} &
+  \multicolumn{2}{c}{$\mathbf{v_1}$} & \phantom{a} &
+  \multicolumn{2}{c}{$\mathbf{v_2}$} & \phantom{a} &
+  \multicolumn{2}{c}{$\mathbf{v_3}$} & \phantom{a} &
+  \multicolumn{2}{c}{$\mathbf{v_4}$} \\
+\cmidrule(l{1em}r){3-4}\cmidrule(l{1em}r){6-7}\cmidrule(l{1em}r){9-10}\cmidrule(l{1em}r){12-13}
+  & & $x_1$ &  $y_1$ & &  $x_2$ & $y_2$ & & $x_3$ &  $y_3$ & &  $x_4$ &  $y_4$ \\
 \midrule
 \showrowcolors
-  & 10.00 &   8.04 &  10.00 &  9.14 &  10.00 &   7.46 &   8.00 &   6.58 \\
-  &  8.00 &   6.95 &   8.00 &  8.14 &   8.00 &   6.77 &   8.00 &   5.76 \\
-  & 13.00 &   7.58 &  13.00 &  8.74 &  13.00 &  12.74 &   8.00 &   7.71 \\
-  &  9.00 &   8.81 &   9.00 &  8.77 &   9.00 &   7.11 &   8.00 &   8.84 \\
-  & 11.00 &   8.33 &  11.00 &  9.26 &  11.00 &   7.81 &   8.00 &   8.47 \\
-  & 14.00 &   9.96 &  14.00 &  8.10 &  14.00 &   8.84 &   8.00 &   7.04 \\
-  &  6.00 &   7.24 &   6.00 &  6.13 &   6.00 &   6.08 &   8.00 &   5.25 \\
-  &  4.00 &   4.26 &   4.00 &  3.10 &   4.00 &   5.39 &  19.00 &  12.50 \\
-  & 12.00 &  10.84 &  12.00 &  9.13 &  12.00 &   8.15 &   8.00 &   5.56 \\
-  &  7.00 &   4.82 &   7.00 &  7.26 &   7.00 &   6.42 &   8.00 &   7.91 \\
-  &  5.00 &   5.68 &   5.00 &  4.74 &   5.00 &   5.73 &   8.00 &   6.89 \\
+  & & 10.00 &   8.04 & &  10.00 &  9.14 & &  10.00 &   7.46 & &   8.00 &   6.58 \\
+  & &  8.00 &   6.95 & &   8.00 &  8.14 & &   8.00 &   6.77 & &   8.00 &   5.76 \\
+  & & 13.00 &   7.58 & &  13.00 &  8.74 & &  13.00 &  12.74 & &   8.00 &   7.71 \\
+  & &  9.00 &   8.81 & &   9.00 &  8.77 & &   9.00 &   7.11 & &   8.00 &   8.84 \\
+  & & 11.00 &   8.33 & &  11.00 &  9.26 & &  11.00 &   7.81 & &   8.00 &   8.47 \\
+  & & 14.00 &   9.96 & &  14.00 &  8.10 & &  14.00 &   8.84 & &   8.00 &   7.04 \\
+  & &  6.00 &   7.24 & &   6.00 &  6.13 & &   6.00 &   6.08 & &   8.00 &   5.25 \\
+  & &  4.00 &   4.26 & &   4.00 &  3.10 & &   4.00 &   5.39 & &  19.00 &  12.50 \\
+  & & 12.00 &  10.84 & &  12.00 &  9.13 & &  12.00 &   8.15 & &   8.00 &   5.56 \\
+  & &  7.00 &   4.82 & &   7.00 &  7.26 & &   7.00 &   6.42 & &   8.00 &   7.91 \\
+  & &  5.00 &   5.68 & &   5.00 &  4.74 & &   5.00 &   5.73 & &   8.00 &   6.89 \\
 \hiderowcolors
 \addlinespace[0.5em]
-\textbf{mean} & \textbf{9.00} & \textbf{7.50} & \textbf{9.00} & \textbf{7.50} &
-   \textbf{9.00} & \textbf{7.50} & \textbf{9.00} & \textbf{7.50} \\
-\textbf{sd}   & \textbf{3.3166} & \textbf{2.0316} & \textbf{3.3166} & \textbf{2.0317} &
-   \textbf{3.3166} & \textbf{2.0304} & \textbf{3.3166} & \textbf{2.0306} \\
+\textbf{mean} & &
+  \textbf{9.00} & \textbf{7.50} & &
+  \textbf{9.00} & \textbf{7.50} & &
+  \textbf{9.00} & \textbf{7.50} & &
+  \textbf{9.00} & \textbf{7.50} \\
+\textbf{sd} & &
+  \textbf{3.3166} & \textbf{2.0316} & &
+  \textbf{3.3166} & \textbf{2.0317} & &
+  \textbf{3.3166} & \textbf{2.0304} & &
+  \textbf{3.3166} & \textbf{2.0306} \\
 \bottomrule
 \end{tabular}
+\end{small}
 
 \caption[Anscombe's Quartet in Tabular Form]
 {
-The four variables (datasets) in Anscombe's Quartet look identical if
+The four datasets (variables) in Anscombe's Quartet look identical if
 only standard summary statistics like mean and standard deviation are
 considered. The difference between the datasets is only apparent after
 careful examination of the numbers.
