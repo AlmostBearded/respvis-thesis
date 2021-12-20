@@ -1,80 +1,149 @@
+
 \chapter{Information Visualization}
 \label{chap:InfoVis}
 
-Information visualization is the science of representing abstract information as interactive graphics to present and analyze it more efficiently.
-These two goals of presenting and analyzing abstract information in a visual form are built on the properties of human visual perception, which include the rapid scanning, recognition and recollection of visual information as well as the automatic detection of patterns in it.
-In contrast to textual representations of data, the processing of well-designed visualizations requires much less cognitive effort because it leverages features of the human visual processing system.
-One of these features is preattentive processing, which means that certain visual attributes can be processed very quickly and without any conscious effort \parencite{PreattentiveProcessing}.
+Information visualization seeks to use interactive graphics to present
+and analyze abstract information more efficiently. These two goals of
+presenting and analyzing abstract information in a visual form build
+on the properties of human visual perception, which include the rapid
+scanning, recognition, and recall of visual information, as well as
+the automatic detection of patterns within it. In contrast to textual
+representations of data, the processing of well-designed
+visualizations requires much less cognitive effort, because it
+leverages features of the human visual processing system. One of these
+features is \emph{preattentive processing}, whereby certain visual
+attributes can be processed very quickly and without conscious effort
+\parencite{PreattentiveProcessing}.
+% KA give an example of a pre-attentive feature
 
-In addition to visuals being easier to assimilate by humans, a purely textual and statistical view on data can also lead to erroneous assumptions as demonstrated by \textcite{AnscombesQuartet} in the infamous visualization of four completely different datasets which have identical summary statistics, called Anscombe's Quartet.
-An observer trying to understand these sets of data purely from their statistics would mistakenly deem them to be identical.
-Their inequality will only become obvious after carefully examining and comparing the individual entries in the datasets themselves.
-This is a tedious and error-prone task when not aided by visual representations like Figure~\ref{fig:AnscombesQuartet}.
-Even though Anscombe's Quartet is very likely the most famous example to demonstrate this characteristic, it is certainly not the only set of datasets which possesses it, as has been shown by \textcite{GenDataIdenticalStatisticsDissimilarGraphics}.
+
+In addition to visuals being easier to assimilate by humans, a purely
+textual and statistical view of data can also lead to erroneous
+assumptions, as demonstrated by Anscombe's famous visualization of
+four completely different datasets having identical summary statistics
+(mean and standard deviation), called Anscombe's Quartet
+\parencite{AnscombesQuartet}.
+% KA  need to see the data in a table too, to understand this!
+An observer trying to understand these datasets purely from their
+summary statistics would mistakenly deem them to be identical. Their
+inequality only becomes obvious after carefully examining and
+comparing the individual entries in the datasets themselves. This is a
+tedious and error-prone task when unaided by visual representations
+like Figure~\ref{fig:AnscombesQuartet}. Even though Anscombe's Quartet
+is very likely the most famous example to demonstrate this
+characteristic, it is certainly not the only example, as has been
+shown by \textcite{GenDataIdenticalStatisticsDissimilarGraphics}.
+
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{diagrams/anscombe.pdf}
+\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
+{diagrams/anscombe.pdf}
 \caption[Anscombe's Quartet]{
-  Anscombe's Quartet consists of four distinct sets of data which share identical summary statistics.
-  The difference between these datasets is only obvious by carefully examining the textual data or by plotting it.
-  \imgcredit{Image extracted from \textcite{IVISCourseNotes}. Used with kind permission by Keith Andrews.}
+Anscombe's Quartet consists of four distinct datasets which
+share identical summary statistics. The difference between
+these datasets is only apparent by carefully examining the
+textual data, but very obvious when plotting it graphically.
+\imgcredit{Image extracted from \textcite{IVISCourseNotes}.
+Used with kind permission by Keith Andrews.}
 }
 \label{fig:AnscombesQuartet}
 \end{figure}
 
-This thesis adheres to the separation of the field defined by \textcite{IVISCourseNotes}. 
-It is stated that the field of visualization is segmented into the three main subfields of information visualization, geographic visualization and scientific visualization. 
-Furthermore, the often used term "data visualization" is defined as the intersection of geographic visualization and information visualization.
 
+
+This thesis adheres to the characterization of the field of
+visualization having three main subfields, as defined by
+\textcite{IVISCourseNotes}:
 \begin{enumerate}
-\item Information Visualization: Deals with abstract data, which has no inherent presentation and for which a suitable type of visualization has to be chosen.
-\item Geographic Visualization: Deals with map-based data which has an inherent spatial dimension. 
-\item Scientific Visualization: Deals with object-related data which has inherent presentation, which is usually related to the object's real-world representation.
-\end{enumerate}
+\item \liintro{Information Visualization (InfoVis)}: Deals with
+  abstract data, which has no inherent geometry or visual form and for
+  which a suitable type of visualization has to be chosen.
 
-Visualizations presented in an interactive medium do not merely consist of visual representations.
-It is equally important to provide means for interacting with these representations to analyze more complex datasets.
-Without interactions, a visualization is just a static image and has only very limited use when dealing with large and multidimensional data.
-Even though the majority of the attention in the field of information visualization has been put on the presentational aspect of visualizations, much research has also been conducted on their interactive aspects.
-Many taxonomies have been formulated with the goal of defining the design space of interactions to support analytic reasoning, but they vary greatly depending on the concepts they are focusing on.
-Some taxonomies have been defined on the concept of low-level interaction techniques \parencite{TheEyesHaveIt,GrammarOfGraphics}, providing a very system-centric view on interaction. 
-Other taxonomies focus on user tasks \parencite{LowLevelComponentsOfAnalyticActivity} which are not necessarily strongly related to interacting with visualizations.
-\textcite{RoleOfInteractionInInformationVisualization} aims to provide a view in between the purely system-centric and purely user-centric extremes by defining a taxonomy based on user intent.
-The categories of this taxonomy are listed in Table~\ref{tab:UserIntentCategories}
-They form a good framework for the discussion of interactivity in the context of information visualization.
+\item \liintro{Geographic Visualization (GeoVis)}: Deals with
+  map-based data which has inherent 2d or 3d spatial geometry.
+
+\item \liintro{Scientific Visualization (SciVis)}: Deals with
+  real-world objects having inherent 2d or 3d geometry, which
+  is used as the basis for visualization.
+\end{enumerate}
+The often-used term \enquote{data visualization} (DazaVis) is defined
+as the combination of information visualization and geographic
+visualization.
+
+
+Visualizations presented in an interactive medium do not merely
+consist of visual representations. It is equally important to provide
+means for interacting with these representations to analyze more
+complex datasets. Without interactions, a visualization is just a
+static image and has only very limited use when dealing with large and
+multidimensional data. Even though the majority of the attention in
+the field of information visualization has been put on the
+presentational aspect of visualizations, much research has also been
+conducted on their interactive aspects. Many taxonomies have been
+formulated with the goal of defining the design space of interactions
+to support analytic reasoning, but they vary greatly depending on the
+concepts they are focusing on. Some taxonomies have been defined on
+the concept of low-level interaction techniques
+\parencite{TheEyesHaveIt,GrammarOfGraphics}, providing a very
+system-centric view on interaction. Other taxonomies focus on user
+tasks \parencite{LowLevelComponentsOfAnalyticActivity} which are not
+necessarily strongly related to interacting with visualizations.
+\textcite{RoleOfInteractionInInformationVisualization} aims to provide
+a view in between the purely system-centric and purely user-centric
+extremes by defining a taxonomy based on what a user wants to achieve,
+also known as \emph{user intent}. The categories of this taxonomy are
+shown in Table~\ref{tab:UserIntentCategories}. They provide a good
+framework for the discussion of interactivity in the context of
+information visualization.
+
+% HERE  Read Yi paper and check table
 
 \begin{table}[tp]
 \tablestretch
 \rowcolors{2}{}{tablerowcolour}
 \centering
-\begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}lXX<{\kern-\tabcolsep}}
+\begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}lL{0.35\linewidth}X<{\kern-\tabcolsep}}
 \toprule
 Category & Description & Examples \\
 \midrule
-Select & Mark items as interesting. & \\
-Explore & Show different items. & Panning, direct-walk \\
-Reconfigure & Show a different arrangement. & Dimension configuration, position adjustments \\
-Encode & Show a different representation. & Change chart type, orientation, colors, shapes, ... \\
-Abstract/Elaborate & Show more or less detail. & Details-on-demand (drill-down, sunburst, tooltips, zooming) \\
-Filter & Show items based on conditions. & Dynamic query controls \\
-Connect & Show related items. & Highlight connected items, highlight item in different representations \\
+Select               & Mark items as interesting. & \\
+Explore              & Show different items. & Panning, direct-walk \\
+Reconfigure          & Show a different arrangement. & Dimension configuration, position adjustments \\
+Encode               & Show a different representation. & Change chart type, orientation, colors, shapes, ... \\
+Abstract / Elaborate & Show more or less detail. & Details-on-demand (drill-down, sunburst, tooltips, zooming) \\
+Filter               & Show items based on conditions. & Dynamic query controls \\
+Connect              & Show related items. & Highlight connected items, highlight item in different representations \\
 \bottomrule
 \end{tabularx}
 \caption[Categories of Interaction Based on User Intent]{
-  This table shows the categories of interacting with visualizations based on user intent.
-  \imgcredit{Table adapted from \textcite{RoleOfInteractionInInformationVisualization}}
+Categories of interaction with visualizations based on what
+a users wants to achiev (user intent).
+\imgcredit{Adapted from \textcite{RoleOfInteractionInInformationVisualization}}
 }
 \label{tab:UserIntentCategories}
 \end{table}
 
 
 
+
+
+
 \section{History of Information Visualization}
 
-The history of information visualization goes back a long time.
-One of its earliest examples dates back to the 10th century, when an unknown astronomer created the chart about the movement of prominent planets \parencite{CommentariiInSomniumScipionis} shown in Figure~\ref{fig:PlanetaryMovements}.
-Other noteworthy early visualizations include the first occurrence of the principle \textcite{VisualDisplayOfQuantitativeInformation} later coined "small multiples" in the 1626 chart demonstrating sunspot changes seen in Figure~\ref{fig:SunspotChanges} by \textcite{RosaUrsina}, and the 1644 chart displaying longitudinal distance determinations between Toledo and Rome seen in Figure~\ref{fig:RomeToledoLongitude} by Michael Florent van Langren.
+The history of information visualization goes back a long time.  One
+of its earliest examples dates back to the 10th century, when an
+unknown astronomer created the chart about the movement of prominent
+planets \parencite{CommentariiInSomniumScipionis} shown in
+Figure~\ref{fig:PlanetaryMovements}.  Other noteworthy early
+visualizations include the first occurrence of the principle
+\textcite{VisualDisplayOfQuantitativeInformation} later coined "small
+multiples" in the 1626 chart demonstrating sunspot changes seen in
+Figure~\ref{fig:SunspotChanges} by \textcite{RosaUrsina}, and the 1644
+chart displaying longitudinal distance determinations between Toledo
+and Rome seen in Figure~\ref{fig:RomeToledoLongitude} by Michael
+Florent van Langren.
+
 
 \begin{figure}[tp]
 \centering
