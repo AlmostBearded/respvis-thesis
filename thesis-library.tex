@@ -29,7 +29,7 @@ CSS already has the capability to modify the visual appearance of elements and t
 Unfortunately, CSS-based layouting does not affect SVG elements.
 This seriously limits responsive possibilities of styling SVG charts with CSS.
 Without powerful CSS layout technologies like Flexbox or Grid, all the individual components of an SVG chart would have to be positioned manually via JavaScript.
-To enable laying out of SVG elements with CSS, a special Layouter component has been developed which calculates positions of SVG elements via their CSS configuration and applies them.
+To enable laying out of SVG elements with CSS, a special Layouter component has been developed that calculates positions of SVG elements via their CSS configuration and applies them.
 This offers visualization authors comparable configurability to what they are used to when styling HTML documents for when they are styling SVG charts.
 With this approach, visualization authors are not required to understand any library specific APIs and can simply apply the knowledge of CSS-based styling they most likely already possess.
 Since CSS can only be applied to documents, RespVis does not support rendering to HTML canvas elements because graphics rendered there are not exposed to the document and therefore can not be affected by CSS.
@@ -107,31 +107,35 @@ The hierarchy of component layers in the RespVis library can be seen in Figure~\
 \label{fig:Layers}
 \end{figure}
 
+% https://github.com/papers-we-love/papers-we-love/blob/master/design/out-of-the-tar-pit.pdf
+% https://blog.klipse.tech/databook/2020/10/02/separate-code-data.html
+
 \section{Naming Conventions}
 \label{sec:NamingConventions}
 
 The naming of entities in RespVis follows the same naming conventions that are used in D3 modules.
-In D3-related modules, it is common that entity names start with their general type and are further narrowed down until the exact entity is described accurately.
-This convention does not have a name, but it is referred to as "top-down naming" in this work.
+In D3-related modules, it is common that names of entities start with the name of the group an entity belongs to.
+These names are then further narrowed down by successively adding more words until the exact entity is described accurately.
+This convention is not explicitly named, but it is referred to as "top-down naming" in this work.
 An example of the top-down naming convention can be seen in the \code{d3-scale} \parencite{D3Scale} and \code{d3-axis} \parencite{D3Axis} modules, in which entities are called things like \code{scaleLinear}, \code{scaleOrdinal}, \code{axisBottom}, and \code{axisLeft} rather than \code{linearScale}, \code{ordinalScale}, \code{bottomAxis}, and \code{leftAxis}.
 Since this is the exact opposite of how these entities would be called in the natural english language, using such names can feel odd for the uninitiated. 
 However, the experience of working with APIs following such a naming convention is superior to when they do not.
 The reason for this is that users of such APIs can easily discover specialized entities by inputting the general entity type and browsing through code completion suggestions provided by their development tools.
 Due to this superiority and to stay consistent with other D3 modules, the decision has been made that entity names in RespVis should also follow this convention.
+
 The public interface of the library is mostly made up of types and functions.
 Types are usually written as interfaces and represent the shape of an object. 
 Their names are written in \code{PascalCase} and adhere to the top-down naming convention.
 They always start with the group a type belongs to and further words are successively added to distinguish gradually more specialized types.
 The naming of types can best be demostrated by the different names given to different kinds of bar charts.
 Normal bar charts are called \code{ChartBar}, grouped bar charts are called \code{ChartBarGrouped}, and stacked bar charts are called \code{ChartBarStacked}.
+
 The API of RespVis is mainly composed of functions.
 Function names are always written in \code{camelCase} and also follow the top-down naming convention.
-They always start with the type of object they operate followed by the operation they perform.
-Names of functions that create the data of a specific component are always in the form of \code{componentNameData}, such as \code{chartBarData} or \code{chartBarGroupedData}.
-The names of functions that render specific components are always in the form of \code{componentNameRender}, such as \code{chartBarRender} or \code{chartBarGroupedRender}. 
-
-% https://github.com/papers-we-love/papers-we-love/blob/master/design/out-of-the-tar-pit.pdf
-% https://blog.klipse.tech/databook/2020/10/02/separate-code-data.html
+They always start with the type of object on which they operate, followed by the operation they perform.
+A component in RespVis always consists of a data object, an element to which the data object is bound, and a render function that transforms the data into some form of visual representation.
+The names of functions that create component data objects are always in the form of \code{componentNameData}, such as \code{chartBarData} or \code{chartBarGroupedData}.
+Functions that transform bound data into the visual representation of a component are always named in the form of \code{componentNameRender}, such as \code{chartBarRender} or \code{chartBarGroupedRender}. 
 
 
 \section{Project Setup}
