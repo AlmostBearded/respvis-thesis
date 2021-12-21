@@ -157,29 +157,45 @@ shown in Table~\ref{tab:UserIntentCategories}. They provide a good
 framework for the discussion of interactivity in the context of
 information visualization.
 
-% HERE  Read Yi paper and check table
+% KA: I Read the Yi paper and quoted their descriptions exactly.
 
 \begin{table}[tp]
 \tablestretch
 \rowcolors{2}{}{tablerowcolour}
 \centering
+\begin{small}
 \begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}lL{0.35\linewidth}X<{\kern-\tabcolsep}}
 \toprule
 Category & Description & Examples \\
 \midrule
-Select               & Mark items as interesting. & \\
-Explore              & Show different items. & Panning, direct-walk \\
-Reconfigure          & Show a different arrangement. & Dimension configuration, position adjustments \\
-Encode               & Show a different representation. & Change chart type, orientation, colors, shapes, ... \\
-Abstract / Elaborate & Show more or less detail. & Details-on-demand (drill-down, sunburst, tooltips, zooming) \\
-Filter               & Show items based on conditions. & Dynamic query controls \\
-Connect              & Show related items. & Highlight connected items, highlight item in different representations \\
+Select &
+  Mark something as interesting. &
+  Highlighted selections, placemarks, assigning classes. \\
+Explore &
+  Show me something else. &
+  Different subset of data, panning, direct-walk. \\
+Reconfigure &
+  Show me a different arrangement. &
+  Sorting, rearranging columns, plotting different dimensions, using an alternative projection. \\
+Encode &
+  Show me a different representation. &
+  Changing visual encoding (color, size, shape), or even chart type. \\
+Abstract / Elaborate &
+  Show me more or less detail. &
+  Details-on-demand, drill-down and roll-up, tooltips, zooming in and out. \\
+Filter &
+  Show me something conditionally. &
+  Dynamic queries, range sliders, toggle buttons, query by example. \\
+Connect &
+  Show me related items. &
+  Brushing across views, highlighting connected items on mouseover. \\
 \bottomrule
 \end{tabularx}
+\end{small}
 \caption[Categories of Interaction Based on User Intent]{
 Categories of interaction with visualizations based on what
-a users wants to achiev (user intent).
-\imgcredit{Adapted from \textcite{RoleOfInteractionInInformationVisualization}}
+a user wants to achieve (user intent).
+\imgcredit{From \textcite{RoleOfInteractionInInformationVisualization}}
 }
 \label{tab:UserIntentCategories}
 \end{table}
