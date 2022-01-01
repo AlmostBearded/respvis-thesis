@@ -1,0 +1,22 @@
+.chart {
+  display: grid;
+  grid-template: 25rem 15rem / 50% 50%;
+  grid-template-areas:
+    'a b'
+    'c c';
+}
+
+.box[data-index=0] {
+  grid-area: a;
+  fill: red;
+}
+
+.box[data-index=1] {
+  grid-area: b;
+  fill: green;
+}
+
+.box[data-index=2] {
+  grid-area: c;
+  fill: blue;
+}

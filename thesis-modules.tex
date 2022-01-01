@@ -225,9 +225,169 @@ Since only the \code{d} attribute of a path needs to change when the path's shap
 
 \subsection{Layouter}
 
-% layouter
+The Layouter is the most novel contribution of this work.
+It is a component that is wrapped around an SVG document and allows to configure the layout of elements in this document with CSS.
+Instead of implementing a custom layout algorithm, the Layouter builds on layout engines integrated in browsers, which have already been summarized in Section~\ref{sec:BrowserEngines}.
+Earlier proof of concept implementations used the FaberJS \parencite{FaberJS} and Yoga \parencite{Yoga} layout engines to calculate layouts, but these implementations were not further pursued because they limited layouting to either Grid or Flexbox-based constraints.
+Furthermore, the use of already existing browser functionality in the current implementation leads to a reduced bundle size and to visualization authors being able to use all the layouting capabilities natively offered by browsers.
+
+CSS has always been the foundation of responsive web design for HTML-based websites because of its ability to adapt the presentation of elements and the possibility of defining different presentations for different contexts via media queries.
+A large part of the responsive power that CSS offers comes from its ability to change the positioning and layout of elements.
+As already mentioned in previous chapters, CSS can be used to style certain aspects of SVG documents, but it is not possible to use CSS layouting techniques to position SVG elements.
+Even though there are already other visualization libraries such as Chartist \parencite{Chartist} and Highcharts \parencite{Highcharts} that allow the use of CSS to style visualizations, none of them offer the possibility to modify the layout of visualizations via CSS.
+This means that visualization authors have to learn and use custom APIs to position elements, which limits the range of possible layouts to those supported by the individual libraries. 
+
+The Layouter distinguishes between laid-out and non-laid-out elements because not every element in a visualization profits from being laid out by it. 
+Laid-out elements are elements whose position and size are being calculated by the Layouter, whereas non-laid-out elements are ignored during the layout process. 
+Theoretically, the layouter could be used to position all elements of a visualization since it is only necessary to determine a good mapping that maps a rectangular bounding box to the desired SVG shape for each element.
+However, the positioning of elements in a visualization is constrained more strictly than the positioning of elements in typical HTML documents.
+The content of a visualization is communicated more through visual features such as position, size, and shape of elements rather than simply through text which can be positioned much more freely.  
+For this reason, many elements of a visualization must be positioned at specific locations with specific dimensions, which means there is very little profit in laying them out with an elaborate layout algorithm.
+These exactly-positioned elements like the \code{<rect>} elements of bar series and the \code{<circle>} elements of point series are usually positioned directly via their SVG attributes.
+Positioning them via the Layouter would be rather pointless and only cause unnecessary overhead.
+
+The layout process can be seen in Figure~\ref{fig:LayoutProcess} and consists of three phases that have been implemented in the \code{layouterCompute} function:
+\begin{enumerate}
+\item Replication:
+The structure of the SVG document that shall be laid out must be replicated with HTML \code{<div>} elements. These elements are referred to as \enquote{layout elements} and they have the same classes and \code{data-*} attributes as the original SVG elements they are replicating.
+This replication of the SVG document with HTML documents is necessary because CSS-based positioning can only affect HTML elements.
+
+\item Layout:
+The replicated layout elements are affected by CSS rules that configure their positioning and are automatically laid out by browsers. 
+If the Selectors of CSS rules used to style SVG elements only select them using classes and \code{data-*} attributes, the layout of these elements can be directly configured in these rules because they will also be applied to the corresponding layout elements.
+
+\item Synchronization:
+The positions of the layout elements are synchronized with their respective SVG elements.
+This means that the calculated bounding boxes of layout elements are set as \code{bounds} attributes on SVG elements, which can be used in subsequent renderings.
+In addition to that, the Layouter sets different default attributes on different types of SVG elements that aim to represent the boundaries of individual elements.
+\end{enumerate}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{diagrams/respvis-layout-process.pdf}
+\caption[Layout Process of the Layouter]{
+  This diagram shows the three phases of the layout process of the RespVis Layouter. 
+  During the replication phase, the SVG document that shall be laid out is replicated with HTML \code{<div>} elements. 
+  Afterward, these HTML elements are laid out by the browser in the layout phase, and the positions of the laid-out HTML elements are applied to their respective SVG elements during the synchronization phase.
+  \imgcredit{Image created by the author of this thesis using \href{https://www.diagrams.net/}{diagrams.net}.}
+}
+\label{fig:LayoutProcess}
+\end{figure}
+
+
+During the replication process, the structure of an SVG document is replicated with HTML \code{<div>} elements. 
+This replication was implemented using a hierarchical D3 data join in which the original SVG elements are bound as data objects to layout elements.
+This hierarchical data join results in a counterpart in the hierarchy of layout elements for each SVG element that should be affected by the layouter.
+Since not every SVG element should be positioned via the Layouter, the Layouter must know which to ignore.
+For this, the \code{data-ignore-layout} and \code{data-ignore-layout-children} attributes have been introduced.
+Elements that have the \code{data-ignore-layout} attribute or are children of elements that have the \code{data-ignore-layout-children} attribute will not be replicated.
+
+To configure the layout of layout elements in CSS, it must be possible to select them uniquely with a CSS Selector.
+This Selector should be as similar as possible to the Selector of the original SVG element to make it as easy as possible to configure the CSS properties of layout elements.
+For this purpose, the class attributes and all data-* attributes of SVG elements are copied to their corresponding layout elements.
+In addition to the classes of the replicated SVG element, the layout class is set on all layout elements.
+By doing this, it is possible to specifically select the layout element of an SVG element via the same Selector by adding the layout class to the same Selector. 
+If CSS rules of SVG elements use only classes and data attributes in their Selectors, the properties of corresponding layout elements can directly be configured in the same rules.
+An example of how the replicated layout element tree of an SVG document looks can be seen in Listing~\ref{list:LayouterStructure}.
+Furthermore, an example of CSS rules that set various properties of SVG elements and their layout elements can be seen in Listing~\ref{list:LayouterCSS}.  
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:LayouterStructure,
+  caption={[Replicated Layout Structure of an SVG Document]%
+    The replicated layout element structure of an SVG document.
+    Every SVG element has a corresponding layout element that has the same classes and \code{data-*} attributes.
+    In addition to the classes of the original SVG element, every layout element also has the \code{layout} class to allow specific targeting of layout elements via CSS Selectors.
+  },
+]{listings/layouter-structure.html}
+\end{samepage}
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:LayouterCSS,
+  caption={[CSS Rules to Style SVG]%
+    These CSS rules are used to configure the layout and style of an SVG document that is being laid out by the Layouter.
+    Since the Selectors of these CSS rules only use \code{class} and \code{data-*} attributes to match elements, the same rule can be used to configure the properties of an SVG element and its corresponding layout element.  
+    The structure of the SVG document and its replicated layout elements can be seen in Listing~\ref{list:LayouterStructure}.
+  },
+]{listings/layouter-css.css}
+\end{samepage}
+
+The size of dynamically-sized elements depends on the size of their content.
+Since layout elements exist separately from their SVG elements and can not access their content, a manual solution had to be implemented that sets the size of layout elements to the content size of their SVG elements when required.
+An example of dynamically-sized elements is \code{<text>} elements because their size is rarely declared in absolute units and usually depends on the size of their text contents. 
+The custom \code{--fit-width} and \code{--fit-height} CSS properties were introduced to activate the manual copying of dimensions from SVG elements to their layout elements. 
+These boolean properties can be set in CSS rules and are being checked during the replication phase via the \code{window.getComputedStyle} method.
+If at least one of these properties is set to true, the dimensions of the SVG element are calculated with the \code{Element.getBoundingClientRect} method and respectively set as \code{width} or \code{height} properties of the \code{style} attribute on the corresponding layout element.
+By doing this, layout elements will have the same size as their svg elements and can be properly used in the calculation of the overall layout. 
+
+Layout elements are automatically laid out by the browser during the layout phase of the layout process. 
+Since the layout elements are simply \code{<div>} elements that have been styled in CSS rules, the browser can position them automatically via its integrated layout engine.
+This positioning happens as soon as the layout elements have been rendered.
+After this, the final bounding boxes of layout elements can be calculated and used for further operations.  
+
+In the synchronization phase of the layout process, the Layouter iterates over all the layout elements, calculates their bounding boxes, and set this boundary information as attributes on the corresponding SVG elements.
+Bounding boxes of layout elements are calculated relative to their parent elements using the \code{elementRelativeBounds} utility function.
+This bounding box is then converted to its string representation via the \code{rectToString} utility function and set as the \code{bounds} attribute on the corresponding SVG elements. \TODO{Rename bounds attr to data-bounds}
+The \code{bounds} attribute can then be deserialized to a \code{Rect} object whenever the bounding box of an SVG element is needed in subsequent renderings of SVG components. 
+In addition to setting the \code{bounds} attribute of SVG elements, the Layouter also sets specific attributes on different types of SVG elements that make them fit into their calculated bounding boxes.
+These attributes can, of course, be overwritten in later renderings, but they represent sensible defaults that express the boundaries of laid-out elements.
+If the Layouter would not set these default attributes, they would have to be set manually on every laid-out element during the rendering process, which would be less convenient and lead to duplicated code in various places.
+For SVG elements that can be mapped directly to rectangular areas, such as \code{<svg>} and \code{<rect>} elements, the Layouter sets the \code{x}, \code{y}, \code{width}, and \code{height} attributes to the values of their bounding boxes.
+SVG shape elements that have explicit sizes and positions but are not rectangular, such as \code{<circle>} and \code{<line>} elements, also receive attributes that make them fit into their boundaries. 
+Other SVG elements that are not explicitly sized, such as \code{<g>} and \code{<text>} elements, are merely moved to the correct position by setting their \code{transform} attribute to a translation so that their top-left corners aligns with the top-left corners of their bounding boxes. 
+The Layouter does not automatically recalculate the dimensions of exactly-positioned elements based on the changed dimensions of the composite \code{<svg>} or \code{<g>} element containing them.
+This has to be manually implemented in the render functions of the various components.
+
+Using the Layouter requires a more complex rendering process than would be needed if the boundaries of elements would already be known before rendering them.
+The way the Layouter works, some elements need to be rendered before calculating the layout, and afterward, when the positions and sizes of all elements are known, the visualization needs to be rendered in its final form. 
+This visualization rendering process when using the Layouter consists of three phases and is shown in Figure~\ref{fig:RenderProcess}.
+The three phases of the render process are the first rendering phase to render elements affecting the layout, the layouting phase, and the second rendering phase to render elements affected by the layout.
+In the first rendering phase, all elements and attributes that affect the layout of a visualization need to be rendered.
+This mostly includes laid-out container \code{<svg>} and \code{<g>} elements that contain exactly-positioned child elements, but it also means that the contents of dynamically-sized elements, such as \code{<text>} elements and axes, need to be fully rendered in this phase too.
+The layouting phase is where all the operations of the already-described layout process are being performed.
+During this phase, the bounding boxes of laid-out elements are calculated and persisted as attributes that can be accessed during the second rendering phase.
+In the second rendering phase, the desired bounding box position and size of every element is known and can be used to perform a second rendering of the complete visualization.
+Here, every element affected by the layout, which is every element, is rendered at its final position with its final dimensions.
+In theory, the first and second rendering phases of components could be implemented in separate functions.
+However, it is more convenient to invoke the same render function twice and perform some operations only if the appropriate \code{bounds} attribute has already been set.
+
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{diagrams/respvis-render-process.pdf}
+\caption[Render Process When Using the Layouter]{
+  This diagram shows the three phases of the render process when using the RespVis Layouter. 
+  During the first render phase, every element that affects the layout needs to be rendered.
+  The layout phase of the render process is equivalent to the layout process described in Figure~\ref{fig:LayoutProcess}.
+  In this phase, the Layouter calculates the final positions and sizes of laid-out elements and stores them as attributes on the SVG elements.
+  During the second render phase, all elements of the visualization are rendered at their final positions with their final dimensions by using the boundary information calculated in the layout phase.
+  \imgcredit{Image created by the author of this thesis using \href{https://www.diagrams.net/}{diagrams.net}.}
+}
+\label{fig:RenderProcess}
+\end{figure}
+
 
 \subsection{Axes}
+
 
 % base
 % bottom axis
