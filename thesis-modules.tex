@@ -388,10 +388,69 @@ However, it is more convenient to invoke the same render function twice and perf
 
 \subsection{Axes}
 
+% axisData
+%   scale
+%   title
+%     orientation
+%   subtitle
+%     orientation
+%   configureAxis
+%     d3 axis
+%   default values
+% axisRender
+%   structure
+%     .title (dynamically sized wh)
+%     .subtitle (dynamically sized wh)
+%     .ticks-transform (dynamically sized w or h) warum?
+%       .ticks
+%     laid out with CSS Grid
+%   d3 axis function to render ticks
+%     delete attributes and use data attributes and css to configure presentation of axis
+% axisBottomRender
+%   .axis-bottom
+%   CSS grid with 3 rows and 1 full width column
+%   title and subtitle orientations
+%   tick text alignment
+% axisLeftRender
+%   .axis-left
+%   CSS grid with 3 columns and 1 full height row
+%   title and subtitle orientations
+%   tick text alignment
 
-% base
-% bottom axis
-% left axis
+achsen werden verwendet um scales, welche das mapping von abstrakten werten auf zwei-dimensionale positionen representieren, zu visualisieren.
+Die implementierung aller verfuegbaren Achsen komponenten kann in der \code{axis.ts} datei im core module gefunden werden.
+momentan werden von der RespVis library nur kartesische achsen zur verfuegung gestellt da bislang nur kartesische charts implementiert wurden.
+diese kartesischen achsen komponenten werden per ihrer position relativ zu der draw area einer visualisierung unterschieden und zum aktuellen zeitpunkt wurden nur left and bottom axis components in der RespVis library implementiert.
+Dies sind die mit abstand am haeufigsten angetroffenen positionierungen von kartesischen achsen und wurden gewaehlt, da mit ihnen die meisten use cases abgedeckt werden koennen. 
+Eine achse besteht aus ticks, welche die eigentliche visualisierung einer scale sind, und aus einem optionalen titel und untertitel, welche gerendert werden koennen um die konfiguration der visualisierten scale zusaetzlich zu beschreiben. 
+Ein Beispiel dafuer wie eine gerenderte left und bottom axis aussehen koennte, kann in Figure~\ref{fig:Axes} gesehen werden. 
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{diagrams/axes.pdf}
+\caption[RespVis Axis Components]{
+  This figure shows how a rendered left and bottom axis may look like.
+  The left axis consists of a title, subtitle, and ticks, whereas the bottom axis only consists of ticks and a title. 
+  \imgcredit{Image created by the author of this thesis using RespVis and \href{https://inkscape.org/}{Inkscape}.}
+}
+\label{fig:Axes}
+\end{figure}
+  
+
+Das \code{Axis} interface beschreibt die shape eines data objects mit welchem das rendering einer achse konfiguriert werden kann.
+Es beinhaltet ein \code{scale} property, welches die scale representiert die visualisiert werden soll, die \code{title} und \code{subtitle} string properties, und das \code{configureAxis} function property, welches verwendet werden kann um die darunterliegende D3 axis zu konfigurieren bevor sie rendered wird.  
+wie auch die meisten anderen komponenten bestehen auch achsen komponenten hauptsaechlich aus zwei funktionen: einer data creation funktion und einer render funktion.
+die \code{axisData} funktion wird verwendet um ein data object in der form des \code{Axis} interfaces zu erzeugen.
+sie wird mit einem \code{Partial<Axis>} object als parameter aufgerufen und liefert ein neues object bei dem alle nicht-gesetzten aber benoetigten properties des parameter objektes mit standardwerten befuellt wurden.
+die \code{axisBottomRender} und \code{axisLeftRender} funktionen werden verwendet um eine left oder bottom axis in einem composite element zu rendern auf welchem eine achse mittels eines gebundenen \code{Axis} data object konfiguriert wurde. 
+diese beiden render functions verwenden die nicht-exportierte \code{axisRender} base function um duplizierten code zu vermeiden.
+alle achsen haben die selbe struktur von elementen und werden so viel wie moeglich ueber CSS positioniert und gestyled.
+Der root einer achse ist ein CSS Grid container und definiert das layout der title, subtitle und ticks elemente.
+Die standardkonfiguration einer left axis positioniert diese elemente in einem three-column layout in welchem die title, subtitle und ticks elemente in dieser reihenfolge von links nach rechts plaziert werden.
+Bei einer bottom axis sieht die standardkonfiguration eine positionierung derselben elemente in einem three-row layout vor in welchem die ticks, title und subtitle elemente in dieser reihenfolge von oben nach unten plaziert werden.
+Weiters werden die title und subtitle elemente einer left axis mittels der \code{textOrientation} utility function vertikal orientiert um horizontalen platz zu sparen.
+Die RespVis achsen komponenten verwenden intern jeweils die \code{axisBottom} und \code{axisLeft} funktionen aus dem D3 axis module \parencite{D3Axis} um die ticks einer achse zu rendern.
+da diese D3 funktionen attributes verwenden um die einzelnen elemente der ticks einer achse zu positionieren und zu stylen, muessen diese attributes direkt nachdem die ticks gerendert wurden soweit es geht entfernt werden um die konfiguration via CSS zu ermoeglichen. 
 
 \subsection{Chart}
 
