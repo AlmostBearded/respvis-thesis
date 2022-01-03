@@ -874,6 +874,7 @@ combined.
 
 
 
+
 \subsection{Template-Based Visualization Libraries}
 
 Template-based visualization libraries work by providing templates for
@@ -883,52 +884,49 @@ Vega because they offer a concise form of configuration which does not
 require users to have detailed knowledge over the underlying rendering
 technology or complex, non-standardized domain specific languages.
 Even though these types of libraries are usually flexible enough to
-create a huge range of visualizations, at one point users may run into
-limitations.  Some of these limitations can not be worked around and
-require the writing of custom source code which requires a deep
-understanding of the underlying library.  This effectively eliminates
-the ease-of-use benefit of these types of libraries for users that run
-into these limitations.
+create a huge range of visualizations, at some point users may run
+into limitations. Some of these limitations can only be worked around
+by writing custom source code, which requires a deep understanding of
+the underlying library. This effectively eliminates the ease-of-use
+benefit of these types of libraries for users who run into these
+limitations.
 
 For this thesis, a total of 20 template-based JavaScript visualization
-libraries have been collected and compared by different factors such
-as their rendering technology, usage popularity, open-source
-popularity, license, and recent development activity.  In terms of
-rendering technology, most libraries render visualizations as either
-SVG documents or canvas elements, though some implement a hybrid
-renderer which can be configured to render as either one of them.
-Usage popularity has been measured by the cumulative package downloads
-from the npm package manager over the last twelve months.  This has
-been deemed one of the most relevant metrics for the comparison
-because it reflects actual user behavior and gives an indication on
-how widespread a library is used in practice.  The 20 libraries found
-in the initial collection phase were filtered by their usage
-popularity and recent development activity to remove those which were
-not sufficiently used or maintained anymore.  This filtering step
-yielded the following ten libraries: (1) ChartJS \parencite{ChartJS},
-(2) Highcharts \parencite{Highcharts}, (3) ECharts
-\parencite{ECharts}, (4) ApexCharts \parencite{ApexCharts}, (5)
-PlotlyJS \parencite{PlotlyJS}, (6) C3JS \parencite{C3JS}, (7) Chartist
-\parencite{Chartist}, (8) amCharts \parencite{amCharts}, (9)
+libraries were examined and compared according to factors such as
+their rendering technology, usage popularity (number of downloads),
+open-source popularity, license, and recent development activity.  In
+terms of rendering technology, most libraries render visualizations as
+either SVG documents or canvas elements, although some implement a
+hybrid renderer which can be configured to render as either one of
+them. Usage popularity was measured by the cumulative package
+downloads from the npm package manager over the previous twelve
+months. This was deemed one of the most relevant metrics for the
+comparison, because it reflects actual user behavior and gives an
+indication on how widespread a library is used in practice. The 20
+libraries found in the initial collection phase were filtered by their
+usage popularity and recent development activity to remove those which
+were not sufficiently used or no longer maintained. This filtering
+step yielded the following ten libraries: (1) ChartJS
+\parencite{ChartJS}, (2) Highcharts \parencite{Highcharts}, (3)
+ECharts \parencite{ECharts}, (4) ApexCharts \parencite{ApexCharts},
+(5) PlotlyJS \parencite{PlotlyJS}, (6) C3JS \parencite{C3JS}, (7)
+Chartist \parencite{Chartist}, (8) amCharts \parencite{amCharts}, (9)
 billboardJS \parencite{billboardJS}, and (10) D3FC \parencite{D3FC}.
-These libraries have been selected for deeper evaluation because they
-are heavily used and, for the most part, still actively maintained.
-The focus of this more detailed analysis is on summarizing these
-libraries based on high-level features and responsive capabilities.
+These ten libraries were selected for further consideration.
 
-Eight of those ten libraries are completely free to use without
+Eight of the ten libraries are completely free to use without
 restrictions, amCharts has a free license for users who are
 comfortable with an attribution logo on their visualizations, and
 Highcharts offers a free license option for non-profit, educational
-and personal applications.  Nine libraries implement an SVG-based
-renderer, two of which (ECharts, D3FC) offer alternative rendering to
-canvas elements for high-performance scenarios, and only ChartJS
-purely targets canvas-based rendering.  Eight libraries are very
-actively maintained with most of them showing development activity
-within the last month.  Only C3JS and Chartist do not seem to be
-actively maintained anymore, but they nonetheless have been included
-in the deeper evaluation because of their historic and thematic
-relevance and because they are still widely used.
+and personal applications. Nine of the libraries implement an
+SVG-based renderer, two of which (ECharts and D3FC) also offer
+alternative rendering to Canvas elements for high-performance
+scenarios, and only ChartJS solely targets canvas-based rendering.
+Eight libraries are very actively maintained with most of them showing
+development activity within the last month. C3JS and Chartist seem to
+be no longer actively maintained, but were included nontheless in the
+deeper evaluation, due to their historic and thematic relevance and
+because they are still widely used.
 
 Template-based visualization libraries have a strong inclination
 towards designing their APIs according to principles of declarative
@@ -936,66 +934,38 @@ programming.  APIs following these principles allow users to describe
 a desired state they want the underlying system to be in.  This is in
 strong contrast to the typical imperative way of designing APIs in
 which users are instead given a set of tools to query and modify a
-system's state.  The difference can be summarized in simple terms as:
-Using declarative APIs, users specify what state shall be achieved,
-whereas when using imperative APIs, users specify how a certain state
-is achieved.  Declarative APIs are typically built on top of
+system's state. The difference can be summarized in simple terms as
+follows: With declarative APIs, users specify what state shall be
+achieved, whereas with imperative APIs, users specify how a certain
+state is achieved. Declarative APIs are typically built on top of
 lower-level imperative APIs and can therefore be seen as a higher
-level of abstraction over them.  They are popular among developers
+level of abstraction over them. They are popular among developers
 because they are expressive, easy to use and effectively encapsulate
-complexity which would otherwise have to be handled by users.  An
-often overlooked disadvantage of declarative APIs is that they
-frequently only provide high-level access to a system and that more
-specific use cases might not be achievable if they can not be
-expressed in the domain specific language defined by the API.  In many
-cases it makes sense to provide additional imperative APIs for users
-which require a lower level of access to the system to implement
-functionality not achievable via the declarative parts of the
-interface.
+complexity which would otherwise have to be handled by users. An often
+overlooked disadvantage of declarative APIs is that they frequently
+only provide high-level access to a system and that more specific use
+cases might not be achievable if they can not be expressed in the
+domain-specific language defined by the API. In many cases, it makes
+sense to provide additional imperative APIs for users which require a
+lower level of access to the system to implement functionality not
+achievable via the declarative parts of the interface.
 
-All evaluated libraries, except D3FC, expose declarative interfaces in
-the form of nested configuration objects which are used to specify the
-characteristics of individual visualizations.  Apart from Chartist,
-all those libraries feature generic high-level creation functions.
-These functions create charts from declarative configuration objects,
-which allow the specification of different forms of visualization for
-different data dimensions.  This type of interface is demonstrated by
-the Highcharts code seen in Listing~\ref{list:Highcharts}.  Generic
-chart creation functions seem to be correlated with the ability of
-dynamically changing the type of visualization.  In Chartist, for
-instance, which provides separate chart creation functions for each
-type of chart, it is not possible to alter the type of chart after it
-has been created.  Another limitation which may originate in this
-interface partitioning via chart types is that mixed charts which
-combine multiple forms of visualization in one composite visualization
-can not be expressed.  The only library in the deeper evaluation which
-does not provide a high-level declarative configuration API is D3FC.
-The design philosophy of D3FC is based on the idea of "unboxing" D3.
-Even though many visualization libraries are implemented on top of D3,
-it is usually hidden behind public APIs which are easier to work with
-but do not provide the full flexibility of D3.  D3FC exposes a
-component-based interface which closely follows design patterns
-frequently encountered when working with D3.  These components form
-higher-level building blocks on which advanced visualizations can be
-built.  They are also highly configurable and in those cases where the
-options for configuration are not sufficient, a decorator pattern is
-used to allow users to hook into the underlying D3 functionality and
-inject custom code into the various stages of the general update
-pattern at the core of D3.  Code which demonstrates the usage of D3FC
-can be seen in Listing~\ref{list:D3FC}.  The only evaluated library
-which exposes a hybrid API with the possibility of configuring
-visualizations using both declarative configuration objects and
-manually composing higher-level visualizations from lower-level
-components, such as axes and series, is amCharts.  Its component-based
-interface is still rather declarative, with most options being
-configurable by modifying certain properties on the components.
-However, modifying only the properties which require changing instead
-of processing a full configuration object and figuring out the
-necessary changes from it is less costly in terms of performance.  In
-addition to these performance benefits, the components provide
-additional functions to perform operations which would not be
-available using a purely declarative API.
-
+All of the evaluated libraries, except D3FC, expose declarative
+interfaces in the form of nested configuration objects which are used
+to specify the characteristics of individual visualizations. Apart
+from Chartist, all those libraries feature generic high-level creation
+functions. These functions create charts from declarative
+configuration objects, which allow the specification of different
+forms of visualization for different data dimensions. This type of
+interface is demonstrated by the Highcharts code in
+Listing~\ref{list:Highcharts}. Generic chart creation functions seem
+to correlate with the ability to dynamically change the type of
+visualization. Chartist, on the other hand, provides separate chart
+creation functions for each type of chart, and it is not possible to
+alter the type of chart after it has been created. Another limitation
+which may originate from partitioning the API by chart type is that
+mixed charts which combine multiple forms of visualization in one
+composite visualization cannot be expressed.
 
 
 \begin{samepage}
@@ -1010,12 +980,31 @@ available using a purely declarative API.
   frame=shadowbox,
   numbers=left,
   label=list:Highcharts,
-  caption={[Bar Chart in Highcharts] 
-    This example demonstrates how a basic column (vertical bar) chart is defined using the generic chart creation API provided by Highcharts.
-  },
+  caption={[Bar Chart in Highcharts]%
+A basic column (vertical bar) chart defined using Highcharts' generic
+chart creation API. A high-level, declarative configuration object is
+passed to the creation function.
+},
 ]{listings/highcharts.js}
 \end{samepage}
 
+
+
+The only library in the deeper evaluation which does not provide a
+high-level declarative configuration API is D3FC.  The design
+philosophy of D3FC is based on the idea of \enquote{unboxing} D3.
+Even though many visualization libraries are implemented on top of D3,
+it is usually hidden behind public APIs which are easier to work with
+but do not provide the full flexibility of D3. D3FC exposes a
+component-based interface which closely follows design patterns
+frequently encountered when working with D3. These components form
+higher-level building blocks upon which advanced visualizations can be
+built. They are also highly configurable and in those cases where the
+options for configuration are not sufficient, a decorator pattern is
+allows users to hook into the underlying D3 functionality and inject
+custom code into the various stages of the general update pattern at
+the core of D3. Code demonstrating the usage of D3FC can be seen in
+Listing~\ref{list:D3FC}.
 
 
 \begin{samepage}
@@ -1030,49 +1019,67 @@ available using a purely declarative API.
   frame=shadowbox,
   numbers=left,
   label=list:D3FC,
-  caption={[Bar Chart in D3FC] 
-    This example demonstrates how a basic bar chart is defined using the component-based API provided by D3FC.
-  },
+  caption={[Bar Chart in D3FC]%
+A basic bar chart defined using D3FC's component-based API.
+},
 ]{listings/d3fc.js}
 \end{samepage}
 
 
 
-When comparing the evaluated libraries by their responsive
+amCharts is the only evaluated library, which exposes a hybrid API
+with the possibility of configuring visualizations using both
+declarative configuration objects and manually composing higher-level
+visualizations from lower-level components, such as axes and series.
+Its component-based interface is still rather declarative, with most
+options being configurable by modifying specific properties on the
+components. However, modifying only the properties which require
+changing instead of processing a full configuration object and
+figuring out the necessary changes from it, is less costly in terms of
+performance. In addition to these performance benefits, the components
+provide additional functions to perform operations which would not be
+available using a purely declarative API.
+
+
+
+
+When comparing the evaluated libraries in terms of their responsive
 configurability, most libraries offer similar capabilities albeit in
-slightly different ways.  Six libraries (Highcharts, C3JS, Chartist,
-amCharts, billboardJS, D3FC) support the styling of elements in their
-created visualizations with CSS, which requires rendering as SVG
-documents because only document-based visualizations can be affected
-by CSS.  The styling of visualizations with CSS is powerful because it
-leads to a separation of concerns and designers can make use of
-CSS-inherent mechanisms to configure responsive styles.
-Unfortunately, CSS-based styling is only of limited applicability
-because not all CSS properties affect SVG elements, which has already
-been described in Section~\ref{sec:SVG}.  To responsively configure
-other visualization characteristics, such as their type, data, and
-layout, designers have to resort to configuration mechanisms offered
-by the libraries.  Four libraries (Highcharts, ApexCharts, Chartist,
-amCharts) provide the possibility to specify rule-based responsive
-configurations as part of their declarative interfaces, demonstrated
-in the Highcharts example in Listing~\ref{list:HighchartsResponsive}.
-These declarative rules consist of a condition part which specifies
-when to apply the rule, and a configuration part which specifies the
-configuration options which should be set when applying the rule.
-Even though this is a convenient form of responsive configuration, if
-the desired conditions can not be expressed via the provided
-declarative properties, designers have to fall back to more generic
-mechanisms which are also applicable to other libraries.  The
-mechanisms for responsive configuration in the other libraries are
-more generic because they do not offer these configurations as part of
-their declarative interfaces.  This means that developers need to
-trigger responsive configurations themselves by manually reconfiguring
-visualizations via their APIs in custom resize or media query event
-listeners.  Nearly all libraries provide means to dynamically resize
-visualizations and update their data, type and options.  The
-exceptions from this are C3JS, which only supports dynamic changes of
-some options, and Chartist, which does not support changing of a
-visualization's type.
+slightly different ways. Six of the ten libraries (Highcharts, C3JS,
+Chartist, amCharts, billboardJS, and D3FC) support the styling of
+elements in their created visualizations with CSS, which requires
+rendering as SVG documents, since only document-based visualizations
+can be affected by CSS. The styling of visualizations with CSS is
+powerful, because it leads to a separation of concerns and designers
+can make use of CSS-inherent mechanisms to configure responsive
+styles.  Unfortunately, CSS-based styling is only of limited
+applicability because not all CSS properties affect SVG elements, as
+described in Section~\ref{sec:SVG}.
+% KA  not sure about this last sentence??
+
+To responsively configure other visualization characteristics, such as
+their type, data, and layout, designers have to resort to
+configuration mechanisms offered by the libraries. Four libraries
+(Highcharts, ApexCharts, Chartist, and amCharts) provide the
+possibility to specify rule-based responsive configurations as part of
+their declarative interfaces, illustrated in the Highcharts example in
+Listing~\ref{list:HighchartsResponsive}. These declarative rules
+consist of a condition part which specifies when to apply the rule,
+and a configuration part which specifies the configuration options
+which should be set when applying the rule. Even though this is a
+convenient form of responsive configuration, if the desired conditions
+can not be expressed via the provided declarative properties,
+designers have to fall back to more generic mechanisms which are also
+applicable to other libraries. The mechanisms for responsive
+configuration in the other libraries are more generic, because they do
+not offer these configurations as part of their declarative
+interfaces. This means that developers need to trigger responsive
+configurations themselves by manually reconfiguring visualizations via
+their APIs in custom resize or media query event listeners. Nearly all
+libraries provide a means to dynamically resize visualizations and
+update their data, type, and options. The exceptions are
+C3JS, which only supports dynamic changes of some options, and
+Chartist, which does not support changing a visualization's type at all.
 
 
 
@@ -1088,10 +1095,14 @@ visualization's type.
   frame=shadowbox,
   numbers=left,
   label=list:HighchartsResponsive,
-  caption={[Responsive Rules in Highcharts] 
-    This example demonstrates how responsive rules can be declared to configure various aspects of a visualization in relation to the size of the viewport.
-  },
+  caption={[Responsive Rules in Highcharts]%
+The declaration of responsive rules in Highcharts. In this example,
+the x-axis and y-axis titles are removed if the chart is narrower than
+500 pixels.
+},
 ]{listings/highcharts-responsive.js}
 \end{samepage}
+
+% KA  Is the value in pixels?  How about ems?
 
 
