@@ -254,8 +254,6 @@ Original appearance in \textcite{RosaUrsina}.}
 \label{fig:SunspotChanges}
 \end{figure}
 
-% https://cudl.lib.cam.ac.uk/view/PR-QQ-AST-00002-00158-B-00003/1
-
 % Tufte, Edward R. and Peter R. Graves-Morris [1983].
 % The Visual Display of Quantitative Information.
 % Graphics Press, 1983. ISBN 1930824130 (cited on pages 19–20).
@@ -482,8 +480,9 @@ interface which can easily be configured.
 D3 \parencite{D3} is a free, open-source document manipulation library
 built in JavaScript by Mike Bostock and actively maintained by him and
 a community on GitHub \parencite{D3JS}. Mike Bostock is also the
-creator of Observable \parencite{Observable} and was one of the authors of
-the deprecated Protovis visualization library \parencite{Protovis}.
+creator of Observable \parencite{Observable} and was one of the
+authors of the deprecated Protovis visualization library
+\parencite{Protovis}.
 
 D3 enables data-driven document transformations to allow developers to
 describe documents as functions of data.  As an example, developers
