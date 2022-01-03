@@ -11,6 +11,7 @@
 %----------------------------------------------------------------
 
 \documentclass[11pt]{book}
+
 \usepackage[
   a4paper,
   twoside,
@@ -28,8 +29,8 @@
 % A4 paper is w=210m, h=297mm
 
 
-\newcommand{\thisdate}{03 Dec 2021}  % date of this version
-\newcommand{\thisyear}{2021}         % year of this version
+\newcommand{\thisdate}{03 Jan 2022}  % date of this version
+\newcommand{\thisyear}{2022}         % year of this version
 
 
 \newcommand{\fullh}{24cm}         % height of figures for 1 per page
@@ -57,7 +58,6 @@
 
 \setcounter{secnumdepth}{3}     % lowest section level still numbered
 \setcounter{tocdepth}{2}        % lowest section level entered in ToC
-
 
 
 
@@ -149,6 +149,28 @@
   style=sameline,
 }
 
+
+
+% use caption and subfig (caption2 and subfigure are now obsolete)
+
+\usepackage[
+  position=bottom,
+  margin=1cm,
+  font=small,
+  labelfont={bf,sf},
+  format=plain,
+  indention=5mm,
+  aboveskip=4mm,
+  belowskip=0mm,
+]{caption,subfig}
+
+\captionsetup[subfigure]{
+  margin=0pt,
+  parskip=0pt,
+  indention=5mm,
+  farskip=4mm,            % skip above subfig (assuming captions at bottom)
+  captionskip=2mm,        % skip between subfig and subcaption
+}
 
 
 
@@ -448,39 +470,6 @@
 
 
 
-
-% use caption and subfig (caption2 and subfigure are now obsolete)
-
-\usepackage[
-  position=bottom,
-  margin=1cm,
-  font=small,
-  labelfont={bf,sf},
-  format=hang,        % or plain
-  indention=0mm,
-  aboveskip=4mm,
-  belowskip=0mm,
-]{caption,subfig}
-
-\captionsetup[subfigure]{
-  margin=0pt,
-  parskip=0pt,
-  hangindent=0pt,
-  indention=0pt,
-  singlelinecheck=true,
-  farskip=4mm,            % skip above subfig (assuming captions at bottom)
-  captionskip=2mm,        % skip between subfig and subcaption
-}
-
-
-
-
-\usepackage[hyphens,obeyspaces]{url}
-\def\UrlFont{\smaller\ttfamily}
-
-
-
-
 \usepackage[short]{datetime}   % load datetime *after* babel, requires fmtcount
 % \newdateformat{britdate}{%
 % \ordinaldate{\THEDAY} \,\monthname[\THEMONTH] \THEYEAR
@@ -661,6 +650,16 @@
 \addbibresource{thesis-ivis-examples.bib}
 
 
+
+
+% xurl provides better URL breaking than url
+% load after biblatex
+\usepackage[hyphens,obeyspaces]{xurl}
+\def\UrlFont{\smaller\ttfamily}
+
+
+
+
 % adapt pdftitle, pdfsubject, pdfauthor, pdfkeywords
 % for your survey paper
 
@@ -708,9 +707,11 @@ Creating Responsive SVG Charts},
 \fi
 
 
-
+% export adjustbox keys to includegraphics
 % must be after \usepackage{graphicx}
-\usepackage[export]{adjustbox}    % export adjustbox keys to includegraphics
+\usepackage[export]{adjustbox}    % valign=t, frame, ...
+
+
 
 \usepackage{dirtree}
 

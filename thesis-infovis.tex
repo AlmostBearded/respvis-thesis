@@ -482,69 +482,76 @@ interface which can easily be configured.
 D3 \parencite{D3} is a free, open-source document manipulation library
 built in JavaScript by Mike Bostock and actively maintained by him and
 a community on GitHub \parencite{D3JS}. Mike Bostock is also the
-creator of Observable \parencite{Observable} and was one of the authors of
-the deprecated Protovis visualization library \parencite{Protovis}.
+creator of Observable \parencite{Observable} and was one of the
+authors of the now deprecated Protovis visualization library
+\parencite{Protovis}. \textcite{Wattenberger-D3} is a great
+introduction to D3.
 
-D3 enables data-driven document transformations to allow developers to
-describe documents as functions of data.  As an example, developers
-can define transformations which receive a dataset and transform it
-into a basic HTML table or into a more sophisticated visualization as
-an SVG chart.  This focus on explicitly defining transformations is
-better suited for dynamic visualizations because developers have
-complete control over the creation, modification and removal of
-elements.  It also sets D3 apart from other visualization libraries
-where developers usually define the desired state of a representation
-using a declarative domain specific language.
+D3 enables data-driven document transformations allowing developers to
+describe documents as functions of data. As an example, developers can
+define transformations which take a dataset and transform it into a
+basic HTML table or into a more sophisticated visualization as an SVG
+chart. This focus on explicitly defining transformations is well
+suited to dynamic visualizations, because developers have complete
+control over the creation, modification, and removal of elements. It
+also sets D3 apart from other visualization libraries, where
+developers define the desired state of a representation using a
+declarative domain-specific language.
 
 In contrast to other visualization libraries, D3 contains no
 proprietary visual primitives and relies on well established web
-standards like HTML, SVG and CSS to provide visual representations.
-This yields great flexibility because developers work directly with
-web standards that are implemented by their browsers and do not need
-to wait for D3 to implement support for new features as standards
-evolve.  If developers chose to switch to a different library, the
-knowledge of web standards they gained during their work with D3 might
-be applicable in their future work.  The reliance on web standards
-also makes it possible to use debugging tools which are already
-natively implemented in browsers.
+standards like HTML, SVG, and CSS to implement its visual
+representations. This yields great flexibility, because developers
+work directly with web standards implemented in browsers and do not
+need to wait for D3 to support for new features as standards
+evolve. If developers chose to switch to a different library, the
+knowledge of web standards gained during their work with D3 might be
+applicable to their future work. The reliance on web standards also
+makes it possible to use the native debugging tools available in web
+browsers.
 
-Other important aspects of D3's design include immediate evaluation,
-the principle of parsimony, and support for method chaining.
-Immediately evaluating functions means that operations, such as
-modifying attributes, are applied instantaneously at the time of
-calling the respective functions.  This achieves a reduction in
-internal complexity by handing control flow decisions over to invoking
-code.  It also avoids common errors related to missing state changes
-when state is being modified multiple times between rendering in
-libraries that build on delayed evaluation.  The principle of
-parsimony, also referred to as Occam's razor, is a problem-solving
-principle which stems from the field of philosophy
-\parencite{PrincipleOfParsimony}.  It is frequently paraphrased as
-"entities should not be multiplied beyond necessity" and when applied
-to API design it means that superfluous functions in an API should be
-avoided.  As an example, the background color of a circle element can
-already be set with the generic \lstinline{Selection.attr} method to
-set the \attrname{background-color} attribute of all elements in a
-Selection.  Adding an additional \lstinline{backgroundColor} method
-would violate the principle of parsimony because it would introduce a
-special method to achieve something that was already achievable.
+
+Other important aspects of D3's design include immediate evaluation of
+functions, the principle of parsimony, and support for method
+chaining. Immediate evaluate of functions means that operations, such
+as modifying attributes, are applied instantaneously at the time of
+calling the respective functions. This reduces internal complexity by
+handing control flow decisions over to invoking code. It also avoids
+errors related to missing state changes when state is modified
+multiple times between rendering, which commonly occur in libraries
+which use delayed evaluation of functions.
+
+The principle of parsimony, also referred to as Occam's razor, is a
+problem-solving principle which stems from the field of philosophy
+\parencite{PrincipleOfParsimony}. It is frequently paraphrased as
+\enquote{entities should not be multiplied beyond necessity}, and when
+applied to API design it means that superfluous functions in an API
+should be avoided. As an example, the background color of a circle
+element can already be set with the generic \lstinline{Selection.attr}
+method to set the \attrname{background-color} attribute of all
+elements in a Selection. Adding an additional
+\lstinline{backgroundColor} method would violate the principle of
+parsimony because it would introduce a special method to achieve
+something that was already achievable.
+
 Method chaining is a popular syntax which allows functions to be
-chained after one another.  The use of method chaining avoids having
-to store intermediate method results into variables which would
-otherwise not be needed.  It is implemented in D3 by returning the
+chained after one another. The use of method chaining avoids having to
+store intermediate method results in variables which would not
+otherwise be needed. It is implemented in D3 by returning the
 \lstinline{Selection} on which a modifying method is called as a
-result of that method.  Methods that insert new elements into the DOM,
+result of that method. Methods which insert new elements into the DOM,
 such as \lstinline{Selection.append} and \lstinline{Selection.insert},
 return a Selection of the newly added elements to enable the creation
-of nested structures.  This method chaining syntax is further aided by
+of nested structures. This method chaining syntax is further aided by
 the \lstinline{Selection.call} method, which invokes a callback
 receiving the current Selection as a parameter and returns the
-original Selection to further chain methods on it after the callback
-has been executed.  The \lstinline{Selection.call} method enables the
+original Selection to chain further methods on it after the callback
+has been executed. The \lstinline{Selection.call} method enables the
 creation of complex method chaining structures and is widely used by
-developers.  A simple example of method chaining in D3 and the
-application of the \lstinline{Selection.call} method can be seen in
+developers. A simple example of method chaining in D3 with the
+\lstinline{Selection.call} method can be seen in
 Listing~\ref{list:D3MethodChaining}.
+
 
 
 \begin{samepage}
@@ -560,66 +567,66 @@ Listing~\ref{list:D3MethodChaining}.
   frame=shadowbox,
   numbers=left,
   label=list:D3MethodChaining,
-  caption={[D3 Method Chaining] 
-    A simple example of method chaining in D3 which creates an \elname{h1} and \elname{p} element inside a \elname{body}.
-  },
+  caption={[D3 Method Chaining]%
+A simple example of method chaining in D3.
+A \elname{h1} element and a \elname{p} element are created
+inside an existing \elname{body} element.
+},
 ]{listings/d3-method-chaining.js}
 \end{samepage}
 
 
-Selections have already been mentioned in the previous paragraphs.
-They are the atomic building blocks of D3 and are used to access
+Selections are the atomic building blocks of D3 and are used to access
 almost any functionality.  Selections are created using the
 \lstinline{d3.select} or \lstinline{d3.selectAll} methods.  These
-methods are built on the DOM Selectors API, namely the
-\lstinline{querySelector} and \lstinline{querySelectorAll} methods,
-which allow the selection of elements via CSS selectors (see
-Section~\ref{sec:CSS}).  The \lstinline{d3.select} and
-\lstinline{d3.selectAll} methods respectively create a Selection
-containing either a single element matching the provided selector, or
-multiple elements matching it.  A Selection acts as a wrapper
-container around selected elements to perform frequently performed DOM
+methods are built on the \lstinline{querySelector} and
+\lstinline{querySelectorAll} methods of the DOM Selectors API, which
+allow the selection of elements via CSS selectors (see
+Section~\ref{sec:CSS}). The \lstinline{d3.select} and
+\lstinline{d3.selectAll} methods create a Selection containing either
+a single element matching the provided selector, or multiple elements
+matching it, respectively. A Selection acts as a wrapper container
+around selected elements to perform frequently performed DOM
 operations on them.  Among others, the element operations provided by
-a Selection include the setting and getting of: Attributes using the
+a Selection include the setting and getting of: attributes using the
 \lstinline{Selection.attr} method, styles using the
 \lstinline{Selection.style} method, properties using the
 \lstinline{Selection.property} method, text or HTML content using the
 \lstinline{Selection.text} or \lstinline{Selection.html} methods, and
-event listeners using the \lstinline{Selection.on} method.  Selections
+event listeners using the \lstinline{Selection.on} method. Selections
 also provide wrapper methods to insert additional elements using the
-\lstinline{Selection.append} or \lstinline{Selection.insert} methods
+\lstinline{Selection.append} or \lstinline{Selection.insert} methods,
 as well as to remove them using the \lstinline{Selection.remove}
-method.  Accessing the DOM via this wrapper is less tedious than
-accessing it directly because the native DOM API is very verbose, and
+method. Accessing the DOM via this wrapper is less tedious than
+accessing it directly, because the native DOM API is very verbose, and
 also because the method chaining API provided by D3 does not require
 the storage of unnecessary intermediate variables.
 
-An additional feature that D3 adds is the ability to bind data to
-elements using the \lstinline{Selection.data} and
-\lstinline{Selection.datum} methods.  The \lstinline{Selection.datum}
-method binds a single provided data record to all elements in the
-Selection, whereas the \lstinline{Selection.data} method receives an
-array of data records and binds each individual data record to exactly
-one element.  The \lstinline{Selection.data} method performs a join
-operation between data and elements to ensure that exactly one element
-per data record exists.  This data join results in three separate
-Selections: the enter Selection, containing the elements which were
-newly created, the update Selection, containing the elements which
-merely receive new data, and the exit Selection, containing the
-elements which are being removed.  Each of these Selections can be
-individually transformed using the \lstinline{Selection.join} method,
-which can receive three callbacks each being respectively invoked with
-the enter, update and exit Selections of the data join.  This ability
-of individually controlling updates of entering, updating and exiting
-elements is being referred to as the general update pattern in D3 and
-a simple demonstration of how it is used can be seen in
-Figure~\ref{list:D3GeneralUpdatePattern}.  All the previously
-mentioned DOM wrapper methods can receive either constant values or
-dynamic ones, which are defined as functions.  These functions receive
+An additional feature of D3 is the ability to bind data to elements
+using the \lstinline{Selection.data} and \lstinline{Selection.datum}
+methods. The \lstinline{Selection.datum} method binds a single
+provided data record to all elements in the Selection, whereas the
+\lstinline{Selection.data} method receives an array of data records
+and binds each individual data record to exactly one element.  The
+\lstinline{Selection.data} method performs a join operation between
+data and elements to ensure that exactly one element per data record
+exists. This data join results in three separate Selections: the enter
+Selection, containing the elements which were newly created, the
+update Selection, containing the elements which merely receive new
+data, and the exit Selection, containing the elements which are being
+removed. Each of these Selections can be individually transformed
+using the \lstinline{Selection.join} method, which can receive three
+callbacks for the enter, update, and exit Selections of the data join,
+respectively. This ability to individually control changes to
+entering, updating, and exiting elements is referred to in D3 as the
+\emph{general update pattern}. A simple demonstration of how it is
+used can be seen in Listing~\ref{list:D3GeneralUpdatePattern}. All the
+previously mentioned DOM wrapper methods can receive either constant
+values or dynamic values defined as functions. These functions receive
 the bound element data, the element's index in the group of nodes
 represented by the Selection, and the group of nodes themselves as
-input and calculate a dynamic value based on these parameters, which
-is then forwarded to the corresponding DOM methods.
+input and then calculate a dynamic value based on these parameters,
+which is forwarded to the corresponding DOM method.
 
 
 \begin{samepage}
@@ -634,49 +641,53 @@ is then forwarded to the corresponding DOM methods.
   frame=shadowbox,
   numbers=left,
   label=list:D3GeneralUpdatePattern,
-  caption={[D3 General Update Pattern] 
-    A demonstration of D3's general update pattern and how it can be used to specify different transformations for entering, updating and exiting elements.
-    This code is merely meant as an example of how the join selections can be transformed.
-    The full utility of this pattern will only be appearant in more complex scenarios that involve transitions.
-  },
+  caption={[D3 General Update Pattern]%
+A simple demonstration of D3's general update pattern being used to
+specify different transformations for entering, updating, and exiting
+elements. The full utility of this pattern is only apparent in more
+complex scenarios involving transitions.
+},
 ]{listings/d3-join.js}
 \end{samepage}
 
 
 
-D3 also offers a convenient and optional API to perform
-JavaScript-based animations via Transitions, which wrap a Selection
-and allow the animation of various element characteristics.
-Transitions are created using the \lstinline{Selection.transition}
-method which creates a Transition wrapping the Selection on which it
-has been called.  The duration of a Transition is defined using the
+D3 also offers a convenient, optional API to perform JavaScript-based
+animations via Transitions, which wrap a Selection and allow the
+animation of various element characteristics.  Transitions are created
+using the \lstinline{Selection.transition} method which creates a
+Transition wrapping the Selection on which it has been called.  The
+duration of a Transition is defined using the
 \lstinline{Transition.duration} method and its easing can be
-configured using the \lstinline{Transition.ease} method.  There is
-also the possibility of interrupting and chaining transitions, but
-explaining these things would be to go into too many details.
-Transitions provide an almost identical API to Selections.  The major
-change is that the wrapping methods interpolate towards their target
-values using the set easing function over the set duration instead of
-setting the target value directly.  Using D3 Transitions is completely
-optional and users can also choose to instead use other animation
-technologies, like CSS transitions and animations.
+configured using the \lstinline{Transition.ease} method. It is also
+possibile to interrupt and chain transitions. Transitions provide an
+almost identical API to Selections. The major change is that the
+wrapping methods interpolate towards their target values using the
+given easing function over the given duration instead of setting the
+target value directly. Using D3 Transitions is completely optional and
+developers can choose instead to use other animation technologies,
+like CSS transitions and animations.
 
-At the core, D3 is simply a low-level library to perform data-driven
-document transformations.  Even though this generic core technology is
-applicable to a wide range of use cases, D3 has been created with a
-focus on creating visualizations.  There are many additional modules
-which simplify performing the higher-level tasks necessary for the
-rendering of visualizations.  All modules follow the same patterns
-inherent to D3, like method chaining and configurable functions.
-Therefore, despite these higher-level functionalities being split on
-multiple modules, a consistent experience is provided to developers.
-Listing all available modules here would be out of the scope of this
-work, but some noteworthy and characteristic ones include:
-\modname{d3-shape} to create visual primitives like lines and areas,
-\modname{d3-scale} to encode abstract data dimensions,
-\modname{d3-axis} to render scales as human-readable axes, and many
-more such as \modname{d3-array}, \modname{d3-layout} and
-\modname{d3-zoom}.
+At its core, D3 is simply a low-level library to perform data-driven
+document transformations. Even though this generic core technology is
+applicable to a wide range of use cases, D3 was created with a focus
+on creating visualizations. There are many additional modules which
+simplify the higher-level tasks necessary for creating and rendering
+visualizations. All D3 modules follow the same inherent patterns, like
+method chaining and configurable functions. Therefore, despite this
+higher-level functionality being split over multiple modules, a
+consistent experience is provided to developers. Listing all available
+modules here would be out of the scope of this work, but some
+noteworthy modules include: \modname{d3-shape} to create visual
+primitives like lines and areas, \modname{d3-scale} to encode abstract
+data dimensions, \modname{d3-axis} to render scales as human-readable
+axes, and many more such as \modname{d3-array}, \modname{d3-layout}
+and \modname{d3-zoom}.
+% KA add a short characterisation of d3-array, d3-layout, and d3-zoom
+
+
+
+
 
 
 
