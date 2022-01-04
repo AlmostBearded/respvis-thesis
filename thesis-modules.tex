@@ -454,8 +454,88 @@ da diese D3 funktionen attributes verwenden um die einzelnen elemente der ticks 
 
 \subsection{Chart}
 
+% higher-level components that render lower-level components such as axes, legends, and series. 
 % chart
+%   chartRender
+%     default attributes of every chart
+%     .chart
+%     xmlns
 % chart cartesian
+%   ChartCartesian
+%     xAxis, Axis, data object
+%     yAxis, Axis, data object
+%     flipped, boolean, flipping of x and y axes
+%   chartCartesianData
+%     input
+%       Partial<ChartCartesian> with Partial<Axis> as xAxis and yAxis type
+%     default values
+%   chartCartesianRender
+%     chart
+%     .chart-cartesian
+%       .draw-area
+%         .background, invisible, for capturing events
+%   chartCartesianAxesRender
+%      left axis with either xAxis or yAxis data depending on value of flipped
+%      bottom axis with either xAxis or yAxis data depending on value of flipped
+%      .x-axis
+%      .y-axis
+%   contents laid out with CSS grid
+%     left axis, bottom axis, draw area, potential legend
+%     dynamic draw-area size to fill available space
+
+charts sind higher-level components die eine vollstaendige visualisierung inklusive achsen, legenden und series representieren.
+Ein chart wird typischerweise in dem root \code{<svg>} element eines SVG dokumentes gerendert welches zumindest die \code{chart} klasse im \code{class} attribute und den angemessenen SVG namespace im \code{xmlns} attribute gesetzt hat.
+Diese attribute koennen in spezifischeren chart komponenten entweder manuel oder ueber die \code{chartRender} funktion aus der \code{chart.ts} datei im core module, welche nur diese attribute setzt, gesetzt werden.
+
+wie bereits erwaehnt beinhaltet die RespVis library aktuell nur die implementationen von kartesischen charts welche daten in einem kartesischen koordinatensystems visualisieren.
+die implementierung der basis funktionen von kartesischen charts befindet sich in der \code{chart-cartesian.ts} datei im core module. 
+das \code{ChartCartesian} interface beschreibt ein data object fuer die konfiguration von kartesischen charts.
+diese data objects beinhalten die \code{xAxis} und \code{yAxis} \code{Axis} properties mit welchen jeweils die X und Y achsen des charts beschrieben werden.
+das transponieren von achsen ist ein nuetzliches pattern um die responsiveness von visualisierungen zu verbessern und wird mittels des \code{flipped} boolean properties konfiguriert.
+wenn das \code{flipped} property auf \code{false} gesetzt ist, wird das \code{xAxis} object fuer die konfiguration der bottom axis und das \code{yAxis} object fuer die konfiguration der left axis verwendet. 
+wenn es auf \code{true} gesetzt ist, ist es genau umgekehrt.
+
+die \code{chartCartesianData} funktion wird verwendet um ein data object in der form des \code{ChartCartesian} interface zu erzeugen.
+diese funktion erhaelt ein partielles data object bei welchem nur jene properties gesetzt sind welche fuer den aufrufenden code von interesse sind.
+alle nicht gesetzten properties werden mit standardwerten befuellt.
+die standardwerte der \code{xAxis} und \code{yAxis} properties werden ueber die \code{axisData} funktion aus dem axis submodule gesetzt.
+das \code{flipped} property wird, falls es nicht ueber den input parameter spezifiziert wird, auf \code{false} gesetzt.
+
+das rendern von kartesischen charts ist auf zwei funktionen aufgeteilt die seperat voneinander aufgerufen werden muessen.
+diese aufteilung wurde gemacht weil nicht alle teile eines kartesischen charts zum selben zeitpunkt gerendert werden koennen.
+die generelle struktur eines charts muss gerendert werden bevor irgendetwas anderes gerendert werden kann da dies das draw area container element beinhaltet in welches individuelle series componenten gerendert werden muessen.
+die achsen eines charts benoetigen eine vollstaendig initialisierte scale um korrekt gerendert werden zu koennen.
+die range einer scale, also der wertebereich in welchen abstrakte werte gemappt werden, haengt allerdings von den dimensionen der draw area boundary ab und wird erst waehrend der render funktion der individuellen series components, welche in die draw area gerendert werden, initialisiert.    
+aus diesem grund duerfen achsen erst nach allen series components gerendert werden um eine vollstaendig initialisierte scale zu gewaehrleisten.
+
+die struktur eines kartesischen charts wird mit der \code{chartCartesianRender} funktion gerendert.
+diese fuktion setzt die notwendigen chart attribute und die \code{chart} klasse mit der \code{chartRender} funktion.
+Weiters wird mit dieser funktion die \code{chart-cartesian} klasse auf den root elementen der Selection gesetzt mit welcher die funktion aufgerufen wurde.
+die \code{chartCartesianRender} funktion fuegt fuegt ausserdem noch ein \code{<svg>} element mit der \code{draw-area} klasse als child element des component root elementes ein.
+die draw area ist das container element in welches die individuellen series components eines charts gerendert werden.
+standardmaessig wird das \code{overflow} CSS property der draw area auf \code{visible} gesetzt um eventuell ueberlappende elemente nicht zu clippen.
+ein \code{<svg>} element ohne tatsaechlichen content ist nicht in der lage input events abzufangen.
+das bedeutet dass es zum beispiel nicht moeglich waere mittels scroll events eine zoom interaktion zu steuern wenn der cursor sich ueber der leeren flaeche der draw area befindet.
+um dem entgegenzuwirken erzeugt die \code{chartCartesianRender} funktion fuer jede draw area ein transparentes \code{<rect>} background element welches die gesamte flaeche der draw area fuellt und welches es ermoeglicht input events auch in bereichen zu generieren in welchen sich keine series elemente befinden.
+
+die \code{chartCartesianAxesRender} funktion wird verwendet um die achsen eines kartesischen charts zu rendern.
+diese funktion darf nur auf elementen mit einem gebundenen \code{ChartCartesian} data object und nach der vollstaendigen initialisierung der scales, welche mit den achsen visualisiert werden sollen, aufgerufen werden.
+meist bedeutet dies fuer die reihenfolge an operationen einer spezifischerer kartesischen chart component, dass zu beginn die struktur des charts mittels der \code{chartCartesianRender} funktion erzeugt werden muss, gefolgt von dem rendern der gewuenschten series components, und erst danach duerfen die achsen mittels der \code{chartCartesianAxesRender} funktion gerendert werden.
+die \code{chartCartesianAxesRender} function erzeugt zwei \code{<g>} elemente und rendert eine left und eine bottom axis auf ihnen.
+je nachdem ob das \code{flipped} property im gebundenen data object auf \code{true} oder \code{false} gesetzt ist, wird das \code{xAxis} data object fuer die konfiguration der bottom oder left axis verwendet und das \code{yAxis} data object jeweils fuer die andere achse.
+nachdem die achsen gerendert wurden wird auf der achse auf welcher das \code{xAxis} data object gebunden ist die \code{x-axis} klasse und auf der anderen achse die \code{y-axis} klasse gesetzt. 
+diese klassen werden gesetzt um die auswahl der konkreten achsen welche die jeweilige konfiguration representieren ueber CSS Selectors zu ermoeglichen.
+
+wie es in der RespVis library ueblich ist, wird alles moegliche an positionierung und styling ueber CSS konfiguriert.
+die elemente eines kartesischen charts werden ueber ein CSS Grid layout positioniert.
+standardmaessig wird ein grid erzeugt welcher die \code{axis-left}, \code{axis-bottom}, code{draw-area}, und \code{legend} areas definiert.
+die groesse der meisten zeilen und spalten dieses grids ist auf \code{auto} gesetzt, was bedeutet dass deren groesse von der groesse ihres inhaltes abhaengt. 
+die ausnahme hiervon sind die zeile und spalte in welchen sich die draw area befindet.
+deren groesse ist auf \code{1fr} gesetzt um zu erreichen dass die draw area den gesamten restlichen horizontalen und vertikalen platz einnimmt der nicht von den anderen zeilen und spalten eingenommen wird.
+die standardkonfiguration der \code{chart-cartesian} klasse sieht eine positionierung einer eventuellen legende rechts von der draw area vor.
+um die position der legende zu veraendern kann entweder direkt der grid ueber CSS angepasst werden oder eine der vorkonfigurierten positionen kann ueber das \code{data-legend-position} attribut aktiviert werden.
+um das setzten des \code{data-legend-position} attributes zu vereinfachen kann die \code{chartLegendPosition} funktion, welche dieses attribut auf den wert eines mitgegebenen \code{LegendPosition} enum parameters setzt, verwendet werden.
+
 
 \subsection{Chart Window}
 
