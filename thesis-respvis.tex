@@ -1,57 +1,141 @@
+
 \chapter{Responsive Information Visualization}
 
-A responsive visualization is a visualization which adapts to the properties of the device used to access it.
-Similar to responsive design, the need for responsive visualizations arises from the growing variety of devices used to consume content and the physical differences between them.
-On the web, visualizations are significant blocks of content which are embedded into documents.
-These blocks of content must not be ignored when a web page adhering to the principles of responsive web design is to be created.
-Visual elements require proper sizing and spacing to be of value.
-Merely scaling visualizations to fit into their allocated space is not sufficient to provide a seamless experience to users, as has already been discussed in Section~\ref{sec:RWD}.
-Another factor which is often ignored is the different methods of interaction inherent to specific types of devices.
-In addition to enabling these device-specific types of interaction, web designers need to adjust visualizations accordingly to support them as well as possible.
-An example for such a necessary adjustment would be to ensure that data points remain selectable on less precise input devices, such as touchscreens, by reducing the data density and increasing the size of individual elements.
-The goal of responsive visualizations is to alter them depending on the characteristics of the consuming device to ensure an optimal trade-off between the density of graphical elements and the messages they aim to deliver \parencite{DesignPatternsTradeOffsRespVis}. 
+A \emph{responsive} visualization is a visualization which adapts
+itself to the available display space and properties of the device
+used to access it. Analogous to responsive web design, the need for
+responsive visualizations arises from the growing variety of devices
+used to consume content and the physical differences between them.
+Visualizations and charts often form significant blocks of content
+embedded inside web pages. For a web page to be responsive, any
+embedded content such as visualizations and charts must also be
+responsive.
 
-The topic of responsive visualization only came up in recent years, with \textcite{RespVis} being one of the first academic works exploring it.
-Earlier works \parencite{BuildingRespDataVisForTheWeb,LearningRespDataVis} exist, but they strongly focus on the aspect of software development and do not go much into detail on how to properly design responsive visualizations.
- For design-related fields, it is generally helpful to study existing solutions and better define the design space by creating taxonomies of currently used techniques and recurring patterns.
-In the case of responsive visualization, some such works already exist \parencite{TechniquesForFlexibleRespVisDesign,DesignPatternsTradeOffsRespVis,RespVisSurvey} and the various patterns defined in them, including some representative examples, are discussed in the following sections.
+Visual elements require proper sizing and spacing to be of
+value. Merely scaling visualizations to fit into their allocated space
+is insufficient to provide a seamless experience to users, as has
+already been discussed in Section~\ref{sec:RWD}. Another factor which
+is often ignored is the different methods of interaction inherent to
+specific types of devices, such as touch and keyboard interaction. For
+example, to ensure that data points remain selectable on less precise
+input devices such as touchscreens, a visualisation might adapt by
+reducing the data density and increasing the size of individual
+elements. The goal of responsive visualizations is that they should
+adapt themselves to the characteristics of the consuming device and
+context so as to remain as effective and usable as possible
+\parencite{DesignPatternsTradeOffsRespVis}.
+
+
+The topic of responsive visualization only gained prominence in recent
+years, as responsive web design became mainstream.
+\textcite{BuildingRespDataVisForTheWeb} used the term responsive
+visualization, but only descibed how to implement scalable
+visualizations. \textcite{LearningRespDataVis} covered scalable
+visualizations, but also considered interactive selection and touch
+events.
+%
+\textcite{RespVis} was possibly the first academic work to address
+design patterns for responsive visualization. More recent works have
+surveyed the design space of responsive visualizations and created
+taxonomies of currently used techniques and recurring patterns
+\parencite{TechniquesForFlexibleRespVisDesign,RespVisSurvey}.
+% split the above into two sentences, one for each ref
+In addition to surveying design patterns,
+\textcite{DesignPatternsTradeOffsRespVis} also consider issues around
+\enquote{message loss} when reducing graphical complexity.
+
+
+% KA HERE
+
+
+
 
 \section{Responsive Visualization Patterns}
 
-Patterns are templates for solving recurring problems.
-The core problem to solve when designing responsive visualizations is to optimize the trade-off between the visual density of components and the messages which the visualization aims to convey \parencite{DesignPatternsTradeOffsRespVis}.
-Many techniques can be applied to solve that problem by using the available screen space as efficiently as possible.
-Various authors have analyzed many existing visualizations to identify recurring patterns, and they formulated different taxonomies based on their results.
+Patterns are templates for solving recurring problems.  The core
+problem to solve when designing responsive visualizations is to
+optimize the trade-off between the visual density of components and
+the messages which the visualization aims to convey
+\parencite{DesignPatternsTradeOffsRespVis}.  Many techniques can be
+applied to solve that problem by using the available screen space as
+efficiently as possible.  Various authors have analyzed many existing
+visualizations to identify recurring patterns, and they formulated
+different taxonomies based on their results.
 
-\textcite{RespVisSurvey} have conducted a survey under close supervision by Keith Andrews \parencite{RespVis} identifying nine common patterns which reoccurred in several solutions.
-Slightly reworded, these patterns are: (1) rotate axis labels, (2) remove axis ticks, (3) modify strings, (4) transpose chart, (5) reposition components, (6) zoom, (7) filter, (8) modify data density and (9) modify chart type.
-Compared to other works, they did not categorize the techniques they found according to multiple dimensions.
-Rather than that, they created a collection of specific patterns and, even though they are a good collection on which to base further research, they are not comprehensive enough to cover all the techniques which can be applied to increase the responsiveness of a chart.
-An example of a technique which can not be derived from these patterns is the adding and removing of components, such as in the example of a responsive line chart by \textcite{RespVis}, in which the chart's axes were removed on narrow screens.
-These patterns also do not consider any adaptations of interactions, which should not be ignored when talking about responsive design.
+\textcite{RespVisSurvey} have conducted a survey under close
+supervision by Keith Andrews \parencite{RespVis} identifying nine
+common patterns which reoccurred in several solutions.  Slightly
+reworded, these patterns are: (1) rotate axis labels, (2) remove axis
+ticks, (3) modify strings, (4) transpose chart, (5) reposition
+components, (6) zoom, (7) filter, (8) modify data density and (9)
+modify chart type.  Compared to other works, they did not categorize
+the techniques they found according to multiple dimensions.  Rather
+than that, they created a collection of specific patterns and, even
+though they are a good collection on which to base further research,
+they are not comprehensive enough to cover all the techniques which
+can be applied to increase the responsiveness of a chart.  An example
+of a technique which can not be derived from these patterns is the
+adding and removing of components, such as in the example of a
+responsive line chart by \textcite{RespVis}, in which the chart's axes
+were removed on narrow screens.  These patterns also do not consider
+any adaptations of interactions, which should not be ignored when
+talking about responsive design.
 
-A more comprehensive categorization of responsive techniques was created by \textcite{TechniquesForFlexibleRespVisDesign}.
-They state that responsive techniques can be described by a set of five actions which are applied to different components.
-These actions are: (1) resize, (2) reposition, (3) add, (4) modify and (5) remove.
-A sixth action which refers to not changing a component has also been defined in their work, but this is deemed a non-technique and therefore left out.
-They list a collection of eleven components on which these actions can be performed, though they do not claim this list to be exhaustive.
-For the sake of completeness, the components they identified are: (1) axis, (2) axis labels, (3) axis ticks, (4) gridlines, (5) legend, (6) data, (7) marks, (8) labels, (9) title, (10) view, and (11) interaction.
-It should be noted that some combinations of actions and components do not make sense and therefore do not occur in practice.
-It is, for example, not possible to resize interactions or reposition data.
-\textcite{TechniquesForFlexibleRespVisDesign} performed their research following a desktop-first approach of responsive design because the interviews they conducted with visualization authors revealed a strong inclination towards this approach.
-They found that when adapting desktop visualizations for narrow screens, it was much more common to remove elements (37.7\%) than to add them (11.3\%).
-Another one of their findings was that most visualizations (88.7\%) implemented no change at all for their interactions, while some (10\%) even removed interactive capabilities completely.
-On the other hand, a few visualizations (5.6\%) improved the experience of mobile users by adapting interactions accordingly.
+A more comprehensive categorization of responsive techniques was
+created by \textcite{TechniquesForFlexibleRespVisDesign}.  They state
+that responsive techniques can be described by a set of five actions
+which are applied to different components.  These actions are: (1)
+resize, (2) reposition, (3) add, (4) modify and (5) remove.  A sixth
+action which refers to not changing a component has also been defined
+in their work, but this is deemed a non-technique and therefore left
+out.  They list a collection of eleven components on which these
+actions can be performed, though they do not claim this list to be
+exhaustive.  For the sake of completeness, the components they
+identified are: (1) axis, (2) axis labels, (3) axis ticks, (4)
+gridlines, (5) legend, (6) data, (7) marks, (8) labels, (9) title,
+(10) view, and (11) interaction.  It should be noted that some
+combinations of actions and components do not make sense and therefore
+do not occur in practice.  It is, for example, not possible to resize
+interactions or reposition data.
+\textcite{TechniquesForFlexibleRespVisDesign} performed their research
+following a desktop-first approach of responsive design because the
+interviews they conducted with visualization authors revealed a strong
+inclination towards this approach.  They found that when adapting
+desktop visualizations for narrow screens, it was much more common to
+remove elements (37.7\%) than to add them (11.3\%).  Another one of
+their findings was that most visualizations (88.7\%) implemented no
+change at all for their interactions, while some (10\%) even removed
+interactive capabilities completely.  On the other hand, a few
+visualizations (5.6\%) improved the experience of mobile users by
+adapting interactions accordingly.
 
-The most detailed research on patterns in responsive visualization design was performed by \textcite{DesignPatternsTradeOffsRespVis}.
-Similar to \textcite{TechniquesForFlexibleRespVisDesign}, they formulate the strategies they found in terms of the same two dimensions: targets, representing what entity is changed, and actions, representing how entities are changed.
-Apart from the grouping of specific targets into five distinct categories shown in Table~\ref{tab:PatternsTargets}, the major difference to the taxonomy defined by \textcite{TechniquesForFlexibleRespVisDesign} is the increased level of detail which is put into the definition of actions.
-Instead of describing actions as general editing operations (resize, reposition, add, etc.), they are defined by how exactly they affect their targets.
-The action dimension consists of five categories which are split into further subcategories, shown in Table~\ref{tab:PatternsActions}.
-These subcategories are defined as operations with distinct input and output states.
-This ensures that actions can be inverted, and that these patterns can be applied in both a desktop-first and a mobile-first design approach.
-Categorizing techniques using these dimensions, the authors identified a total of 76 viable strategies, with some of them not being used in the visualizations they studied and excluding others which are by definition not possible.
-Listing all these strategies here is outside the scope of this work, but the explorable online gallery by \textcite{DesignPatternsTradeOffsRespVisGallery} contains examples demonstrating all these patterns and shall be referred to for further research.
+The most detailed research on patterns in responsive visualization
+design was performed by \textcite{DesignPatternsTradeOffsRespVis}.
+Similar to \textcite{TechniquesForFlexibleRespVisDesign}, they
+formulate the strategies they found in terms of the same two
+dimensions: targets, representing what entity is changed, and actions,
+representing how entities are changed.  Apart from the grouping of
+specific targets into five distinct categories shown in
+Table~\ref{tab:PatternsTargets}, the major difference to the taxonomy
+defined by \textcite{TechniquesForFlexibleRespVisDesign} is the
+increased level of detail which is put into the definition of actions.
+Instead of describing actions as general editing operations (resize,
+reposition, add, etc.), they are defined by how exactly they affect
+their targets.  The action dimension consists of five categories which
+are split into further subcategories, shown in
+Table~\ref{tab:PatternsActions}.  These subcategories are defined as
+operations with distinct input and output states.  This ensures that
+actions can be inverted, and that these patterns can be applied in
+both a desktop-first and a mobile-first design approach.  Categorizing
+techniques using these dimensions, the authors identified a total of
+76 viable strategies, with some of them not being used in the
+visualizations they studied and excluding others which are by
+definition not possible.  Listing all these strategies here is outside
+the scope of this work, but the explorable online gallery by
+\textcite{DesignPatternsTradeOffsRespVisGallery} contains examples
+demonstrating all these patterns and shall be referred to for further
+research.
+
 
 \begin{table}[tp]
 \tablestretch
@@ -76,6 +160,7 @@ References/Layout & References represent additional information which makes visu
 \label{tab:PatternsTargets}
 \end{table}
 
+
 \begin{table}[tp]
 \tablestretch
 \rowcolors{2}{}{tablerowcolour}
@@ -99,28 +184,62 @@ Compensate & Actions which compensate for loss of information. Includes toggle a
 \label{tab:PatternsActions}
 \end{table}
 
+
+
 \section{Responsive Visualization Examples}
 
-The goal of this section is to provide the reader with some demonstrative examples of responsive visualizations.
-The figures in this section were taken from external scientific sources which put most of their effort into demonstrating responsive visualization patterns rather than communicating messages in the data they used.
-Owing to this, some figures below are lacking essential features, such as titles and axes descriptions, which would usually be present in practice.
-The examples in this section are organized by chart type, with each paragraph describing some responsive patterns applicable to a certain type of chart.
-It would be an immense endeavor to bring examples for every pattern used for all types of charts, so only a subset which demonstrates some of the most frequently encountered patterns for frequently used types of charts will be summarized here.
+The goal of this section is to provide the reader with some
+demonstrative examples of responsive visualizations.  The figures in
+this section were taken from external scientific sources which put
+most of their effort into demonstrating responsive visualization
+patterns rather than communicating messages in the data they used.
+Owing to this, some figures below are lacking essential features, such
+as titles and axes descriptions, which would usually be present in
+practice.  The examples in this section are organized by chart type,
+with each paragraph describing some responsive patterns applicable to
+a certain type of chart.  It would be an immense endeavor to bring
+examples for every pattern used for all types of charts, so only a
+subset which demonstrates some of the most frequently encountered
+patterns for frequently used types of charts will be summarized here.
 
 The first types of charts which shall be discussed are a bar charts.
-They are among the most often encountered types of charts, accounting for 135 (= 36\%) of the 378 responsive charts studied by \textcite{DesignPatternsTradeOffsRespVis}.
-Bar charts are usually used to visualize two-dimensional data, with one dimension being categorical and the other one being quantitative.
-Two additional variants of bar charts exist to visualize categorical datasets with multiple subdimensions: grouped bar charts \parencite{GroupedBar}, to compare subdimensions with each other, and stacked bar charts \parencite{StackedBar}, to compare part-to-whole relationships of the subdimensions.
-Even though responsive design of visualizations is slowly becoming more common, most charts found in today's web articles are still being created as static images \parencite{HBar,VBar,HVBar,MapBarLine}.
-A good example of a responsive bar chart has been created by \textcite{RespVis} and can be seen in Figure~\ref{fig:RespBarExample}.
-Bar charts are freely scalable by adjusting the width of individual bars \parencite{RespHBar,RespHBarHLine,RespHBars}, so they all can fit into their allocated space.
-When reducing the width of any type of chart past a certain point, the tick labels of the horizontal axis may start overlapping each other.
-This is why the reducing width pattern usually occurs together with the recompose axis ticks and simplify/elaborate axis labels patterns \parencite{RespHBars,RespHBarHLine,RespVBar}.
-Another effective pattern for solving overlapping of tick labels is to rotate them by up to 90 degrees to make them take up less horizontal space \parencite{RespVis}.
-If there is too much data to fit into the available width, the chart can be transposed and grown to as much height as necessary \parencite{RespVis}.
-Doing this is more advisable than simply extending the width of the chart past the viewport because vertical scrolling is easier to achieve than horizontal scrolling.
-When reducing the size of charts which contain annotations, similar patterns than those targeting tick labels can be applied to avoid the annotations from overlapping.
-Annotations can simply be removed \parencite{RespHStackedBar,RespHLineHStackedBar}, or they can be simplified and relocated \parencite{RespVBar}.
+They are among the most often encountered types of charts, accounting
+for 135 (= 36\%) of the 378 responsive charts studied by
+\textcite{DesignPatternsTradeOffsRespVis}.  Bar charts are usually
+used to visualize two-dimensional data, with one dimension being
+categorical and the other one being quantitative.  Two additional
+variants of bar charts exist to visualize categorical datasets with
+multiple subdimensions: grouped bar charts \parencite{GroupedBar}, to
+compare subdimensions with each other, and stacked bar charts
+\parencite{StackedBar}, to compare part-to-whole relationships of the
+subdimensions.  Even though responsive design of visualizations is
+slowly becoming more common, most charts found in today's web articles
+are still being created as static images
+\parencite{HBar,VBar,HVBar,MapBarLine}.  A good example of a
+responsive bar chart has been created by \textcite{RespVis} and can be
+seen in Figure~\ref{fig:RespBarExample}.  Bar charts are freely
+scalable by adjusting the width of individual bars
+\parencite{RespHBar,RespHBarHLine,RespHBars}, so they all can fit into
+their allocated space.  When reducing the width of any type of chart
+past a certain point, the tick labels of the horizontal axis may start
+overlapping each other.  This is why the reducing width pattern
+usually occurs together with the recompose axis ticks and
+simplify/elaborate axis labels patterns
+\parencite{RespHBars,RespHBarHLine,RespVBar}.  Another effective
+pattern for solving overlapping of tick labels is to rotate them by up
+to 90 degrees to make them take up less horizontal space
+\parencite{RespVis}.  If there is too much data to fit into the
+available width, the chart can be transposed and grown to as much
+height as necessary \parencite{RespVis}.  Doing this is more advisable
+than simply extending the width of the chart past the viewport because
+vertical scrolling is easier to achieve than horizontal scrolling.
+When reducing the size of charts which contain annotations, similar
+patterns than those targeting tick labels can be applied to avoid the
+annotations from overlapping.  Annotations can simply be removed
+\parencite{RespHStackedBar,RespHLineHStackedBar}, or they can be
+simplified and relocated \parencite{RespVBar}.
+
+
 
 \begin{figure}[tp]
 \centering
@@ -161,20 +280,46 @@ An example of a responsive bar chart at different display widths.
 \label{fig:RespBarExample}
 \end{figure}
 
-The second most frequent types of responsive charts according to the responsive visualization gallery created by \textcite{DesignPatternsTradeOffsRespVis} are line charts, which amount to 98 (= 26\%) out of the 378 responsive visualizations in the gallery.
-Line charts are used to show trends in two-dimensional datasets by plotting them as points which are connected by lines.
-They can be extended to compare trends in multiple dimensions with each other by drawing additional points and lines for every additional dimension which shall be compared.
-Many line charts on the web are still published in non-responsive forms \parencite{HLine,HLine2}, though some web authors already took the extra effort to make their charts responsive.
-The minimum which can be done to make a line chart responsive is to reduce their width \parencite{RespRadialScatterHLine} by shrinking the horizontal distance between neighboring points.
-This usually occurs together with the recomposition and simplification of horizontal ticks.
-If the chart contains annotations, it may also be necessary to recompose, relocate, and simplify them as well \parencite{RespHLines,RespHLine,RespHBarHLine,RespHLineHStackedBar}.
-A good demonstration of which responsive patterns can be applied to make a line chart responsive is shown in the responsive line chart created by \textcite{RespVis} which can be seen in Figure~\ref{fig:RespLineExample}.
-In addition to the recomposition of ticks, tick labels are rotated to reduce their required horizontal space.
-For exceptionally limited space, it can make sense to remove the axes of a line chart entirely and turn it into a sparkline.
-However, it should be noted that by doing this, the consumer of the visualization looses information about the type and scale of the chart's dimensions.
-This technique should therefore only be applied in cases where no other pattern is applicable or if the trend in the data is the most important message to convey.
-It is rare to encounter transposed versions of line charts, though the transposing could benefit heavily annotated line charts \parencite{VLine}.
-Applying a transpose pattern would allow the chart to take up as much vertical space as necessary to neatly fit all the annotations without requiring the consumer to scroll horizontally.
+
+
+
+The second most frequent types of responsive charts according to the
+responsive visualization gallery created by
+\textcite{DesignPatternsTradeOffsRespVis} are line charts, which
+amount to 98 (= 26\%) out of the 378 responsive visualizations in the
+gallery.  Line charts are used to show trends in two-dimensional
+datasets by plotting them as points which are connected by lines.
+They can be extended to compare trends in multiple dimensions with
+each other by drawing additional points and lines for every additional
+dimension which shall be compared.  Many line charts on the web are
+still published in non-responsive forms \parencite{HLine,HLine2},
+though some web authors already took the extra effort to make their
+charts responsive.  The minimum which can be done to make a line chart
+responsive is to reduce their width \parencite{RespRadialScatterHLine}
+by shrinking the horizontal distance between neighboring points.  This
+usually occurs together with the recomposition and simplification of
+horizontal ticks.  If the chart contains annotations, it may also be
+necessary to recompose, relocate, and simplify them as well
+\parencite{RespHLines,RespHLine,RespHBarHLine,RespHLineHStackedBar}.
+A good demonstration of which responsive patterns can be applied to
+make a line chart responsive is shown in the responsive line chart
+created by \textcite{RespVis} which can be seen in
+Figure~\ref{fig:RespLineExample}.  In addition to the recomposition of
+ticks, tick labels are rotated to reduce their required horizontal
+space.  For exceptionally limited space, it can make sense to remove
+the axes of a line chart entirely and turn it into a sparkline.
+However, it should be noted that by doing this, the consumer of the
+visualization looses information about the type and scale of the
+chart's dimensions.  This technique should therefore only be applied
+in cases where no other pattern is applicable or if the trend in the
+data is the most important message to convey.  It is rare to encounter
+transposed versions of line charts, though the transposing could
+benefit heavily annotated line charts \parencite{VLine}.  Applying a
+transpose pattern would allow the chart to take up as much vertical
+space as necessary to neatly fit all the annotations without requiring
+the consumer to scroll horizontally.
+
+
 
 \begin{figure}[tp]
 \centering
@@ -215,19 +360,49 @@ An example of a responsive line chart at different display widths.
 \label{fig:RespLineExample}
 \end{figure}
 
-Scatterplots are also among the rather frequently encountered types of responsive charts, amounting to 26 (= 7\%) of the 378 responsive charts contained in the gallery by \textcite{DesignPatternsTradeOffsRespVis}.
-A scatterplot is a visualization which represents two-dimensional data as points in a Cartesian coordinate system.
-There are plenty of examples of scatterplots which are merely being published as static images \parencite{Scatter,Scatter2}, even though responsive versions can also already be observed occasionally.
-The first step to making scatterplots responsive is to reduce their width to fit them into the space available for them.
-As for other types of charts, care must be taken to avoid overlapping of labels and annotations by applying recomposition, relocation and simplification patterns \parencite{RespScatter,RespScatter2}.
-To counteract the increased cramming of points when reducing the size of their container, various interaction features are usually implemented in scatterplots which help consumers in making sense of the represented data.
-The most useful interaction features in these charts are elaborative zooming interactions and the explorative panning interactions.
-In addition to zooming and panning, \textcite{RespVis} employs additional methods which reduce overlapping of individual points, such as fisheye distortion, Cartesian distortion or temporary displacements of points.
-An interesting technique for responsive visualizations which bases responsive configurations on a visualization's density rather than on its size has been introduced by \textcite{NickRabinowitzRDV}.
-The benefit of this approach is that charts will also adapt to changing amounts of data and reconfigure their appearance accordingly.
-The patterns applied in the responsive scatterplot by \textcite{NickRabinowitzRDV} shown in Figure~\ref{fig:RespScatterExample} are the recomposition of annotations to only show them for selected data records, and the switching of the encoding from a scatterplot to a heatmap for high densities.
-A good number of other techniques, such as for example the recomposition of data records, are also applicable to improve the responsiveness of scatterplots, but no examples for such patterns could be found.
-If the data which shall be encoded is inherently cyclic, a radial scatterplot, which is a polar coordinate system variant of a scatterplot, can be applied to better visualize this cyclic nature of the data \parencite{RespRadialScatterHLine}. 
+
+
+Scatterplots are also among the rather frequently encountered types of
+responsive charts, amounting to 26 (= 7\%) of the 378 responsive
+charts contained in the gallery by
+\textcite{DesignPatternsTradeOffsRespVis}.  A scatterplot is a
+visualization which represents two-dimensional data as points in a
+Cartesian coordinate system.  There are plenty of examples of
+scatterplots which are merely being published as static images
+\parencite{Scatter,Scatter2}, even though responsive versions can also
+already be observed occasionally.  The first step to making
+scatterplots responsive is to reduce their width to fit them into the
+space available for them.  As for other types of charts, care must be
+taken to avoid overlapping of labels and annotations by applying
+recomposition, relocation and simplification patterns
+\parencite{RespScatter,RespScatter2}.  To counteract the increased
+cramming of points when reducing the size of their container, various
+interaction features are usually implemented in scatterplots which
+help consumers in making sense of the represented data.  The most
+useful interaction features in these charts are elaborative zooming
+interactions and the explorative panning interactions.  In addition to
+zooming and panning, \textcite{RespVis} employs additional methods
+which reduce overlapping of individual points, such as fisheye
+distortion, Cartesian distortion or temporary displacements of points.
+An interesting technique for responsive visualizations which bases
+responsive configurations on a visualization's density rather than on
+its size has been introduced by \textcite{NickRabinowitzRDV}.  The
+benefit of this approach is that charts will also adapt to changing
+amounts of data and reconfigure their appearance accordingly.  The
+patterns applied in the responsive scatterplot by
+\textcite{NickRabinowitzRDV} shown in
+Figure~\ref{fig:RespScatterExample} are the recomposition of
+annotations to only show them for selected data records, and the
+switching of the encoding from a scatterplot to a heatmap for high
+densities.  A good number of other techniques, such as for example the
+recomposition of data records, are also applicable to improve the
+responsiveness of scatterplots, but no examples for such patterns
+could be found.  If the data which shall be encoded is inherently
+cyclic, a radial scatterplot, which is a polar coordinate system
+variant of a scatterplot, can be applied to better visualize this
+cyclic nature of the data \parencite{RespRadialScatterHLine}.
+
+
 
 \begin{figure}[tp]
 \centering
@@ -269,15 +444,32 @@ The breakpoints on which the design changes are defined on the metric of data de
 \label{fig:RespScatterExample}
 \end{figure}
 
-Even though parallel coordinates charts are rarely encountered in non-technical contexts, they are very popular when it comes to visualizing multidimensional data in visual analytics systems \parencite{HighD}.
-In these kinds of charts, multiple dimensions are rendered as parallel axes which are connected via paths.
-Each path represents an individual data record and its values in the corresponding dimensions.
-The axes of a parallel coordinates chart are typically laid out horizontally, meaning that the chart can be scaled down by reducing the distance between the individual axes.
-It might also be beneficial to apply previously mentioned axis-related patterns, such as rotating labels and recomposing ticks.
-Another technique which can be applied to make parallel coordinates charts even more responsive is the successive hiding of dimensions based on their priorities.
-When automatically hiding dimensions, it is necessary to apply compensation patterns which give users additional controls which allow configuration of the displayed dimensions to override the system's hiding behavior.
-If reducing the chart's complexity is not a desirable approach, it can again be recommended to transpose the chart and expand it to whatever height necessary rather than cram too much information into the limited width available.
-An example of a responsive parallel coordinate chart incorporating some of these patterns can be seen in Figure~\ref{fig:RespParCoordExample}.
+
+
+
+Even though parallel coordinates charts are rarely encountered in
+non-technical contexts, they are very popular when it comes to
+visualizing multidimensional data in visual analytics systems
+\parencite{HighD}.  In these kinds of charts, multiple dimensions are
+rendered as parallel axes which are connected via paths.  Each path
+represents an individual data record and its values in the
+corresponding dimensions.  The axes of a parallel coordinates chart
+are typically laid out horizontally, meaning that the chart can be
+scaled down by reducing the distance between the individual axes.  It
+might also be beneficial to apply previously mentioned axis-related
+patterns, such as rotating labels and recomposing ticks.  Another
+technique which can be applied to make parallel coordinates charts
+even more responsive is the successive hiding of dimensions based on
+their priorities.  When automatically hiding dimensions, it is
+necessary to apply compensation patterns which give users additional
+controls which allow configuration of the displayed dimensions to
+override the system's hiding behavior.  If reducing the chart's
+complexity is not a desirable approach, it can again be recommended to
+transpose the chart and expand it to whatever height necessary rather
+than cram too much information into the limited width available.  An
+example of a responsive parallel coordinate chart incorporating some
+of these patterns can be seen in Figure~\ref{fig:RespParCoordExample}.
+
 
 \begin{figure}[tp]
 \centering
@@ -337,3 +529,4 @@ An example of a responsive parallel coordinates chart at different display width
 }
 \label{fig:RespParCoordExample}
 \end{figure}
+
