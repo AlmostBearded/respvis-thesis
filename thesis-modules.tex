@@ -483,9 +483,22 @@ da diese D3 funktionen attributes verwenden um die einzelnen elemente der ticks 
 %     left axis, bottom axis, draw area, potential legend
 %     dynamic draw-area size to fill available space
 
+\TODO{Capitalize "Chart Component" or "Chart component"? How about only "chart" without "component"? Capitalize "Chart" everytime it's used?}
 charts sind higher-level components die eine vollstaendige visualisierung inklusive achsen, legenden und series representieren.
+ein beispiel eines gerenderten RespVis charts der zwei achsen, eine grouped bar series, eine label series und eine legend beinhaltet kann in Figure~\ref{fig:Chart} gesehen werden.
 Ein chart wird typischerweise in dem root \code{<svg>} element eines SVG dokumentes gerendert welches zumindest die \code{chart} klasse im \code{class} attribute und den angemessenen SVG namespace im \code{xmlns} attribute gesetzt hat.
 Diese attribute koennen in spezifischeren chart komponenten entweder manuel oder ueber die \code{chartRender} funktion aus der \code{chart.ts} datei im core module, welche nur diese attribute setzt, gesetzt werden.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{diagrams/chart.pdf}
+  \caption[Chart Example]{
+    An example of a chart that contains two axes, a grouped bar series, a label series and a legend.
+    This chart has been rendered with the RespVis library.
+    \imgcredit{Image created by the author of this thesis.}
+  }
+  \label{fig:Chart}
+\end{figure}
 
 wie bereits erwaehnt beinhaltet die RespVis library aktuell nur die implementationen von kartesischen charts welche daten in einem kartesischen koordinatensystems visualisieren.
 die implementierung der basis funktionen von kartesischen charts befindet sich in der \code{chart-cartesian.ts} datei im core module. 
@@ -539,12 +552,125 @@ um das setzten des \code{data-legend-position} attributes zu vereinfachen kann d
 
 \subsection{Chart Window}
 
-% chart window
-% menu dropdown
-% series checkbox
-% tool filter nominal
+% wrappers around charts that handle the render process and add a toolbar to configure charts and perform various operations.
+% chartWindowRender
+%   div.chart-window
+%     div.toolbar, toolbarRender
+%       div.menu-tools, menuToolsRender
+%         menuDropdownRender
+%         no chevron
+%         text unicode burger menu, trigram for heaven, https://graphemica.com/%E2%98%B0, U+2630
+%     div.layouter
+%   resizeEventListener
+% menuDropdownRender
+%   .menu
+%     span.chevron, unicode, left pointing,
+%     span.text
+%     ul.items
+%       positioning and styling via CSS
+%       showing via CSS
+%       highlighting via CSS
+
+% toolFilterNominal
+%   one of the tools provided by the library is the nominal filtering tool that can be used to filter a nominal dimension of the rendered data.
+%   nominal data is simply labeled data where no quantitative value is assigned to the individual values.  
+%   text, options, keys
+%   menuDropdownRender
+%   .item, seriesCheckboxRender
+%     container, labels, keys
+%     containerElement.checkbox
+%       input[type=checkbox][id=uuid()]
+%       label[for=input.id]
 % tool download svg
+%   dont describe in too much detail as it will be included in selected topics chapter
 % resize event dispatcher
+
+\TODO{Capitalize "Chart Window"?}
+chart windows sind wrapper komponenten um charts die einen chart innerhalb eines Layouter container elementes rendern und mit einer toolbar dekorieren.
+ein beispiel eines chart windows mit einem ausgeklappten tool menue in welchem sich zwei nominale filtering tools und ein svg download tool befinden kann in Figure~\ref{fig:ChartWindow} gesehen werden.
+die implementierung der chart window komponente befindet sich in der \code{chart-window.ts} datei im core module.
+diese komponenten stellen einen noch higher-level layer als charts dar und werden verwendet um den render prozess und die konfiguration von charts zu managen.
+in den meisten anderen visualization libraries werden charts als der hoechste level an komponenten die konfiguriert werden koennen zur verfuegung gestellt.
+typischerweise bedeutet das, dass zusaetzliche HTML elemente fuer die runtime configuration von charts von der einbettenden webseite selbst erzeugt und gemanaged werden muessen.     
+ein chart window wird ausserhalb des SVG dokumentes eines charts auf einem HTML \code{<div>} element mit der \code{chartWindowRender} funktion gerendert.
+ihre struktur besteht aus einem \code{<div>} element in welches die toolbar mit der \code{toolbarRender} funktion gerendert wird und aus einem weiteren \code{<div>} element auf welchem ein Layouter mit der \code{layouterRender} funktion initialisiert wird. 
+das SVG dokument eines charts wird dann an das \code{<div>} element des Layouters als child angehaengt.
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/chart-window.png}
+  \caption[Chart Window Example]{
+    An example of a chart that is wrapped in a chart window.
+    The tool menue has been expanded by hovering over it and the menu entries of two nominal filtering tools and the download SVG tool can be seen inside.
+    \imgcredit{Image created by the author of this thesis.}
+  }
+  \label{fig:ChartWindow}
+\end{figure}
+
+
+zum aktuellen zeitpunkt befindet sich in der toolbar nur das tool menu als einziges element.
+das tool menu ist ein dropdown menue in welchem die einzelnen tools als menueeintraege oder als untermenues zu finden sind.
+ein dropdown menu wird ueber die \code{menuDropdownRender} funktion auf den elementen der mitgegebenen Selection gerendert.
+diese funktion setzt die \code{menu} klasse auf den root elementen auf welchen das dropdown menue gerendert wird.
+ein dropdown menue besteht aus einem \code{<span>} element mit der \code{chevron} klasse dessen text content ein nach links zeigendes Unicode chevron symbol ist, einem zweiten \code{<span>} element mit der \code{text} klasse dessen text der titel des dropdown menues ist, und einem \code{<ul>} element mit der \code{items} klasse dass die unterelemente des dropdown menues beinhaltet.
+die unterelemente eines dropdown menues werden ueber CSS absolut positioniert und angezeigt sowie highlighted solange eine hover interaktion auf dem menue stattfindet.
+das tool menue wird ueber die \code{menuToolsRender} funktion erzeugt welche intern die \code{menuDropdownRender} funktion verwendet um das tool menue als dropdown menue zu initialisieren.
+das root dropdown menue des tool menues wird ohne chevron symbol gerendert und enhaelt ein Unicode symbol in seinem \code{<span>} element mit der \code{text} klasse. 
+das symbol dass fuer das tool menue verwendet wurde ist das \enquote{trigram for heaven} Unicode symbol mit dem code U+2630 welches haeufig fuer burger menues verwendet wird.
+
+das core module stellt tools zur verfuegung die zu den tool menues von spezifischeren chart windows hizugefuegt werden koennen.
+eines dieser tools ist das nominale filtering tool welches sich in der \code{tools/tool-filter-nominal.ts} datei im core module befindet.
+dieses tool wird verwendet um eine nominale datendimension eines visualsierten datasets ueber ein dropdown menue dass eine checkbox series beinhaltet zu filtern.
+nominale daten sind im gegensatz zu ordinalen daten nur gelabelte oder kategorische daten deren werten kein quantitativer wert zugewiesen ist und welche daher keine reihenfolge besitzen und auch nicht sortiert werden koennen.
+das data object fuer die konfiguration eines nominalen filter tools wird durch das \code{ToolFilterNominal} interface beschrieben.
+dieses interface enthaelt ein \code{text} string property welches den titel des dropdown menues definiert, ein \code{options} string array property welches die einzelnen optionen die gefiltert werden koennen definiert, und ein \code{keys} string array property welches die keys der einzelnen optionen definiert. 
+die \code{toolFilterNominalData} funktion wird verwendet um ein data objekt vom typ \code{ToolFilterNominal} von einem partiellen input objekt zu erzeugen bei welchem die nicht definierten properties mit standardwerten befuellt werden.
+das tool kann dann ueber die \code{toolFilterNominalRender} funktion auf einem element mit einem gebundenen \code{ToolFilterNominal} data objekt gerendert werden.
+diese funktion verwendet intern die \code{menuDropdownRender} funktion um das tool als dropdown menue zu initialisieren.
+die items des nominalen filter tool dropdown menues werden als eine checkbox series gerendert.
+
+die implementierung einer checkbox series befindet sich in der \code{series-checkbox.ts} datei im core module.
+eine checkbox series wird ueber ein data objekt in der form des \code{SeriesCheckbox} interfaces konfiguriert.
+dieses interface beschreibt eine checkbox series ueber ein \code{container} string property mit welchem der element typ von checkbox container elementen gewaehlt werden kann, ein \code{labels} string array property mit welchem die labels der individuellen checkboxes konfiguriert werden koennen, und ein \code{keys} string array property mit welchem die keys der individuellen checkboxes definiert werden koennen.
+ein data objekt von diesem typ kann mit der \code{seriesCheckboxData} funktion erzeugt werden, welche ein gueltiges objekt ausgehend von einem partiellen input objekt erstellt.
+eine checkbox series wird ueber die \code{seriesCheckboxRender} funktion gerendert.
+diese funktion setzt die \code{series-checkbox} klasse auf den Selection elementen, fuegt einen custom click listener hinzu welcher das toggling von checkboxes durch klicks irgendwo in ihrem container element ermoeglicht, und rendert die eigentlichen checkbox elemente durch einen D3 data join.
+um den data join durchzufuehren wird ein data object pro zu rendernder checkbox benoetigt.
+dies wird durch eine transformation des \code{SeriesCheckbox} data objektes in ein array von \code{Checkbox} data objekten erreicht.
+jedes dieser \code{Checkbox} data objekte beinhaltet ein \code{container} property mit welchem der tag des container elementes definiert wird, ein \code{label} property und ein \code{key} property. 
+alle dieser properties werden von den \code{container}, \code{labels}, und \code{keys} properties des \code{SeriesCheckbox} data objektes abgeleitet.
+die \code{seriesCheckboxJoin} funktion wird mit der Selection, welche aus dem data join mit den \code{Checkbox} data objekten entsteht, aufgerufen.
+diese funktion rendert die einzelnen checkboxes welche aus einem container element, einem \code{<input>} checkbox element, und aus einem \code{<label>} element bestehen.
+die tags der container elemente haengen von dem werten der \code{container} properties in den gebundenen data objekten ab.
+jedes container element erhaelt ausserdem die \code{checkbox} klasse und ein \code{data-key} attribut welches auf den wert des \code{key} property des data objektes gesetzt wird.
+das checkbox \code{<input>} element und das \code{<label>} element werden als kinder des container elementes angehaengt.
+um das \code{<label>} element dem \code{<input>} element semantisch zuzuweisen muss das \code{for} attribut am \code{<label>} element auf die id des \code{<input>} elementes gesetzt werden.
+hierfuer muss jedoch zuerst jedem \code{<input>} element eine einzigartige id zugewiesen werden.
+diese id wird beim erstmaligen erzeugen der checkbox ueber die die \code{uuid} funktion generiert und am \code{<input>} element als \code{id} attribut sowie auf dem \code{<label>} element als \code{for} attribut gesetzt.
+die \code{uuid} funktion ist ein alias fuer die \code{v4} funktion aus dem \code{uuid} npm package \code{UUIDPackage}.
+sie wird verwendet um UUIDs (Universally Unique IDentifiers) \parencite{UUIDRFC} der vierten version zu erzeugen welche mit enormer wahrscheinlichkeit eindeutig sind und welche daher bedenkenlos als werte fuer \code{id} attribute verwendet werden koennen.
+
+% UUIDPackage https://www.npmjs.com/package/uuid
+% UUIDRFC https://www.ietf.org/rfc/rfc4122.txt
+
+ein weiteres tool welches vom core module zur verfuegung gestellt wird und welches von jedem chart window eingebunden wird ist das SVG download tool.
+ein SVG dokument welches in ein HTML dokument einbettet ist kann nicht einfach wie ein eingebettes bild durch einen rechtsklick von benutzern heruntergeladen werden.
+um ein SVG dokument zu downloaden muss dieses zuerst als string in einen \code{Blob} enkodiert werden welcher dann als object URL im \code{href} attribut auf einem \code{<a>} element gesetzt wird.
+da die praesentation von RespVis visualisierungen allerdings hauptsaechlich ueber CSS konfiguriert wird, muessen die aktiven CSS properties zu attributen konvertiert werden bevor das SVG dokument gedownloaded werden kann.
+um dies zu tun wird zuerst das ganze SVG dokument geklont um attribute auf den geklonten elementen setzen zu koennen ohne die gerenderte visualisierung zu beinflussen.
+nachdem das dokument geklont wurde werden auf jedem geklonten element die notwendigen attribute gesetzt die den aktiven CSS properties des originalem objektes entsprechen.
+die aktiven CSS properties des originalem objektes werden ueber die \code{elementComputedStyleWithoutDefaults} utility funktion berechnet.
+nachdem alle notwendigen attribute auf den geklonten elementen gesetzt worden sind wird die string representation des gesamten geklonten dokumentes ueber das \code{Element.innerHTML} property berechnet und in einem \code{Blob} objekt mit dem typ \code{image/svg+xml} enkodiert.
+zum aktuellen zeitpunkt wird die string representation des SVG dokumentes nicht weiter nachbearbeitet oder formatiert was zu einer recht schwer lesbaren SVG datei fuehrt.   
+das \code{Blob} objekt wird dann ueber die \code{URL.createObjectURL} methode in eine object URL konvertiert und im \code{href} attribut eines neu erzeugten \code{<a>} elementes gesetzt.
+dieses neu erzeuge \code{<a>} element wird dann kurzzeitig an das \code{<body>} element des aktiven dokumentes angehaengt und ueber die \code{Element.click} methode geklickt was den dowload des fertig praeparierten SVG dokumentes initiiert.
+die implementierung des SVG download tools befindet sich in der \code{tools/tool-download-svg.ts} datei im core module.
+um dieses tool als menueeintrag des tool menues zu rendern wird die \code{toolDownloadSVGRender} funktion verwendet.
+diese funktion initialisiert den menueeintrag mit der \code{tool-download-svg} klasse und einem angemessenen text content.
+ausserdem setzt die \code{toolDownloadSVGRender} funktion einen click event listener auf dem menueeintrag welcher bei interaktion des benutzers den download des gerenderten SVG dokumentes ueber die \code{chartDownload} funktion initiiert.
+die \code{chartDownload} funktion fuehrt dann alle bereits beschriebenen operationen aus die fuer die praeparation und den download des gerenderten SVG dokumentes notwendig sind.
+
+\TODO{Ask keith why i shouldn't explain the svg download functionality here and skip the selected details chapter}
 
 \section{Legend Module}
 
