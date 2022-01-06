@@ -670,9 +670,85 @@ diese funktion initialisiert den menueeintrag mit der \code{tool-download-svg} k
 ausserdem setzt die \code{toolDownloadSVGRender} funktion einen click event listener auf dem menueeintrag welcher bei interaktion des benutzers den download des gerenderten SVG dokumentes ueber die \code{chartDownload} funktion initiiert.
 die \code{chartDownload} funktion fuehrt dann alle bereits beschriebenen operationen aus die fuer die praeparation und den download des gerenderten SVG dokumentes notwendig sind.
 
-\TODO{Ask keith why i shouldn't explain the svg download functionality here and skip the selected details chapter}
-
 \section{Legend Module}
+
+das legend module besteht nur aus der \code{legend.ts} datei welche die implementierung einer legende beinhaltet.
+eine legende wird verwendet um scales zu visualisieren deren werte nicht auf raeumliche werte in einem koordinatensystem gemappt werden.
+stattdessen werden in den scales die durch eine legende visualisiert werden abstrakte werte auf visuelle eigenschaften wie zum beispiel farbe, form oder groesse abgebildet.
+die legende die in diesem modul implementiert wurde visualisiert dieses mapping durch gelabelte konfigurierbare symbole.
+ein beispiel welches die verwendung des legend modules demonstriert befindet sich in der \code{legend.html} datei im \code{src/examples/} ordner.
+ein auszug dieses beispiels kann in Listing~\ref{list:Legend} und dessen rendering in Figure~\ref{fig:Legend} gesehen werden. 
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:Legend,
+  caption={[Source Code of Legend Example]%
+    The source code of the example website implemented in the \code{legend.html} file of the \code{src/examples/} directory that renders the three different legends seen in Figure~\ref{fig:Legend}.
+    Non-essential parts of the source code have been removed to focus on the configuration of the individual legends.
+    The horizontal legend has the same configuration in their data object as the rectangle symbol legend.
+    The only difference between those two legends is that the items of the horizontal legend have been laid out horizontally via the \code{flex-direction: row} CSS property.
+  },
+]{listings/legend.html}
+\end{samepage}
+
+\begin{figure}[tp]
+  \centering
+  \includegraphics[keepaspectratio,width=\linewidth / 2,height=\fullh]{diagrams/legend.pdf}
+  \caption[Legend Example]{
+    This is an example of three different legends that have been created from the source code in Listing~\ref{list:Legend}.
+    One legend has been configured to have rectangles as symbols, one has been configured to have circles as symbols, and the last one has been configured with rectangle symbols but with horizontally laid out legend items.
+    \imgcredit{Image created by the author of this thesis.}
+  }
+  \label{fig:Legend}
+\end{figure}
+
+ein data object mit welchem das rendering einer legende konfigurert werden kann wird durch das \code{Legend} interface beschrieben.
+dieses interface beinhaltet ein \code{title} string property, ein \code{labels} string array property, ein \code{symbols} function oder function array property, ein \code{styleClasses} string oder string array property, und ein \code{keys} string array property.
+der titel einer legende kann optional ueber das \code{title} property gesetzt werden.
+das \code{labels} string array property definiert die labels neben den symbolen der einzelnen legend items.
+die symbole der legend items werden ueber das \code{symbols} property bestimmt.
+da die symbole einer legende komplett konfigurierbar sein sollen wird nicht einfach ein \code{<rect>} oder \code{<circle>} element als symbol gerendert sondern ein \code{<path>} element.
+die verwendung eines \code{<path>} elementes ermoeglicht es beliebige symbole in der legende zu visualisieren.
+der nachteil hiervon ist dass die konfiguration von \code{<path>} elementen aufwaendiger ist als die konfiguration von eingeschraenkteren SVG elementen.
+das rendern eines symbols als \code{<path>} wird ueber eine funktion erledigt welche als input das jeweilige \code{<path>} element und die vom Layouter berechneten boundaries erhaelt.
+in dem \code{symbols} property des \code{Legend} data objektes kann entweder eine einzelne solche funktion oder ein array von solchen funktionen gesetzt sein.
+ist eine einzelne funktion gesetzt, erhaelt jedes symbol die selbe path konfiguration. 
+sollte hier ein array an funktionen gesetzt sein, dann wird jedes symbol durch eine eigene path konfiguration visualisiert.
+das \code{styleClasses} property erlaubt die konfiguration der style klassen von legend items.
+eine style klasse wird in dem \code{data-style} attribut eines elementes gesetzt und dient der konfiguration von visuellen eigenschaften ueber CSS.
+ein beispiel fuer verfuegbare style klassen sind die \code{categorical-0} bis \code{categorical-9} style klassen.
+das setzen einer dieser klassen im \code{data-style} attribut eines elementes fuehrt dazu dass das CSS \code{fill} property auf die jeweilige kategorische farbe gesetzt wird.  
+wird in dem \code{styleClasses} property eine einzelne style klasse deklariert, dann wird diese style klasse auf allen legend items gesetzt.
+alternativ dazu akzeptiert dieses property auch ein array an style klassen, was dazu fuehrt das jedes legend item eine eigene style klasse gesetzt bekommt.
+das \code{keys} property eines \code{Legend} data objektes bestimmt die werte der \code{data-key} attribute der einzelnen legend items.
+ein data objekt das der form des \code{Legend} interface entspricht kann mit der \code{legendData} funktion erzeugt werden.
+diese funktion erhaelt ein input objekt von dem selben typ wie jener den sie erzeugt bei welchem die werte die fuer den aufrufenden code nicht von interesse sind nicht gesetzt sein muessen und mit standardwerten befuellt werden.
+
+eine legende wird mit der \code{legendRender} funktion auf elementen gerendert auf denen ein \code{Legend} data objekt gebunden ist.
+diese funktion setzt die \code{legend} klasse auf den elementen der uebergebenen Selection.
+innerhalb des root elementes der legende befindet sich ein \code{<text>} element mit der \code{text} klasse welches den titel der legende representiert, und ein \code{<g>} element mit der \code{items} klasse in welches die einzelnen legend items ueber einen data join gerendert werden.
+um den legend item data join durchzufuehren benoetigt man ein data objekt pro legend item das gerendert werden soll.
+dieses array an \code{LegendItem} data objekten, welche aus den \code{label}, \code{styleClass}, \code{symbol}, und \code{key} eigenschaften bestehen, wird durch transformation des \code{Legend} data objektes erzeugt.
+ueber einen data join mit diesem array an data objekten wird fuer jedes legend item ein \code{<g>} element mit der \code{legend-item} klasse erzeugt.
+an jedes dieser \code{<g>} elemente werden dann ein \code{<path>} element mit der \code{symbol} klasse und ein \code{<text>} element mit der \code{label} klassen angehaengt.
+das \code{label} property des gebundenen \code{LegendItem} data objektes wird dann als textinhalt des \code{<text>} elementes gesetzt und das \code{symbol} property wird verwendet um die form des \code{<path>} objektes zu bestimmen.
+ausserdem werden die \code{data-style} und \code{data-key} attribute auf dem \code{<g>} legend item element auf die werte der \code{styleClass} und \code{key} eigenschaften des data objektes gesetzt.
+im kern kann eine legende auch als legend item series angesehen werden und wie auch alle anderen series components kann auch in den data join der legende direkt ueber die \code{enter}, \code{update}, und \code{exit} events, welche auf dem root element der legende gesendet werden, eingegriffen werden.
+die event objekte dieser events beinhalten im \code{detail.selection} property jeweils die enter, update, und exit Selections des darunterliegenden data joins.
+ueber diese properties koennen beliebige operationen in den verschiedenen phasen des data joins ausgefuehrt werden.
+
+
+\TODO{Capitalize "Core Module", "Bar Module", "Chart", "Chart Component", "Axis", "Axis Component" according to Keith}
+
 
 \section{Tooltip Module}
 

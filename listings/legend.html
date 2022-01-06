@@ -1,0 +1,37 @@
+<html>
+<head>
+  <style>
+    /* ... */
+    .horizontal-legend .items {
+      flex-direction: row;
+    }
+  </style>
+</head>
+<body>
+  <div id="chart"></div>
+  <script type="module">
+    // imports, init chart window, init chart, ...
+
+    const labels = [0, 1, 2, 3].map((n) => `Label ${n}`);
+
+    // legend with rectangle symbols
+    const rectLegendData = legendData({
+      title: 'Legend',
+      labels,
+      symbols: (p, s) => pathRect(p, rectFromSize(s)),
+    });
+
+    // legend with circle symbols
+    const circleLegendData = legendData({
+      title: 'Legend',
+      labels,
+      symbols: (p, s) => pathCircle(p, circleInsideRect(rectFromSize(s))),
+    });
+
+    // horizontal legend with rectangle symbols
+    const horizontalLegendData = rectLegendData;
+
+    // handle render process, resize, ...
+  </script>
+</body>
+</html>
