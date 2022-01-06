@@ -647,11 +647,8 @@ das checkbox \code{<input>} element und das \code{<label>} element werden als ki
 um das \code{<label>} element dem \code{<input>} element semantisch zuzuweisen muss das \code{for} attribut am \code{<label>} element auf die id des \code{<input>} elementes gesetzt werden.
 hierfuer muss jedoch zuerst jedem \code{<input>} element eine einzigartige id zugewiesen werden.
 diese id wird beim erstmaligen erzeugen der checkbox ueber die die \code{uuid} funktion generiert und am \code{<input>} element als \code{id} attribut sowie auf dem \code{<label>} element als \code{for} attribut gesetzt.
-die \code{uuid} funktion ist ein alias fuer die \code{v4} funktion aus dem \code{uuid} npm package \code{UUIDPackage}.
+die \code{uuid} funktion ist ein alias fuer die \code{v4} funktion aus dem \code{uuid} npm package \parencite{UUIDPackage}.
 sie wird verwendet um UUIDs (Universally Unique IDentifiers) \parencite{UUIDRFC} der vierten version zu erzeugen welche mit enormer wahrscheinlichkeit eindeutig sind und welche daher bedenkenlos als werte fuer \code{id} attribute verwendet werden koennen.
-
-% UUIDPackage https://www.npmjs.com/package/uuid
-% UUIDRFC https://www.ietf.org/rfc/rfc4122.txt
 
 ein weiteres tool welches vom core module zur verfuegung gestellt wird und welches von jedem chart window eingebunden wird ist das SVG download tool.
 ein SVG dokument welches in ein HTML dokument einbettet ist kann nicht einfach wie ein eingebettes bild durch einen rechtsklick von benutzern heruntergeladen werden.
