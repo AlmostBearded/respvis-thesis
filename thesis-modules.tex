@@ -542,7 +542,7 @@ diese klassen werden gesetzt um die auswahl der konkreten achsen welche die jewe
 
 wie es in der RespVis library ueblich ist, wird alles moegliche an positionierung und styling ueber CSS konfiguriert.
 die elemente eines kartesischen charts werden ueber ein CSS Grid layout positioniert.
-standardmaessig wird ein grid erzeugt welcher die \code{axis-left}, \code{axis-bottom}, code{draw-area}, und \code{legend} areas definiert.
+standardmaessig wird ein grid erzeugt welcher die \code{axis-left}, \code{axis-bottom}, \code{draw-area}, und \code{legend} areas definiert.
 die groesse der meisten zeilen und spalten dieses grids ist auf \code{auto} gesetzt, was bedeutet dass deren groesse von der groesse ihres inhaltes abhaengt. 
 die ausnahme hiervon sind die zeile und spalte in welchen sich die draw area befindet.
 deren groesse ist auf \code{1fr} gesetzt um zu erreichen dass die draw area den gesamten restlichen horizontalen und vertikalen platz einnimmt der nicht von den anderen zeilen und spalten eingenommen wird.
@@ -659,8 +659,8 @@ um dies zu tun wird zuerst das ganze SVG dokument geklont um attribute auf den g
 nachdem das dokument geklont wurde werden auf jedem geklonten element die notwendigen attribute gesetzt die den aktiven CSS properties des originalem objektes entsprechen.
 die aktiven CSS properties des originalem objektes werden ueber die \code{elementComputedStyleWithoutDefaults} utility funktion berechnet.
 nachdem alle notwendigen attribute auf den geklonten elementen gesetzt worden sind wird die string representation des gesamten geklonten dokumentes ueber das \code{Element.innerHTML} property berechnet und in einem \code{Blob} objekt mit dem typ \code{image/svg+xml} enkodiert.
-zum aktuellen zeitpunkt wird die string representation des SVG dokumentes nicht weiter nachbearbeitet oder formatiert was zu einer recht schwer lesbaren SVG datei fuehrt.   
-das \code{Blob} objekt wird dann ueber die \code{URL.createObjectURL} methode in eine object URL konvertiert und im \code{href} attribut eines neu erzeugten \code{<a>} elementes gesetzt.
+zum aktuellen zeitpunkt wird die string representation des SVG dokumentes nicht weiter nachbearbeitet oder formatiert was zu einer recht schwer lesbaren SVG datei fuehrt und was in der zukunft verbessert werden soll. 
+das \code{Blob} objekt wird dann ueber die \code{URL.createObjectURL} methode in eine URL konvertiert die ein downloadable \code{Blob} objekt representiert und im \code{href} attribut eines neu erzeugten \code{<a>} elementes gesetzt.
 dieses neu erzeuge \code{<a>} element wird dann kurzzeitig an das \code{<body>} element des aktiven dokumentes angehaengt und ueber die \code{Element.click} methode geklickt was den dowload des fertig praeparierten SVG dokumentes initiiert.
 die implementierung des SVG download tools befindet sich in der \code{tools/tool-download-svg.ts} datei im core module.
 um dieses tool als menueeintrag des tool menues zu rendern wird die \code{toolDownloadSVGRender} funktion verwendet.
@@ -699,14 +699,14 @@ ein auszug dieses beispiels kann in Listing~\ref{list:Legend} und dessen renderi
 \end{samepage}
 
 \begin{figure}[tp]
-  \centering
-  \includegraphics[keepaspectratio,width=\linewidth / 2,height=\fullh]{diagrams/legend.pdf}
-  \caption[Legend Example]{
-    This is an example of three different legends that have been created from the source code in Listing~\ref{list:Legend}.
-    One legend has been configured to have rectangles as symbols, one has been configured to have circles as symbols, and the last one has been configured with rectangle symbols but with horizontally laid out legend items.
-    \imgcredit{Image created by the author of this thesis.}
-  }
-  \label{fig:Legend}
+\centering
+\includegraphics[keepaspectratio,width=\linewidth / 2,height=\fullh]{diagrams/legend.pdf}
+\caption[Legend Example]{
+  This is an example of three different legends that have been created from the source code in Listing~\ref{list:Legend}.
+  One legend has been configured to have rectangles as symbols, one has been configured to have circles as symbols, and the last one has been configured with rectangle symbols but with horizontally laid out legend items.
+  \imgcredit{Image created by the author of this thesis.}
+}
+\label{fig:Legend}
 \end{figure}
 
 ein data object mit welchem das rendering einer legende konfigurert werden kann wird durch das \code{Legend} interface beschrieben.
@@ -748,7 +748,68 @@ ueber diese properties koennen beliebige operationen in den verschiedenen phasen
 \TODO{Capitalize "Core Module", "Bar Module", "Chart", "Chart Component", "Axis", "Axis Component" according to Keith}
 
 
+
+
 \section{Tooltip Module}
+
+\TODO{Capitalize "Tooltip", "Tooltip Module", ...}
+
+tooltips werden verwendet um zusaetzliche informationen eines elementes anzuzeigen die zu umfangreich sind um sie permanent anzuzeigen.
+eine visualisierung die zu viele informationen zur selben zeit darstellt verliert an effektivitaet da ein groesserer kognitiver aufwand aufgebracht werden muss um sie zu interpretieren.
+durch die verwendung von tooltips kann dieses problem dadurch geloest werden dass zu detailierte informationen erst durch interaktion der benutzter mit einem element in dessen kontext die information steht angezeigt werden.
+ausserdem ist es fuer tooltips ok andere wichtige teile einer visualisierung zu ueberdecken da sie nicht permanent sichbar sind.
+ein beispiel eines bar charts in welchem zusaetzliche informationen ueber einen tooltip angezeigt werden kann in Figure~\ref{fig:Tooltip} gesehen werden.
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/tooltip.png}
+\caption[Tooltip Example]{
+  A bar chart with a tooltip showing additional information of the data record associated with an individual bar.
+  Since the tooltip is only visible while the user interacts with the context element, it is ok that the tooltip covers other important parts of the visualization.
+  \imgcredit{Image created by the author of this thesis.}
+  }
+  \label{fig:Tooltip}
+\end{figure}
+  
+  
+das tooltip module befindet sich im \code{src/lib/tooltip/} odner des projektes.
+die hauptdatei welche die implementierung der tooltip funktionalitaet beinhaltet ist die \code{tooltip.ts} datei.
+so wie tooltips hier implementiert wurden, wird die gleichzeitige anzeige mehrerer tooltips unterstuetzt.
+um dies zu erreichen, erwarten alle funktionen die tooltip operationen ausfuehren, dass das tooltip element auf welchem die operation ausgefuehrt werden soll als erster parameter an die funktion uebergeben wird.
+diese funktionen erlauben es allerdings auch ein \code{null} objekt in diesem parameter zu uebergeben, was zur verwendung eines standard tooltip elementes, welches an das \code{<body>} element des aktiven dokumentes angehaengt wird, fuehrt.
+%
+tooltips sind HTML \code{<div>} elemente mit der \code{tooltip} klasse und werden ueber CSS gestyled.
+der inhalt eines tooltips wird mit der \code{tooltipContent} funktion gesetzt.
+diese funktion erlaubt es den inhalt eines tooltips als string zu definieren welcher als HTML inhalt des tooltip elementes gesetzt wird.
+%
+die position eines tooltips wird ueber die \code{tooltipPosition} funktion gesetzt.
+diese funktion erhaelt ein objekt als parameter mit welchem die position in viewport koordinaten und ein optionaler offset von dieser position bestimmt werden.
+wird kein expliziter offset gefordert berechnet die \code{tooltipPosition} funktion einen welcher den tooltip so postioniert dass er immer in dem sichtbaren bereich des browsers positioniert wird.
+tooltips werden ueber viewport koordinaten positioniert und die endgueltige position eines tooltips wird ueber die CSS \code{top}, \code{bottom}, \code{left}, und \code{right} eigenschaften gesetzt.
+welche dieser eigenschaften verwendet wird haengt von der offset richtung des tooltips ab. 
+%
+tooltips werden mit der \code{tooltipShow} funktion angezeigt und mit der \code{tooltipHide} funktion versteckt.
+diese funktionen setzen und enfernen jeweils die \code{show} klasse von dem tooltip element wodurch die CSS \code{opacity} eigenschaft des elementes beinflusst wird. 
+
+neben der \code{tooltip.ts} datei beinhaltet das tooltip modul noch die \code{series-config-tooltips.ts} datei.
+in dieser datei befindet sich keine eigene komponente sondern utility funktionen um die konfiguration und das handling von tooltips auf series komponenten zu vereinfachen.
+die datenobjekt interfaces von series komponenten mit welchen tooltips konfiguriert werden sollen koennen von dem \code{SeriesConfigTooltips} interface erben.
+dieses interface beinhaltet die \code{tooltipsEnabled}, \code{tooltips}, und \code{tooltipPositions} eigenschaften.
+die \code{tooltipsEnabled} boolean eigenschaft ermoeglicht das aktivieren und deaktivieren von tooltips.
+der inhalt der tooltips von individuellen series item elements wird ueber die \code{tooltips} eigenschaft konfiguriert.
+in dieser eigenschaft wird eine funktion gesetzt die mit dem series item element aufgerufen wird fuer welches ein tooltip angezeigt werden soll und welche den tooltipinhalt als string zurueckliefert.     
+die positionen der einzelnen tooltips werden ueber die \code{tooltipPositions} eigenschaft gesetzt.
+der wert dieser eigenschaft ist ebenfalls eine funktion welche mit dem kontext series item element und der aktuellen mausposition in viewport koordinaten als parameter aufgerufen wird.
+die gewuenschte position des tooltips kann dann ueber diese parameter berechnet werden.
+%
+zusaetzlich zu dem \code{SeriesConfigTooltips} interface kann die \code{seriesConfigTooltipsHandleEvents} funktion in der \code{series-config-tooltips.ts} datei gefunden werden.
+diese funktion kann in series komponenten verwendet werden um \code{mouseover}, \code{mousemove}, und \code{mouseout} event listener an die root elemente einer series anzuhaengen die fuer das management von tooltips zustaendig sind.
+diese event listener verwenden die \code{SeriesConfigTooltips} eigenschaften der an den series elementen gebundenen datenobjekte um die sichtbarkeit, den inhalt, und die position von tooltips zu modifizieren.
+die verwendung dieser utility typen und funktionen ist optional.
+es steht series komponenten frei eigene eigenschaften fuer die konfiguration von tooltips zur verfuegung zu stellen und das handling von tooltips selbst zu implementieren.
+allerdings ist es aus konsistenzgruenden besser wenn sich die art der konfiguration von tooltips nicht zu sehr zwischen unterschiedlichen series komponenten unterscheidet.   
+
+
 
 \section{Bar Module}
 
