@@ -211,6 +211,9 @@ The actions of responsive visualization patterns identified by
 
 \section{Responsive Visualization Examples}
 
+% KA you need to gather two or three real-world examples yourself,
+% by following the URLs in the responsive-vis-gallery !!
+
 The goal of this section is to provide the reader with some
 demonstrative examples of responsive visualizations.  The figures in
 this section were taken from external scientific sources which put
@@ -218,59 +221,90 @@ most of their effort into demonstrating responsive visualization
 patterns rather than communicating messages in the data they used.
 Owing to this, some figures below are lacking essential features, such
 as titles and axes descriptions, which would usually be present in
-practice.  The examples in this section are organized by chart type,
-with each paragraph describing some responsive patterns applicable to
-a certain type of chart.  It would be an immense endeavor to bring
-examples for every pattern used for all types of charts, so only a
-subset which demonstrates some of the most frequently encountered
-patterns for frequently used types of charts will be summarized here.
+practice.
 
-The first types of charts which shall be discussed are a bar charts.
-They are among the most often encountered types of charts, accounting
-for 135 (= 36\%) of the 378 responsive charts studied by
-\textcite{DesignPatternsTradeOffsRespVis}.  Bar charts are usually
-used to visualize two-dimensional data, with one dimension being
-categorical and the other one being quantitative.  Two additional
-variants of bar charts exist to visualize categorical datasets with
-multiple subdimensions: grouped bar charts \parencite{GroupedBar}, to
-compare subdimensions with each other, and stacked bar charts
-\parencite{StackedBar}, to compare part-to-whole relationships of the
-subdimensions.  Even though responsive design of visualizations is
-slowly becoming more common, most charts found in today's web articles
-are still being created as static images
-\parencite{HBar,VBar,HVBar,MapBarLine}.  A good example of a
-responsive bar chart has been created by \textcite{RespVis} and can be
-seen in Figure~\ref{fig:RespBarExample}.  Bar charts are freely
+
+The examples in this section are organized by chart type. It would be
+an immense endeavor to bring examples for every pattern used for all
+types of charts, so only a subset which demonstrates some of the most
+frequently encountered patterns for frequently used types of charts is
+summarized here.
+
+% KA introduce a table of the charts by type from Kim et al
+% bar     135 35%
+% line     98 26%
+% scatter  26  7%
+% ...
+
+% Where did these numbers come from?
+% Did you calculate them yourself?
+
+% The Kim dataset is *not* representative!!
+% 280 of 378 charts are from NYT and WSJ.
+
+
+
+% Chart prevalence statistics in the wild:
+% Reverse-Engineering Visualizations: Recovering Visual Encodings from Chart Images
+% Jorge Poco and Jeffrey Heer
+% EuroVis 2017
+% doi:10.1111/cgf.13193
+% https://idl.cs.washington.edu/files/2017-ReverseEngineeringVis-EuroVis.pdf
+
+
+
+
+
+
+
+\subsection{Bar Charts}
+
+Bar charts are very widespread, accounting for 135 (= 36\%) of the 378
+responsive charts in the corpus collected by
+\textcite{DesignPatternsTradeOffsRespVis}. Bar charts are usually used
+to visualize two-dimensional data, with one categorical dimension and
+one quantitative dimension. Two variants of bar charts support the
+visualization of categorical datasets having subdimensions: grouped
+bar charts \parencite{GroupedBar} compare subdimensions with each
+other, and stacked bar charts \parencite{StackedBar} compare
+part-to-whole relationships of the subdimensions. Even though
+responsive design of visualizations is slowly becoming more common,
+most charts found in today's web articles are still being created as
+static images \parencite{HBar,VBar,HVBar,MapBarLine}.
+
+A good example of a responsive bar chart created by \textcite{RespVis}
+can be seen in Figure~\ref{fig:RespBarExample}. Bar charts are freely
 scalable by adjusting the width of individual bars
 \parencite{RespHBar,RespHBarHLine,RespHBars}, so they all can fit into
-their allocated space.  When reducing the width of any type of chart
+their allocated space. When reducing the width of any type of chart
 past a certain point, the tick labels of the horizontal axis may start
-overlapping each other.  This is why the reducing width pattern
-usually occurs together with the recompose axis ticks and
-simplify/elaborate axis labels patterns
-\parencite{RespHBars,RespHBarHLine,RespVBar}.  Another effective
-pattern for solving overlapping of tick labels is to rotate them by up
-to 90 degrees to make them take up less horizontal space
-\parencite{RespVis}.  If there is too much data to fit into the
+to overlap. This is why the reducing width pattern usually occurs
+together with the recompose axis ticks and simplify/elaborate axis
+labels patterns \parencite{RespHBars,RespHBarHLine,RespVBar}. Another
+effective pattern for avoiding overlapping tick labels is to rotate
+the labels by up to 90 degrees tso they take up less horizontal space
+\parencite{RespVis}. If there is too much data to fit into the
 available width, the chart can be transposed and grown to as much
-height as necessary \parencite{RespVis}.  Doing this is more advisable
-than simply extending the width of the chart past the viewport because
-vertical scrolling is easier to achieve than horizontal scrolling.
-When reducing the size of charts which contain annotations, similar
-patterns than those targeting tick labels can be applied to avoid the
-annotations from overlapping.  Annotations can simply be removed
+height as is required necessary \parencite{RespVis}. Doing this is
+more advisable than simply extending the width of the chart past the
+viewport, since vertical scrolling is easier than horizontal
+scrolling. When reducing the size of charts containing annotations,
+similar patterns than those targeting tick labels can be applied to
+avoid annotations overlapping. Annotations can simply be removed
 \parencite{RespHStackedBar,RespHLineHStackedBar}, or they can be
 simplified and relocated \parencite{RespVBar}.
 
 
 
 \begin{figure}[tp]
+\newlength{\respbarwidth}
+\setlength{\respbarwidth}{1mm}
 \centering
 \subfloat[][%
 70rem
 ]
 {%
-\includegraphics[width=0.47\linewidth]
+\includegraphics[width=70\respbarwidth]
 {diagrams/resp-bar-1.pdf}%
 \label{fig:RespBarExample1}%
 }
@@ -279,7 +313,7 @@ simplified and relocated \parencite{RespVBar}.
 50rem
 ]
 {%
-\includegraphics[width=0.33\linewidth]
+\includegraphics[width=50\respbarwidth]
 {diagrams/resp-bar-2.pdf}%
 \label{fig:RespBarExample2}%
 }
@@ -288,23 +322,27 @@ simplified and relocated \parencite{RespVBar}.
 30rem
 ]
 {%
-\includegraphics[width=0.2\linewidth]
+\includegraphics[width=30\respbarwidth]
 {diagrams/resp-bar-3.pdf}%
 \label{fig:RespBarExample3}%
 }
 \caption[Responsive Bar Chart Example]
 {
-An example of a responsive bar chart at different display widths.
-\subref{fig:RespBarExample1} Axis tick labels are aligned horizontally.
-\subref{fig:RespBarExample2} Axis tick labels are aligned vertically.
-\subref{fig:RespBarExample3} Chart is transposed.
-\imgcredit{Screenshots of \textcite{RespVis} created by the author of this thesis. Used with kind permission by Keith Andrews.}
+An example of a responsive bar chart at different display widths. At
+70rem, axis tick labels are aligned horizontally. At 50rem, axis tick
+labels are aligned vertically. At 30rem, the chart is transposed.
+\imgcredit{Screenshots of \textcite{RespVis} created by the author of this thesis.
+Used with kind permission by Keith Andrews.}
 }
 \label{fig:RespBarExample}
 \end{figure}
 
 
 
+% HERE
+
+
+\subsection{Line Charts}
 
 The second most frequent types of responsive charts according to the
 responsive visualization gallery created by
@@ -384,6 +422,9 @@ An example of a responsive line chart at different display widths.
 \end{figure}
 
 
+
+
+\subsection{Scatterplots}
 
 Scatterplots are also among the rather frequently encountered types of
 responsive charts, amounting to 26 (= 7\%) of the 378 responsive
@@ -469,6 +510,12 @@ The breakpoints on which the design changes are defined on the metric of data de
 
 
 
+
+
+
+\subsection{Parallel Coordinates}
+
+% KA  How many and % in Kim dataset?
 
 Even though parallel coordinates charts are rarely encountered in
 non-technical contexts, they are very popular when it comes to
