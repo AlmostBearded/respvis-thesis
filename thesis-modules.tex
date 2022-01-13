@@ -904,9 +904,9 @@ die resultierende visualisierung dieses codes kann in Figure~\ref{fig:BarChartWi
   label=list:BarChartWindow,
   caption={[Basic Bar Chart Window Example]%
     The example source code that creates a basic Bar Chart Window.
-    The Bar Chart Window is configured with the bound data object that is initialized via the \code{chartBarWindowData} function.
-    After configuration, the Chart Window is rendered by the \code{chartBarWindowRender} function.
-    Since no special responsive behavior is desired in this example, the default resize and category filter behavior is attached to the Chart Window via the \code{chartBarWindowAutoResize} and \code{chartBarWindowAutoFilterCategories} functions. 
+    The Bar Chart Window is configured with the bound data object that is initialized via the \code{chartWindowBarData} function.
+    After configuration, the Chart Window is rendered by the \code{chartWindowBarRender} function.
+    Since no special responsive behavior is desired in this example, the default resize and category filter behavior is attached to the Chart Window via the \code{chartWindowBarAutoResize} and \code{chartWindowBarAutoFilterCategories} functions. 
   },
 ]{listings/bar-chart-window.js}
 \end{samepage}
@@ -914,9 +914,9 @@ die resultierende visualisierung dieses codes kann in Figure~\ref{fig:BarChartWi
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{diagrams/bar-chart-window.pdf}
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/bar-chart-window.png}
 \caption[Basic Bar Chart Window Example]{
-  The resulting bar chart of the example code in Listing~\ref{list:BarChartWindow}. 
+  The resulting Bar Chart of the example code in Listing~\ref{list:BarChartWindow}. 
   \imgcredit{Image created by the author of this thesis using RespVis and \href{https://inkscape.org/}{Inkscape}.}
 }
 \label{fig:BarChartWindow}
@@ -926,9 +926,64 @@ die resultierende visualisierung dieses codes kann in Figure~\ref{fig:BarChartWi
 
 \subsection{Grouped Bars}
 
+ein grouped bar chart, manchmal auch clustered oder multi-series bar chart genannt, wird verwendet um mehrere quantitative dimensionen unterschiedlicher kategorien eines kategorischen datensatzes miteinander zu vergleichen.
+in einem solchen chart wird fuer jede kategorie eine gruppe an bars gerendert deren laengen proportional zu den werten der unterschiedlichen quantitativen dimensionen sind.
+die verschiedenen zu visualisierenden quantitativen dimensionen muessen miteinander vergleichbar sein und koennen als unterkategorien der einzelnen kategorien betrachtet werden.
+wie bei basic bar charts werden auch hier die kategorien ueber band scales auf raeumliche dimensionen abgebildet.
+der unterschied befindet sich darin dass bei grouped bar charts zwei verschiedene band scales zur anwendung kommen.
+ueber die category scale wird der verfuegbare platz der draw area auf die anzahl der kategorien aufgeteilt und ueber die subcategory scale wird der platz innerhalb der daraus resultierenden gleich grossen intervalle auf die anzahl der unterkategorien aufgeteilt.
+das abbilden von quantitativen werten auf raeumliche dimensionen wird wieder ueber eine continuous scale durchgefuehrt, wobei die selbe scale fuer jeden wert verwendet werden muss damit die werte miteinander vergleichbar sind.
 
+fuer das rendering von grouped bar charts werden drei verschiedene komponenten zur verfuegung gestellt welche ihren gegenstuecken fuer das rendering von basic bar charts sehr aehnlich sind.
+die grouped bar series ist die lowest-level komponente die dafuer gedacht ist eine sammlung an \code{<rect>} elementen, welche die jeweiligen werte und kategorien eines grouped bar charts representieren, in die draw area eines charts zu rendern.
+der unterschied einer grouped bar series zu einer basic bar series ist dass zusaetzliche eigenschaften fuer die konfiguration der unterkategorien notwendig sind und dass manche bereits vorhandene eigenschaften hier zwei-dimensionale arrays erfordern um deren werte den hier zwei-dimensional (kategorie/unterkategorie) gruppierten bars zuzuordnen.
+allen bars die der selben unterkategorie angehoeren werden die selben style klassen zugewiesen um die werte der einzelnen kategorien leichter miteinander vergleichen zu koennen.
+ein grouped bar chart ist ein kartesischer chart mit einer grouped bar series und optionalen labels in seiner draw area, einer left und bottom axis die die scales der grouped bar series visualisieren, und einer legende die die unterkategorien des charts beschreibt.
+ein solcher Chart implementiert ausserdem event listener auf unterschiedlichen elementen die das gemeinsame hervorheben von zusammengehoerenden bars, labels, category axis ticks, und legend items abwickeln.  
+ein Grouped Bar Chart Window ist die highest-order komponente die verwendet werden kann um einen Grouped Bar Chart zu rendern.
+diese komponente plaziert den Chart innerhalb eines Layouters und managed den render prozess der es erlaubt individuelle elemente ueber CSS zu positionieren.
+weiters dekoriert ein solches Chart Window den Grouped Bar Chart mit einer toolbar in welcher sich ein SVG download tool und zwei filter tools befinden um die visualisierten kategorien und unterkategorien zu filtern.
+die konfiguration des eingebetteten Charts mit den gefilterten eigenschaften des am Chart Window gebundenen datenobjektes wird von der render funktion des Grouped Chart Windows durchgefuehrt.
+immer wenn der user mit den filter tools interagiert und die zusammenstellung der aktiven kategorien und unterkategorien veraendert werden die \code{categoryfilter} und \code{subcategoryfilter} events mit jeweils den neuen aktiven kategorien und unterkategorien ausgesandt.
+der author der visualisierung kann entweder spezielles verhalten in eigenen resize und filter event listenern implementieren oder das standardverhalten ueber die zur verfuegung gestellten \code{chartWindowBarGroupedAutoResize}, \code{chartWindowBarGroupedAutoFilterCategories}, und \code{chartWindowBarGroupedAutoSubcategories} funktionen aktivieren.
+der beispielcode um einen einfachen grouped bar chart zu erzeugen welcher sich an die groesse seines container elementes anpasst und in welchem die kategorien und unterkategorien ueber die toolbar gefiltert werden koennen befindet sich in Listing~\ref{list:GroupedBarChartWindow}.
+die resultierende visualisierung dieses beispiels kann in Figure~\ref{fig:GroupedBarChartWindow} gesehen werden.  
 
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:GroupedBarChartWindow,
+  caption={[Basic Grouped Bar Chart Window Example]%
+    The example source code that creates a basic Grouped Bar Chart Window.
+    The Grouped Bar Chart Window is configured with the bound data object that is initialized via the \code{chartWindowBarGroupedData} function.
+    After configuration, the Chart Window is rendered by the \code{chartWindowBarGroupedRender} function.
+    Since no special responsive behavior is desired in this example, the default resize, category filter, and subcategory filter behavior is attached to the Chart Window via the \code{chartWindowBarAutoResize}, \code{chartWindowBarAutoFilterCategories}, and \code{chartWindowBarAutoFilterSubcategories} functions. 
+  },
+]{listings/grouped-bar-chart-window.js}
+\end{samepage}
+    
+  
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/grouped-bar-chart-window.png}
+\caption[Basic Grouped Bar Chart Window Example]{
+  The resulting Grouped Bar Chart of the example code in Listing~\ref{list:GroupedBarChartWindow}. 
+  The tool menu popup has manually been displaced to not cover the legend. 
+  \imgcredit{Image created by the author of this thesis using RespVis and \href{https://inkscape.org/}{Inkscape}.}
+}
+\label{fig:GroupedBarChartWindow}
+\end{figure}
 
 \subsection{Stacked Bars}
+
+
 
 \section{Point Module}
