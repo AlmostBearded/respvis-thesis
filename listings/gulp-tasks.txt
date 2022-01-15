@@ -1,0 +1,15 @@
+Tasks for gulpfile.js
+|-- clean
+|-- cleanAll
+| |-- <series>
+|   |-- cleanDist
+|   |-- cleanNodeModules
+|-- build
+| |-- <series>
+|   |-- cleanDist
+|   |-- <parallel>
+|     |-- bundleJS
+|     |-- bundleCSS
+|     |-- copyExamples
+|-- serve
+|-- default
