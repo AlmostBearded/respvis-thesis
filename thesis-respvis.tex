@@ -298,7 +298,7 @@ simplified and relocated \parencite{RespVBar}.
 
 \begin{figure}[tp]
 \newlength{\respbarwidth}
-\setlength{\respbarwidth}{1mm}
+\setlength{\respbarwidth}{0.95mm}
 \centering
 \subfloat[][%
 70rem
@@ -328,67 +328,73 @@ simplified and relocated \parencite{RespVBar}.
 }
 \caption[Responsive Bar Chart Example]
 {
-An example of a responsive bar chart at different display widths. At
-70rem, axis tick labels are aligned horizontally. At 50rem, axis tick
-labels are aligned vertically. At 30rem, the chart is transposed.
-\imgcredit{Screenshots of \textcite{RespVis} created by the author of this thesis.
-Used with kind permission by Keith Andrews.}
+An example of a responsive bar chart at different display widths.
+\subref{fig:RespBarExample1} At 70rem, axis tick labels are aligned
+horizontally. \subref{fig:RespBarExample2} At 50rem, axis tick labels
+are aligned vertically. \subref{fig:RespBarExample3} At 30rem, the
+chart is transposed.
+\imgcredit{Screenshots of \textcite{RespVis} created by the author of
+  this thesis. Used with kind permission by Keith Andrews.}
 }
 \label{fig:RespBarExample}
 \end{figure}
 
 
 
-% HERE
+
 
 
 \subsection{Line Charts}
 
-The second most frequent types of responsive charts according to the
-responsive visualization gallery created by
-\textcite{DesignPatternsTradeOffsRespVis} are line charts, which
-amount to 98 (= 26\%) out of the 378 responsive visualizations in the
-gallery.  Line charts are used to show trends in two-dimensional
-datasets by plotting them as points which are connected by lines.
-They can be extended to compare trends in multiple dimensions with
-each other by drawing additional points and lines for every additional
-dimension which shall be compared.  Many line charts on the web are
-still published in non-responsive forms \parencite{HLine,HLine2},
-though some web authors already took the extra effort to make their
-charts responsive.  The minimum which can be done to make a line chart
-responsive is to reduce their width \parencite{RespRadialScatterHLine}
-by shrinking the horizontal distance between neighboring points.  This
-usually occurs together with the recomposition and simplification of
-horizontal ticks.  If the chart contains annotations, it may also be
+The second most frequent type of responsive charts according to the
+responsive visualization gallery
+\parencite{DesignPatternsTradeOffsRespVis} are line charts, which
+number 98 (= 26\%) out of the 378 responsive visualizations in the
+gallery. Line charts are used to show trends in two-dimensional
+datasets by plotting them as points connected by lines (a polyline).
+They can be extended to compare trends in an additional categorical
+dimension by drawing additional polylines for each category. Many line
+charts on the web are published in non-responsive forms
+\parencite{HLine,HLine2}, although some authors take the extra effort
+to make their charts responsive. The minimum which can be done to make
+a line chart responsive is to reduce their width
+\parencite{RespRadialScatterHLine} on narrower screens by shrinking
+the horizontal distance between neighboring points. This usually
+occurs together with the recomposition and simplification of
+horizontal ticks. If the chart contains annotations, it may also be
 necessary to recompose, relocate, and simplify them as well
 \parencite{RespHLines,RespHLine,RespHBarHLine,RespHLineHStackedBar}.
+
 A good demonstration of which responsive patterns can be applied to
 make a line chart responsive is shown in the responsive line chart
 created by \textcite{RespVis} which can be seen in
-Figure~\ref{fig:RespLineExample}.  In addition to the recomposition of
+Figure~\ref{fig:RespLineExample}. In addition to the recomposition of
 ticks, tick labels are rotated to reduce their required horizontal
-space.  For exceptionally limited space, it can make sense to remove
+space. For exceptionally limited space, it can make sense to remove
 the axes of a line chart entirely and turn it into a sparkline.
+% KA Need a bib entry and ref to sparkline
 However, it should be noted that by doing this, the consumer of the
 visualization looses information about the type and scale of the
-chart's dimensions.  This technique should therefore only be applied
-in cases where no other pattern is applicable or if the trend in the
-data is the most important message to convey.  It is rare to encounter
+chart's dimensions. This technique should therefore only be applied in
+cases where no other pattern is applicable or if the trend in the data
+is the most important message to convey. It is rare to encounter
 transposed versions of line charts, though the transposing could
-benefit heavily annotated line charts \parencite{VLine}.  Applying a
+benefit heavily annotated line charts \parencite{VLine}. Applying a
 transpose pattern would allow the chart to take up as much vertical
-space as necessary to neatly fit all the annotations without requiring
-the consumer to scroll horizontally.
+space as necessary to neatly accomodate the annotations without
+requiring the consumer to scroll horizontally.
 
 
 
 \begin{figure}[tp]
+\newlength{\resplinewidth}
+\setlength{\resplinewidth}{1.15mm}
 \centering
 \subfloat[][%
 65rem
 ]
 {%
-\includegraphics[width=0.52\linewidth]
+\includegraphics[width=65\resplinewidth]
 {diagrams/resp-line-1.pdf}%
 \label{fig:RespLineExample1}%
 }
@@ -397,7 +403,7 @@ the consumer to scroll horizontally.
 40rem
 ]
 {%
-\includegraphics[width=0.31\linewidth]
+\includegraphics[width=40\resplinewidth]
 {diagrams/resp-line-2.pdf}%
 \label{fig:RespLineExample2}%
 }
@@ -406,20 +412,28 @@ the consumer to scroll horizontally.
 20rem
 ]
 {%
-\includegraphics[width=0.16\linewidth]
+\includegraphics[width=20\resplinewidth]
 {diagrams/resp-line-3.pdf}%
 \label{fig:RespLineExample3}%
 }
 \caption[Responsive Line Chart Example]
 {
 An example of a responsive line chart at different display widths.
-\subref{fig:RespLineExample1} Maximum width configuration is shown.
-\subref{fig:RespLineExample2} Axis ticks are thinned out and labels are rotated.
-\subref{fig:RespLineExample3} Axes are removed, turning the chart into a sparkline.
-\imgcredit{Screenshots of \textcite{RespVis} created by the author of this thesis. Used with kind permission by Keith Andrews.}
+\subref{fig:RespLineExample1} At 65rem, the x axis labels are
+horizontal.  \subref{fig:RespLineExample2} At 40rem, the x axis ticks
+have been thinned out and the labels fully rotated by 90\textdegree.
+\subref{fig:RespLineExample3} At 20rem, both axes have been removed,
+and the chart has become a sparkline.
+\imgcredit{Screenshots of \textcite{RespVis} created by the author of
+  this thesis. Used with kind permission by Keith Andrews.}
 }
 \label{fig:RespLineExample}
 \end{figure}
+
+
+
+
+
 
 
 
@@ -507,6 +521,8 @@ The breakpoints on which the design changes are defined on the metric of data de
 }
 \label{fig:RespScatterExample}
 \end{figure}
+
+
 
 
 
