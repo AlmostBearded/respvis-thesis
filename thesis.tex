@@ -64,7 +64,8 @@
 \usepackage[T1]{fontenc}        % 8-bit output chars (must be before inputenx)
 \usepackage[utf8]{inputenx}     % input char encoding
 
-\usepackage[austrian,american]{babel}
+% \usepackage[austrian,american]{babel}
+\usepackage[austrian,english]{babel}
 
 \usepackage{newtxtext}          % newer times fonts
 \usepackage{newtxmath}
@@ -831,8 +832,9 @@ Creating Responsive SVG Charts},
 \cleardoublepage
 % for now, switch to language english
 % hack to force unix date for biblio, biblatex 3.11
+
 \begin{otherlanguage}{english}
-  \printbibliography[heading=bibintoc]
+\printbibliography[heading=bibintoc]
 \end{otherlanguage}
 
 

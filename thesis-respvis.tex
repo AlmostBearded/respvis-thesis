@@ -269,12 +269,12 @@ bar charts \parencite{GroupedBar} compare subdimensions with each
 other, and stacked bar charts \parencite{StackedBar} compare
 part-to-whole relationships of the subdimensions. Even though
 responsive design of visualizations is slowly becoming more common,
-most charts found in today's web articles are still being created as
-static images \parencite{HBar,VBar,HVBar,MapBarLine}.
+most charts found in today's web articles are still created as static
+images \parencite{HBar,VBar,HVBar,MapBarLine}.
 
-A good example of a responsive bar chart created by \textcite{RespVis}
-can be seen in Figure~\ref{fig:RespBarExample}. Bar charts are freely
-scalable by adjusting the width of individual bars
+A good example of a responsive bar chart can be seen in
+Figure~\ref{fig:RespBarExample} \parencite{RespVis}. Bar charts are
+freely scalable by adjusting the width of individual bars
 \parencite{RespHBar,RespHBarHLine,RespHBars}, so they all can fit into
 their allocated space. When reducing the width of any type of chart
 past a certain point, the tick labels of the horizontal axis may start
@@ -288,11 +288,11 @@ available width, the chart can be transposed and grown to as much
 height as is required necessary \parencite{RespVis}. Doing this is
 more advisable than simply extending the width of the chart past the
 viewport, since vertical scrolling is easier than horizontal
-scrolling. When reducing the size of charts containing annotations,
-similar patterns than those targeting tick labels can be applied to
-avoid annotations overlapping. Annotations can simply be removed
-\parencite{RespHStackedBar,RespHLineHStackedBar}, or they can be
-simplified and relocated \parencite{RespVBar}.
+scrolling. When reducing the width of charts containing annotations, a
+number of patterns can be applied to avoid annotations
+overlapping. For example, annotations can be removed
+\parencite{RespHStackedBar,RespHLineHStackedBar}, simplified, or
+relocated \parencite{RespVBar}.
 
 
 
@@ -374,15 +374,15 @@ space. For exceptionally limited space, it can make sense to remove
 the axes of a line chart entirely and turn it into a sparkline.
 % KA Need a bib entry and ref to sparkline
 However, it should be noted that by doing this, the consumer of the
-visualization looses information about the type and scale of the
+visualization loses information about the type and scale of the
 chart's dimensions. This technique should therefore only be applied in
 cases where no other pattern is applicable or if the trend in the data
 is the most important message to convey. It is rare to encounter
-transposed versions of line charts, though the transposing could
-benefit heavily annotated line charts \parencite{VLine}. Applying a
-transpose pattern would allow the chart to take up as much vertical
-space as necessary to neatly accomodate the annotations without
-requiring the consumer to scroll horizontally.
+transposed versions of line charts, although transposition could
+sometimes benefit heavily annotated line charts
+\parencite{VLine}. Applying a transpose pattern would allow the chart
+to take up as much vertical space as necessary to neatly accomodate
+annotations without requiring the consumer to scroll horizontally.
 
 
 
@@ -440,84 +440,85 @@ and the chart has become a sparkline.
 
 \subsection{Scatterplots}
 
-Scatterplots are also among the rather frequently encountered types of
-responsive charts, amounting to 26 (= 7\%) of the 378 responsive
-charts contained in the gallery by
-\textcite{DesignPatternsTradeOffsRespVis}.  A scatterplot is a
-visualization which represents two-dimensional data as points in a
-Cartesian coordinate system.  There are plenty of examples of
-scatterplots which are merely being published as static images
-\parencite{Scatter,Scatter2}, even though responsive versions can also
-already be observed occasionally.  The first step to making
-scatterplots responsive is to reduce their width to fit them into the
-space available for them.  As for other types of charts, care must be
-taken to avoid overlapping of labels and annotations by applying
-recomposition, relocation and simplification patterns
-\parencite{RespScatter,RespScatter2}.  To counteract the increased
-cramming of points when reducing the size of their container, various
-interaction features are usually implemented in scatterplots which
-help consumers in making sense of the represented data.  The most
+Scatterplots are also quite frequently encountered among responsive
+charts, numbering 26 (= 7\%) of the 378 responsive charts contained in
+the gallery by \textcite{DesignPatternsTradeOffsRespVis}. A
+scatterplot represents two-dimensional data as points in a 2d
+Cartesian coordinate system. There are many examples of scatterplots
+published as static images \parencite{Scatter,Scatter2}, with
+responsive versions starting to emerge.
+
+The first step to making scatterplots responsive is to reduce their
+width to fit them into the space available. As for other types of
+chart, care must be taken to avoid overlapping of labels and
+annotations by applying recomposition, relocation and simplification
+patterns \parencite{RespScatter,RespScatter2}. To counteract the
+increased density of points when reducing the size of their container,
+various interaction features are usually implemented in scatterplots
+which help consumers in making sense of the represented data. The most
 useful interaction features in these charts are elaborative zooming
-interactions and the explorative panning interactions.  In addition to
-zooming and panning, \textcite{RespVis} employs additional methods
-which reduce overlapping of individual points, such as fisheye
-distortion, Cartesian distortion or temporary displacements of points.
-An interesting technique for responsive visualizations which bases
-responsive configurations on a visualization's density rather than on
-its size has been introduced by \textcite{NickRabinowitzRDV}.  The
-benefit of this approach is that charts will also adapt to changing
-amounts of data and reconfigure their appearance accordingly.  The
-patterns applied in the responsive scatterplot by
-\textcite{NickRabinowitzRDV} shown in
-Figure~\ref{fig:RespScatterExample} are the recomposition of
-annotations to only show them for selected data records, and the
-switching of the encoding from a scatterplot to a heatmap for high
-densities.  A good number of other techniques, such as for example the
-recomposition of data records, are also applicable to improve the
-responsiveness of scatterplots, but no examples for such patterns
-could be found.  If the data which shall be encoded is inherently
-cyclic, a radial scatterplot, which is a polar coordinate system
-variant of a scatterplot, can be applied to better visualize this
-cyclic nature of the data \parencite{RespRadialScatterHLine}.
+interactions and the explorative panning interactions. In addition to
+zooming and panning, \textcite{RespVis} employs additional methods to
+ameliorate the overlapping of individual points, including fisheye
+distortion, Cartesian distortion, and temporary displacements of
+points.
+
+An interesting technique for responsive scatterplots based on the
+visualization's density (data points per pixel) rather than its width
+was introduced by \textcite{NickRabinowitzRDV}. The benefit of this
+approach is that charts adapt to changing amounts of data and
+reconfigure their appearance accordingly. The patterns applied in the
+responsive scatterplot shown in Figure~\ref{fig:RespScatterExample}
+are the recomposition of annotations to only show annotations for
+selected data records, and the switching of the encoding from a
+scatterplot to a heatmap for high point densities. Other techniques,
+such as the recomposition of data records, would also be applicable to
+responsive scatterplots, but no examples for such patterns could be
+found. If the data to be encoded is inherently cyclic, a radial
+scatterplot, using polar coordinates, can be used to better reflect
+the cyclic nature of the data \parencite{RespRadialScatterHLine}.
 
 
 
 \begin{figure}[tp]
 \centering
 \subfloat[][%
-0.00005 points per pixel
+Small number of data points. % (0.00005 points per pixel).
 ]
 {%
-\includegraphics[width=0.33\linewidth]
+\includegraphics[width=0.3\linewidth]
 {diagrams/resp-scatter-1.pdf}%
 \label{fig:RespScatterExample1}%
 }
 \hfill
 \subfloat[][%
-0.0007 points per pixel
+Medium number of data points. % (0.0007 points per pixel).
 ]
 {%
-\includegraphics[width=0.33\linewidth]
+\includegraphics[width=0.3\linewidth]
 {diagrams/resp-scatter-2.pdf}%
 \label{fig:RespScatterExample2}%
 }
 \hfill
 \subfloat[][%
-0.017 points per pixel
+Large number of data points. % (0.017 points per pixel).
 ]
 {%
-\includegraphics[width=0.33\linewidth]
+\includegraphics[width=0.3\linewidth]
 {diagrams/resp-scatter-3.pdf}%
 \label{fig:RespScatterExample3}%
 }
 \caption[Responsive Scatterplot Example]
 {
-An example of a responsive scatterplot with increasing amount of data.
-The breakpoints on which the design changes are defined on the metric of data density (points per pixel) instead of on the width of the viewport as is usually the case.
-\subref{fig:RespScatterExample1} All points and their corresponding labels are shown.
-\subref{fig:RespScatterExample2} Point labels have been removed and are only shown for selected points.
-\subref{fig:RespScatterExample3} The scatterplot has been replaced by a heatmap to more efficiently display the large amount of data.
-\imgcredit{Screenshots created by the author of this thesis. Visualization created by \textcite{NickRabinowitzRDV}}
+An example of a responsive scatterplot based on data density (data
+points per pixel). \subref{fig:RespScatterExample1} With a small
+number of data points, all points and their corresponding labels are
+shown. \subref{fig:RespScatterExample2} At a certain density, labels
+are only shown for selected points. \subref{fig:RespScatterExample3}
+At very large densities, the scatterplot is replaced by a heatmap to
+more efficiently display the large amount of data.
+\imgcredit{Screenshots created by the author of this thesis.
+Visualization created by \textcite{NickRabinowitzRDV}}
 }
 \label{fig:RespScatterExample}
 \end{figure}
@@ -533,37 +534,43 @@ The breakpoints on which the design changes are defined on the metric of data de
 
 % KA  How many and % in Kim dataset?
 
+% include Ref to Alfred Inselberg book
+
 Even though parallel coordinates charts are rarely encountered in
 non-technical contexts, they are very popular when it comes to
 visualizing multidimensional data in visual analytics systems
-\parencite{HighD}.  In these kinds of charts, multiple dimensions are
-rendered as parallel axes which are connected via paths.  Each path
-represents an individual data record and its values in the
-corresponding dimensions.  The axes of a parallel coordinates chart
+\parencite{HighD}. In these kinds of charts, multiple dimensions are
+rendered as parallel axes, upon which points are connected via paths
+(polylines). Each polyline represents a data record and its values at
+the corresponding dimensions. The axes of a parallel coordinates chart
 are typically laid out horizontally, meaning that the chart can be
-scaled down by reducing the distance between the individual axes.  It
-might also be beneficial to apply previously mentioned axis-related
-patterns, such as rotating labels and recomposing ticks.  Another
-technique which can be applied to make parallel coordinates charts
-even more responsive is the successive hiding of dimensions based on
-their priorities.  When automatically hiding dimensions, it is
-necessary to apply compensation patterns which give users additional
-controls which allow configuration of the displayed dimensions to
-override the system's hiding behavior.  If reducing the chart's
-complexity is not a desirable approach, it can again be recommended to
-transpose the chart and expand it to whatever height necessary rather
-than cram too much information into the limited width available.  An
-example of a responsive parallel coordinate chart incorporating some
-of these patterns can be seen in Figure~\ref{fig:RespParCoordExample}.
+made narrower by reducing the distance between individual axes.
+Previously mentioned axis-related responsive patterns, such as
+rotating labels and recomposing ticks, can also be applied.
+
+Another technique is to temporarily hide some dimensions, based on
+some criteria. When automatically hiding dimensions, it is necessary
+to apply compensation patterns, giving the user additional controls to
+configure which dimensions are displayed and override the system's
+hiding behavior. An example of a responsive parallel coordinate chart
+incorporating some of these patterns can be seen in
+Figure~\ref{fig:RespParCoordExample}.
+%
+If reducing the chart's complexity is not appropriate, an alternative
+is to transpose the chart, so its dimensions are laid out vertically
+and vertical scrolling can be used to explore the full chart.
+
+
 
 
 \begin{figure}[tp]
+\newcommand{\respparcoordscale}{0.36}
 \centering
 \subfloat[][%
 61rem
 ]
 {%
-\includegraphics[width=0.55\linewidth]
+\includegraphics[valign=b,scale=\respparcoordscale]
 {images/resp-parcoord-1.png}%
 \label{fig:RespParCoordExample1}%
 }
@@ -572,16 +579,16 @@ of these patterns can be seen in Figure~\ref{fig:RespParCoordExample}.
 50rem
 ]
 {%
-\includegraphics[width=0.45\linewidth]
+\includegraphics[valign=b,scale=\respparcoordscale]
 {images/resp-parcoord-2.png}%
 \label{fig:RespParCoordExample2}%
 }
-\hfill
+\newline
 \subfloat[][%
 40rem
 ]
 {%
-\includegraphics[width=0.4\linewidth]
+\includegraphics[valign=b,scale=\respparcoordscale]
 {images/resp-parcoord-3.png}%
 \label{fig:RespParCoordExample3}%
 }
@@ -590,28 +597,34 @@ of these patterns can be seen in Figure~\ref{fig:RespParCoordExample}.
 30rem
 ]
 {%
-\includegraphics[width=0.3\linewidth]
+\includegraphics[valign=b,scale=\respparcoordscale]
 {images/resp-parcoord-4.png}%
 \label{fig:RespParCoordExample4}%
 }
 \hfill
 \subfloat[][%
-30rem with re-added dimensions
+30rem, user-configured dimensions
 ]
 {%
-\includegraphics[width=0.3\linewidth]
+\includegraphics[valign=b,scale=\respparcoordscale]
 {images/resp-parcoord-5.png}%
 \label{fig:RespParCoordExample5}%
 }
 \caption[Responsive Parallel Coordinates Chart Example]
 {
-An example of a responsive parallel coordinates chart at different display widths.
-\subref{fig:RespParCoordExample1} All dimensions are shown.
-\subref{fig:RespParCoordExample2} Dimensions are removed based on their priority, dimension labels are rotated by 45 degrees, and a dimensions toggle is shown which enables the configuration of dimensions.
-\subref{fig:RespParCoordExample3} Further dimensions are removed.
-\subref{fig:RespParCoordExample4} Further dimensions are removed, and dimension labels are rotated by 90 degrees.
-\subref{fig:RespParCoordExample5} Dimension configuration panel is opened, and a dimension has been manually re-added.
-\imgcredit{Screenshots of \textcite{RespVis} created by the author of this thesis. Used with kind permission by Keith Andrews.}
+A responsive parallel coordinates chart at different display widths.
+\subref{fig:RespParCoordExample1} At larger widths, all dimensions are
+shown. \subref{fig:RespParCoordExample2} Dimensions are removed based
+on their priority, dimension labels are rotated by 45 degrees, and a
+dimensions toggle is shown which enables the configuration of
+dimensions. \subref{fig:RespParCoordExample3} Further dimensions are
+removed. \subref{fig:RespParCoordExample4} Further dimensions are
+removed, and dimension labels are rotated by 90 degrees.
+\subref{fig:RespParCoordExample5} The dimension configuration panel
+has been opened, and the user has taken control over which dimensions
+to show.
+\imgcredit{Screenshots of \textcite{RespVis} created by the author of this thesis.
+Used with kind permission by Keith Andrews.}
 }
 \label{fig:RespParCoordExample}
 \end{figure}
