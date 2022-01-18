@@ -821,7 +821,7 @@ das bar modul befindet sich in dem \code{src/lib/bars/} ordner des projektes und
 bar charts werden zur visualisierung von kategorischen datensaetzen durch rectangles eingesetzt wobei die laenge der rectangles proportional zu den werten einer quantitativen datendimension ist.
 in einem kategorischen datensatz ist eine kategorie eindeutig anderen dimensionen der einzelnen dateneintraege zuordenbar.
 ein beispiel hierfuer waere ein datensatz in welchem unterschiedliche charakteristiken einzelner laender aufgelistet sind.
-bar charts gehoeren zu den aeltesten arten von charts mit einem der ersten aufkommen in \textcite{CommercialAndPoliticalAtlas} und gehoeren auch heute noch zu den am haeufigsten vorgefundenen visualisierungen (~36\% der 378 studied charts by \textcite{DesignPatternsTradeOffsRespVisGallery}) im modernen web.
+bar charts gehoeren zu den aeltesten arten von charts mit einem der ersten aufkommen in \textcite{CommercialAndPoliticalAtlas} und gehoeren auch heute noch zu den am haeufigsten vorgefundenen visualisierungen (\~36\% der 378 studied charts by \textcite{DesignPatternsTradeOffsRespVisGallery}) im modernen web.
 die bars einens bar charts koennen entweder horizontal oder vertikal ausgerichtet sein.
 bei einem horizontalen bar chart, manchal auch row chart genannt, wird die quantitative dimension ueber die X achse ausgedrueckt.
 diese variante von bar charts eignet sich besser fuer die darstellung in layouts mit eingeschraenkter breite, da die labels der kategorischen achse leichter ohne zu ueberlappen positioniert werden koennen und da ein horizontaler bar chart vertikal gescrollt werden kann was horizontalem scrollen zu bevorzugen ist.
@@ -1054,3 +1054,53 @@ das gerenderte resultat dieses codes kann in Figure~\ref{fig:StackedBarChartWind
 
 
 \section{Point Module}
+
+Point Charts, manchmal auch scatter charts oder scatter plots genannt, werden verwendet um die beziehung zwischen zwei dimensionen eines datensatzes ueber punkte in einem kartesischen koordinatensystem zu verdeutlichen.
+ueber eine solche visualisierung koennen potentielle korrelationen und muster zwischen diesen dimensionen identifiziert werden.
+ueblicherweise werden zwei numerische dimensionen fuer die positionierung der punkte verwendet.
+die art der zu visualisierenden daten ist jedoch nicht von bedeutung, solange individuelle werte ueber eine scale auf raeumliche dimensionen abgebildet werden koennen.
+durch zusaetzliche kodierung der punkte mit farben, groessen oder formen koennen mehr als zwei dimensionen in einem Point Chart visualisiert werden.
+Point Charts in welchen eine dritte dimension ueber die groesse der punkte visualisiert wird, werden auch bubble charts genannt.
+der source code um einen skalierenden Point Chart mit der RespVis library zu erzeugen befindet sich in Listing~\ref{list:PointChartWindow} und die daraus resultierende visualisierung kann in Figure~\ref{fig:PointChartWindow} gesehen werden.  
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:PointChartWindow,
+  caption={[Point Chart Window Example]%
+    The example source code that creates a Point Chart Window.
+    The Point Chart Window is configured with a bound data object that is initialized via the \code{chartWindowPointData} function.
+    After configuration, the Chart Window is rendered by the \code{chartWindowPointRender} function.
+    Since no special responsive behavior is desired in this example, the default resize behavior is attached to the Chart Window via the \code{chartWindowPointAutoResize} function. 
+  },
+]{listings/point-chart-window.js}
+\end{samepage}
+  
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/point-chart-window.png}
+\caption[Point Chart Window Example]{
+  The resulting Point Chart of the example code in Listing~\ref{list:PointChartWindow}. 
+  \imgcredit{Image created by the author of this thesis using RespVis.}
+}
+\label{fig:PointChartWindow}
+\end{figure}
+  
+
+das Point Module befindet sich im \code{src/lib/point/} ordner der RespVis library und beinhaltet die implementierung der Point Series, Point Chart, und Point Chart Window komponenten.
+mit einer Point Series wird eine sammlung an \code{<circle>} elementen gerendert deren mittelpunkte ueber X und Y werte arrays mit deren dazugehoerigen X und Y scales bestimmt werden und deren styles ueber style klassen gesetzt werden.
+da die radiuse der einzelnen \code{<circle>} elemente konfigurierbar sind, kann eine Point Series auch verwendet werden um einen bubble chart zu erzeugen.
+wie auch bei anderen Series Components, wird auch hier das gebundene datenobjekt in ein array an datenobjekten transformiert welches verwendet wird um die elemente der Series ueber einen data join zu rendern.
+ein Point Chart ist ein kartesischer Chart mit einer Point Series in seiner draw area und zwei achsen welche die scales visualisieren mit welchen die Point Series gerendert wurde.
+Point Chart Windows sind wrapper komponenten um Point Charts die diese in einen Layouter einbetten, ihren render prozess abwickeln, und sie mit einer toolbar dekorieren.
+zum aktuellen zeitpunkt wird nur ein SVG download tool ueber die toolbar eines Point Chart Windows zur verfuegung gestellt da bislang nur eine begrenzte anzahl an tools entwickelt wurden und diese sich nicht fuer die anwendung an Point Charts eignen.
+werden weitere tools benoetigt muessen diese manuell von visualisierungsauthoren implementiert und hinzugefuegt werden.
