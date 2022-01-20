@@ -154,39 +154,40 @@ Since only the \code{d} attribute of a path needs to change when a \code{<path>}
 \label{sec:Layouter}
 
 The Layouter is the most novel contribution of this work.
-It is a component that is wrapped around an SVG document and allows to configure the layout of elements in this document with CSS.
-Instead of implementing a custom layout algorithm, the Layouter builds on layout engines integrated in browsers, which have already been summarized in Section~\ref{sec:BrowserEngines}.
+It is a component wrapped around an SVG document and allows configuration of the layout of elements in this document with CSS.
+Instead of implementing a custom layout algorithm, the Layouter builds on layout engines integrated into browsers, which have already been summarized in Section~\ref{sec:BrowserEngines}.
 Earlier proof of concept implementations used the FaberJS \parencite{FaberJS} and Yoga \parencite{Yoga} layout engines to calculate layouts, but these implementations were not further pursued because they limited layouting to either Grid or Flexbox-based constraints.
 Furthermore, the use of already existing browser functionality in the current implementation leads to a reduced bundle size and to visualization authors being able to use all the layouting capabilities natively offered by browsers.
 
-CSS has always been the foundation of responsive web design for HTML-based websites because of its ability to adapt the presentation of elements and the possibility of defining different presentations for different contexts via media queries.
+CSS has always been the foundation of responsive web design for HTML-based websites because of its ability to adapt an element's presentation and the possibility of defining different presentations for different contexts via media queries.
 A large part of the responsive power that CSS offers comes from its ability to change the positioning and layout of elements.
-As already mentioned in previous chapters, CSS can be used to style certain aspects of SVG documents, but it is not possible to use CSS layouting techniques to position SVG elements.
+As already mentioned in previous chapters, CSS can style certain aspects of SVG documents, but it is not possible to use CSS layouting techniques to position SVG elements.
 Even though there are already other visualization libraries such as Chartist \parencite{Chartist} and Highcharts \parencite{Highcharts} that allow the use of CSS to style visualizations, none of them offer the possibility to modify the layout of visualizations via CSS.
-This means that visualization authors have to learn and use custom APIs to position elements, which limits the range of possible layouts to those supported by the individual libraries. 
+This means that visualization authors have to learn and use custom APIs to position elements, limiting the range of possible layouts to those supported by the individual libraries. 
 
-The Layouter distinguishes between laid-out and non-laid-out elements because not every element in a visualization profits from being laid out by it. 
-Laid-out elements are elements whose position and size are being calculated by the Layouter, whereas non-laid-out elements are ignored during the layout process. 
-Theoretically, the layouter could be used to position all elements of a visualization since it is only necessary to determine a good mapping that maps a rectangular bounding box to the desired SVG shape for each element.
-However, the positioning of elements in a visualization is constrained more strictly than the positioning of elements in typical HTML documents.
-The content of a visualization is communicated more through visual features such as position, size, and shape of elements rather than simply through text which can be positioned much more freely.  
+The Layouter distinguishes between laid-out and non-laid-out elements because not every visualization element profits from being laid out by it. 
+The positions and sizes of laid-out elements are being calculated by the Layouter, whereas non-laid-out elements are ignored during the layout process.
+Theoretically, the Layouter could position all visualization elements since it is only necessary to determine a good mapping for each element that maps a rectangular bounding box to the desired SVG shape.
+However, the positioning of elements in a visualization is constrained more strictly than element positioning in typical HTML documents.
+The content of a visualization is communicated through visual features such as position, size, and shape of elements rather than simply through text which can be positioned much more freely.  
 For this reason, many elements of a visualization must be positioned at specific locations with specific dimensions, which means there is very little profit in laying them out with an elaborate layout algorithm.
-These exactly-positioned elements like the \code{<rect>} elements of bar series and the \code{<circle>} elements of point series are usually positioned directly via their SVG attributes.
-Positioning them via the Layouter would be rather pointless and only cause unnecessary overhead.
+These exactly-positioned elements like the \code{<rect>} elements of Bar Series and the \code{<circle>} elements of Point Series are usually positioned directly via their SVG attributes.
+Positioning them via the Layouter would be pointless and only cause unnecessary overhead.
 
 The layout process can be seen in Figure~\ref{fig:LayoutProcess} and consists of three phases that have been implemented in the \code{layouterCompute} function:
 \begin{enumerate}
 \item Replication:
-The structure of the SVG document that shall be laid out must be replicated with HTML \code{<div>} elements. These elements are referred to as \enquote{layout elements} and they have the same classes and \code{data-*} attributes as the original SVG elements they are replicating.
+The structure of the SVG document that shall be laid out must be replicated with HTML \code{<div>} elements, which are referred to as \enquote{layout elements}.
+These layout elements have the same classes and \code{data-*} attributes as the original SVG elements they are replicating.
 This replication of the SVG document with HTML documents is necessary because CSS-based positioning can only affect HTML elements.
 
 \item Layout:
 The replicated layout elements are affected by CSS rules that configure their positioning and are automatically laid out by browsers. 
-If the Selectors of CSS rules used to style SVG elements only select them using classes and \code{data-*} attributes, the layout of these elements can be directly configured in these rules because they will also be applied to the corresponding layout elements.
+If the Selectors of CSS rules used to style SVG elements only select them using classes and \code{data-*} attributes, their layout can be directly configured in these rules because they will also be applied to the corresponding layout elements.
 
 \item Synchronization:
 The positions of the layout elements are synchronized with their respective SVG elements.
-This means that the calculated bounding boxes of layout elements are set as \code{bounds} attributes on SVG elements, which can be used in subsequent renderings.
+The calculated bounding boxes of layout elements are set as \code{bounds} attributes on SVG elements to make the boundary information available in subsequent renderings.
 In addition to that, the Layouter sets different default attributes on different types of SVG elements that aim to represent the boundaries of individual elements.
 \end{enumerate}
 
@@ -204,18 +205,18 @@ In addition to that, the Layouter sets different default attributes on different
 
 
 During the replication process, the structure of an SVG document is replicated with HTML \code{<div>} elements. 
-This replication was implemented using a hierarchical D3 data join in which the original SVG elements are bound as data objects to layout elements.
-This hierarchical data join results in a counterpart in the hierarchy of layout elements for each SVG element that should be affected by the layouter.
+Replication is implemented using a hierarchical D3 data join in which the original SVG elements are bound as data objects to layout elements.
+The hierarchical data join results in a counterpart in the hierarchy of layout elements for each SVG element that should be affected by the layouter.
 Since not every SVG element should be positioned via the Layouter, the Layouter must know which to ignore.
 For this, the \code{data-ignore-layout} and \code{data-ignore-layout-children} attributes have been introduced.
 Elements that have the \code{data-ignore-layout} attribute or are children of elements that have the \code{data-ignore-layout-children} attribute will not be replicated.
 
 To configure the layout of layout elements in CSS, it must be possible to select them uniquely with a CSS Selector.
 This Selector should be as similar as possible to the Selector of the original SVG element to make it as easy as possible to configure the CSS properties of layout elements.
-For this purpose, the class attributes and all data-* attributes of SVG elements are copied to their corresponding layout elements.
-In addition to the classes of the replicated SVG element, the layout class is set on all layout elements.
-By doing this, it is possible to specifically select the layout element of an SVG element via the same Selector by adding the layout class to the same Selector. 
-If CSS rules of SVG elements use only classes and data attributes in their Selectors, the properties of corresponding layout elements can directly be configured in the same rules.
+For this purpose, the \code{class} attributes and all \code{data-*} attributes of SVG elements are copied to their corresponding layout elements.
+In addition to the classes of the replicated SVG element, the \code{layout} class is set on all layout elements.
+By doing this, it is possible to specifically select the layout element of an SVG element via the same Selector by adding the \code{layout} class to it. 
+If CSS rules of SVG elements use only classes and \code{data-*} attributes in their Selectors, the properties of corresponding layout elements can directly be configured in the same rules.
 An example of how the replicated layout element tree of an SVG document looks can be seen in Listing~\ref{list:LayouterStructure}.
 Furthermore, an example of CSS rules that set various properties of SVG elements and their layout elements can be seen in Listing~\ref{list:LayouterCSS}.  
 
@@ -265,38 +266,36 @@ An example of dynamically-sized elements is \code{<text>} elements because their
 The custom \code{--fit-width} and \code{--fit-height} CSS properties were introduced to activate the manual copying of dimensions from SVG elements to their layout elements. 
 These boolean properties can be set in CSS rules and are being checked during the replication phase via the \code{window.getComputedStyle} method.
 If at least one of these properties is set to true, the dimensions of the SVG element are calculated with the \code{Element.getBoundingClientRect} method and respectively set as \code{width} or \code{height} properties of the \code{style} attribute on the corresponding layout element.
-By doing this, layout elements will have the same size as their svg elements and can be properly used in the calculation of the overall layout. 
+By doing this, layout elements will have the same sizes as their SVG elements and can be properly used in the calculation of the overall layout. 
 
 Layout elements are automatically laid out by the browser during the layout phase of the layout process. 
-Since the layout elements are simply \code{<div>} elements that have been styled in CSS rules, the browser can position them automatically via its integrated layout engine.
-This positioning happens as soon as the layout elements have been rendered.
+Since layout elements are simply \code{<div>} elements that have been styled via CSS rules, the browser can position them automatically via its integrated layout engine.
+This positioning by the browser happens as soon as the layout elements have been rendered.
 After this, the final bounding boxes of layout elements can be calculated and used for further operations.  
 
 In the synchronization phase of the layout process, the Layouter iterates over all the layout elements, calculates their bounding boxes, and set this boundary information as attributes on the corresponding SVG elements.
 Bounding boxes of layout elements are calculated relative to their parent elements using the \code{elementRelativeBounds} utility function.
-This bounding box is then converted to its string representation via the \code{rectToString} utility function and set as the \code{bounds} attribute on the corresponding SVG elements. \TODO{Rename bounds attr to data-bounds}
-The \code{bounds} attribute can then be deserialized to a \code{Rect} object whenever the bounding box of an SVG element is needed in subsequent renderings of SVG components. 
+This bounding box is then converted to its string representation via the \code{rectToString} utility function and set as the \code{bounds} attribute on the corresponding SVG elements.
+The \code{bounds} attribute can then be deserialized to a \code{Rect} object whenever the bounding box of an SVG element is needed in subsequent renderings. 
 In addition to setting the \code{bounds} attribute of SVG elements, the Layouter also sets specific attributes on different types of SVG elements that make them fit into their calculated bounding boxes.
-These attributes can, of course, be overwritten in later renderings, but they represent sensible defaults that express the boundaries of laid-out elements.
+These attributes can be overwritten in later renderings, but they represent sensible defaults that express the boundaries of laid-out elements.
 If the Layouter would not set these default attributes, they would have to be set manually on every laid-out element during the rendering process, which would be less convenient and lead to duplicated code in various places.
 For SVG elements that can be mapped directly to rectangular areas, such as \code{<svg>} and \code{<rect>} elements, the Layouter sets the \code{x}, \code{y}, \code{width}, and \code{height} attributes to the values of their bounding boxes.
 SVG shape elements that have explicit sizes and positions but are not rectangular, such as \code{<circle>} and \code{<line>} elements, also receive attributes that make them fit into their boundaries. 
 Other SVG elements that are not explicitly sized, such as \code{<g>} and \code{<text>} elements, are merely moved to the correct position by setting their \code{transform} attribute to a translation so that their top-left corners aligns with the top-left corners of their bounding boxes. 
-The Layouter does not automatically recalculate the dimensions of exactly-positioned elements based on the changed dimensions of the composite \code{<svg>} or \code{<g>} element containing them.
-This has to be manually implemented in the render functions of the various components.
+The Layouter does not automatically reposition exactly-positioned elements based on the changed boundary of the composite \code{<svg>} or \code{<g>} element containing them, so this has to be implemented manually in the render functions of various components.
 
 Using the Layouter requires a more complex rendering process than would be needed if the boundaries of elements would already be known before rendering them.
 The way the Layouter works, some elements need to be rendered before calculating the layout, and afterward, when the positions and sizes of all elements are known, the visualization needs to be rendered in its final form. 
-This visualization rendering process when using the Layouter consists of three phases and is shown in Figure~\ref{fig:RenderProcess}.
+This rendering process of a visualization when using the Layouter consists of three phases and is shown in Figure~\ref{fig:RenderProcess}.
 The three phases of the render process are the first rendering phase to render elements affecting the layout, the layouting phase, and the second rendering phase to render elements affected by the layout.
 In the first rendering phase, all elements and attributes that affect the layout of a visualization need to be rendered.
 This mostly includes laid-out container \code{<svg>} and \code{<g>} elements that contain exactly-positioned child elements, but it also means that the contents of dynamically-sized elements, such as \code{<text>} elements and axes, need to be fully rendered in this phase too.
 The layouting phase is where all the operations of the already-described layout process are being performed.
 During this phase, the bounding boxes of laid-out elements are calculated and persisted as attributes that can be accessed during the second rendering phase.
-In the second rendering phase, the desired bounding box position and size of every element is known and can be used to perform a second rendering of the complete visualization.
-Here, every element affected by the layout, which is every element, is rendered at its final position with its final dimensions.
-In theory, the first and second rendering phases of components could be implemented in separate functions.
-However, it is more convenient to invoke the same render function twice and perform some operations only if the appropriate \code{bounds} attribute has already been set.
+In the second rendering phase, the previously calculated bounding boxes of every element can be used to perform a second rendering of the complete visualization.
+Here, every element affected by the layout, which actually encompasses every element, is rendered at its final position with its final dimensions.
+In theory, the first and second rendering phases of components could be implemented in separate functions, but it is more convenient to invoke the same render function twice and perform some operations only if the appropriate \code{bounds} attribute has already been set.
 
 
 \begin{figure}[tp]
@@ -316,205 +315,97 @@ However, it is more convenient to invoke the same render function twice and perf
 
 \subsection{Axes}
 
-% axisData
-%   scale
-%   title
-%     orientation
-%   subtitle
-%     orientation
-%   configureAxis
-%     d3 axis
-%   default values
-% axisRender
-%   structure
-%     .title (dynamically sized wh)
-%     .subtitle (dynamically sized wh)
-%     .ticks-transform (dynamically sized w or h) warum?
-%       .ticks
-%     laid out with CSS Grid
-%   d3 axis function to render ticks
-%     delete attributes and use data attributes and css to configure presentation of axis
-% axisBottomRender
-%   .axis-bottom
-%   CSS grid with 3 rows and 1 full width column
-%   title and subtitle orientations
-%   tick text alignment
-% axisLeftRender
-%   .axis-left
-%   CSS grid with 3 columns and 1 full height row
-%   title and subtitle orientations
-%   tick text alignment
-
-
-Axes are used to visualize scales representing the mapping of abstract values to two-dimensional positions.
-The implementation of all available axis components can be found in the \code{axis.ts} file in the core module.
-Currently only cartesian axes are provided by the RespVis library since so far only cartesian charts have been implemented.
-These cartesian axis components are distinguished by their position relative to the draw area of a visualization and at the time of writing only left and bottom axis components have been implemented in the RespVis library.
-These are by far the most commonly encountered positions of cartesian axes and have been chosen because they cover most use cases. 
-An axis consists of ticks, which are the actual visualization of a scale, and an optional title and subtitle, which can be rendered to additionally describe the configuration of the visualized scale. 
-An example of what a rendered left and bottom axis might look like can be seen in Figure~\ref{fig:Axes}. 
+Axes are used to visualize scales representing the mapping of abstract values to spatial dimensions.
+The implementation of all available Axis Components can be found in the \code{axis.ts} file in the Core Module.
+Currently, only cartesian Axes are provided by the RespVis library because only cartesian charts have been implemented so far.
+These cartesian Axis Components are distinguished by their position relative to a visualization's draw area.
+At the current time, only Left and Bottom Axis Components have been implemented in the RespVis library because they are the most commonly encountered positions of cartesian Axes and cover most use cases. 
+An Axis consists of ticks, an optional title, and an optional subtitle.
+The ticks of an Axis are the actual visualization of the Axis' scale, and the title and subtitle can be specified to additionally describe it.
+An example of what a rendered Left and Bottom Axis might look like can be seen in Figure~\ref{fig:Axes}. 
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{diagrams/axes.pdf}
 \caption[RespVis Axis Components]{
-  This figure shows how a rendered left and bottom axis may look like.
-  The left axis consists of a title, subtitle, and ticks, whereas the bottom axis only consists of ticks and a title. 
+  This figure shows how a rendered Left and Bottom Axis may look like.
+  The Left Axis consists of a title, subtitle, and ticks, whereas the Bottom Axis only consists of ticks and a title. 
   \imgcredit{Image created by the author of this thesis using RespVis and \href{https://inkscape.org/}{Inkscape}.}
 }
 \label{fig:Axes}
 \end{figure}
   
 
-The \code{Axis} interface describes the shape of a data object with which the rendering of an axis can be configured.
+The \code{Axis} interface describes the shape of a data object with which an Axis can be configured.
 It includes a \code{scale} property, which represents the scale that has to be visualized, the \code{title} and \code{subtitle} string properties, and the \code{configureAxis} function property, which can be used to configure the underlying D3 axis before rendering it.  
 Like most other components, axis components consist of two main functions: a data creation function and a render function.
-The \code{axisData} function is used to create a data object in the form of the \code{Axis} interface.
-It is called with a \code{Partial<Axis>} object as parameter and returns a new object with all non-set but required properties of the parameter object filled with default values.
-The \code{axisBottomRender} and \code{axisLeftRender} functions are used to render a left and bottom axis in a composite element on which an axis has been configured using a bound \code{Axis} data object. 
-These two render functions use the non-exported \code{axisRender} base function to avoid duplicate code.
-All axes have the same structure of elements which are positioned and styled as much as possible using CSS.
-The root of an axis is a CSS Grid container and defines the layout of the title, subtitle and ticks elements.
-The default configuration of a left axis positions these elements in a three-column layout in which the title, subtitle and ticks elements are placed in this order from left to right.
-For a bottom axis, the default configuration positions the same elements in a three-row layout in which the ticks, title and subtitle elements are placed in this order from top to bottom.
-Furthermore, the title and subtitle elements of a left axis are vertically oriented to save horizontal space using the \code{textOrientation} utility function.
-The RespVis axis components internally use the \code{axisBottom} and \code{axisLeft} functions from the D3 axis module \parencite{D3Axis} to render the ticks of an axis.
-Since these D3 functions use attributes to position and style the individual elements of the ticks of an axis, as many of these attributes as possible must be removed directly after the ticks have been rendered to allow configuration via CSS. 
+The \code{axisData} function is used to create an \code{Axis} data object from a \code{Partial<Axis>} object parameter where all non-set but required properties are filled with default values.
+The \code{axisBottomRender} and \code{axisLeftRender} functions are used to render a Left and Bottom Axis in a composite element on which an \code{Axis} data object has been bound. 
+An Axis' root element is a CSS Grid container and defines the layout of the title, subtitle, and ticks elements.
+The default configuration of a Left Axis positions these elements in a three-column layout in which the title, subtitle, and ticks elements are placed in this order from left to right.
+For a Bottom Axis, the default configuration positions the same elements in a three-row layout in which the ticks, title, and subtitle elements are placed in this order from top to bottom.
+Furthermore, the title and subtitle elements of a Left Axis are vertically oriented to save horizontal space using the \code{textOrientation} utility function.
+The RespVis Axis Components internally use the \code{axisBottom} and \code{axisLeft} functions from the D3 Axis Module \parencite{D3Axis} to render the ticks of an Axis.
+Since these D3 functions use attributes to position and style elements, as many of these attributes as possible must be removed directly after the ticks have been rendered to allow configuration via CSS.  
 
 \subsection{Chart}
 
-% higher-level components that render lower-level components such as axes, legends, and series. 
-% chart
-%   chartRender
-%     default attributes of every chart
-%     .chart
-%     xmlns
-% chart cartesian
-%   ChartCartesian
-%     xAxis, Axis, data object
-%     yAxis, Axis, data object
-%     flipped, boolean, flipping of x and y axes
-%   chartCartesianData
-%     input
-%       Partial<ChartCartesian> with Partial<Axis> as xAxis and yAxis type
-%     default values
-%   chartCartesianRender
-%     chart
-%     .chart-cartesian
-%       .draw-area
-%         .background, invisible, for capturing events
-%   chartCartesianAxesRender
-%      left axis with either xAxis or yAxis data depending on value of flipped
-%      bottom axis with either xAxis or yAxis data depending on value of flipped
-%      .x-axis
-%      .y-axis
-%   contents laid out with CSS grid
-%     left axis, bottom axis, draw area, potential legend
-%     dynamic draw-area size to fill available space
+Charts are high-level components that represent a complete visualization with Axes, Legends, and Series.
+An example of a rendered RespVis Chart that includes two Axes, a Grouped Bar Series, a Label Series, and a Legend can be seen in Figure~\ref{fig:Chart}.
+A Chart is typically rendered in the root \code{<svg>} element of an SVG document that has at least the \code{chart} class set in its \code{class} attribute and the appropriate SVG namespace set in its \code{xmlns} attribute.
+These attributes can be set in more specific Chart Components either manually or via the \code{chartRender} function from the \code{chart.ts} file in the Core Module, which only sets these attributes.
 
-\TODO{Capitalize "Chart Component" or "Chart component"? How about only "chart" without "component"? Capitalize "Chart" everytime it's used?}
-charts sind higher-level components die eine vollstaendige visualisierung inklusive achsen, legenden und series representieren.
-ein beispiel eines gerenderten RespVis charts der zwei achsen, eine grouped bar series, eine label series und eine legend beinhaltet kann in Figure~\ref{fig:Chart} gesehen werden.
-Ein chart wird typischerweise in dem root \code{<svg>} element eines SVG dokumentes gerendert welches zumindest die \code{chart} klasse im \code{class} attribute und den angemessenen SVG namespace im \code{xmlns} attribute gesetzt hat.
-Diese attribute koennen in spezifischeren chart komponenten entweder manuel oder ueber die \code{chartRender} funktion aus der \code{chart.ts} datei im core module, welche nur diese attribute setzt, gesetzt werden.
 
 \begin{figure}[tp]
   \centering
   \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{diagrams/chart.pdf}
   \caption[Chart Example]{
-    An example of a chart that contains two axes, a grouped bar series, a label series and a legend.
-    This chart has been rendered with the RespVis library.
+    An example of a Chart that contains two Axes, a Grouped Bar Series, a Label Series and a Legend.
     \imgcredit{Image created by the author of this thesis.}
   }
   \label{fig:Chart}
 \end{figure}
 
-wie bereits erwaehnt beinhaltet die RespVis library aktuell nur die implementationen von kartesischen charts welche daten in einem kartesischen koordinatensystems visualisieren.
-die implementierung der basis funktionen von kartesischen charts befindet sich in der \code{chart-cartesian.ts} datei im core module. 
-das \code{ChartCartesian} interface beschreibt ein data object fuer die konfiguration von kartesischen charts.
-diese data objects beinhalten die \code{xAxis} und \code{yAxis} \code{Axis} properties mit welchen jeweils die X und Y achsen des charts beschrieben werden.
-das transponieren von achsen ist ein nuetzliches pattern um die responsiveness von visualisierungen zu verbessern und wird mittels des \code{flipped} boolean properties konfiguriert.
-wenn das \code{flipped} property auf \code{false} gesetzt ist, wird das \code{xAxis} object fuer die konfiguration der bottom axis und das \code{yAxis} object fuer die konfiguration der left axis verwendet. 
-wenn es auf \code{true} gesetzt ist, ist es genau umgekehrt.
+As already mentioned, the RespVis library currently contains only the implementations of Cartesian Charts, which visualize data in a Cartesian coordinate system.
+The implementation of the base functionality of Cartesian charts is located in the \code{chart-cartesian.ts} file in the Core Module. 
+The \code{ChartCartesian} interface describes a data object for the configuration of Cartesian Charts.
+These data objects contain the \code{xAxis} and \code{yAxis} \code{Axis} properties which describe the X and Y Axes of the Chart respectively.
+Transposing Axes is a useful pattern to improve the responsiveness of visualizations and is configured using the \code{flipped} boolean properties.
+If the \code{flipped} property is set to \code{false}, the \code{xAxis} object is used to configure the Bottom Axis and the \code{yAxis} object is used to configure the Left Axis. 
+If it is set to \code{true}, it is the other way around.
 
-die \code{chartCartesianData} funktion wird verwendet um ein data object in der form des \code{ChartCartesian} interface zu erzeugen.
-diese funktion erhaelt ein partielles data object bei welchem nur jene properties gesetzt sind welche fuer den aufrufenden code von interesse sind.
-alle nicht gesetzten properties werden mit standardwerten befuellt.
-die standardwerte der \code{xAxis} und \code{yAxis} properties werden ueber die \code{axisData} funktion aus dem axis submodule gesetzt.
-das \code{flipped} property wird, falls es nicht ueber den input parameter spezifiziert wird, auf \code{false} gesetzt.
+The \code{chartCartesianData} function is used to create a \code{ChartCartesian} data object.
+This function gets a partial data object with only those properties set that are of interest to the calling code, and all non-set properties are filled with default values.
+The default values of the \code{xAxis} and \code{yAxis} properties are set by the \code{axisData} function from the Axis Module and the \code{flipped} property is initialized to \code{false}.
 
-das rendern von kartesischen charts ist auf zwei funktionen aufgeteilt die seperat voneinander aufgerufen werden muessen.
-diese aufteilung wurde gemacht weil nicht alle teile eines kartesischen charts zum selben zeitpunkt gerendert werden koennen.
-die generelle struktur eines charts muss gerendert werden bevor irgendetwas anderes gerendert werden kann da dies das draw area container element beinhaltet in welches individuelle series componenten gerendert werden muessen.
-die achsen eines charts benoetigen eine vollstaendig initialisierte scale um korrekt gerendert werden zu koennen.
-die range einer scale, also der wertebereich in welchen abstrakte werte gemappt werden, haengt allerdings von den dimensionen der draw area boundary ab und wird erst waehrend der render funktion der individuellen series components, welche in die draw area gerendert werden, initialisiert.    
-aus diesem grund duerfen achsen erst nach allen series components gerendert werden um eine vollstaendig initialisierte scale zu gewaehrleisten.
+The rendering of Cartesian Charts is split into two functions that have to be called separately because not all parts of a Cartesian Chart can be rendered simultaneously.
+The general structure of a Chart must be rendered before anything else can be rendered, as this includes the draw area container element into which individual Series Components are rendered.
+A Chart's Axes need fully initialized scales to be rendered correctly.
+However, the range of a scale, i.e. the range of values into which abstract values are mapped, depends on the size of the draw area and is only set during the render function of the individual Series Components.    
+Therefore, Axes must be rendered after Series Components to ensure fully initialized scales.
 
-die struktur eines kartesischen charts wird mit der \code{chartCartesianRender} funktion gerendert.
-diese fuktion setzt die notwendigen chart attribute und die \code{chart} klasse mit der \code{chartRender} funktion.
-Weiters wird mit dieser funktion die \code{chart-cartesian} klasse auf den root elementen der Selection gesetzt mit welcher die funktion aufgerufen wurde.
-die \code{chartCartesianRender} funktion fuegt fuegt ausserdem noch ein \code{<svg>} element mit der \code{draw-area} klasse als child element des component root elementes ein.
-die draw area ist das container element in welches die individuellen series components eines charts gerendert werden.
-standardmaessig wird das \code{overflow} CSS property der draw area auf \code{visible} gesetzt um eventuell ueberlappende elemente nicht zu clippen.
-ein \code{<svg>} element ohne tatsaechlichen content ist nicht in der lage input events abzufangen.
-das bedeutet dass es zum beispiel nicht moeglich waere mittels scroll events eine zoom interaktion zu steuern wenn der cursor sich ueber der leeren flaeche der draw area befindet.
-um dem entgegenzuwirken erzeugt die \code{chartCartesianRender} funktion fuer jede draw area ein transparentes \code{<rect>} background element welches die gesamte flaeche der draw area fuellt und welches es ermoeglicht input events auch in bereichen zu generieren in welchen sich keine series elemente befinden.
+The structure of a Cartesian Chart is rendered with the \code{chartCartesianRender} function, which sets the necessary attributes and classes on the root element and attaches the draw area \code{<svg>} element to it.
+The draw area is the container element into which the Series Components of a Chart are rendered.
+An \code{<svg>} element without actual content is not able to catch input events, which means that it would, for example, not be possible to capture scroll events to control a zoom interaction when the cursor is over the empty area of the draw area.
+To counteract this, a transparent \code{<rect>} background element that fills the whole draw area is added, which allows capturing input events in empty areas.
 
-die \code{chartCartesianAxesRender} funktion wird verwendet um die achsen eines kartesischen charts zu rendern.
-diese funktion darf nur auf elementen mit einem gebundenen \code{ChartCartesian} data object und nach der vollstaendigen initialisierung der scales, welche mit den achsen visualisiert werden sollen, aufgerufen werden.
-meist bedeutet dies fuer die reihenfolge an operationen einer spezifischerer kartesischen chart component, dass zu beginn die struktur des charts mittels der \code{chartCartesianRender} funktion erzeugt werden muss, gefolgt von dem rendern der gewuenschten series components, und erst danach duerfen die achsen mittels der \code{chartCartesianAxesRender} funktion gerendert werden.
-die \code{chartCartesianAxesRender} function erzeugt zwei \code{<g>} elemente und rendert eine left und eine bottom axis auf ihnen.
-je nachdem ob das \code{flipped} property im gebundenen data object auf \code{true} oder \code{false} gesetzt ist, wird das \code{xAxis} data object fuer die konfiguration der bottom oder left axis verwendet und das \code{yAxis} data object jeweils fuer die andere achse.
-nachdem die achsen gerendert wurden wird auf der achse auf welcher das \code{xAxis} data object gebunden ist die \code{x-axis} klasse und auf der anderen achse die \code{y-axis} klasse gesetzt. 
-diese klassen werden gesetzt um die auswahl der konkreten achsen welche die jeweilige konfiguration representieren ueber CSS Selectors zu ermoeglichen.
+The \code{chartCartesianAxesRender} function is used to render the Axes of a Cartesian Chart.
+This function may only be called on elements with a bound \code{ChartCartesian} data object and after the scales that are to be visualized by the axes have been fully initialized.
+Charts must first render the Chart's structure using the \code{chartCartesianRender} function, followed by the desired Series Components, and only after those the Chart's Axes can be rendered using the \code{chartCartesianAxesRender} function.
+The \code{chartCartesianAxesRender} function creates two \code{<g>} elements and renders a Left and a Bottom Axis on them.
+Depending on whether the \code{flipped} property in the bound data object is set to \code{true} or \code{false}, the \code{xAxis} data object is used to configure the Bottom or Left Axis and the \code{yAxis} data object is used to configure the other one.
+After the Axes are rendered, the \code{x-axis} class is set on the one the \code{x-axis} data object is bound to, and the \code{y-axis} class is set on the other one.
 
-wie es in der RespVis library ueblich ist, wird alles moegliche an positionierung und styling ueber CSS konfiguriert.
-die elemente eines kartesischen charts werden ueber ein CSS Grid layout positioniert.
-standardmaessig wird ein grid erzeugt welcher die \code{axis-left}, \code{axis-bottom}, \code{draw-area}, und \code{legend} areas definiert.
-die groesse der meisten zeilen und spalten dieses grids ist auf \code{auto} gesetzt, was bedeutet dass deren groesse von der groesse ihres inhaltes abhaengt. 
-die ausnahme hiervon sind die zeile und spalte in welchen sich die draw area befindet.
-deren groesse ist auf \code{1fr} gesetzt um zu erreichen dass die draw area den gesamten restlichen horizontalen und vertikalen platz einnimmt der nicht von den anderen zeilen und spalten eingenommen wird.
-die standardkonfiguration der \code{chart-cartesian} klasse sieht eine positionierung einer eventuellen legende rechts von der draw area vor.
-um die position der legende zu veraendern kann entweder direkt der grid ueber CSS angepasst werden oder eine der vorkonfigurierten positionen kann ueber das \code{data-legend-position} attribut aktiviert werden.
-um das setzten des \code{data-legend-position} attributes zu vereinfachen kann die \code{chartLegendPosition} funktion, welche dieses attribut auf den wert eines mitgegebenen \code{LegendPosition} enum parameters setzt, verwendet werden.
+The elements of a Cartesian Chart are positioned using a CSS Grid layout.
+By default a grid is created which defines the \code{axis-left}, \code{axis-bottom}, \code{draw-area}, and \code{legend} areas.
+Most rows and columns of this grid are sized to fit their content, with the only exception being the row and column containing the draw area, which is set to fill all the remaining space.
+The default configuration of the \code{chart-cartesian} class positions an eventual legend to the right of the draw area.
+The position of the legend can be changed by either adjusting the grid directly via CSS or activating one of the preconfigured positions via the \code{data-legend-position} attribute.
+To simplify setting the \code{data-legend-position} attribute, the \code{chartLegendPosition} function can be used, which sets this attribute to the value of a passed \code{LegendPosition} enum parameter.
 
 
 \subsection{Chart Window}
 
-% wrappers around charts that handle the render process and add a toolbar to configure charts and perform various operations.
-% chartWindowRender
-%   div.chart-window
-%     div.toolbar, toolbarRender
-%       div.menu-tools, menuToolsRender
-%         menuDropdownRender
-%         no chevron
-%         text unicode burger menu, trigram for heaven, https://graphemica.com/%E2%98%B0, U+2630
-%     div.layouter
-%   resizeEventListener
-% menuDropdownRender
-%   .menu
-%     span.chevron, unicode, left pointing,
-%     span.text
-%     ul.items
-%       positioning and styling via CSS
-%       showing via CSS
-%       highlighting via CSS
-
-% toolFilterNominal
-%   one of the tools provided by the library is the nominal filtering tool that can be used to filter a nominal dimension of the rendered data.
-%   nominal data is simply labeled data where no quantitative value is assigned to the individual values.  
-%   text, options, keys
-%   menuDropdownRender
-%   .item, seriesCheckboxRender
-%     container, labels, keys
-%     containerElement.checkbox
-%       input[type=checkbox][id=uuid()]
-%       label[for=input.id]
-% tool download svg
-%   dont describe in too much detail as it will be included in selected topics chapter
-% resize event dispatcher
-
-\TODO{Capitalize "Chart Window"?}
 chart windows sind wrapper komponenten um charts die einen chart innerhalb eines Layouter container elementes rendern und mit einer toolbar dekorieren.
 ein beispiel eines chart windows mit einem ausgeklappten tool menue in welchem sich zwei nominale filtering tools und ein svg download tool befinden kann in Figure~\ref{fig:ChartWindow} gesehen werden.
 die implementierung der chart window komponente befindet sich in der \code{chart-window.ts} datei im core module.
