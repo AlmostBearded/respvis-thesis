@@ -4,20 +4,18 @@
 
 RespVis is an open-source D3 extension library for creating responsive
 SVG charts. It enables the use of CSS for the responsive styling and
-layout of visualizations.
-% KA  Since CSS can only be applied to documents?
-Since CSS can only be applied to documents, RespVis renders
-visualizations as pure and complete SVG documents, meaning that the
-whole visualization is contained in one SVG document and includes no
-elements of other XML namespaces. RespVis is designed as an extension
-to D3, rather than a wrapper around it. Unlike most other
-visualization libraries built on top of D3, RespVis does not hide it
-behind a custom API. Rather, users invoke RespVis functionality by
-binding specially structured data to D3 Selections, which render
-visual components using render functions to transform the bound data
-into some form of visual representation. Furthermore, RespVis espouses
-the strong separation between data and code and applies strong static
-type-checking through the use of TypeScript.
+layout of visualizations. RespVis renders visualizations as pure and
+complete SVG documents, meaning that the whole visualization is
+contained in one SVG document and includes no elements of other XML
+namespaces. RespVis is designed as an extension to D3, rather than a
+wrapper around it. Unlike most other visualization libraries built on
+top of D3, RespVis does not hide it behind a custom API. Rather, users
+invoke RespVis functionality by binding specially structured data to
+D3 Selections, which render visual components using render functions
+to transform the bound data into some form of visual
+representation. Furthermore, RespVis espouses the strong separation
+between data and code and applies strong static type-checking through
+the use of TypeScript.
 
 
 
@@ -28,10 +26,10 @@ The design of the RespVis library is guided by six principles:
 \begin{enumerate}
 \item Responsive Styling and Layout via CSS.
 \item Visualizations are Pure, Complete SVG Documents.
-\item Extension rather than Wrapper.
+\item Extension of D3 rather than Wrapper around D3.
 \item Separation of Data and Code.
 \item Strong Static Type-Checking with TypeScript.
-\item Layered Components at Different Levels of Abstraction.
+\item Layered Component Hierarchy.
 \end{enumerate}
 
 
@@ -60,11 +58,6 @@ laying out HTML elements. For example, a legend can be configured to
 be placed to the right of a chart in a wider view, and beneath the
 chart in a narrower view, using familiar CSS constructs.
 
-Since CSS can only be applied to documents,
-% KA ??
-RespVis does not support rendering to HTML canvas elements because
-graphics rendered there are not exposed as document elements and
-therefore can not be affected by CSS.
 
 
 
@@ -72,151 +65,165 @@ therefore can not be affected by CSS.
 \subsection{Visualizations are Pure, Complete SVG Documents}
 
 Every RespVis visualization should be rendered as a pure and complete
-SVG document. An SVG document is considered \emph{pure} if it contains
-only elements defined in the SVG namespace. This means that it must
-not contain any \code{<foreignObject>} elements, which embed elements
-of an XML namespace other than SVG, for example to embed HTML elements
-inside an SVG.
+SVG document. An SVG document is considered \emph{pure}, if it
+contains only elements defined in the SVG namespace. This means that
+it must not contain any \code{<foreignObject>} elements, which embed
+elements of an XML namespace other than SVG, for example to embed HTML
+elements inside an SVG. RespVis does not support rendering to HTML
+canvas elements, because graphics rendered there cannot be styled by
+CSS.
 
 An SVG document representing a visualization is considered
-\emph{complete} if it contains the entire visualization within
+\emph{complete}, if it contains the entire visualization within
 it. Splitting visualization components across multiple SVG documents
 is considered bad practice, because these components conceptually
 belong together and should be represented as a whole. Having
 a full visualization enclosed in a complete SVG document allows the
-whole visualizatio to be exported and stored as a standard-compliant
+whole visualization to be exported and stored as a standard-compliant
 SVG file, which can be further processed using a wide range of tools.
 
 
 
-% HERE
 
-\subsection{Extension rather than Wrapper}
+\subsection{Extension of D3 rather than Wrapper around D3}
 
-RespVis has been designed as a library that extends D3.  Compared to
-other visualization libraries that are built on top of D3, RespVis
-does not represent a wrapping layer around it.  It does not provide an
-entirely new interface to library users but uses D3 Selections as the
-core interface with which to interact.  The typical workflow of
-invoking RespVis functionality is to bind data objects of a specific
-structure onto the elements of a Selection and visualize this data by
-calling a render function that transforms it into visual marks.  If D3
-was hidden behind a custom API, its powerful capabilities for the
-rendering of documents would not be accessible to users of the library
-and would need to be exposed manually through special mechanisms.  By
-designing RespVis as an extension of D3, users can continue to
-leverage its expressive and concise API and author their documents
-using data joins and the general update pattern.
+RespVis is designed as a library which extends D3, rather than a
+wrapper around D3. Compared to other visualization libraries which
+wrap a layer around D3, it does not provide an entirely new interface
+to users, but uses D3 Selections as the core interface with which to
+interact. The typical workflow of invoking RespVis functionality is to
+bind data objects of a specific structure to the elements of a
+Selection and then to visualize this data by calling a render function
+to transform it into visual marks. If D3 were hidden behind a custom
+API, its powerful capabilities would not be directly accessible to
+users of the library, and would need to be exposed manually through
+special mechanisms. By designing RespVis as an extension of D3, users
+can continue to leverage its expressive and concise API and author
+their documents using data joins and the general update pattern.
 
 
 
 \subsection{Separation of Data and Code}
 
-Fourthly, data and code are decoupled from each other.  Everything in
+In RespVis, data and code are decoupled from each other. Everything in
 RespVis is built from functions and objects without using any classes.
-Classes have been avoided because they are not common when working
-with D3 and also because they lead to a tight coupling between data
-and functionality, which has been deemed undesirable.  The decoupling
-of data and code results in various benefits compared to the prevalent
-object-oriented way of building software.  Among these benefits are
-easier reuse and testing of functions and a software system that
-requires less cognitive effort to understand it.  Functions are easier
-to reuse because they only require certainly-shaped input data to
-perform their task, and no mechanisms like inheritance or composition,
-which tend to increase the complexity of a system, are necessary.
-Compared to class-based code, where an object needs to be instantiated
-before testing its methods, it is easier to test functions in
-isolation when they are not coupled to their data.  The reason for
-this is that the instantiation of an object might be a complex
-operation that depends on other methods and could affect the results
-of a test case.  Possibly the main benefit of decoupling data and code
-lies in the reduced complexity of the resulting system.  A software
-system that treats data and code as different entities might be
-composed of more entities than a system that does not, but individual
-entities have fewer dependencies between one another.  This reduced
-number of dependencies between entities in such a system comes from
-separating entities into a data entities group and a function entities
-group, with no relationships between them.  The research related to
-software complexity is hard to convey in simple terms, but one rule
-that is related to this concept of data and code separation is well
-summarized by \textcite{DataCodeSeparation} as \enquote{A system made
-  of disjoint simple parts is less complex than a system made of a
-  single complex part.}  Of course, there are also various drawbacks
-when designing a system adhering to this concept, but they are not too
-severe and are therefore not listed here.  For further research on
-this topic, readers are advised to review
-\textcite{DataCodeSeparation} and \textcite{OutOfTarPit}.
+Classes were avoided, since they are not common when working with D3,
+and also because they lead to a tight coupling between data and
+functionality, which was deemed undesirable. The decoupling of data
+and code results in various benefits compared to the prevalent
+object-oriented way of building software. Among these benefits are
+easier reuse and testing of functions and a software system which
+requires less cognitive effort to understand.
+
+Functions are easier to reuse because they only require well-shaped
+input data to perform their task. Mechanisms like inheritance or
+composition, which tend to increase the complexity of a system, are
+unnecessary. Compared to class-based code, where an object needs to be
+instantiated before testing its methods, it is easier to test
+functions in isolation when they are not coupled to their data. The
+reason for this is that the instantiation of an object might be a
+complex operation dependent on other methods which could affect the
+results of a test case.
+
+Possibly the main benefit of decoupling data and code lies in the
+reduced complexity of the resulting system. A software system which
+treats data and code as different entities might be composed of more
+entities than a system which does not, but the individual entities
+have fewer dependencies between one another. The reduced number of
+dependencies between entities results from separating entities into a
+data entities group and a function entities group, with no
+relationships between them. The research related to software
+complexity is hard to convey in simple terms, but one rule of thumb is
+well summarized by \textcite{DataCodeSeparation} as \enquote{A system
+  made of disjoint simple parts is less complex than a system made of
+  a single complex part.} Of course, there are also drawbacks when
+designing a system adhering to this concept, but they are not too
+severe and are therefore not listed here. For further reading on this
+topic, the reader is directed to Moseley and Marks' classic workshop
+paper \parencite{OutOfTarPit} and Sharvit's forthcoming book
+\parencite{Sharvit-Book}.
+
 
 
 
 \subsection{Strong Static Type-Checking with TypeScript}
 
-Fifthly, the library is written in TypeScript, with everything being
-as strongly-typed as possible.  For the most part, interfaces are used
-to describe the structure of data objects, and function parameters are
-annotated with types.  Whenever working with D3 Selections, their
+The RespVis library is written in TypeScript, with everything being as
+strongly-typed as possible. For the most part, interfaces are used to
+describe the structure of data objects, and function parameters are
+annotated with types. Whenever working with D3 Selections, their
 contents are typed as strongly as possible using the generic type
-variables available on Selections.  Most of the time, it is sufficient
+variables available on Selections. Most of the time, it is sufficient
 to specify only the type of elements contained in a Selection and the
-structure of the data bound on them.  If the element and data types of
+structure of the data bound on them. If the element and data types of
 a Selection are declared, the various functions can assume that
 parameters passed to them have specific types, and they do not have to
-worry about dynamic type checking.  Applying a strongly-typed type
-system has many advantages like better development tooling and the
-compile-time identification of type-related bugs.  These advantages
+worry about dynamic type checking. Applying a strongly typed system
+has many advantages, such as better development tooling and
+compile-time identification of type-related bugs. These advantages
 have already been described in Section~\ref{sec:TS}.
 
 
 
-\subsection{Layered Components at Different Levels of Abstraction}
 
-Sixthly, components in RespVis are structured in layers with different
-levels of abstraction.  Components in higher layers need to make more
-assumptions about their content than components in lower layers.  The
-bottom-most layer with the lowest level of abstraction consists of
-visual primitives that are represented by basic SVG elements like
-\code{<rect>}, \code{<circle>}, and \code{<text>} elements.  These
-primitives do not require any data to be bound on them and are simply
-rendered by setting their attributes to the desired values.  The layer
-above primitive elements is formed by composite components, which are
-usually rendered as \code{<svg>} or \code{<g>} elements that only
-contain primitive elements.  The components in this layer include
-axes, legends, and series and are the lowest-level components that are
-configured using structured data bound on their elements.  Series
-components are composite elements that render a collection of
-underlying elements using a data join and the general update pattern.
-The next higher layer consists of chart components.  Charts are
-composite components that can also include other composite components.
-They are the visual entities that represent complete visualizations
-and are usually composed of axes, series, and legend components.  In
-many other visualization libraries, charts are the highest-level
-components users can work with, but RespVis contains an additional
-layer above them, formed by Chart Window Components.  Chart Windows
-are also composite components, but unlike all previously discussed
-layers, they are not rendered as SVG elements but as HTML \code{<div>}
-elements.  Their purpose is to nest Charts into a Layouter Component,
-render them in a three-phased rendering process, and provide a toolbar
-for them.  Toolbars are customizable and will hold different tools for
-different types of charts.  The hierarchy of component layers in
-RespVis can be seen in Figure~\ref{fig:Layers}.
+
+
+
+\subsection{Layered Component Hierarchy}
+
+Components in RespVis are structured in four layers with increasing
+levels of abstraction, as shown in Figure~\ref{fig:Layers}. Components
+in higher layers make more assumptions about their content than
+components in lower layers. The bottom-most layer with the lowest
+level of abstraction consists of visual Primitives, represented by
+basic SVG elements like \code{<rect>}, \code{<circle>}, and
+\code{<text>}. These Primitives do not require any data to be bound to
+them and are simply rendered by setting their attributes to the
+desired values.
 
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{diagrams/respvis-layers.pdf}
+\includegraphics[keepaspectratio,width=\linewidth,height=7.5cm]
+{diagrams/respvis-layers.pdf}
 \caption[Component Layers of RespVis]{
-  This diagram shows the different layers of components of the RespVis library.
-  Layers that are higher in the hierarchy contain increasingly higher-level components that make more assumtions than components in lower layers.
-  The lowest level of components are primitives that are merely SVG elements such as \code{<rect>}, \code{<circle>}, and \code{<text>} elements.
-  Axes, legends and series are composite components that only contain primitives.
-  Charts are composite components that are composed of lower-level primitives or other composite components to form a complete visualization.
-  Chart Windows are wrapper components around Charts, manage their rendering process and provide a toolbar for them.  
-  \imgcredit{Image created by the author of this thesis.}
+The four layers of components in the RespVis library. Higher layers
+contain increasingly higher-level components.
+\imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:Layers}
 \end{figure}
 
 
+The second layer comprises composite components such as Axes, Legends,
+and Series. These are usually rendered as \code{<svg>} or \code{<g>}
+elements containing only primitive elements. The components in this
+layer are the lowest-level components which are configured using
+structured data bound to their elements. Series components are
+composite elements which render a collection of underlying elements
+using a data join and the general update pattern.
+
+The third layer consists of Chart components. Charts are composite
+components which can also include other composite components. They are
+the visual entities which represent complete visualizations and are
+usually composed of axes, series, and legend components.
+
+In many other visualization libraries, charts are the highest-level
+components users can work with, but RespVis contains an additional
+layer above them, formed by Chart Window Components. Chart Windows are
+wrapper components around Charts. Unlike the previously discussed
+lower layers, Chart Windows are not rendered as SVG elements but as
+HTML \code{<div>} elements. Their purpose is to nest Charts into a
+Layouter Component, render them in a three-phased rendering process,
+and provide an optional toolbar for them. Toolbars are customizable
+and can hold different tools for different types of chart.
+
+
+
+
+
+
+% HERE
 
 
 
