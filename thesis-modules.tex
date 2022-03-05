@@ -526,18 +526,19 @@ However, for consistency reasons, the way of configuring Tooltips should not dif
 
 \section{Bar Module}
 
-das bar modul befindet sich in dem \code{src/lib/bars/} ordner des projektes und beinhaltet komponenten um unterschiedliche arten von bar charts zu rendern.
-bar charts werden zur visualisierung von kategorischen datensaetzen durch rectangles eingesetzt wobei die laenge der rectangles proportional zu den werten einer quantitativen datendimension ist.
-in einem kategorischen datensatz ist eine kategorie eindeutig anderen dimensionen der einzelnen dateneintraege zuordenbar.
-ein beispiel hierfuer waere ein datensatz in welchem unterschiedliche charakteristiken einzelner laender aufgelistet sind.
-bar charts gehoeren zu den aeltesten arten von charts mit einem der ersten aufkommen in \textcite{CommercialAndPoliticalAtlas} und gehoeren auch heute noch zu den am haeufigsten vorgefundenen visualisierungen (\~36\% der 378 studied charts by \textcite{DesignPatternsTradeOffsRespVisGallery}) im modernen web.
-die bars einens bar charts koennen entweder horizontal oder vertikal ausgerichtet sein.
-bei einem horizontalen bar chart, manchal auch row chart genannt, wird die quantitative dimension ueber die X achse ausgedrueckt.
-diese variante von bar charts eignet sich besser fuer die darstellung in layouts mit eingeschraenkter breite, da die labels der kategorischen achse leichter ohne zu ueberlappen positioniert werden koennen und da ein horizontaler bar chart vertikal gescrollt werden kann was horizontalem scrollen zu bevorzugen ist.
-im gegensatz zu horizontalen bar charts wird bei vertikalen bar charts, manchmal auch column charts genannt, die quantitative dimension ueber die Y achse ausgedrueckt. 
-das bar modul beinhaltet komponenten fuer das rendering von basic, grouped, und stacked bar charts welche in unterschiedlichen visualisierungsszenarien eingesetzt werden koennen.
-fuer jede art von bar chart wird eine Series Component, eine Chart Component und eine Chart Window Component zur verfuegung gestellt. 
-die implementierung der unterschiedlichen arten von bar charts und wann welche art am besten zur anwendung kommt wird in den folgenden sections beschrieben.
+Bar Charts are used to compare the values of quantitative variables that are uniquely associated with distinct values of qualitative variables by visualizing these variables as rectangles whose lengths are proportional to the quantitative values.
+An example of variables that can be plotted using a Bar Chart would be countries with their populations, people with their ages, and browsers with their market shares.
+Bar Charts have already been in use for quite a long time, with one of the earliest documented occurrences being \textcite{CommercialAndPoliticalAtlas}, and they are still among the most frequently encountered types of visualizations in the modern web.
+
+The bars of a Bar Chart can either be horizontally or vertically oriented.
+In Horizontal Bar Charts, sometimes also called Row Charts, categories are spread in equal intervals across the Y-Axis to define the positions and heights of bars, and the associated values of categories are mapped on the X-Axis to determine their widths. 
+Conversely, in Vertical Bar Charts, sometimes also called Column Charts, categories are spread in equal intervals across the X-Axis to determine the positions and widths of bars, and the values of categories are mapped on the Y-Axis to determine their heights.
+Horizontal Bar Charts are better suited for display in narrow contexts than Vertical Bar Charts because category labels can be positioned more easily without having to rotate them and because these Charts can be vertically extended by having the user scroll vertically, which is strongly preferable to horizontal scrolling. 
+
+The Bar Module is located in the \code{src/lib/bars/} directory of the RespVis library and contains components to create Single-Series, Grouped Multi-Series, and Stacked Multi-Series Bar Charts that can be used in different situations.
+For every type of Bar Chart, the Bar Module provides a respective Series Component to render only the actual bars, a Chart Component to render a full Chart including bars, axes, and possible legends, and a Chart Window Component to render a full Chart embedded into a Layouter with additional tools provided via a Toolbar.
+Higher-level components are more convenient to use, but they also impose more assumptions, and therefore restrictions, on lower-level components contained within them.
+The implementations of the different types of Bar Charts and when which type is best used is described in the following sections.
 
 \subsection{Basic Bars}
 
