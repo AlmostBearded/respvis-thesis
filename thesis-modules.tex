@@ -318,6 +318,7 @@ The RespVis Axis Components internally use the \code{axisBottom} and \code{axisL
 Since these D3 functions use attributes to position and style elements, as many of these attributes as possible must be removed directly after the ticks have been rendered to enable their configuration via CSS.  
 
 \subsection{Chart}
+\label{sec:Chart}
 
 Charts are high-level components that represent a complete visualization with Axes, Legends, and Series.
 An example of a rendered RespVis Chart that includes two Axes, a Grouped Bar Series, a Label Series, and a Legend can be seen in Figure~\ref{fig:Chart}.
@@ -560,14 +561,12 @@ The output range of the scales used to map categories and values to spatial dime
 With these scales, the dimensions of bars are calculated, and enter, update, and exit transitions are utilized to interpolate them towards these new dimensions so that changes in visualization are easier to track, which leads to an improved experience for users.
 As with all other Series, the \code{enter}, \code{update}, and \code{exit} events containing the respective data join Selections are dispatched on the Series' root element and allow the injection of custom behavior into the different phases of the Series' data join.
 
-die implementierung von bar charts befindet sich in der \code{chart-bar.ts} datei im bar modul. 
-bar charts sind kartesische charts die eine bar series mit optionalen labels in ihrer draw area rendern.
-das \code{ChartBar} interface beschreibt die form von datenobjekten fuer die konfiguration von bar charts.
-es beinhaltet alle eigenschaften der \code{ChartCartesian} und \code{SeriesBar} interfaces und fuegt zusaetzliche eigenschaften zur konfiguration von bar labels hinzu. 
-ein mit standardwerten initialisiertes datenobjekt vom typ \code{ChartBar} kann mit der \code{chartBarData} funktion von einem partiellen input objekt erzeugt werden.
-nachdem solch ein datenobjekt auf einem \code{<svg>} oder \code{<g>} element gebunden wurde, kann ein bar chart mit der \code{chartBarRender} funktion in dieses element gerendert werden.
-diese funktion initialisiert einen kartesischen chart, initialisiert und rendert eine bar series und eine optionale label series in der draw area des charts, und rendert die scales mit welchen die bar series gerendert wurde als left und bottom axes des charts. 
-weiters werden \code{mouseover} event listener an die bar series angehaengt die fuer das hervorheben von bars und den dazugehoerigen ticks auf der category axis zustaendig sind.
+Bar Charts are Cartesian Charts, as discussed in Section~\ref{sec:Chart}, that display a Bar Series with optional labels in their draw area and render the scales used to map categories and values to spatial dimensions as Axes.
+Their implementation can be found in the \code{chart-bar.ts} file of the Bar Module, which contains the \code{ChartBar} interface to describe data objects used for the configuration of Bar Charts, the \code{chartBarData} function to create a fully initialized \code{ChartBar} data object from a partial input object, and the \code{chartBarRender} function to render Bar Charts on \code{<svg>} or \code{<g>} elements to which \code{ChartBar} data objects have been bound.
+The \code{ChartBar} interface inherits all properties of the \code{ChartCartesian} and \code{SeriesBar} interfaces and adds additional properties for the configuration of bar labels.
+It is not necessary to manually specify all the offered properties of this interface because the \code{chartBarData} function initializes all of them with sensible defaults that are derived from the properties callers are interested in and which have been specified in the partial data object passed to this function.
+The \code{chartBarRender} function is quite fundamental as it simply initializes a Cartesian Chart and renders a Bar Series whose configuration is derived from the \code{ChartBar} data object bound to the Chart's element and an optional series of labels to annotate the bars of the Bar Series into the Cartesian Chart's draw area. 
+Furthermore, the scales used for rendering the Bar Series are visualized as the Left and Bottom Axes of the Cartesian Chart, and a \code{mouseover} event listener that highlights bars and their corresponding ticks on the category axis is attached to bars.
 
 ein bar chart window ist die highest-level komponente die verwendet werden kann um einen bar chart zu rendern der in ein Layouter element eingebettet wird um dessen elemente ueber CSS zu positionieren.
 ueber die toolbar des bar chart windows koennen die kategorien des bar charts gefiltert und das SVG dokument des bar charts gedownloaded werden.
