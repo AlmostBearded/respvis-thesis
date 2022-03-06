@@ -540,40 +540,25 @@ For every type of Bar Chart, the Bar Module provides a respective Series Compone
 Higher-level components are more convenient to use, but they also impose more assumptions, and therefore restrictions, on lower-level components contained within them.
 The implementations of the different types of Bar Charts and when which type is best used is described in the following sections.
 
-\subsection{Basic Bars}
-
-\TODO{Is "Basic Bars" a good name? Maybe "Single Bars" or "Bars" or something else?}
+\subsection{Single-Series Bars}
 
 \TODO{Add figure of vertical and horizontal bar charts (subfigures?)}
 
-basic bar charts, manchmal auch single-series bar charts genannt, werden verwendet um unterschiede einer quantitativen dimension verschiedener kategorien eines kategorischen datensatzes zu verdeutlichen.
-von jedem dateneintrag wird jeweils eine kategorische und eine quantitative dimension als eine bar visualisiert, wobei die zu visualisierenden kategorien eindeutig auf einen quantitativen wert gemapped werden koennen muessen.
-die kategorien eines bar charts werden ueber eine band scale auf raeumliche dimensionen gemapped.
-eine band scale wird verwendet um werte gleichmaessig auf gleich grosse intervalle (baender) des verfuegbaren platzes aufzuteilen. 
-der abstand zwischen den einzelnen intervallen ist konfigurierbar.
-die breite der zu rendernden bars ergibt sich durch die anzahl der kategorien, dem bereich auf welchen sie ueber die band scale aufgeteilt werden sollen, und dem abstand zwischen den bars. 
-die quantitativen werte, welche die laenge der individuellen bars bestimmen, werden ueber eine continuous scale auf raemliche dimensionen gemapped.
-eine continuous scale bildet abstrakte quantitative werte ueber eine kontinuierliche interpolationsfunktion auf den bereich zwischen zwei extemen ab.
-in den meisten faellen kommt eine lineare interpolation ueber eine linear scale zur anwendung.
-es steht dem author einer visualisierung jedoch frei eine andere form der interpolation, wie zum beispiel eine logarithmische funktion ueber eine logarithmic scale, zu waehlen. 
+Single-Series Bar Charts are what most people think of when thinking of Bar Charts.
+They consist of only a single series of bars and can therefore only visualize differences between categories associated with a singular quantitative value.
+Categories of Single-Series Bar Charts are mapped to spatial dimensions via a band scale that partitions available space into equal intervals (bands) with configurable paddings between them.
+Thus, the width of bars is calculated via the total number of categories, the range they are spread on, and the paddings between them.
+The mapping of quantitative values to spatial dimensions in a Single-Series Bar Chart is performed using a continuous scale that maps abstract quantitative values stored in a dataset into a range of values between two extremes via a continuous interpolations function.
+In most cases, a linear interpolation via a linear scale is used to map quantitative values, but visualization authors can choose other forms of interpolation, such as logarithmic interpolation via a logarithmic scale.
 
-die lowest-level komponente die fuer das rendern eines bar charts notwendig ist ist eine bar series.
-eine bar series ist eine sammlung von \code{<rect>} elementen welche die bars innerhalb der draw area eines bar charts representieren.
-die implementierung der bar series komponente befindet sich in der \code{series-bar.ts} datei des bar moduls.
-das datenobjekt fuer die konfiguration einer bar series wird ueber das \code{SeriesBar} interface beschrieben.
-diese interface beschreibt ein objekt mit den \code{categories}, \code{values}, \code{categoryScale}, \code{valueScale}, \code{flipped}, \code{styleClasses}, und \code{keys} eigenschaften.
-zusaetzlich zu diesen eigenschaften wird die konfiguration von tooltips ueber die eigenschaften des \code{SeriesConfigTooltips} interface, welches in Section~\ref{sec:TooltipModule} beschrieben wird, ermoeglicht.
-die \code{categories} und \code{values} eigenschaften sind arrays welche die individuellen kategorien und deren quantitative werte repraesentieren.
-das mapping der kategorischen und quantitativen werte auf raeumliche dimensionen wird ueber die \code{categoryScale} und \code{valueScale} eigenschaften bestimmt.
-ob vertikale oder horizontale bars gerendert werden haengt von dem wert der \code{flipped} eigenschaft ab, wobei ein wert von \code{false} fuer vertikale bars und ein wert von \code{true} fuer horizontale bars steht.
-die \code{data-style} attribute, welche die farbe von bars bestimmen, und die \code{data-key} attribute, welche zur identifikation von zusammengehoerenden elementen verwendet werden, werden ueber die \code{styleClasses} und \code{keys} eigenschaften bestimmt.
-ein mit standardwerten initialisiertes \code{SeriesBar} datenobjekt kann mit der \code{seriesBarData} funktion von einem partiellen input objekt erzeugt werden.
-diese datenobjekte koennen an \code{<svg>} oder \code{<g>} elemente gebunden werden in welche dann eine bar series mit der \code{seriesBarRender} funktion gerendert werden kann.
-die individuellen bar elemente werden ueber einen data join mit einem array an \code{Bar} datenobjekten erzeugt, welches durch transformation des gebundenen \code{SeriesBar} datenobjektes berechnet wird.
-die position und groesse der bars wird mithilfe der beiden scales berechnet deren output values auf die dimensionen der bounding box des series elementes gemapped werden, welche vom Layouter berechnet und im \code{bounds} attribut gespeichert wurden.
-jede bar hat eine enter und exit transition und ihre position und groesse wird ueber eine update transition zwischen aktuellen und neuen werten interpoliert.
-diese transitions erleichtern es aenderungen in den visualisierten daten nachzuvollziehen und fuehren zu einer verbesserung der user experience.
-wie bei alle anderen series komponenten, werden die enter, update, und exit events mit der jeweiligen Selection des bar data joins auf dem root element der series dispatched um das injezieren von eigenem verhalten in die verschiedenen phasen des data joins zu ermoeglichen. 
+Bar Series render collections of \code{<rect>} elements that represent the bars in a Bar Chart's draw area, and they are the lowest-level components required for rendering Bar Charts.
+Their implementation is located in the \code{series-bar.ts} file of the Bar Module and contains the \code{SeriesBar} interface describing data objects to configure Bar Series, the \code{seriesBarData} function to create these data objects from partial data objects, and the \code{seriesBarRender} function to render Bar Series.
+The \code{SeriesBar} interface inherits Tooltip configuration properties from the \code{SeriesConfigTooltips} interface described in Section~\ref{sec:TooltipModule} and adds additional properties to configure the used categories and values, the scales to map them to spatial dimensions, whether or not bars should be oriented vertically or horizontally, and properties to configure their colors and keys. 
+After the desired \code{SeriesBar} data objects have been created and bound to \code{<svg>} or \code{<g>} elements, the \code{seriesBarRender} function can be used to render Bar Series on these elements.
+During rendering, the bound \code{SeriesBar} data object is transformed into an array of \code{Bar} data objects, and a data join with these data objects is performed to render the individual bars. 
+The output range of the scales used to map categories and values to spatial dimensions is set to the dimensions of the Bar Series element's bounding box that has been previously calculated and stored in the \code{bounds} attribute by the Layouter.
+With these scales, the dimensions of bars are calculated, and enter, update, and exit transitions are utilized to interpolate them towards these new dimensions so that changes in visualization are easier to track, which leads to an improved experience for users.
+As with all other Series, the \code{enter}, \code{update}, and \code{exit} events containing the respective data join Selections are dispatched on the Series' root element and allow the injection of custom behavior into the different phases of the Series' data join.
 
 die implementierung von bar charts befindet sich in der \code{chart-bar.ts} datei im bar modul. 
 bar charts sind kartesische charts die eine bar series mit optionalen labels in ihrer draw area rendern.
