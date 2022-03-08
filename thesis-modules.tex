@@ -568,21 +568,16 @@ It is not necessary to manually specify all the offered properties of this inter
 The \code{chartBarRender} function is quite fundamental as it simply initializes a Cartesian Chart and renders a Bar Series whose configuration is derived from the \code{ChartBar} data object bound to the Chart's element and an optional series of labels to annotate the bars of the Bar Series into the Cartesian Chart's draw area. 
 Furthermore, the scales used for rendering the Bar Series are visualized as the Left and Bottom Axes of the Cartesian Chart, and a \code{mouseover} event listener that highlights bars and their corresponding ticks on the category axis is attached to bars.
 
-ein bar chart window ist die highest-level komponente die verwendet werden kann um einen bar chart zu rendern der in ein Layouter element eingebettet wird um dessen elemente ueber CSS zu positionieren.
-ueber die toolbar des bar chart windows koennen die kategorien des bar charts gefiltert und das SVG dokument des bar charts gedownloaded werden.
-das datenobjekt fuer die konfiguration eines bar chart windows wird durch das \code{ChartWindowBar} interface beschrieben.
-dieses interface erbt vom \code{ChartBar} interface und beinhaltet dadurch alle eigenschaften die fuer die konfiguration des darunterliegenden bar charts benoetigt werden.
-zusaetzlich zu diesen, werden weitere eigenschaften fuer das filtern von kategorien, wie etwa die derzeit aktiven kategorien und das verhalten der value scale, zur verfuegung gestellt.
-die \code{chartWindowBarData} funktion kann verwendet werden um ein datenobjekt fuer die konfiguration eines bar chart windows von einem partiellen input objekt zu erzeugen bei welchem die nicht definierten werte mit standardwerten initialisiert werden.
-mit der \code{chartWindowBarRender} funktion kann ein bar chart window in einem \code{<div>} element auf welchem ein angemessenes datenobjekt gebunden is gerendert werden.
-diese funktion rendert die toolbar mit den kategorie filter und SVG download tools, initialisiert den eingebetteten chart mit den gefilterten werten des chart window datenobjektes, und rendert den chart, entsprechend des render prozesses definiert in Section~\ref{sec:Layouter}, zweimal mit einem layout computation schritt dazwischen.
-standardmaessig wird das chart window nicht automatisch rerendert wenn sich die groesse des viewports aendert oder wenn die aktiven kategorien gefiltert werden.
-das rerendern bei viewport groessenaenderungen kann ueber einen \code{resize} event listener auf dem chart window root element implementiert werden in welchem die chart window render funktion erneut aufgerufen wird nachdem das gebundene datenobjekt angemessen an die neuen dimensionen des viewports angepasst wurde.
-das bar chart window sendet ein \code{categoryfilter} event mit den derzeit aktiven kategorien immer wenn kategorien ueber das filter tool aktiviert oder deaktiviert werden.
-um den bar chart auf die neue filterkonfiguration anzupassen muss ein \code{categoryfilter} event listener implementiert werden welcher die aktiven kategorien im datenobjekt des chart windows aktualisiert und das chart window rerendert.
-muessen keine speziellen konfigurationen bei aenderung der viewport groesse oder des kategoriefilters durchgefuehrt werden, koennen die \code{chartWindowBarAutoResize} und \code{chartWindowBarAutoFilterCategories} funktionen verwendet werden um \code{resize} und \code{categoryfilter} event listener an das chart window anzuhaengen die das standardverhalten implementieren.
-ein simples beispiel dafuer wie ein skalierendes bar chart window erzeugt werden kann welches das filtern von kategorien erlaubt ist in Listing~\ref{list:BarChartWindow} ersichtlich.
-die resultierende visualisierung dieses codes kann in Figure~\ref{fig:BarChartWindow} gesehen werden.
+Bar Chart Windows are high-level components that wrap a Bar Chart into a Layouter so its elements can be laid out with CSS, and they also add a Toolbar containing tools to filter a Bar Chart's categories and download the SVG document representing them.
+Their implementation can be found in the \code{chart-window-bar.ts} file of the Bar Module, which contains the \code{ChartWindowBar} interface to describe data objects for the configuration of Bar Chart Windows, the \code{chartWindowBarData} function to create a fully initialized \code{ChartWindowBar} data object from a partial input object containing only relevant properties, and the \code{chartWindowBarRender} function to render a Bar Chart Window on a \code{<div>} element onto which a \code{ChartWindowBar} data object has been bound.
+The \code{ChartWindowBar} interface inherits all properties of the \code{ChartBar} interface to configure the wrapped Bar Chart and adds additional properties needed for the filtering of categories.
+Bar Chart Windows are rendered with the \code{chartWindowBarRender} function, which renders a Toolbar including a Nominal Filtering Tool for categories and an SVG Download Tool, initializes the nested Bar Chart with the filtered values, and renders it, according to the render process required by the Layouter defined in Section~\ref{sec:Layouter}, twice with a layout computation step between both renderings.
+By default, Bar Chart Windows are not automatically updated when the viewport size changes or if their categories are filtered.
+Instead, a custom \code{resize} event listener in which the Chart Window is responsively reconfigured according to the changed viewport size and subsequently rerendered via the \code{chartWindowBarRender} function has to be attached to the Chart Window's element.
+Furthermore, Bar Chart Windows dispatch custom \code{categoryfilter} events containing the currently active categories whenever categories are activated or deactivated via the Nominal Filtering Tool.
+These events can be used to responsively reconfigure Bar Chart Windows concerning the newly active categories by adding a custom \code{categoryfilter} event listener that updates the configuration of the Bar Chart Window accordingly and rerenders it.
+If no special configuration is required when the viewport size or the category filtering changes, then the \code{chartWindowBarAutoResize} and \code{chartWindowBarAutoFilterCategories} functions can be used to attach custom \code{resize} and \code{categoryfilter} event listeners that implement the default behavior.
+A simple example of how a scalable Bar Chart Window with filterable categories can be created is shown in Listing~\ref{list:BarChartWindow} and the resulting visualization of this code can be seen in Figure~\ref{fig:BarChartWindow}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -597,9 +592,8 @@ die resultierende visualisierung dieses codes kann in Figure~\ref{fig:BarChartWi
   numbers=left,
   label=list:BarChartWindow,
   caption={[Bar Chart Window Example]%
-    The example source code that creates a Bar Chart Window.
-    The Bar Chart Window is configured with the bound data object that is initialized via the \code{chartWindowBarData} function.
-    After configuration, the Chart Window is rendered by the \code{chartWindowBarRender} function.
+    The example source code that creates the Bar Chart Window seen in Figure~\ref{fig:BarChartWindow}.
+    This Bar Chart Window is configured with the bound data object initialized with the \code{chartWindowBarData} function and rendered with the \code{chartWindowBarRender} function.
     Since no special responsive behavior is desired in this example, the default resize and category filter behavior is attached to the Chart Window via the \code{chartWindowBarAutoResize} and \code{chartWindowBarAutoFilterCategories} functions. 
   },
 ]{listings/bar-chart-window.js}
@@ -610,7 +604,7 @@ die resultierende visualisierung dieses codes kann in Figure~\ref{fig:BarChartWi
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/bar-chart-window.png}
 \caption[Bar Chart Window Example]{
-  The resulting Bar Chart of the example code in Listing~\ref{list:BarChartWindow}. 
+  The Bar Chart Window resulting from the example code in Listing~\ref{list:BarChartWindow}. 
   \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:BarChartWindow}
