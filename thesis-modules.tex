@@ -527,7 +527,7 @@ However, for consistency reasons, the way of configuring Tooltips should not dif
 
 \section{Bar Module}
 
-Bar Charts are used to compare the values of quantitative variables that are uniquely associated with distinct values of qualitative variables by visualizing these variables as rectangles whose lengths are proportional to the quantitative values.
+Bar Charts are used to compare the values of quantitative variables, hereafter referred to as values, that are uniquely associated with distinct values of qualitative variables, hereafter referred to as categories, by visualizing these variables as rectangles whose lengths are proportional to the quantitative values.
 An example of variables that can be plotted using a Bar Chart would be countries with their populations, people with their ages, and browsers with their market shares.
 Bar Charts have already been in use for quite a long time, with one of the earliest documented occurrences being \textcite{CommercialAndPoliticalAtlas}, and they are still among the most frequently encountered types of visualizations in the modern web.
 
@@ -614,13 +614,11 @@ A simple example of how a scalable Bar Chart Window with filterable categories c
 
 \subsection{Grouped Bars}
 
-ein grouped bar chart, manchmal auch clustered oder multi-series bar chart genannt, wird verwendet um mehrere quantitative dimensionen unterschiedlicher kategorien eines kategorischen datensatzes miteinander zu vergleichen.
-in einem solchen chart wird fuer jede kategorie eine gruppe an bars gerendert deren laengen proportional zu den werten der unterschiedlichen quantitativen dimensionen sind.
-die verschiedenen zu visualisierenden quantitativen dimensionen muessen miteinander vergleichbar sein und koennen als unterkategorien der einzelnen kategorien betrachtet werden.
-wie bei basic bar charts werden auch hier die kategorien ueber band scales auf raeumliche dimensionen abgebildet.
-der unterschied befindet sich darin dass bei grouped bar charts zwei verschiedene band scales zur anwendung kommen.
-ueber die category scale wird der verfuegbare platz der draw area auf die anzahl der kategorien aufgeteilt und ueber die subcategory scale wird der platz innerhalb der daraus resultierenden gleich grossen intervalle auf die anzahl der unterkategorien aufgeteilt.
-das abbilden von quantitativen werten auf raeumliche dimensionen wird wieder ueber eine continuous scale durchgefuehrt, wobei die selbe scale fuer jeden wert verwendet werden muss damit die werte miteinander vergleichbar sind.
+Grouped Bar Charts, sometimes also called Clustered or Multi-Series Bar Charts, consist of multiple series of bars and are used to visualize differences between categories where each category is associated with a series of quantitative variables.
+Every category must be associated with the same number of quantitative variables, effectively splitting categories into subcategories, and all values assigned to these subcategories must be comparable with one another, meaning they must have the same units and scales.
+As with Single-Series Bar Charts, categories in Grouped Bar Charts are also mapped to spatial dimensions using band scales, but here, two different band scales have to be applied.
+The category band scale divides all the available space along either the X or Y-Axis into equal intervals based on the number of categories, whereas the subcategory band scale further divides these intervals into even smaller intervals based on the number of subcategories.
+Quantitative values are again mapped to spatial dimensions via a single continuous scale that must be used for all of them.
 
 fuer das rendering von grouped bar charts werden drei verschiedene komponenten zur verfuegung gestellt welche ihren gegenstuecken fuer das rendering von basic bar charts sehr aehnlich sind.
 die grouped bar series ist die lowest-level komponente die dafuer gedacht ist eine sammlung an \code{<rect>} elementen, welche die jeweiligen werte und kategorien eines grouped bar charts representieren, in die draw area eines charts zu rendern.
