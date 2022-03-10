@@ -620,20 +620,19 @@ As with Single-Series Bar Charts, categories in Grouped Bar Charts are also mapp
 The category band scale divides all the available space along either the X or Y-Axis into equal intervals based on the number of categories, whereas the subcategory band scale further divides these intervals into even smaller intervals based on the number of subcategories.
 Quantitative values are again mapped to spatial dimensions via a single continuous scale that must be used for all of them.
 
-fuer das rendering von grouped bar charts werden drei verschiedene komponenten zur verfuegung gestellt welche ihren gegenstuecken fuer das rendering von basic bar charts sehr aehnlich sind.
-die grouped bar series ist die lowest-level komponente die dafuer gedacht ist eine sammlung an \code{<rect>} elementen, welche die jeweiligen werte und kategorien eines grouped bar charts representieren, in die draw area eines charts zu rendern.
-der unterschied einer grouped bar series zu einer basic bar series ist dass zusaetzliche eigenschaften fuer die konfiguration der unterkategorien notwendig sind und dass manche bereits vorhandene eigenschaften hier zwei-dimensionale arrays erfordern um deren werte den hier zwei-dimensional (kategorie/unterkategorie) gruppierten bars zuzuordnen.
-allen bars die der selben unterkategorie angehoeren werden die selben style klassen zugewiesen um die werte der einzelnen kategorien leichter miteinander vergleichen zu koennen.
-ein grouped bar chart ist ein kartesischer chart mit einer grouped bar series und optionalen labels in seiner draw area, einer left und bottom axis die die scales der grouped bar series visualisieren, und einer legende die die unterkategorien des charts beschreibt.
-ein solcher Chart implementiert ausserdem event listener auf unterschiedlichen elementen die das gemeinsame hervorheben von zusammengehoerenden bars, labels, category axis ticks, und legend items abwickeln.  
-ein Grouped Bar Chart Window ist die highest-order komponente die verwendet werden kann um einen Grouped Bar Chart zu rendern.
-diese komponente plaziert den Chart innerhalb eines Layouters und managed den render prozess der es erlaubt individuelle elemente ueber CSS zu positionieren.
-weiters dekoriert ein solches Chart Window den Grouped Bar Chart mit einer toolbar in welcher sich ein SVG download tool und zwei filter tools befinden um die visualisierten kategorien und unterkategorien zu filtern.
-die konfiguration des eingebetteten Charts mit den gefilterten eigenschaften des am Chart Window gebundenen datenobjektes wird von der render funktion des Grouped Chart Windows durchgefuehrt.
-immer wenn der user mit den filter tools interagiert und die zusammenstellung der aktiven kategorien und unterkategorien veraendert werden die \code{categoryfilter} und \code{subcategoryfilter} events mit jeweils den neuen aktiven kategorien und unterkategorien ausgesandt.
-der author der visualisierung kann entweder spezielles verhalten in eigenen resize und filter event listenern implementieren oder das standardverhalten ueber die zur verfuegung gestellten \code{chartWindowBarGroupedAutoResize}, \code{chartWindowBarGroupedAutoFilterCategories}, und \code{chartWindowBarGroupedAutoSubcategories} funktionen aktivieren.
-der beispielcode um einen einfachen grouped bar chart zu erzeugen welcher sich an die groesse seines container elementes anpasst und in welchem die kategorien und unterkategorien ueber die toolbar gefiltert werden koennen befindet sich in Listing~\ref{list:GroupedBarChartWindow}.
-die resultierende visualisierung dieses beispiels kann in Figure~\ref{fig:GroupedBarChartWindow} gesehen werden.  
+The Bar Module provides the Grouped Bar Series, Grouped Bar Chart, and Grouped Bar Chart Window Components, which are very similar to their Single-Series Bar Chart counterparts, to render Grouped Bar Charts in different levels of hierarchy.
+Grouped Bar Series are the lowest-level components of these and render a collection of \code{<rect>} elements meant for display in the draw area of a Grouped Bar Chart.
+The difference between a Grouped Bar Series and a Single-Series Bar Series is that this one offers additional properties needed for the configuration of subcategories and that other properties that specified as one-dimensional arrays in Single-Series Bar Series are here required to hold two-dimensional arrays so that their values can be assigned to the two-dimensionally grouped bars.
+All bars that belong to the same subcategory have the same style to simplify their comparison across all categories.
+Grouped Bar Charts are Cartesian Charts that contain a Grouped Bar Series with optional labels in their draw area, Left and Bottom Axes that visualize the scales used by this Grouped Bar Series, and a Legend that describes the different subcategories.
+These Charts also attach event listeners to various elements to highlight bars, labels, ticks on the category axis, and Legend items that semantically belong together.
+Grouped Bar Chart Windows are the highest-level components to render visualizations based on Grouped Bars.
+They contain Grouped Bar Charts wrapped inside Layouters and render them following the render process defined in Section~\ref{sec:Layouter} to allow positioning of their elements via CSS.
+Furthermore, they decorate their nested Charts with Toolbars containing tools to download them as SVG documents and filter their categories and subcategories.
+Every time the user interacts with these Nominal Filtering Tools to change the configuration of displayed categories and subcategories, the \code{categoryfilter} and \code{subcategoryfilter} events are being dispatched, respectively containing the newly active categories and subcategories.
+Visualization authors can either implement special resize and filter behavior by attaching custom listeners to these events, or they can activate the default behavior via the \code{chartWindowBarGroupedAutoResize}, \code{chartWindowBarGroupedAutoFilterCategories}, and \code{chartWindowBarGroupedAutoFilterSubcategories} functions.
+Example code to create a scalable Grouped Bar Chart Window whose categories and subcategories can be filtered via the Toolbar can be seen in Listing~\ref{list:GroupedBarChartWindow} and the visualization resulting from this code is shown in Figure~\ref{fig:GroupedBarChartWindow}.
+
 
 \begin{samepage}
 \lstinputlisting[%
@@ -648,9 +647,8 @@ die resultierende visualisierung dieses beispiels kann in Figure~\ref{fig:Groupe
   numbers=left,
   label=list:GroupedBarChartWindow,
   caption={[Grouped Bar Chart Window Example]%
-    The example source code that creates a Grouped Bar Chart Window.
-    The Grouped Bar Chart Window is configured with the bound data object that is initialized via the \code{chartWindowBarGroupedData} function.
-    After configuration, the Chart Window is rendered by the \code{chartWindowBarGroupedRender} function.
+    This source code creates the Grouped Bar Chart Window shown in Figure~\ref{fig:GroupedBarChartWindow}.
+    The Grouped Bar Chart Window is configured via a bound data object that is initialized with the \code{chartWindowBarGroupedData} function and rendered with the \code{chartWindowBarGroupedRender} function.
     Since no special responsive behavior is desired in this example, the default resize, category filter, and subcategory filter behavior is attached to the Chart Window via the \code{chartWindowBarGroupedAutoResize}, \code{chartWindowBarGroupedAutoFilterCategories}, and \code{chartWindowBarGroupedAutoFilterSubcategories} functions. 
   },
 ]{listings/grouped-bar-chart-window.js}
@@ -661,8 +659,8 @@ die resultierende visualisierung dieses beispiels kann in Figure~\ref{fig:Groupe
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/grouped-bar-chart-window.png}
 \caption[Grouped Bar Chart Window Example]{
-  The resulting Grouped Bar Chart of the example code in Listing~\ref{list:GroupedBarChartWindow}. 
-  The Tool Menu popup has manually been displaced to not cover the legend. 
+  The resulting Grouped Bar Chart Window from the example source code in Listing~\ref{list:GroupedBarChartWindow}. 
+  The Tool Menu popup has been manually displaced to not cover the legend. 
   \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:GroupedBarChartWindow}
