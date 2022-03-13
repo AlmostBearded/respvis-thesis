@@ -676,17 +676,14 @@ Due to this transformation, all stacks of bars are of equal length, which means 
 Bar stacks are created by splitting the category axis into equal intervals via a band scale into which bars representing the different subcategories are stacked on top of one another.
 The lengths of stacked bars are proportional to their quantitative values and are calculated via a continuous scale that maps these values into the range of the value axis.
 
-die RespVis library stellt drei verschiedene komponenten unterschiedlicher layer fuer das rendern von Stacked Bar Charts zur verfuegung.
-die Stacked Bar Series, Stacked Bar Chart und Stacked Bar Chart Window komponenten sind ihren gegenstuecken fuer das rendern von Grouped Bar Charts sehr aehnlich.
-auch bei diesen komponenten werden bars ueber die zwei-dimensionale (kategorie/unterkategorie) gruppierung von quantitativen werten gerendert, wobei eigenschaften welche individuelle bars beeinflussen ebenfalls als ein zwei-dimensionales array konfiguriert werden koennen.
-der hauptunterschied in der implementierung der Stacked Bar Series von der Grouped Bar Series besteht in der berechnung der positionen und ausmasse von bars.
-Stacked Bar Charts sind, so wie Grouped Bar Charts, kartesische Charts die aus einer Stacked Bar Series mit optionalen labels, zwei achsen, und einer legende bestehen.
-Stacked Bar Chart Windows sind ebenfallst äquivalent zu ihren Gegenstuecken von Grouped Bar Charts und rendern einen Stacked Bar Chart innerhalb eines Layouters unter einhaltung des erforderlichen render prozesses waehrend in der toolbar tools fuer das filtern der kategorien und unterkategorien des gerenderten Charts zur verfuegung gestellt werden.
-um das rendern eines Percent Stacked Bar Charts zu vereinfachen, koennen die quantitativen werte in dem datenobjekt eines Stacked Bar Chart Windows ueber die \code{valuesAsRatios} boolean eigenschaft als anteile deklariert werden was dazu fuehrt dass werte in prozentuelle anteile ihrer summen innerhalb einer kategorie transformiert werden.
-in Listing~\ref{list:StackedBarChartWindow} ist der notwendige code ersichtlich mit dem ein skalierendes Stacked Bar Chart Window erzeugt werden kann dessen kategorien und unterkategorien ueber die toolbar gefiltert werden koennen.
-das gerenderte resultat dieses codes kann in Figure~\ref{fig:StackedBarChartWindow} gesehen werden.
-
-
+The RespVis library provides a Series, a Chart, and a Chart Window Component to render Stacked Bar Charts, all of which are highly similar to their Grouped Bar counterparts.
+Bars in Stacked Bar Series are two-dimensionally grouped (category/subcategory), and configuration properties that affect individual bars are specified as two-dimensional arrays.
+The main difference between Stacked Bar Series and Grouped Bar Series lies in how the positions and extents of bars are calculated.
+Stacked Bar Charts are, just like Grouped Bar Charts, Cartesian Charts that consist of a Stacked Bar Series with optional labels, two Axes, and a Legend.
+Furthermore, Stacked Bar Chart Windows are also equivalent to Grouped Bar Chart Windows as they wrap a Stacked Bar Chart into a Layouter, manage their render process, and decorate it with a Toolbar containing two Nominal Filtering Tools to filter categories and subcategories.  
+Percent Stacked Bar Charts can either be rendered by directly setting percental values that lead to all category totals summing up to 100\% or by enabling the \code{valuesAsRatios} configuration property, which causes quantitative values to be treated as ratios that are transformed to percental shares of their category totals during rendering.
+Listing~\ref{list:StackedBarChartWindow} shows the necessary RespVis code to create the scalable Stacked Bar Chart Window whose categories and subcategories can be filtered displayed in Figure~\ref{fig:StackedBarChartWindow}.
+ 
 \begin{samepage}
 \lstinputlisting[%
   float=tp,
@@ -700,9 +697,8 @@ das gerenderte resultat dieses codes kann in Figure~\ref{fig:StackedBarChartWind
   numbers=left,
   label=list:StackedBarChartWindow,
   caption={[Stacked Bar Chart Window Example]%
-    The example source code that creates a Stacked Bar Chart Window.
-    The Stacked Bar Chart Window is configured with the bound data object that is initialized via the \code{chartWindowBarStackedData} function.
-    After configuration, the Chart Window is rendered by the \code{chartWindowBarStackedRender} function.
+    The source code that creates the Stacked Bar Chart Window shown in Figure~\ref{fig:StackedBarChartWindow}.
+    The Stacked Bar Chart Window is configured with the bound data object that is initialized via the \code{chartWindowBarStackedData} function and rendered with the \code{chartWindowBarStackedRender} function.
     Since no special responsive behavior is desired in this example, the default resize, category filter, and subcategory filter behavior is attached to the Chart Window via the \code{chartWindowBarStackedAutoResize}, \code{chartWindowBarStackedAutoFilterCategories}, and \code{chartWindowBarStackedAutoFilterSubcategories} functions. 
   },
 ]{listings/stacked-bar-chart-window.js}
@@ -710,7 +706,7 @@ das gerenderte resultat dieses codes kann in Figure~\ref{fig:StackedBarChartWind
   
 \begin{figure}[tp]
 \centering
-\subfloat[Basic Stacked Bar Chart]{%
+\subfloat[Stacked Bar Chart]{%
 \hspace{1cm}
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/stacked-bar-chart-window.png}
 \hspace{1cm}
@@ -724,10 +720,10 @@ das gerenderte resultat dieses codes kann in Figure~\ref{fig:StackedBarChartWind
 \label{fig:StackedBarChartWindow2}
 }
 \caption[Stacked Bar Chart Window Example]{%
-  The resulting Stacked Bar Charts of the example code in Listing~\ref{list:StackedBarChartWindow}. 
-  The Tool Menu popup has manually been displaced to not cover the legend.
-  \subref{fig:StackedBarChartWindow1} A Basic Stacked Bar Chart to compare the category totals and subcategory contributions to these totals.
-  \subref{fig:StackedBarChartWindow2} A Percent Stacked Bar Chart to better compare the subcategory contributions to category totals. 
+  The Stacked Bar Charts rendered by the source code in Listing~\ref{list:StackedBarChartWindow}. 
+  The Tool Menu popup has been manually displaced to not cover the legend.
+  \subref{fig:StackedBarChartWindow1} An ordinary Stacked Bar Chart to compare category totals and subcategory contributions to these totals.
+  \subref{fig:StackedBarChartWindow2} A Percent Stacked Bar Chart to better compare subcategory contributions to category totals. 
   \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:StackedBarChartWindow}
@@ -758,9 +754,8 @@ der source code um einen skalierenden Point Chart mit der RespVis library zu erz
   numbers=left,
   label=list:PointChartWindow,
   caption={[Point Chart Window Example]%
-    The example source code that creates a Point Chart Window.
-    The Point Chart Window is configured with a bound data object that is initialized via the \code{chartWindowPointData} function.
-    After configuration, the Chart Window is rendered by the \code{chartWindowPointRender} function.
+    The source code that creates the Point Chart Window shown in Figure~\ref{fig:PointChartWindow}.
+    The Point Chart Window is configured with a bound data object that is initialized with the \code{chartWindowPointData} function and rendered with the \code{chartWindowPointRender} function.
     Since no special responsive behavior is desired in this example, the default resize behavior is attached to the Chart Window via the \code{chartWindowPointAutoResize} function. 
   },
 ]{listings/point-chart-window.js}
