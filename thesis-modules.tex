@@ -668,15 +668,13 @@ Example code to create a scalable Grouped Bar Chart Window whose categories and 
 
 \subsection{Stacked Bars}
 
-ein stacked bar chart wird verwendet um die relativen beitraege mehrerer quantitativer dimensionen zu einem kombinierten gesamten von unterschiedlichen kategorien eines kategorischen datensatzes miteinander zu vergleichen.
-die quantitativen dimensionen koennen als unterkategorien der einzelnen kategorien gesehen werden und muessen in einer part-to-whole beziehung zueinander stehen.
-Stacked Bar Charts existieren in zwei verschiedenen variationen: Basic Stacked Bar Charts und Percent Stacked Bar Charts.
-bei Basic Stacked Bar Charts werden alle bars einer kategorie einfach uebereinander platziert was bedeutet dass die kombinierten gesamten unterschiedlicher kategorien miteinander verglichen werden koennen.
-die laengen eines Percent Stacked Bar Charts werden hingegen nur als prozentuelle anteile eines gesamten betrachtet.
-das kombinierte gesamte jeder kategorie eines solchen Charts betraegt immer genau 100\% wodurch zwar die information ueber die summe aller werte einer kategorie verloren geht aber die beitraege der einzelnen werte zu dem gesamten klarer ersichtlich ist.
-alle bars innerhalb einer kategorie werden uebereinander platziert und die bars die der selben unterkategorie angehoeren haben den selben style.
-das abbilden von kategorien und quantitativen werten auf raeumliche dimensionen wird so wie bei Basic Bar Charts ueber eine band scale und eine continuous scale erreicht.
-der unterschied besteht darin, dass der ursprung von bars nicht auf dem unteren extrem der value scale liegt sondern sich aus der summe der laengen der vorhergegangenen bars derselben kategorie ergibt.
+Stacked Bar Charts are Multi-Series Bar Charts in which individual series of bars are rendered as stacks rather than as clusters.
+Since the bars of Stacked Bar Charts do not share a common baseline, these Charts are not well-suited for comparing individual subcategories across multiple categories but rather for approximating the contributions of subcategories to the totals of their categories.
+A bar's color is determined by its subcategory so that all bars that have the same subcategory are colored equally.  
+Percent Stacked Bar Charts are variants of Stacked Bar Charts in which the totals of all categories are transformed to equal 100\% by using the quantitative values of subcategories as ratios of a whole.
+Due to this transformation, all stacks of bars are of equal length, which means the information about their totals is being lost, but on the contrary, the share that subcategories contribute to their categories is emphasized more strongly than in ordinary Stacked Bar Charts.
+Bar stacks are created by splitting the category axis into equal intervals via a band scale into which bars representing the different subcategories are stacked on top of one another.
+The lengths of stacked bars are proportional to their quantitative values and are calculated via a continuous scale that maps these values into the range of the value axis.
 
 die RespVis library stellt drei verschiedene komponenten unterschiedlicher layer fuer das rendern von Stacked Bar Charts zur verfuegung.
 die Stacked Bar Series, Stacked Bar Chart und Stacked Bar Chart Window komponenten sind ihren gegenstuecken fuer das rendern von Grouped Bar Charts sehr aehnlich.
