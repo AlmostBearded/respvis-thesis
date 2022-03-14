@@ -733,13 +733,12 @@ Listing~\ref{list:StackedBarChartWindow} shows the necessary RespVis code to cre
 
 \section{Point Module}
 
-Point Charts, manchmal auch scatter charts oder scatter plots genannt, werden verwendet um die beziehung zwischen zwei dimensionen eines datensatzes ueber punkte in einem kartesischen koordinatensystem zu verdeutlichen.
-ueber eine solche visualisierung koennen potentielle korrelationen und muster zwischen diesen dimensionen identifiziert werden.
-ueblicherweise werden zwei numerische dimensionen fuer die positionierung der punkte verwendet.
-die art der zu visualisierenden daten ist jedoch nicht von bedeutung, solange individuelle werte ueber eine scale auf raeumliche dimensionen abgebildet werden koennen.
-durch zusaetzliche kodierung der punkte mit farben, groessen oder formen koennen mehr als zwei dimensionen in einem Point Chart visualisiert werden.
-Point Charts in welchen eine dritte dimension ueber die groesse der punkte visualisiert wird, werden auch bubble charts genannt.
-der source code um einen skalierenden Point Chart mit der RespVis library zu erzeugen befindet sich in Listing~\ref{list:PointChartWindow} und die daraus resultierende visualisierung kann in Figure~\ref{fig:PointChartWindow} gesehen werden.  
+Point Charts, also commonly known as Scatter Charts or Scatter Plots, show the relationship between two variables by plotting them as points in a Cartesian coordinate system.
+Each variable is used for determining a point's position on one of the coordinate system's Axes, and typically, these variables contain quantitative data.
+However, the data type of the variables used to position points is not relevant as long as their values can be mapped to spatial dimensions via scales.
+Point Charts are particularly suitable for discovering potential correlations and patterns between variables.
+They can also visualize more than two variables simultaneously by encoding additional ones via colors and sizes of points.
+Point Charts that encode an additional variable as the sizes of points are called Bubble Charts.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -766,7 +765,7 @@ der source code um einen skalierenden Point Chart mit der RespVis library zu erz
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/point-chart-window.png}
 \caption[Point Chart Window Example]{
-  The resulting Point Chart of the example code in Listing~\ref{list:PointChartWindow}. 
+  The resulting Point Chart Window of the source code in Listing~\ref{list:PointChartWindow}. 
   \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:PointChartWindow}
@@ -781,3 +780,4 @@ ein Point Chart ist ein kartesischer Chart mit einer Point Series in seiner draw
 Point Chart Windows sind wrapper komponenten um Point Charts die diese in einen Layouter einbetten, ihren render prozess abwickeln, und sie mit einer toolbar dekorieren.
 zum aktuellen zeitpunkt wird nur ein SVG download tool ueber die toolbar eines Point Chart Windows zur verfuegung gestellt da bislang nur eine begrenzte anzahl an tools entwickelt wurden und diese sich nicht fuer die anwendung an Point Charts eignen.
 werden weitere tools benoetigt muessen diese manuell von visualisierungsauthoren implementiert und hinzugefuegt werden.
+der source code um einen skalierenden Point Chart mit der RespVis library zu erzeugen befindet sich in Listing~\ref{list:PointChartWindow} und die daraus resultierende visualisierung kann in Figure~\ref{fig:PointChartWindow} gesehen werden.  
