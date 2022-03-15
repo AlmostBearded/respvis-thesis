@@ -771,13 +771,12 @@ Point Charts that encode an additional variable as the sizes of points are calle
 \label{fig:PointChartWindow}
 \end{figure}
   
-
-das Point Module befindet sich im \code{src/lib/point/} ordner der RespVis library und beinhaltet die implementierung der Point Series, Point Chart, und Point Chart Window komponenten.
-mit einer Point Series wird eine sammlung an \code{<circle>} elementen gerendert deren mittelpunkte ueber X und Y werte arrays mit deren dazugehoerigen X und Y scales bestimmt werden und deren styles ueber style klassen gesetzt werden.
-da die radiuse der einzelnen \code{<circle>} elemente konfigurierbar sind, kann eine Point Series auch verwendet werden um einen bubble chart zu erzeugen.
-wie auch bei anderen Series Components, wird auch hier das gebundene datenobjekt in ein array an datenobjekten transformiert welches verwendet wird um die elemente der Series ueber einen data join zu rendern.
-ein Point Chart ist ein kartesischer Chart mit einer Point Series in seiner draw area und zwei achsen welche die scales visualisieren mit welchen die Point Series gerendert wurde.
-Point Chart Windows sind wrapper komponenten um Point Charts die diese in einen Layouter einbetten, ihren render prozess abwickeln, und sie mit einer toolbar dekorieren.
-zum aktuellen zeitpunkt wird nur ein SVG download tool ueber die toolbar eines Point Chart Windows zur verfuegung gestellt da bislang nur eine begrenzte anzahl an tools entwickelt wurden und diese sich nicht fuer die anwendung an Point Charts eignen.
-werden weitere tools benoetigt muessen diese manuell von visualisierungsauthoren implementiert und hinzugefuegt werden.
-der source code um einen skalierenden Point Chart mit der RespVis library zu erzeugen befindet sich in Listing~\ref{list:PointChartWindow} und die daraus resultierende visualisierung kann in Figure~\ref{fig:PointChartWindow} gesehen werden.  
+The Point Module is located in the \code{src/lib/point/} directory of the RespVis library and contains the implementation of Point Series, Point Charts, and Point Chart Windows.
+Point Series render a collection of \code{<circle>} elements whose center positions are calculated by mapping arrays of X and Y values into the bounding boxes of the Series' root elements via X and Y scales.
+The colors of points are specified as style classes, and their radiuses can be configured, meaning that it is also possible to create Bubble Charts with this implementation.
+As with other Series, individual elements of Point Series are rendered via a data join using an array of data objects created through transforming the bound Series data object, and this data join can be customized by providing custom \code{enter}, \code{update}, and \code{exit} event listeners.
+Point Charts are Cartesian Charts that contain Point Series in their draw areas and two Axes visualizing the scales used to render the Point Series.
+Point Chart Windows are Chart Windows that contain Point Charts nested into Layouters, handle the render process of these Charts so that their elements can be laid out with CSS,  and decorate them with a Toolbar.
+Currently, the Toolbars of Point Chart Windows only contain SVG Download Tools because only a limited number of Tools, not suited for application on Point Charts, have been developed so far.
+Further Tools that can also be applied to Point Charts, such as Zoom and Quantitative Filter Tools, are planned for development, and once these are available, they will be added to the default Tools attached to the Toolbars of Point Chart Windows.
+The source code to create a scalable Point Chart Window can be found in Listing~\ref{list:PointChartWindow}, and the visualization resulting from this source code is shown in Figure~\ref{fig:PointChartWindow}.
