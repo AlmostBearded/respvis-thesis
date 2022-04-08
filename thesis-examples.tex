@@ -43,6 +43,7 @@ Knowing what kind of configuration is better done in CSS or JavaScript is not im
 There are plans to allow configuring even more in CSS, but this requires that data is also accessible there, which would cause a rather extensive refactoring and, therefore, will be considered for a future release of the library.
 
 \section{Axes}
+\label{sec:AxesUsage}
 
 Axes are used to visualize the spatial mapping of abstract values by rendering abstract values as ticks at the spatial positions to which they are being mapped.
 In addition to ticks, an Axis also contains an optional title and subtitle to describe the visualized data further.
@@ -87,9 +88,101 @@ The titles and subtitles of Axes can be hidden by making them transparent via th
 \end{itemize}
 
 \section{Legends}
+\label{sec:LegendsUsage}
+
+Legends visualize the non-spatial mapping of abstract values such as mappings to colors, shapes, and sizes via labeled symbols and are needed in any visualization that uses such an encoding.
+They are essential and frequently encountered parts of visualizations and, as such, must not be ignored when optimizing a visualization's responsiveness. 
+Listing~\ref{list:LegendPatterns} shows how different responsive patterns can be implemented using RespVis Legends, and Figure~\ref{fig:LegendPatterns} displays the resulting Legend visualizations.
+These patterns are:
+
+\begin{itemize}
+
+\item
+Relocate Legend.
+A Legend's position in its containing Chart can be controlled by directly modifying the Chart's grid layout via the CSS \code{grid-template} property, or by positioning the Legend at predefined \code{\"top\"}, \code{\"right\"}, \code{\"bottom\"}, and \code{\"left\"} positions via the \code{data-legend-position} attribute.
+
+\item
+Simplify title.
+A Legend's title can be shortened by specifying a shorter textual representation for it via the \code{title} property on a Chart's data object.
+
+\item
+Remove title.
+If the title can not be further shortened or if it does not convey too much important information, it can be hidden by making it transparent via the CSS \code{opacity} property.
+
+\item
+Simplify symbol labels.
+If the symbol labels can be shortened, this can be done via the \code{labels} property on a Legend's data object.
+This property allows the specification of the text content of all labels as an array of string values.
+
+\item
+Relocate labeled symbols.
+Changing the layout of labeled symbols is one of the most effective responsive patterns applicable to Legends.
+By default, labeled symbols are laid out using CSS Flexbox layouting.
+Thus, whether labeled symbols are laid out horizontally or vertically can be controlled using the CSS \code{flex-direction} property on their container element.
+
+\end{itemize}
 
 \section{Bar Charts}
+\label{sec:BarChartsUsage}
+
+Bar Charts are used to compare categories associated with quantitative values by visualizing them as bars whose lengths depend on the quantitative dimension of the data.
+In the case of Multi-Series Bar Charts like Grouped and Stacked Bar Charts, categories are further divided into subcategories associated with quantitative values and compared with one another rather than categories themselves.
+Bars in Multi-Series Bar Charts are usually colored based on their subcategories which is why these Charts often include Legends to visualize this color encoding.
+
+The different responsive patterns applicable to Bar Charts have already been discussed in Section~\ref{sec:BarChartExamples}, and the focus here lies on demonstrating their implementation using the Bar Chart Windows provided by RespVis.
+Listing~\ref{list:BarChartPatterns} demonstrates how these patterns can be implemented and Figure~\ref{fig:BarChartPatterns} shows how they look in the resulting rendering.
+In practice, the responsive patterns that can be applied to different variants of Bar Charts are very similar, which is why this section does not differentiate between them.
+These patterns are:
+
+\begin{itemize}
+
+\item
+Rescale Chart.
+Scaling a Bar Chart to fit into the available space is done automatically by their render functions.
+By default, Axes and Legends only take up necessary space, and the remaining space is filled with the Chart's draw area.
+Bars and labels in this draw area are automatically scaled and positioned to fit into the allocated space.
+
+\item
+Reduce bar padding.
+Reducing the paddings between bars frees up space that can be used by the bars themselves.
+Paddings can be controlled via the \code{padding} function on the \code{categoryScale} property of a Bar Chart's data object. 
+
+\item
+Simplify bar labels.
+When reducing the width of Bar Charts, bar labels could start overlapping one another, and it might be a good idea to shorten them, if possible. 
+These labels can be configured using the \code{labels} property of a Bar Chart's data object.
+
+\item
+Remove bar labels.
+An alternative to prevent bar labels from overlapping is to hide some or even all of them.
+The best way of implementing this is to make the labels that should be hidden transparent via the CSS \code{opacity} property.
+
+\item
+Transpose Chart.
+By default, Bar Charts are rendered with vertical bars, and transposing would make them horizontal.
+Horizontal Bar Charts are better suited for narrow spaces because bar labels and the tick labels of the Axis representing categories are easier to place.
+Furthermore, Horizontal Bar Charts are allowed to extend outside the visible viewport because vertical scrolling is strongly preferred over horizontal scrolling.
+Bar Charts can be transposed by setting the \code{flipped} property on their data objects.
+
+\item
+Remove bars.
+Sometimes it might be required to reduce the number of bars to maintain a good user experience.
+Bars representing certain categories or subcategories can be hidden by declaring them as inactive via the \code{activeCategories} and \code{activeSubcategories} properties on a Bar Chart's data object.
+Using these properties is easier than manually adapting the \code{categories}, \code{values}, \code{categoryScale}, and \code{valueScale} properties on the data object.
+Furthermore, categories and subcategories that have been hidden via the \code{activeCategories} and \code{activeSubcategories} properties can also be unhidden by users via a Chart's Toolbar if they are interested in the additional data.  
+
+\item
+Apply Axis patterns.
+Since Bar Charts usually contain two Axes to visualize the spatial mappings of categories and values, all responsive patterns mentioned in Section~\ref{sec:AxesUsage} should also be applied to Bar Charts.
+
+\item
+Apply Legend patterns.
+For Multi-Series Bar Charts that contain Legends to visualize the color mapping of bars, the responsive patterns mentioned in Section~\ref{sec:LegendsUsage} should be applied.
+
+\end{itemize}
 
 \section{Line Charts}
+\label{sec:LineChartsUsage}
 
-\section{Point Chart}
+\section{Point Charts}
+\label{sec:PointChartsUsage}
