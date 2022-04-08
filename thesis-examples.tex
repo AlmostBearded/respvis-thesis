@@ -1,12 +1,95 @@
-\chapter{Examples}
-\label{chap:Examples}
+\chapter{Usage}
+\label{chap:Usage}
 
-\section{Bar Chart}
+This chapter demonstrates how different responsive patterns can be achieved using the components provided by the various RespVis modules outlined in Chapter~\ref{chap:Modules}.
+The \code{src/examples} directory of the RespVis library contains examples that show how the library can be used to create different kinds of charts with varying degrees of responsive configurations.
+Even though users can compose custom charts out of low-level components like Series, Axes, and Legends, all examples in this chapter focus on creating responsive visualizations using high-level Chart Window Components.
+These Chart Windows represent convenient interfaces that allow visualization authors to focus on responsive configuration rather than on laborious tasks like setting up a Chart's structure and handling the render processes of their components.
 
-\section{Grouped Bar Chart}
+All examples provided by the RespVis library follow the same basic structure outlined in Listing~\ref{list:ExampleStructure}:
 
-\section{Stacked Bar Chart}
+\begin{enumerate}
 
-\section{Scatterplot}
+\item 
+Import the RespVis CSS file \code{respvis.css}.
+This file contains the necessary default styling applied on visualization elements rendered by the RespVis library.
 
-\TODO{Write about application example (newspaper article?)}
+\item
+Import D3 and RespVis.
+RespVis is a D3 extension library, and therefore the functionality of both libraries needs to be imported from either IIFE or ES modules to create visualizations with RespVis.
+
+\item
+Attach a \code{<div>} element to the element into which the Chart Window should be rendered.
+
+\item
+Bind a fully-initialized data object to the \code{<div>} element that represents the render configuration of the Chart Window.
+This data object is usually created by deriving default properties from a partial object via one of the \code{chartWindowXData} functions.
+
+\item
+Attach a \code{resize} event listener to the \code{<div>} element.
+This event listener should update the Chart Window's bound data object based on media queries and rerender it.
+Theoretically, it is possible to use the actual viewport size in pixels for responsive configuration decisions, but it is strongly recommended to use media queries via the \code{window.matchMedia} function instead.
+The usage of media queries allows a Chart's JavaScript configuration to be based on the same media queries that might be used for the CSS configuration of the same Chart.
+
+\item
+Render the Chart Window using the appropriate \code{chartWindowXRender} function.
+
+\end{enumerate}
+
+Since one of the core premises of RespVis is to enable the configuration of SVG-based visualizations with CSS, many responsive patterns can be implemented without JavaScript.
+In general, everything that does not affect the content or behavior of a Chart should be handled in CSS, which includes configuring presentation attributes and the layout of laid-out elements.
+Configuration changes that affect a Chart's content or behavior, like changing the visualized data, texts, or interaction mechanisms, still need to be applied in JavaScript.
+Knowing what kind of configuration is better done in CSS or JavaScript is not immediately obvious and can be confusing to figure out for developers unfamiliar with RespVis.
+There are plans to allow configuring even more in CSS, but this requires that data is also accessible there, which would cause a rather extensive refactoring and, therefore, will be considered for a future release of the library.
+
+\section{Axes}
+
+Axes are used to visualize the spatial mapping of abstract values by rendering abstract values as ticks at the spatial positions to which they are being mapped.
+In addition to ticks, an Axis also contains an optional title and subtitle to describe the visualized data further.
+Axis-related responsive patterns are of great significance because nearly every Chart includes Axes, and often improving the responsiveness of Axes alone can already lead to significant improvements in a user's experience.
+
+Common issues that occur when decreasing the available space of Axes are overlapping tick labels and too long titles and subtitles.
+These issues can be alleviated with the following responsive patterns that  can also be seen in Listing~\ref{list:AxisPatterns} and Figure~\ref{fig:AxisPatterns}:
+
+\begin{itemize}
+
+\item
+Rotate tick labels.
+One of the most effective ways to prevent tick labels from overlapping is rotating them by up to 90 degrees because all the available information is preserved and only presented differently.
+Tick labels can be rotated by setting a rotation in the CSS \code{transform} property on their pivot container elements and modifying their CSS \code{text-anchor} property accordingly. 
+
+\item
+Simplify tick labels.
+In some cases rotating tick labels may not be desired, or labels might still overlap after rotation.
+The next best thing that can be done in these cases is to shorten tick labels if shorter textual representations exist.
+The D3 Axis object used for rendering ticks is accessible via the \code{configureAxis} function property on an Axis' data object, and how individual tick labels are shortened is specified as a formatting callback set via the D3 Axis' \code{tickFormat} function.
+
+\item
+Remove ticks.
+If neither rotation nor shortening of tick labels is applicable, the last thing that can be done is to reduce the number of ticks shown.
+This can be achieved either via a D3 Axis' \code{ticks} or \code{tickValues} function, or by simply making ticks transparent via the CSS \code{opacity} property.
+A D3 Axis' \code{ticks} function allows specifying the desired number of ticks that shall be rendered, and the D3 Axis' render function will decide how many ticks to create based on this number and other contributing factors.
+The \code{tickValues} function of a D3 Axis allows for much more control than the \code{ticks} function because it is used to specify the exact abstract values for which ticks shall be rendered.
+
+\item
+Simplify title/subtitle.
+Since Axes do not just contain ticks but also titles and subtitles, these should not be ignored when optimizing the responsiveness of Axes.
+One of the things that can be done is to simplify titles/subtitles by specifying shorter textual representations via the \code{title} and \code{subtitle} properties on Axes' data objects.
+
+\item
+Relocate title/subtitle.
+The titles and subtitles of Axes can be relocated by modifying the Axes' grid layouts via the CSS \code{grid-template} property. 
+
+\item
+Remove title/subtitle.
+The titles and subtitles of Axes can be hidden by making them transparent via the CSS \code{opacity} property.
+
+\end{itemize}
+
+\section{Legends}
+
+\section{Bar Charts}
+
+\section{Line Charts}
+
+\section{Point Chart}
