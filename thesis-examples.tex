@@ -34,6 +34,24 @@ The usage of media queries allows a Chart's JavaScript configuration to be based
 \item
 Render the Chart Window using the appropriate \code{chartWindowXRender} function.
 
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:ExampleStructure,
+  caption={[Structure of Examples]%
+    WIP
+  },
+]{listings/example-structure.js}
+\end{samepage}
+
 \end{enumerate}
 
 Since one of the core premises of RespVis is to enable the configuration of SVG-based visualizations with CSS, many responsive patterns can be implemented without JavaScript.
@@ -87,6 +105,34 @@ The titles and subtitles of Axes can be hidden by making them transparent via th
 
 \end{itemize}
 
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:AxisPatterns,
+  caption={[Implementation of Axis-Related Responsive Patterns]%
+    WIP
+  },
+]{listings/axis-patterns.html}
+\end{samepage}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
+\caption[Results of Axis-Related Responsive Patterns]{
+  WIP.
+  \imgcredit{Image created by the author of this thesis using RespVis.}
+}
+\label{fig:AxisPatterns}
+\end{figure}
+
 \section{Legends}
 \label{sec:LegendsUsage}
 
@@ -121,6 +167,34 @@ By default, labeled symbols are laid out using CSS Flexbox layouting.
 Thus, whether labeled symbols are laid out horizontally or vertically can be controlled using the CSS \code{flex-direction} property on their container element.
 
 \end{itemize}
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:LegendPatterns,
+  caption={[Implementation of Legend-Related Responsive Patterns]%
+    WIP
+  },
+]{listings/legend-patterns.html}
+\end{samepage}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
+\caption[Results of Legend-Related Responsive Patterns]{
+  WIP.
+  \imgcredit{Image created by the author of this thesis using RespVis.}
+}
+\label{fig:LegendPatterns}
+\end{figure}
 
 \section{Bar Charts}
 \label{sec:BarChartsUsage}
@@ -180,6 +254,35 @@ Apply Legend patterns.
 For Multi-Series Bar Charts that contain Legends to visualize the color mapping of bars, the responsive patterns mentioned in Section~\ref{sec:LegendsUsage} should be applied.
 
 \end{itemize}
+
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:BarChartPatterns,
+  caption={[Implementation of Responsive Patterns Targeting Bar Charts]%
+    WIP
+  },
+]{listings/bar-chart-patterns.html}
+\end{samepage}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
+\caption[Results of Responsive Patterns Targeting Bar Charts]{
+  WIP.
+  \imgcredit{Image created by the author of this thesis using RespVis.}
+}
+\label{fig:BarChartPatterns}
+\end{figure}
 
 \section{Line Charts}
 \label{sec:LineChartsUsage}
