@@ -374,3 +374,76 @@ In Multi-Series Line Charts that contain Legends to visualize non-spatial data e
 
 \section{Point Charts}
 \label{sec:PointChartsUsage}
+
+Point Charts, sometimes also called Scatterplots, are used to discover patterns and correlations in data by plotting individual data points as points in a Cartesian coordinate system.
+In most cases, Point Charts are only used to visualize two-dimensional data by plotting points of the same color, but they can also be used to visualize multi-dimensional data by adding color, size, or shape encodings.
+If such additional encodings are used, Point Charts usually include Legends to visualize them. 
+
+The responsive patterns applicable to Point Charts have already been discussed in Section~\ref{sec:ScatterplotExamples}, and the focus here mainly lies on demonstrating their implementation using RespVis Point Chart Windows.
+Listing~\ref{list:PointChartPatterns} shows how some of these patterns can be implemented to create the responsive Point Chart displayed in Figure~\ref{fig:PointChartPatterns}.
+All the responsive patterns and their implementations that can be applied to Point Charts are:
+
+\begin{itemize}
+
+\item
+Rescale draw area.
+As with other Cartesian Charts, the draw areas of Point Charts and their contents are automatically scaled by the Chart's render functions to fill the space not occupied by the Axes and potential Legends of Charts.
+
+\item
+Rescale points.
+When a large number of points are rendered in a Point Chart, it can be helpful to reduce their sizes to make individual ones easier to see and reduce clutter.
+The sizes of points can be controlled via the \code{radiuses} property on the data objects of Point Charts.
+
+\item
+Simplify labels.
+When labels are shown in a Point Chart, it might be helpful to shorten them when reducing the width of Charts to prevent them from overlapping.
+The texts of labels can be configured via the \code{labels} property on the data objects of Point Charts.
+
+\item
+Remove labels.
+Often, Point Charts are used for the visualization of large data sets.
+In such situations, rendering labels for all points would only clutter the visualization, and it might be better to hide them by making them transparent via the CSS \code{opacity} property. 
+
+\item
+Zoom draw area.
+Zooming allows users to view data at various levels of detail.
+Charts can be zoomed by adjusting the domains of the scales handling the spatial encoding of data, which are the \code{xScale} and \code{yScale} properties on the data objects of Point Charts.
+To simplify the setup and handling of the zooming interaction, the D3 Zoom Module \parencite{D3Zoom} can be used, which is demonstrated in detail in Listing~\ref{list:PointChartPatterns}.
+
+\item
+Apply Axis patterns.
+As with all Cartesian charts that use Axes to visualize spatially-encoded data, the Axis-related responsive patterns described in Section~\ref{sec:AxesUsage} should be applied to Point Charts.
+
+\item
+Apply Legend patterns.
+In the case of Point Charts that visualize additional non-spatial data encodings with Legends, the responsive patterns discussed in Section~\ref{sec:LegendsUsage} should be applied.  
+
+\end{itemize} 
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:PointChartPatterns,
+  caption={[Implementation of Responsive Patterns Targeting Point Charts]%
+    WIP
+  },
+]{listings/point-chart-patterns.html}
+\end{samepage}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
+\caption[Results of Responsive Patterns Targeting Point Charts]{
+  WIP.
+  \imgcredit{Image created by the author of this thesis using RespVis.}
+}
+\label{fig:PointChartPatterns}
+\end{figure}
