@@ -203,15 +203,15 @@ Bar Charts are used to compare categories associated with quantitative values by
 In the case of Multi-Series Bar Charts like Grouped and Stacked Bar Charts, categories are further divided into subcategories associated with quantitative values and compared with one another rather than categories themselves.
 Bars in Multi-Series Bar Charts are usually colored based on their subcategories which is why these Charts often include Legends to visualize this color encoding.
 
-The different responsive patterns applicable to Bar Charts have already been discussed in Section~\ref{sec:BarChartExamples}, and the focus here lies on demonstrating their implementation using the Bar Chart Windows provided by RespVis.
-Listing~\ref{list:BarChartPatterns} demonstrates how these patterns can be implemented and Figure~\ref{fig:BarChartPatterns} shows how they look in the resulting rendering.
+The different responsive patterns applicable to Bar Charts have already been discussed in Section~\ref{sec:BarChartExamples}, and the focus here lies on demonstrating their implementation using RespVis Bar Chart Windows.
+Listing~\ref{list:BarChartPatterns} demonstrates how some of these patterns can be implemented to create a responsive Bar Chart, and Figure~\ref{fig:BarChartPatterns} shows the rendered result.
 In practice, the responsive patterns that can be applied to different variants of Bar Charts are very similar, which is why this section does not differentiate between them.
-These patterns are:
+These patterns and their implementations are:
 
 \begin{itemize}
 
 \item
-Rescale Chart.
+Rescale draw area.
 Scaling a Bar Chart to fit into the available space is done automatically by their render functions.
 By default, Axes and Legends only take up necessary space, and the remaining space is filled with the Chart's draw area.
 Bars and labels in this draw area are automatically scaled and positioned to fit into the allocated space.
@@ -286,6 +286,91 @@ For Multi-Series Bar Charts that contain Legends to visualize the color mapping 
 
 \section{Line Charts}
 \label{sec:LineChartsUsage}
+
+Line Charts are visualizations that show trends in data by plotting markers in regular intervals and connecting them with lines.
+It can be distinguished between Single and Multi-Series Line Charts, where Single-Series Line Charts show trends in two-dimensional data via a single line and Multi-Series Line Charts show trends in multi-dimensional data via multiple lines. 
+The different lines in Multi-Series Line Charts can be seen as representations of subcategories in the data and are usually colored differently to reflect this.
+For this reason, the main difference between Single and Multi-Series Line Charts, apart from rendering multiple lines, is that Multi-Series Line Charts include Legends to visualize the color encoding of subcategories.
+
+The responsive patterns applicable to Line Charts have already been discussed in Section~\ref{sec:LineChartExamples}, and the focus here lies on demonstrating how they can be implemented using RespVis Line Chart Windows. 
+Listing~\ref{list:LineChartPatterns} shows how some of these patterns can be implemented, and the resulting Line Chart can be seen in Figure~\ref{fig:LineChartPatterns}.
+The responsive patterns that can be applied to Line Charts and their implementations are:
+
+\begin{itemize}
+
+\item
+Rescale draw area.
+As for Bar Charts, Line Charts are automatically scaled by their render functions.
+The default behavior is that Axes and potential Legends only take up necessary space, and whatever space is left is filled with the Chart's draw area.
+Elements contained in these draw areas like lines, markers, and labels are automatically scaled and positioned to fit into the available space.
+
+\item
+Remove markers.
+If a Chart contains a large number of individual data points, it might be a good idea to reduce visual clutter by not showing markers for every single one of them.
+The best way of removing markers is to hide some or all of them by making them transparent via the CSS \code{opacity} property.
+
+\item
+Rescale markers.
+An alternative to removing markers is to decrease their sizes.
+Marker sizes can be controlled via the \code{markers.radiuses} property on the data objects of Line Charts.
+
+\item
+Simplify marker labels.
+The labels of markers might start overlapping when trying to fit a Line Chart into increasingly narrow widths.
+A good solution for this is to shorten marker labels by providing shorter textual representations for them via the \code{labels} property on a Line Chart's data object.
+
+\item
+Remove marker labels.
+Sometimes shortening labels may not be possible, desired, or effective enough and an alternative to prevent them from overlapping is to remove some or all of them.
+The recommended way to remove marker labels is to hide them by making them transparent via the CSS \code{opacity} property.
+
+\item
+Transpose Chart.
+Even though Line Charts are less frequently transposed than Bar Charts, there are still situations when transposing a Line Chart could improve the user's experience.
+One such situation would be a Line Chart that includes so many points of data that the density becomes too much for displaying all of it in a Horizontal Line Chart with limited width.
+Transposing such a Chart into a Vertical Line Chart could reduce the data density by allowing the Chart to extend outside the visible viewport and having users scroll vertically.
+Furthermore, Vertical Line Charts are useful for heavily annotated Line Charts because labels are much easier to place in them than in horizontal ones.
+Line Charts can be transposed by setting the \code{flipped} property on their data objects.
+
+\item
+Apply Axis patterns.
+As with all Charts that use Axes to visualize spatial mappings, the responsive patterns described in Section~\ref{sec:AxesUsage} should be applied to the Axes in Line Charts.
+Axes of Line Charts could even be removed completely to turn Line Charts into Spartlines, but this should be considered carefully because information about the scale of data is lost when hiding Axes.
+
+\item
+Apply Legend patterns.
+In Multi-Series Line Charts that contain Legends to visualize non-spatial data encodings, the responsive patterns discussed in Section~\ref{sec:LegendsUsage} should be applied.
+
+\end{itemize}
+
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:LineChartPatterns,
+  caption={[Implementation of Responsive Patterns Targeting Line Charts]%
+    WIP
+  },
+]{listings/line-chart-patterns.html}
+\end{samepage}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
+\caption[Results of Responsive Patterns Targeting Line Charts]{
+  WIP.
+  \imgcredit{Image created by the author of this thesis using RespVis.}
+}
+\label{fig:LineChartPatterns}
+\end{figure}
 
 \section{Point Charts}
 \label{sec:PointChartsUsage}
