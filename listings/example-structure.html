@@ -1,0 +1,19 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./path/to/respvis.css" />
+  <style>/* user styling */</style>
+</head>
+<body>
+  <div id="chart"></div>
+  <script src="./path/to/d3.js"></script>
+  <script type="module">
+    import { chartWindowXData, chartWindowXRender } from './path/to/respvis.mjs';
+    const chartWindowData = {/* ... */};
+    const chartWindow = d3.select('#chart')
+      .append('div')
+      .datum(chartWindowXData(chartWindowData))
+      .on('resize', function () {/* ... */})
+      .call(chartWindowXRender);
+  </script>
+</body>
+</html>
