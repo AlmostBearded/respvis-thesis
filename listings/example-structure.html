@@ -12,8 +12,8 @@
     const chartWindow = d3.select('#chart')
       .append('div')
       .datum(chartWindowXData(chartWindowData))
-      .on('resize', function () {/* ... */})
-      .call(chartWindowXRender);
+      .call(chartWindowXRender)
+      .on('resize', function () {/* ... */});
   </script>
 </body>
 </html>

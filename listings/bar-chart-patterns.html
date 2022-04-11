@@ -1,1 +1,43 @@
-// WIP
+<html>
+<head>
+  <link rel="stylesheet" href="./path/to/respvis.css" />
+  <style>
+    #chart { width: 100%; height: 75vh; min-height: 25rem; }
+    @media (max-width: 60rem) {
+      .axis-bottom .tick text { transform: rotate(-45deg); text-anchor: end; }
+    }
+  </style>
+</head>
+<body><div id="chart"></div></body>
+<script src="./path/to/d3.js"></script>
+<script type="module">
+  import { /* ... */  } from './path/to/respvis.mjs';
+  import { cities, populations } from './path/to/data/austrian-cities.js';
+
+  const data = {
+    categories: cities,
+    values: populations,
+    xAxis: { title: 'City' },
+    yAxis: { 
+      title: 'Population', 
+      configureAxis: (a) => a.tickFormat(d3.format('.2s')) 
+    },
+  };
+
+  const chart = d3.select('#chart').append('div')
+    .datum(chartWindowBarData(data))
+    .call(chartWindowBarAutoFilterCategories)
+    .call(chartWindowBarRender)
+    .on('resize', function () {
+      const mediumWidth = window.matchMedia('(min-width: 40rem)').matches;
+      const largeWidth = window.matchMedia('(min-width: 60rem)').matches;
+      const flipped = data.flipped = !mediumWidth;
+      const labelPrecision = !mediumWidth ? 2 : !largeWidth ? 3 : 4;
+      data.labels = {
+        labels: populations.map(d3.format(`.${labelPrecision}s`)),
+        relativePositions: flipped ? { x: 1, y: 0.5 } : { x: 0.5, y: 0 }
+      };
+      chart.datum(chartWindowBarData(data)).call(chartWindowBarRender);
+    });
+</script>
+</html>

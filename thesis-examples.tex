@@ -26,13 +26,14 @@ Bind a fully-initialized data object to the \code{<div>} element that represents
 This data object is usually created by deriving default properties from a partial object via one of the \code{chartWindowXData} functions.
 
 \item
+Render the Chart Window using the appropriate \code{chartWindowXRender} function.
+
+\item
 Attach a \code{resize} event listener to the \code{<div>} element.
 This event listener should update the Chart Window's bound data object based on media queries and rerender it.
 Theoretically, it is possible to use the actual viewport size in pixels for responsive configuration decisions, but it is strongly recommended to use media queries via the \code{window.matchMedia} function instead.
 The usage of media queries allows a Chart's JavaScript configuration to be based on the same media queries that might be used for the CSS configuration of the same Chart.
 
-\item
-Render the Chart Window using the appropriate \code{chartWindowXRender} function.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -76,7 +77,7 @@ These issues can be alleviated with the following responsive patterns that  can 
 \item
 Rotate tick labels.
 One of the most effective ways to prevent tick labels from overlapping is rotating them by up to 90 degrees because all the available information is preserved and only presented differently.
-Tick labels can be rotated by setting a rotation in the CSS \code{transform} property on their pivot container elements and modifying their CSS \code{text-anchor} property accordingly. 
+Tick labels can be rotated by setting a rotation in the CSS \code{transform} property on them and modifying their CSS \code{text-anchor} property accordingly. 
 
 \item
 Simplify tick labels.
@@ -137,7 +138,7 @@ The titles and subtitles of Axes can be hidden by making them transparent via th
 \section{Legends}
 \label{sec:LegendsUsage}
 
-Legends visualize the non-spatial mapping of abstract values such as mappings to colors, shapes, and sizes via labeled symbols and are needed in any visualization that uses such an encoding.
+Legends visualize the non-spatial mapping of abstract values such as mappings to colors, shapes, and sizes via labeled symbols and are needed in any visualization that uses such encodings.
 They are essential and frequently encountered parts of visualizations and, as such, must not be ignored when optimizing a visualization's responsiveness. 
 Listing~\ref{list:LegendPatterns} shows how different responsive patterns can be implemented using RespVis Legends, and Figure~\ref{fig:LegendPatterns} displays the resulting Legend visualizations.
 These patterns are:
@@ -270,16 +271,33 @@ For Multi-Series Bar Charts that contain Legends to visualize the color mapping 
   numbers=left,
   label=list:BarChartPatterns,
   caption={[Implementation of Responsive Patterns Targeting Bar Charts]%
-    WIP
+    The implementation of a responsive Bar Chart that rotates Axis tick labels, gradually simplifies bar labels, and transposes the Chart.
+    Some non-essential parts have been removed for clarity reasons and to fit the whole Listing on one page.
   },
 ]{listings/bar-chart-patterns.html}
 \end{samepage}
 
 \begin{figure}[tp]
+\newcommand{\respscale}{0.5}
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
-\caption[Results of Responsive Patterns Targeting Bar Charts]{
-  WIP.
+\subfloat[][60rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-bar-60rem.pdf}%
+  \label{fig:BarChartPatterns60rem}%
+}
+\newline
+\subfloat[][40rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-bar-40rem.pdf}%
+  \label{fig:BarChartPatterns40rem}%
+}
+\subfloat[][30rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-bar-30rem.pdf}%
+  \label{fig:BarChartPatterns30rem}%
+}
+\caption[Responsive RespVis Bar Chart]{
+  The resulting responsive Bar Chart that is rendered from the implementation in Listing~\ref{list:BarChartPatterns}.
+  \subref{fig:BarChartPatterns60rem} At a viewport size of 60rem, the Chart is not yet transposed, bar labels are shown with a precision of four digits above bars, and tick labels of the bottom axis are not rotated.
+  \subref{fig:BarChartPatterns40rem} At a viewport size of 40rem, bar labels are shown with a precision of three digits above bars, and tick labels of the bottom axis are rotated by 45 degrees.
+  \subref{fig:BarChartPatterns30rem} At a viewport size of 30rem, the Chart is transposed, bar labels are shown with a precision of two digits to the right of bars, and bottom axis tick labels are still rotated by 45 degrees.
   \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:BarChartPatterns}
