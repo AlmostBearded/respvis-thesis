@@ -845,21 +845,21 @@ passed \code{LegendPosition} enum parameter.
 
 Chart Windows are implemented in the \code{chart-window.ts} file in
 the Core Module and are wrapper components around Charts that render a
-Chart inside a Layouter and decorate it with a Toolbar.  These
-components represent an even higher-level layer than Charts and are
-used to manage their rendering process and configuration.  In most
-other visualization libraries, Charts are provided as the highest
-level of components that can be configured, which typically means that
-additional HTML elements for the runtime configuration of Charts have
-to be created and managed by the embedding web page itself.  Chart
-Windows are rendered with the \code{chartWindowRender} function on
-HTML \code{<div>} elements containing a Chart's SVG document.  Their
-structure consists of a \code{<div>} element in which the Toolbar is
-rendered, and of another \code{<div>} element on which a Layouter is
-initialized and which holds the wrapped Chart's SVG document.  An
-example of a Chart Window with an expanded Tool Menu containing two
-Nominal Filtering Tools and an SVG Download Tool can be seen in
-Figure~\ref{fig:ChartWindow}.
+Chart inside a Layouter and decorate it with a Toolbar. These
+components represent an even higher-level layer of abstraction than
+Charts and are used to manage their rendering process and
+configuration. In most other visualization libraries, Charts are
+provided as the highest level of components that can be configured,
+which typically means that additional HTML elements for the runtime
+configuration of Charts have to be created and managed by the
+embedding web page itself.  Chart Windows are rendered with the
+\code{chartWindowRender} function on HTML \code{<div>} elements
+containing a Chart's SVG document.  Their structure consists of a
+\code{<div>} element in which the Toolbar is rendered, and of another
+\code{<div>} element on which a Layouter is initialized and which
+holds the wrapped Chart's SVG document. An example of a Chart Window
+with an expanded Tool Menu containing two Nominal Filtering Tools and
+an SVG Download Tool can be seen in Figure~\ref{fig:ChartWindow}.
 
 
 \begin{figure}[tp]
@@ -867,7 +867,7 @@ Figure~\ref{fig:ChartWindow}.
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {images/chart-window.png}
 \caption[Chart Window Example]{%
-An example of a Chart that is wrapped in a Chart Window.  The Tool
+An example of a Chart wrapped in a Chart Window. The Tool
 Menu has been expanded by hovering over it, and the menu entries of
 two Nominal Filtering Tools and the SVG Download Tool can be seen
 inside. \imgcredit{Image created by the author of this thesis.}
@@ -879,28 +879,28 @@ inside. \imgcredit{Image created by the author of this thesis.}
 Currently, the Toolbar only contains the Tool Menu, a dropdown menu
 into which individual tools are added as menu items or as submenus.
 Dropdown menus are created with the \code{menuDropdownRender} function
-and consist of a title and a container for menu items.  The current
+and consist of a title and a container for menu items. The current
 dropdown menu implementation uses no JavaScript and simply shows menu
-items via CSS when there is a hover interaction.  The Tool Menu is
+items via CSS when there is a hover interaction. The Tool Menu is
 created with the \code{menuToolsRender} function, which internally
 uses the \code{menuDropdownRender} function to initialize it as a
 dropdown menu.
 
-The Core Module provides various tools that can be added to the Tool
-Menus of Chart Windows.  One of these tools is the Nominal Filtering
-Tool which is located in the \code{tools/tool-filter-nominal.ts} file
-of the Core Module.  This tool is used to filter a nominal data
-dimension of a visualized dataset via a dropdown menu that includes a
-Checkbox Series.  Nominal data, in contrast to ordinal or quantitative
-data, consists only of labels that do not have a quantitative value
-assigned to them and therefore cannot be ordered or sorted.  The data
-object for the configuration of a Nominal Filter Tool is described by
-the \code{ToolFilterNominal} interface, which contains properties to
-specify the title of the dropdown menu, the individual options to be
-filtered, and the keys of these options.  The
+The Core Module provides various tools which can be added to the Tool
+Menu of Chart Windows. One of these tools is the Nominal Filtering
+Tool located in the \code{tools/tool-filter-nominal.ts} file of the
+Core Module. This tool is used to filter a nominal (or categorical)
+data dimension of a visualized dataset via a dropdown menu that
+includes a Checkbox Series. Nominal data, in contrast to ordinal or
+quantitative data, consists only of labels that do not have a
+quantitative value assigned to them and therefore have no inherent
+ordering. The data object for the configuration of a Nominal Filter
+Tool is described by the \code{ToolFilterNominal} interface, which
+contains properties to specify the title of the dropdown menu, the
+individual options to be filtered, and the keys of these options. The
 \code{toolFilterNominalData} function is used to create a data object
 of type \code{ToolFilterNominal} from a partial input object where
-undefined properties are being filled with default values.  Nominal
+undefined properties are being filled with default values. Nominal
 Filtering Tools can then be rendered on elements with bound
 \code{ToolFilterNominal} data objects using the
 \code{toolFilterNominalRender} function, which internally uses the
@@ -909,46 +909,46 @@ which the checkboxes representing the individual options of the filter
 are rendered as menu items.
 
 Checkbox Series are implemented in the \code{series-checkbox.ts} file
-in the Core Module and they render series of checkboxes consisting of
+in the Core Module and render a series of checkboxes consisting of
 checkbox \code{<input>} elements with associated \code{<label>}
-elements.  They are configured using data objects in the form of the
+elements. They are configured using data objects in the form of the
 \code{SeriesCheckbox} interface, which contains properties to
 determine the type of checkbox container elements and the labels of
-checkboxes.  A data object of this type can be created with the
+checkboxes. A data object of this type can be created with the
 \code{seriesCheckboxData} function, which creates a complete object
-from a partial one.  Checkbox Series are rendered using the
+from a partial one. Checkbox Series are rendered using the
 \code{seriesCheckboxRender} function, which generates individual
-checkboxes using a data join that join requires an array of
-\code{Checkbox} data objects so that a single data object can be bound
-to each checkbox.  Individual \code{Checkbox} data objects contain all
-data needed to render a single checkbox and are created by
-transforming the \code{SeriesCheckbox} data objects bound on the
-Series' root element.  Single checkboxes consist of a container
-element, an \code{<input>} checkbox element, and a \code{<label>}
-element.  In order to semantically assign the \code{<label>} elements
-to their \code{<input>} elements, the \code{for} attributes on
-\code{<label>} elements must be set to the ids of their corresponding
-\code{<input>} elements.  This requires assigning unique ids to
-\code{<input>} elements, which are generated via the \code{uuid}
-function and set as \code{id} attributes on the \code{<input>}
-elements and as \code{for} attributes on \code{<label>} elements when
-the checkbox is first created.  The \code{uuid} function is an alias
-for the \code{v4} function from the \code{uuid} npm package
-\parencite{UUIDPackage} and is used to generate UUIDs (Universally
-Unique IDentifiers) \parencite{UUIDRFC} of the fourth version, which
-are very likely to be unique and therefore can be safely used as
-values for \code{id} attributes.
+checkboxes using a data join requiring an array of \code{Checkbox}
+data objects so that a single data object can be bound to each
+checkbox. Individual \code{Checkbox} data objects contain all the data
+needed to render a single checkbox and are created by transforming the
+\code{SeriesCheckbox} data objects bound on the Series' root element.
+Single checkboxes consist of a container element, an \code{<input>}
+checkbox element, and a \code{<label>} element. In order to
+semantically assign the \code{<label>} elements to their
+\code{<input>} elements, the \code{for} attributes on \code{<label>}
+elements must be set to the ids of their corresponding \code{<input>}
+elements. This requires assigning unique ids to \code{<input>}
+elements, which are generated via the \code{uuid} function and set as
+\code{id} attributes on the \code{<input>} elements and as \code{for}
+attributes on \code{<label>} elements when the checkbox is first
+created. The \code{uuid} function is an alias for the \code{v4}
+function from the \code{uuid} npm package \parencite{UUIDPackage} and
+is used to generate UUIDs (Universally Unique IDentifiers)
+\parencite{UUIDRFC} of the fourth version, which are very likely to be
+unique and therefore can be safely used as values for \code{id}
+attributes.
 
 The SVG Download Tool is implemented in the
 \code{tools/tool-download-svg.ts} file of the Core Module and is
-included by default in every Chart Window.  SVG documents embedded in
-HTML documents cannot as easily be downloaded by users as raster
+included by default in every Chart Window. SVG documents embedded in
+HTML documents cannot be downloaded by users as easily as raster
 images, which can simply be downloaded with native browser tools.
 Instead, SVG documents must be encoded in \code{Blob} objects and then
 set as as object URLs in the \code{href} attributes of \code{<a>}
-elements.  However, since the presentation of RespVis visualizations
-is mainly configured using CSS, the active CSS properties must first
-be converted to attributes before the SVG document can be downloaded.
+elements. However, since the presentation of RespVis visualizations is
+mainly configured using CSS, the active CSS properties must first be
+converted to attributes before the SVG document can be downloaded.
 For this, a clone of the whole SVG document is made to set attributes
 on the cloned elements without affecting the rendered visualization.
 After the document has been cloned, attributes reflecting the active
@@ -956,24 +956,25 @@ CSS configuration of the original elements are set on cloned elements.
 The active CSS configuration of the original elements is calculated
 using the \code{elementComputedStyleWithoutDefaults} utility function,
 which yields a list of CSS properties and their values, only
-containing properties that are not set to defaults.  After setting all
+containing properties that are not set to defaults. After setting all
 the necessary attributes on cloned elements, the string representation
 of the cloned document is calculated using the
 \code{Element.innerHTML} property and encoded in a \code{Blob} object
-with the content type \code{image/svg+xml}.  At present, the string
-representation of the SVG document is not further processed or
-formatted, which results in a rather difficult-to-read file and which
-will be improved in future work.  The \code{Blob} object containing
-the SVG document is further transformed into an object URL via the
-\code{URL.createObjectURL} method and set in the \code{href} attribute
-of a newly created \code{<a>} element.  This newly created \code{<a>}
-element is then briefly attached to the \code{<body>} element of the
-active HTML document and clicked using the \code{Element.click}
-method, which initiates the download of the final prepared SVG
-document.  Download SVG Tools can be rendered as menu items in a Chart
-Window's Tool Menu with the \code{toolDownloadSVGRender} function,
-which initializes them and triggers the download of the SVG document
-embedded in the Chart Window when the user clicks on the menu item.
+with the content type \code{image/svg+xml}. At present, the string
+representation of the SVG document is not processed further or
+prettily formatted, which results in a rather difficult-to-read file
+and which will be improved in future work. The \code{Blob} object
+containing the SVG document is further transformed into an object URL
+via the \code{URL.createObjectURL} method and set in the \code{href}
+attribute of a newly created \code{<a>} element. This newly created
+\code{<a>} element is then briefly attached to the \code{<body>}
+element of the active HTML document and clicked using the
+\code{Element.click} method, which initiates the download of the final
+prepared SVG document. Download SVG Tools can be rendered as menu
+items in a Chart Window's Tool Menu with the
+\code{toolDownloadSVGRender} function, which initializes them and
+triggers the download of the SVG document embedded in the Chart Window
+when the user clicks on the menu item.
 
 
 
