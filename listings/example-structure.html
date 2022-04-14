@@ -5,15 +5,15 @@
 </head>
 <body>
   <div id="chart"></div>
-  <script src="./path/to/d3.js"></script>
-  <script type="module">
-    import { chartWindowXData, chartWindowXRender } from './path/to/respvis.mjs';
-    const chartWindowData = {/* ... */};
-    const chartWindow = d3.select('#chart')
-      .append('div')
-      .datum(chartWindowXData(chartWindowData))
-      .call(chartWindowXRender)
-      .on('resize', function () {/* ... */});
-  </script>
 </body>
+<script src="./path/to/d3.js"></script>
+<script type="module">
+  import { chartWindowXData, chartWindowXRender } from './path/to/respvis.mjs';
+  const data = {/* ... */};
+  const chartWindow = d3.select('#chart')
+    .append('div')
+    .datum(chartWindowXData(data))
+    .call(chartWindowXRender)
+    .on('resize', function () {/* ... */});
+</script>
 </html>

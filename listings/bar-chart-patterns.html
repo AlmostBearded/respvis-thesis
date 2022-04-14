@@ -3,6 +3,7 @@
   <link rel="stylesheet" href="./path/to/respvis.css" />
   <style>
     #chart { width: 100%; height: 75vh; min-height: 25rem; }
+    /* rotate bottom axis tick labels on <60rem screens */
     @media (max-width: 60rem) {
       .axis-bottom .tick text { transform: rotate(-45deg); text-anchor: end; }
     }
@@ -28,16 +29,19 @@
     .datum(chartWindowBarData(data))
     .call(chartWindowBarAutoFilterCategories)
     .call(chartWindowBarRender)
-    .on('resize', function () {
-      const mediumWidth = window.matchMedia('(min-width: 40rem)').matches;
-      const largeWidth = window.matchMedia('(min-width: 60rem)').matches;
-      const flipped = data.flipped = !mediumWidth;
-      const labelPrecision = !mediumWidth ? 2 : !largeWidth ? 3 : 4;
-      data.labels = {
-        labels: populations.map(d3.format(`.${labelPrecision}s`)),
-        relativePositions: flipped ? { x: 1, y: 0.5 } : { x: 0.5, y: 0 }
-      };
-      chart.datum(chartWindowBarData(data)).call(chartWindowBarRender);
-    });
+    .on('resize', handleResize);
+
+  function handleResize() {
+    const wide = window.matchMedia('(min-width: 40rem)').matches;
+    const widest = window.matchMedia('(min-width: 60rem)').matches;
+    // transpose chart on narrow screens
+    data.flipped = !wide;
+    // move labels from top to right of bars in transposed chart
+    data.labels.relativePositions =  !wide ? { x: 1, y: 0.5 } : { x: 0.5, y: 0 };
+    // gradually shorten labels by decreasing scientific notation precision
+    const labelPrecision = !wide ? 2 : !widest ? 3 : 4;
+    data.labels.labels = populations.map(d3.format(`.${labelPrecision}s`));
+    chart.datum(chartWindowBarData(data)).call(chartWindowBarRender);
+  }
 </script>
 </html>

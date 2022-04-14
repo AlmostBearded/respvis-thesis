@@ -69,8 +69,7 @@ Axes are used to visualize the spatial mapping of abstract values by rendering a
 In addition to ticks, an Axis also contains an optional title and subtitle to describe the visualized data further.
 Axis-related responsive patterns are of great significance because nearly every Chart includes Axes, and often improving the responsiveness of Axes alone can already lead to significant improvements in a user's experience.
 
-Common issues that occur when decreasing the available space of Axes are overlapping tick labels and too long titles and subtitles.
-These issues can be alleviated with the following responsive patterns that  can also be seen in Listing~\ref{list:AxisPatterns} and Figure~\ref{fig:AxisPatterns}:
+The following list contains all the responsive patterns that can be applied to Axes and explains how they can be implemented for RespVis visualizations:
 
 \begin{itemize}
 
@@ -88,7 +87,7 @@ The D3 Axis object used for rendering ticks is accessible via the \code{configur
 \item
 Remove ticks.
 If neither rotation nor shortening of tick labels is applicable, the last thing that can be done is to reduce the number of ticks shown.
-This can be achieved either via a D3 Axis' \code{ticks} or \code{tickValues} function, or by simply making ticks transparent via the CSS \code{opacity} property.
+This can be achieved either via a D3 Axis' \code{ticks} or \code{tickValues} function, or via the CSS \code{display} property.
 A D3 Axis' \code{ticks} function allows specifying the desired number of ticks that shall be rendered, and the D3 Axis' render function will decide how many ticks to create based on this number and other contributing factors.
 The \code{tickValues} function of a D3 Axis allows for much more control than the \code{ticks} function because it is used to specify the exact abstract values for which ticks shall be rendered.
 
@@ -103,45 +102,17 @@ The titles and subtitles of Axes can be relocated by modifying the Axes' grid la
 
 \item
 Remove title/subtitle.
-The titles and subtitles of Axes can be hidden by making them transparent via the CSS \code{opacity} property.
+The titles and subtitles of Axes can be hidden via the CSS \code{display} property.
 
 \end{itemize}
-
-\begin{samepage}
-\lstinputlisting[%
-  float=tp,
-  aboveskip=\floatsep,
-  belowskip=\floatsep,
-  xleftmargin=0cm,              % no extra margins for floats
-  xrightmargin=0cm,             % no extra margins for floats
-  %
-  basicstyle=\footnotesize\ttfamily,
-  frame=shadowbox,
-  numbers=left,
-  label=list:AxisPatterns,
-  caption={[Implementation of Axis-Related Responsive Patterns]%
-    WIP
-  },
-]{listings/axis-patterns.html}
-\end{samepage}
-
-\begin{figure}[tp]
-\centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
-\caption[Results of Axis-Related Responsive Patterns]{
-  WIP.
-  \imgcredit{Image created by the author of this thesis using RespVis.}
-}
-\label{fig:AxisPatterns}
-\end{figure}
 
 \section{Legends}
 \label{sec:LegendsUsage}
 
 Legends visualize the non-spatial mapping of abstract values such as mappings to colors, shapes, and sizes via labeled symbols and are needed in any visualization that uses such encodings.
 They are essential and frequently encountered parts of visualizations and, as such, must not be ignored when optimizing a visualization's responsiveness. 
-Listing~\ref{list:LegendPatterns} shows how different responsive patterns can be implemented using RespVis Legends, and Figure~\ref{fig:LegendPatterns} displays the resulting Legend visualizations.
-These patterns are:
+
+The following list shows how different responsive patterns that can be applied to Legends are implemented for RespVis visualizations: 
 
 \begin{itemize}
 
@@ -155,7 +126,7 @@ A Legend's title can be shortened by specifying a shorter textual representation
 
 \item
 Remove title.
-If the title can not be further shortened or if it does not convey too much important information, it can be hidden by making it transparent via the CSS \code{opacity} property.
+If the title can not be further shortened or if it does not convey too much important information, it can be hidden via the CSS \code{display} property.
 
 \item
 Simplify symbol labels.
@@ -170,34 +141,6 @@ Thus, whether labeled symbols are laid out horizontally or vertically can be con
 
 \end{itemize}
 
-\begin{samepage}
-\lstinputlisting[%
-  float=tp,
-  aboveskip=\floatsep,
-  belowskip=\floatsep,
-  xleftmargin=0cm,              % no extra margins for floats
-  xrightmargin=0cm,             % no extra margins for floats
-  %
-  basicstyle=\footnotesize\ttfamily,
-  frame=shadowbox,
-  numbers=left,
-  label=list:LegendPatterns,
-  caption={[Implementation of Legend-Related Responsive Patterns]%
-    WIP
-  },
-]{listings/legend-patterns.html}
-\end{samepage}
-
-\begin{figure}[tp]
-\centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
-\caption[Results of Legend-Related Responsive Patterns]{
-  WIP.
-  \imgcredit{Image created by the author of this thesis using RespVis.}
-}
-\label{fig:LegendPatterns}
-\end{figure}
-
 \section{Bar Charts}
 \label{sec:BarChartsUsage}
 
@@ -206,9 +149,10 @@ In the case of Multi-Series Bar Charts like Grouped and Stacked Bar Charts, cate
 Bars in Multi-Series Bar Charts are usually colored based on their subcategories which is why these Charts often include Legends to visualize this color encoding.
 
 The different responsive patterns applicable to Bar Charts have already been discussed in Section~\ref{sec:BarChartExamples}, and the focus here lies on demonstrating their implementation using RespVis Bar Chart Windows.
-Listing~\ref{list:BarChartPatterns} demonstrates how some of these patterns can be implemented to create a responsive Bar Chart, and Figure~\ref{fig:BarChartPatterns} shows the rendered result.
+Listing~\ref{list:BarChartPatterns} demonstrates how some of these patterns can be implemented to create the responsive Bar Chart shown in Figure~\ref{fig:BarChartPatterns}.
 In practice, the responsive patterns that can be applied to different variants of Bar Charts are very similar, which is why this section does not differentiate between them.
-These patterns and their implementations are:
+
+The following list shows the implementation of different responsive patterns that can be applied on RespVis Bar Charts:
 
 \begin{itemize}
 
@@ -231,7 +175,7 @@ These labels can be configured using the \code{labels} property of a Bar Chart's
 \item
 Remove bar labels.
 An alternative to prevent bar labels from overlapping is to hide some or even all of them.
-The best way of implementing this is to make the labels that should be hidden transparent via the CSS \code{opacity} property.
+The best way of implementing this is to hide them via the CSS \code{opacity} or \code{display} properties.
 
 \item
 Transpose Chart.
@@ -270,9 +214,10 @@ For Multi-Series Bar Charts that contain Legends to visualize the color mapping 
   frame=shadowbox,
   numbers=left,
   label=list:BarChartPatterns,
-  caption={[Implementation of Responsive Patterns Targeting Bar Charts]%
-    The implementation of a responsive Bar Chart that rotates Axis tick labels, gradually simplifies bar labels, and transposes the Chart.
-    Some non-essential parts have been removed for clarity reasons and to fit the whole Listing on one page.
+  caption={[Implementation of a Responsive RespVis Bar Chart]%
+    The implementation of the responsive Bar Chart shown in Figure~\ref{fig:BarChartPatterns}.
+    Depending on the screen's width, Axis tick labels are rotated, bar labels are simplified, and on very narrow screens, the whole Chart is transposed.
+    Non-essential parts have been removed for clarity reasons.
   },
 ]{listings/bar-chart-patterns.html}
 \end{samepage}
@@ -312,8 +257,9 @@ The different lines in Multi-Series Line Charts can be seen as representations o
 For this reason, the main difference between Single and Multi-Series Line Charts, apart from rendering multiple lines, is that Multi-Series Line Charts include Legends to visualize the color encoding of subcategories.
 
 The responsive patterns applicable to Line Charts have already been discussed in Section~\ref{sec:LineChartExamples}, and the focus here lies on demonstrating how they can be implemented using RespVis Line Chart Windows. 
-Listing~\ref{list:LineChartPatterns} shows how some of these patterns can be implemented, and the resulting Line Chart can be seen in Figure~\ref{fig:LineChartPatterns}.
-The responsive patterns that can be applied to Line Charts and their implementations are:
+For this purpose, Listing~\ref{list:LineChartPatterns} demonstrates how some of these patterns can be combined to create the responsive Line Chart shown in Figure~\ref{fig:LineChartPatterns}.
+
+The following list shows the implementation of different responsive patterns that can be applied on RespVis Line Charts:
 
 \begin{itemize}
 
@@ -326,7 +272,7 @@ Elements contained in these draw areas like lines, markers, and labels are autom
 \item
 Remove markers.
 If a Chart contains a large number of individual data points, it might be a good idea to reduce visual clutter by not showing markers for every single one of them.
-The best way of removing markers is to hide some or all of them by making them transparent via the CSS \code{opacity} property.
+The best way of removing markers is to hide them via the CSS \code{opacity} or \code{display} properties.
 
 \item
 Rescale markers.
@@ -341,7 +287,7 @@ A good solution for this is to shorten marker labels by providing shorter textua
 \item
 Remove marker labels.
 Sometimes shortening labels may not be possible, desired, or effective enough and an alternative to prevent them from overlapping is to remove some or all of them.
-The recommended way to remove marker labels is to hide them by making them transparent via the CSS \code{opacity} property.
+The recommended way to remove marker labels is to hide them via the CSS \code{opacity} or \code{display} properties.
 
 \item
 Transpose Chart.
@@ -354,7 +300,7 @@ Line Charts can be transposed by setting the \code{flipped} property on their da
 \item
 Apply Axis patterns.
 As with all Charts that use Axes to visualize spatial mappings, the responsive patterns described in Section~\ref{sec:AxesUsage} should be applied to the Axes in Line Charts.
-Axes of Line Charts could even be removed completely to turn Line Charts into Spartlines, but this should be considered carefully because information about the scale of data is lost when hiding Axes.
+Axes of Line Charts could even be removed completely via the CSS \code{display} property to turn Line Charts into Sparklines, but this should be considered carefully because information about the scale of data is lost when hiding Axes.
 
 \item
 Apply Legend patterns.
@@ -375,17 +321,35 @@ In Multi-Series Line Charts that contain Legends to visualize non-spatial data e
   frame=shadowbox,
   numbers=left,
   label=list:LineChartPatterns,
-  caption={[Implementation of Responsive Patterns Targeting Line Charts]%
-    WIP
+  caption={[Implementation of a Responsive RespVis Line Chart]%
+      The implementation of the responsive Line Chart shown in Figure~\ref{fig:LineChartPatterns}. 
+      Depending on the screen width, Axis ticks and markers are hidden, Axis tick labels are simplified, and on very narrow screens, Axes are hidden to turn the Line Chart into a Sparkline.
+      Non-essential parts of the implementation have been removed for clarity reasons.
   },
 ]{listings/line-chart-patterns.html}
 \end{samepage}
 
 \begin{figure}[tp]
+\newcommand{\respscale}{0.5}
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
-\caption[Results of Responsive Patterns Targeting Line Charts]{
-  WIP.
+\subfloat[][60rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-line-60rem.pdf}%
+  \label{fig:LineChartPatterns60rem}%
+}
+\newline
+\subfloat[][40rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-line-40rem.pdf}%
+  \label{fig:LineChartPatterns40rem}%
+}
+\subfloat[][30rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-line-30rem.pdf}%
+  \label{fig:LineChartPatterns30rem}%
+}
+\caption[Responsive RespVis Line Chart]{
+  The resulting responsive Line Chart that is rendered from the implementation in Listing~\ref{list:LineChartPatterns}.
+  \subref{fig:LineChartPatterns60rem} At a viewport size of 60rem, all markers are shown and tick labels are not shortened.
+  \subref{fig:LineChartPatterns40rem} At a viewport size of 40rem, tick labels are shortened.
+  \subref{fig:LineChartPatterns30rem} At a viewport size of 30rem, Axes are hidden and only the first and last markers and marker labels are shown to turn the Chart into a Sparkline.
   \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:LineChartPatterns}
@@ -400,7 +364,8 @@ If such additional encodings are used, Point Charts usually include Legends to v
 
 The responsive patterns applicable to Point Charts have already been discussed in Section~\ref{sec:ScatterplotExamples}, and the focus here mainly lies on demonstrating their implementation using RespVis Point Chart Windows.
 Listing~\ref{list:PointChartPatterns} shows how some of these patterns can be implemented to create the responsive Point Chart displayed in Figure~\ref{fig:PointChartPatterns}.
-All the responsive patterns and their implementations that can be applied to Point Charts are:
+
+The following list shows the implementation of different responsive patterns that can be applied on RespVis Point Charts:
 
 \begin{itemize}
 
@@ -421,7 +386,7 @@ The texts of labels can be configured via the \code{labels} property on the data
 \item
 Remove labels.
 Often, Point Charts are used for the visualization of large data sets.
-In such situations, rendering labels for all points would only clutter the visualization, and it might be better to hide them by making them transparent via the CSS \code{opacity} property. 
+In such situations, rendering labels for all points would only clutter the visualization, and it might be better to hide them via the CSS \code{opacity} or \code{display} properties. 
 
 \item
 Zoom draw area.
@@ -451,17 +416,41 @@ In the case of Point Charts that visualize additional non-spatial data encodings
   frame=shadowbox,
   numbers=left,
   label=list:PointChartPatterns,
-  caption={[Implementation of Responsive Patterns Targeting Point Charts]%
-    WIP
+  caption={[Implementation of Responsive RespVis Point Charts]%
+    The implementation of the responsive Point Chart shown in Figure~\ref{fig:PointChartPatterns}. 
+    Depending on the screen width, Axis ticks are hidden, Axis tick labels are shortened, and point radiuses are reduces.
+    Additionally, zooming is implemented using the D3 Zoom package \parencite{D3Zoom}.
+    Non-essential parts of the implementation have been removed for clarity reasons.
   },
 ]{listings/point-chart-patterns.html}
 \end{samepage}
 
 \begin{figure}[tp]
+\newcommand{\respscale}{0.5}
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]{images/placeholder.png}
-\caption[Results of Responsive Patterns Targeting Point Charts]{
-  WIP.
+\subfloat[][60rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-point-60rem.pdf}%
+  \label{fig:PointChartPatterns60rem}%
+}
+\newline
+\subfloat[][40rem]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-point-40rem.pdf}%
+  \label{fig:PointChartPatterns40rem}%
+}
+% \subfloat[][30rem]{%
+%   \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-point-30rem.pdf}%
+%   \label{fig:PointChartPatterns30rem}%
+% }
+\subfloat[][30rem, zoomed]{%
+  \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-point-30rem-zoomed.pdf}%
+  \label{fig:PointChartPatterns30remZoomed}%
+}
+\caption[Responsive RespVis Point Chart]{
+  The resulting responsive Point Chart that is rendered from the implementation in Listing~\ref{list:PointChartPatterns}.
+  \subref{fig:PointChartPatterns60rem} At a viewport size of 60rem, all ticks are shown, tick labels are not shortened, and points are rendered at their full size. 
+  \subref{fig:PointChartPatterns40rem} At a viewport size of 40rem, only every second tick is shown and point sizes are reduced.
+  % \subref{fig:PointChartPatterns30rem} At a viewport size of 30rem,
+  \subref{fig:PointChartPatterns30remZoomed} At a viewport size of 30rem, tick labels are shortened using scientific notation and point sizes are further reduced. Additionally, the Chart has been zoomed in.
   \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:PointChartPatterns}

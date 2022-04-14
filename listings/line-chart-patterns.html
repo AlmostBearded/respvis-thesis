@@ -1,1 +1,52 @@
-// WIP
+<html>
+<head>
+  <link rel="stylesheet" href="./path/to/respvis.css" />
+  <style>
+    #chart { width: 100%; height: 75vh; min-height: 25rem; }
+    /* show axis only on wide screens */ 
+    .axis { display: none; }
+    @media (min-width: 40rem) { .axis { display: block; } }
+    /* show more ticks the wider the screen */
+    .tick { display: none; }
+    @media (min-width: 40rem) { .tick:nth-of-type(2n + 1) { display: block; } }
+    @media (min-width: 60rem) { .tick { display: block; } }
+    /* show only first and last marker on <40rem screens  */
+    .point { opacity: 0; } 
+    .point:first-of-type, .point:last-of-type { opacity: 1; }
+    @media (min-width: 40rem) { .point { opacity: 1; } }
+    /* show first and last marker label only on <40rem screens  */
+    .label:not(:first-of-type), .label:not(:last-of-type) { display: none; }
+    @media (min-width: 40rem) { .label { display: none; } }
+  </style>
+</head>
+<body><div id="chart"></div></body>
+<script src="./path/to/d3.js"></script>
+<script type="module">
+  import { /* ... */  } from './path/to/respvis.mjs';
+  import { years, averageOpens } from './path/to/data/google-stock.js';
+
+  const data = {
+    xValues: years,
+    yValues: [averageOpens],
+    xAxis: { title: 'Years' },
+    yAxis: { title: 'Average Open Prices', subtitle: '[USD]' },
+  };
+
+  const chart = d3.select('#chart').append('div')
+    .datum(chartWindowLineData(data))
+    .call(chartWindowLineRender)
+    .on('resize', handleResize);
+
+  function handleResize() {
+    const wide = window.matchMedia('(min-width: 40rem)').matches;
+    const widest = window.matchMedia('(min-width: 60rem)').matches;
+    // shorten price tick labels using scientific notation on <60rem screens
+    const priceTickFormat = widest ? d3.format(',') : d3.format('.2s');
+    data.yAxis.configureAxis = (axis) => axis.tickFormat(priceTickFormat);
+    // shorten year tick labels on <60rem screens
+    const yearTickFormat = widest ? (v) => v : (v) => `'${v.slice(-2)}`;
+    data.xAxis.configureAxis = (axis) => axis.tickFormat(yearTickFormat);
+    chart.datum(chartWindowLineData(data)).call(chartWindowLineRender);
+  }
+</script>
+</html>

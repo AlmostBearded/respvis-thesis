@@ -1,1 +1,53 @@
-// WIP
+<html>
+<head>
+  <link rel="stylesheet" href="./path/to/respvis.css" />
+  <style>
+    #chart { width: 100%; height: 75vh; min-height: 25rem; }
+    /* show more ticks the wider the screen */
+    .tick { display: none; }
+    .tick:nth-of-type(2n + 1) { display: block; }
+    @media (min-width: 60rem) { .tick { display: block; } }
+  </style>
+</head>
+<body><div id="chart"></div></body>
+<script src="./path/to/d3.js"></script>
+<script type="module">
+  import { /* ... */  } from './path/to/respvis.mjs';
+  import { areas, prices } from './path/to/data/houses.js';
+  const areaScale = d3.scaleLinear().domain([0, Math.max(...areas)]).nice();
+  const priceScale = d3.scaleLinear().domain([0, Math.max(...prices)]).nice();
+  const data = {
+    xValues: areas, xScale: areaScale, yValues: prices, yScale: priceScale,
+    xAxis: { /* ... */ }, yAxis: { /* ... */ } 
+  };
+  const chartWindow = d3.select('#chart').append('div')
+    .datum(chartWindowPointData(data)).call(chartWindowPointRender)
+    .on('resize', handleResize);
+  // set up zooming on draw area with minimum 1x and maximum 20x magnification 
+  const zoom = d3.zoom().scaleExtent([1, 20]).on('zoom', handleZoom);
+  const drawArea = chartWindow.selectAll('.draw-area').call(zoom);
+
+  function handleResize() {
+    // limit panning by setting zoom extents to draw area bounds 
+    const { width, height } = rectFromString(drawArea.attr('bounds'));
+    const extent = [[0, 0], [width, height]];
+    zoom.extent(extent).translateExtent(extent);
+    
+    const wide = window.matchMedia('(min-width: 40rem)').matches;
+    const widest = window.matchMedia('(min-width: 60rem)').matches;
+    // shorten axis tick labels on <40rem screens using scientific notation
+    data.xAxis.configureAxis = data.yAxis.configureAxis = 
+      (a) => a.tickFormat(d3.format(!wide ? '.2s' : ','));
+    // gradually reduce radiuses of points
+    data.radiuses = !wide ? 3 : !widest ? 5 : 7;
+    chartWindow.datum(chartWindowPointData(data)).call(chartWindowPointRender)
+  }
+
+  function handleZoom(e) {
+    // calculate new scales based on zoom transformation
+    data.xScale = e.transform.rescaleX(areaScale);
+    data.yScale = e.transform.rescaleY(priceScale);
+    chartWindow.datum(chartWindowPointData(data)).call(chartWindowPointRender)
+  }
+</script>
+</html>
