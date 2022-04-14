@@ -1096,17 +1096,17 @@ configured on the bound \code{Legend} data object.
 \section{Tooltip Module}
 \label{sec:TooltipModule}
 
-Tooltips display additional contextual information that is too
-expansive to be shown all the time because the more information a
+Tooltips display additional contextual information which is too
+expansive to be shown all the time. The more information a
 visualization shows simultaneously, the more cognitive effort is
-required to interpret it.  Detailed information that may be valuable
-but not necessary for understanding a visualization's core message is
-only shown via a Tooltip when the user interacts with an element in
-whose context this information stands.  Due to Tooltips only being
-explicitly shown by users, they may overlap and cover other elements
-of a Chart that would otherwise be too important to hide.  An example
-of a Bar Chart in which additional information is displayed via a
-Tooltip can be seen in Figure~\ref{fig:Tooltip}.
+required to interpret it. Detailed information which may be valuable
+but is not absolutely necessary for understanding a visualization's
+core message is only shown via a Tooltip when the user interacts with
+an element in whose context this information stands. Since Tooltips
+are only shown explicitly after user interaction, they may overlap and
+cover other elements of a Chart which would otherwise be too important
+to hide. An example of a Bar Chart in which additional information is
+displayed via a Tooltip can be seen in Figure~\ref{fig:Tooltip}.
 
 
 \begin{figure}[tp]
@@ -1114,12 +1114,12 @@ Tooltip can be seen in Figure~\ref{fig:Tooltip}.
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {images/tooltip.png}
 \caption[Tooltip Example]{%
-This Figure shows a Bar Chart with an active Tooltip that displays
-additional information of the data record associated with an
-individual bar.  Due to the Tooltip only being visible during
-interaction with a context element, it may overlap and cover other
-important parts of the Chart. \imgcredit{Image created by the author
-  of this thesis.}
+A Bar Chart with an active Tooltip displaying
+additional information from the data record associated with an
+individual bar. Since a Tooltip is only visible during
+interaction with a particular element, it may sometimes overlap
+and cover other important parts of a Chart.
+\imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:Tooltip}
 \end{figure}
@@ -1128,52 +1128,52 @@ important parts of the Chart. \imgcredit{Image created by the author
 The Tooltip Module is located in the \code{src/lib/tooltip/} directory
 of the RespVis library and contains the implementation of Tooltips and
 utility functions to simplify the configuration of Tooltips on Series
-Components.  Tooltips are merely HTML \code{<div>} elements with the
-\code{tooltip} class that are styled via CSS and that can be
-initialized with the \code{tooltip} function.  Their visibility,
+Components. Tooltips are merely HTML \code{<div>} elements with the
+\code{tooltip} class, which are styled via CSS and which can be
+initialized with the \code{tooltip} function. Their visibility,
 position, and content is controlled via the \code{tooltipShow},
 \code{tooltipHide}, \code{tooltipPosition}, and \code{tooltipContent}
-functions in the \code{tooltip.ts} file of the Tooltip Module.  Due to
+functions in the \code{tooltip.ts} file of the Tooltip Module. Due to
 the support of multiple simultaneous Tooltips, all of these functions
 have to be passed the Tooltip element they should affect or a
 \code{null} value in place of it to indicate usage of a default
-element attached to the body of the active document.  Tooltips are
+element attached to the body of the active document. Tooltips are
 shown and hidden via the \code{tooltipShow} and \code{tooltipHide}
 functions, which respectively add or remove the \code{show} class to
-the classes of the Tooltip element.  The actual showing and hiding is
+the classes of the Tooltip element. The actual showing and hiding is
 done in CSS by setting the \code{opacity} property of the element
-depending on whether or not the \code{show} class is set.  Positions
+depending on whether or not the \code{show} class is set. Positions
 of Tooltips are configured via the \code{tooltipPosition} function.
 This function calculates positions through an anchor position in
 viewport coordinates and a directional offset from that anchor.
 Specifying the anchor position is necessary, but the directional
 offset can be omitted to have a sensible one chosen by the
-\code{tooltipPosition} function so that the Tooltip is always placed
-inside the visible area of the browser.  The actual positioning is
+\code{tooltipPosition} function, so that the Tooltip is always placed
+inside the visible area of the browser. The actual positioning is
 again done in CSS by setting a combination of the \code{left},
 \code{right}, \code{bottom}, and \code{top} properties depending on
-the offset direction of the Tooltip.  A Tooltip's content can be set
-with the \code{tooltipContent} function which sets the Tooltip's inner
+the offset direction of the Tooltip. A Tooltip's content can be set
+with the \code{tooltipContent} function, which sets the Tooltip's inner
 HTML to the HTML string passed to the function.
 
 Apart from Tooltips, the Tooltip Module also contains utility
-functions that aim to simplify the setup and handling of Tooltips on
-different Series Components such as Bar or Point Series.  Interfaces
+functions to simplify the setup and handling of Tooltips on
+different Series Components such as Bar or Point Series. Interfaces
 describing the data objects of Series Components can inherit from the
 \code{SeriesConfigTooltips} interface to add additional properties for
-the configuration of Tooltips to these data objects.  Among these
+the configuration of Tooltips to these data objects. Among these
 properties is a property to enable the Tooltips of the Series and
 properties to specify the contents and positions of individual
 Tooltips based on their associated context-element and the current
-cursor position.  In addition to the \code{SeriesConfigTooltips}
+cursor position. In addition to the \code{SeriesConfigTooltips}
 interface, the \code{seriesConfigTooltipsHandleEvents} function is
 provided to automatically set \code{mouseover}, \code{mousemove}, and
 \code{mouseout} event listeners on Series to automatically update the
 visibility, content, and position of Tooltips based on the
 \code{SeriesConfigTooltips} properties stored in the Series' data
-object.  The usage of these utilities is optional, and Series
+object. The usage of these utilities is optional, and Series
 Components are free to provide their own properties for the
-configuration of Tooltips and their handling.  However, for
+configuration of Tooltips and their handling. However, for
 consistency reasons, the way of configuring Tooltips should not differ
 too much between different types of Series Components, and therefore
 it is recommended to use the utilities provided here unless there is a
