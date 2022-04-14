@@ -40,7 +40,6 @@ the dependencies between them are shown in Figure~\ref{fig:Modules}.
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {diagrams/respvis-modules.pdf}
 \caption[Modules of RespVis]{
-
 The five modules of the RespVis library and their submodules. The
 directional arrows indicate dependencies between modules.
 \imgcredit{Image created by the author of this thesis using
@@ -503,9 +502,9 @@ can be seen in Listing~\ref{list:LayouterCSS}.
   numbers=left,
   label=list:LayouterStructure,
   caption={[Replicated Layout Structure of an SVG Document]%
-The replicated layout element structure of an SVG document.  Every SVG
+The replicated layout element structure of an SVG document. Every SVG
 element has a corresponding layout element that has the same classes
-and \code{data-*} attributes.  In addition to the classes of the
+and \code{data-*} attributes. In addition to the classes of the
 original SVG element, every layout element also has the \code{layout}
 class to allow specific targeting of layout elements via CSS
 Selectors.
@@ -528,7 +527,7 @@ Selectors.
   label=list:LayouterCSS,
   caption={[CSS Rules to Style SVG]%
 These CSS rules are used to configure the layout and style of an SVG
-document that is being laid out by the Layouter.  Since the Selectors
+document that is being laid out by the Layouter. Since the selectors
 of these CSS rules only use \code{class} and \code{data-*} attributes
 to match elements, the same rule can be used to configure the
 properties of an SVG element and its corresponding layout element.
@@ -639,8 +638,8 @@ function twice and perform some operations only if the appropriate
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {diagrams/respvis-render-process.pdf}
 \caption[Render Process When Using the Layouter]{%
-This diagram shows the three phases of the render process when using
-the RespVis Layouter.  During the first render phase, every element
+The three phases of the render process when using
+the RespVis Layouter. During the first render phase, every element
 that affects the layout needs to be rendered.  The layout phase of the
 render process is equivalent to the layout process described in
 Figure~\ref{fig:LayoutProcess}. In this phase, the Layouter
@@ -657,20 +656,23 @@ the author of this thesis using \href{https://diagrams.net/}{diagrams.net}.}
 
 
 
+
+
+
 \subsection{Axes}
 
 Axes are implemented in the \code{axis.ts} file in the Core Module and
 are used to visualize scales that map abstract values to spatial
-dimensions.  Currently, only Cartesian Axes, which are distinguished
-by their position relative to a visualization's draw area, are
-provided by RespVis because only Cartesian Charts have been
-implemented so far.  The implementation has so far been focused on
-Left and Bottom Axes because they are the most commonly encountered
-types of Cartesian Axes and cover most use cases.  An Axis consists of
-ticks, an optional title, and an optional subtitle, where the ticks of
-an Axis are the actual visualization of the Axis' scale, and the title
-and subtitle can be specified for additional description.  An example
-of what a rendered Left and Bottom Axis might look like can be seen in
+dimensions. Currently, only Cartesian Axes, distinguished by their
+position relative to a visualization's draw area, are provided by
+RespVis, since only Cartesian Charts have been implemented so far.
+The implementation has so far been focused on Left and Bottom Axes,
+because they are the most commonly encountered types of Cartesian Axes
+and cover most use cases. An Axis consists of ticks, an optional
+title, and an optional subtitle, where the ticks of an Axis are the
+actual visualization of the Axis' scale, and the title and subtitle
+can be specified for additional description. An example of what a
+rendered Left and Bottom Axis might look like can be seen in
 Figure~\ref{fig:Axes}.
 
 \begin{figure}[tp]
@@ -678,60 +680,65 @@ Figure~\ref{fig:Axes}.
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {diagrams/axes.pdf}
 \caption[RespVis Axis Components]{%
-This figure shows how a rendered Left and Bottom Axis may look like.
-The Left Axis consists of a title, subtitle, and ticks, whereas the
-Bottom Axis only consists of ticks and a title.  \imgcredit{Image
-  created by the author of this thesis using RespVis and
-  \href{https://inkscape.org/}{Inkscape}.}  }
+A rendered Left Axis with ticks, a title, and a subtitle, and a
+Bottom Axis  with ticks and a title.
+\imgcredit{Image created by the author of this thesis using RespVis
+  and \href{https://inkscape.org/}{Inkscape}.}
+}
 \label{fig:Axes}
 \end{figure}
-  
+
 
 The \code{Axis} interface describes the shape of a data object with
 which an Axis can be configured.  It includes a \code{scale} property,
-which represents the scale that has to be visualized, the \code{title}
-and \code{subtitle} string properties, and the \code{configureAxis}
+representing the scale to be visualized, the \code{title} and
+\code{subtitle} string properties, and the \code{configureAxis}
 function property, which can be used to configure the underlying D3
-axis before rendering it.  Like most other components, axis components
+axis before rendering it. Like most other components, axis components
 consist of two main functions: a data creation function and a render
-function.  The \code{axisData} function is used to create an
-\code{Axis} data object from a \code{Partial<Axis>} object parameter
+function. The \code{axisData} function is used to create an
+\code{Axis} data object from a \code{Partial<Axis>} object parameter,
 where all non-set but required properties are filled with default
-values.  The \code{axisBottomRender} and \code{axisLeftRender}
+values. The \code{axisBottomRender} and \code{axisLeftRender}
 functions are used to render a Left and Bottom Axis in a composite
 element on which an \code{Axis} data object has been bound.  An Axis'
 root element is a CSS Grid container and defines the layout of the
 title, subtitle, and ticks elements.  The default configuration of a
 Left Axis positions these elements in a three-column layout in which
 the title, subtitle, and ticks elements are placed in this order from
-left to right.  For a Bottom Axis, the default configuration positions
-the same elements in a three-row layout in which the ticks, title, and
-subtitle elements are placed in this order from top to bottom.
+left to right. For a Bottom Axis, the default configuration positions
+the same elements in a three-row layout, in which the ticks, title,
+and subtitle elements are placed in this order from top to bottom.
 Furthermore, the title and subtitle elements of a Left Axis are
 oriented vertically to save horizontal space using the
-\code{textOrientation} utility function.  The RespVis Axis Components
-internally use the \code{axisBottom} and \code{axisLeft} functions
+\code{textOrientation} utility function. Internally, the RespVis Axis
+Components use the \code{axisBottom} and \code{axisLeft} functions
 from the D3 Axis Module \parencite{D3Axis} to render the ticks of an
-Axis.  Since these D3 functions use attributes to position and style
+Axis. Since these D3 functions use attributes to position and style
 elements, as many of these attributes as possible must be removed
 directly after the ticks have been rendered to enable their
 configuration via CSS.
 
 
+
+
+
+
 \subsection{Chart}
 \label{sec:Chart}
 
-Charts are high-level components that represent a complete
-visualization with Axes, Legends, and Series.  An example of a
-rendered RespVis Chart that includes two Axes, a Grouped Bar Series, a
-Label Series, and a Legend can be seen in Figure~\ref{fig:Chart}.  A
-Chart is typically rendered in the root \code{<svg>} element of an SVG
-document that has at least the \code{chart} class set in its
-\code{class} attribute and the appropriate SVG namespace set in its
-\code{xmlns} attribute.  These attributes can be set in more specific
-Chart Components either manually or via the \code{chartRender}
-function from the \code{chart.ts} file in the Core Module, which only
-sets these attributes.
+Charts are high-level components which represent a complete
+visualization with Axes, Legends, and Series. An example of a rendered
+RespVis Chart containing a Left Axis, a Bottom Axis, a Grouped Bar
+Series, a Label Series, and a Legend can be seen in
+Figure~\ref{fig:Chart}. A Chart is typically rendered in the root
+\code{<svg>} element of an SVG document that has at least the
+\code{chart} class set in its \code{class} attribute and the
+appropriate SVG namespace set in its \code{xmlns} attribute. These
+attributes can be set in more specific Chart Components either
+manually or via the \code{chartRender} function from the
+\code{chart.ts} file in the Core Module, which only sets these
+attributes.
 
 
 \begin{figure}[tp]
@@ -739,95 +746,99 @@ sets these attributes.
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {diagrams/chart.pdf}
 \caption[Chart Example]{%
-An example of a Chart that contains two Axes, a Grouped Bar Series, a
-Label Series and a Legend.  \imgcredit{Image created by the author of
-  this thesis.}
+An example of a Chart containing a Left Axis, a Bottom Axis,
+a Grouped Bar Series, a Label Series, and a Legend.
+\imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:Chart}
 \end{figure}
+% KA maybe need to annotate this figure to show the 5 components?
 
 
-As mentioned previously, RespVis currently contains only the
-implementations of Cartesian Charts, which visualize data in a
-Cartesian coordinate system.  The implementation of the base
-functionality of such Cartesian Charts is located in the
-\code{chart-cartesian.ts} file in the Core Module.  The
+As mentioned previously, RespVis currently only supports Cartesian
+Charts, which visualize data in a Cartesian coordinate system. The
+implementation of the base functionality of  Cartesian Charts is
+located in the \code{chart-cartesian.ts} file in the Core Module. The
 \code{ChartCartesian} interface describes a data object for the
 configuration of Cartesian Charts via the \code{xAxis} and
 \code{yAxis} \code{Axis} properties which describe the X and Y Axes of
-the Chart respectively.  Transposing Axes is a useful pattern to
+the Chart respectively. Transposing Axes is a useful pattern to
 improve the responsiveness of visualizations and can be configured
 using the \code{flipped} boolean property of \code{ChartCartesian}
-data objects.  If the \code{flipped} property is set to \code{false},
+data objects. If the \code{flipped} property is set to \code{false},
 the \code{xAxis} object is used to configure the Bottom Axis and the
-\code{yAxis} object is used to configure the Left Axis.  If it is set
+\code{yAxis} object is used to configure the Left Axis. If it is set
 to \code{true}, it is the other way around.
 
 The \code{chartCartesianData} function is used to create a
-\code{ChartCartesian} data object.  This function gets a partial data
-object with only those properties set that are of interest to the
+\code{ChartCartesian} data object. This function gets a partial data
+object with only those properties set which are of interest to the
 calling code, and all non-set properties are filled with default
-values.  The default values of the \code{xAxis} and \code{yAxis}
+values. The default values of the \code{xAxis} and \code{yAxis}
 properties are set by the \code{axisData} function from the Axis
-Module and the \code{flipped} property is initialized to \code{false}.
+Module. The \code{flipped} property is initialized to \code{false}.
 
-The rendering of Cartesian Charts is split into two functions that
-have to be called separately because not all parts of a Cartesian
-Chart can be rendered simultaneously.  The general structure of a
-Chart must be rendered before anything else can be rendered, as this
+The rendering of Cartesian Charts is split into two functions which
+have to be called separately, because not all parts of a Cartesian
+Chart can be rendered simultaneously. The general structure of a Chart
+must be rendered before anything else can be rendered, since this
 includes the draw area container element into which individual Series
-Components are rendered.  A Chart's Axes need fully initialized scales
-to be rendered correctly.  However, the range of a scale, i.e. the
+Components are rendered. A Chart's Axes need fully initialized scales
+to be rendered correctly. However, the range of a scale, i.e. the
 range of values into which abstract values are mapped, depends on the
 size of the draw area and is only set during the render function of
-the individual Series Components.  Therefore, the Axes of a Cartesian
-Chart must be rendered after Series Components to ensure fully
-initialized scales.
+the individual Series Components. Therefore, the Axes of a Cartesian
+Chart must be rendered after Series Components in order to ensure
+fully initialized scales.
 
 The structure of a Cartesian Chart is rendered with the
 \code{chartCartesianRender} function, which sets the necessary
 attributes and classes on the root element and attaches the draw area
-\code{<svg>} element to it.  The draw area is the container element
-into which the Series Components of a Chart are rendered.  An
-\code{<svg>} element without actual content is not able to catch input
-events, which means that it would, for example, not be possible to
-capture scroll events to control a zoom interaction when the cursor is
-over the empty area of the draw area.  To counteract this, a
-transparent \code{<rect>} background element that fills the whole draw
-area is added, which allows capturing input events even in empty
-areas.
+\code{<svg>} element to it. The draw area is the container element
+into which the Series Components of a Chart are rendered. An
+\code{<svg>} element without actual content is not able to receive
+input events, which means that it would, for example, not be possible
+to capture scroll events to control a zoom interaction when the cursor
+is over the empty area of the draw area. To counter this, a
+transparent \code{<rect>} background element filling the whole draw
+area is added, allows input events to be received even in empty areas.
 
 The \code{chartCartesianAxesRender} function is used to render the
-Axes of a Cartesian Chart.  This function must only be called on
-elements with a bound \code{ChartCartesian} data object and after the
-scales that are to be visualized by the Axes have been fully
-initialized.  Charts must first render the Chart's structure using the
+Axes of a Cartesian Chart. This function must only be called on
+elements with a bound \code{ChartCartesian} data object and only after
+the scales that are to be visualized by the Axes have been fully
+initialized. Charts must first render the Chart's structure using the
 \code{chartCartesianRender} function, followed by the desired Series
-Components, and only after those the Chart's Axes can be rendered
-using the \code{chartCartesianAxesRender} function.  The
+Components, and only then can the Chart's Axes be rendered using the
+\code{chartCartesianAxesRender} function. The
 \code{chartCartesianAxesRender} function creates two \code{<g>}
-elements and renders Left and a Bottom Axes in them.  Depending on
-whether the \code{flipped} property in the bound data object is set to
-\code{true} or \code{false}, the \code{xAxis} data object is used to
-configure the Bottom or Left Axis and the \code{yAxis} data object is
-used to configure the other one.  After the Axes are rendered, the
-\code{x-axis} class is set on the one the \code{x-axis} data object is
-bound to, and the \code{y-axis} class is set on the other one.
+elements and renders a Left Axis and a Bottom Axes in them. Depending
+on whether the \code{flipped} property in the bound data object is set
+to \code{true} or \code{false}, the \code{xAxis} data object is used
+to configure the Bottom Axis or Left Axis and the \code{yAxis} data
+object is used to configure the other. After the Axes are rendered,
+the \code{x-axis} class is set on the one the \code{x-axis} data
+object is bound to, and the \code{y-axis} class is set on the other
+one.
 
 The elements of a Cartesian Chart are positioned using a CSS Grid
-layout.  By default a grid is created which defines the
+layout. By default, a grid is created which defines the
 \code{axis-left}, \code{axis-bottom}, \code{draw-area}, and
-\code{legend} areas.  Most rows and columns of this grid are sized to
+\code{legend} areas. Most rows and columns of this grid are sized to
 fit their content, with the only exception being the row and column
 containing the draw area, which is set to fill the remaining space not
-occupied by the other rows and columns.  The default CSS configuration
-of a Cartesian Chart positions an eventual legend to the right of the
-draw area, but this can be changed by either adjusting the grid
-directly via CSS or activating one of the preconfigured positions via
-the \code{data-legend-position} attribute.  To simplify setting the
+occupied by the other rows and columns. The default CSS configuration
+of a Cartesian Chart positions any legend to the right of the draw
+area, but this can be changed by either adjusting the grid directly
+via CSS or activating one of the preconfigured positions via the
+\code{data-legend-position} attribute. To simplify setting the
 \code{data-legend-position} attribute, the \code{chartLegendPosition}
-function can be used, which sets this attribute to the value of a
+function can be used, which sets this attribute to the value of the
 passed \code{LegendPosition} enum parameter.
+
+
+
+
 
 
 \subsection{Chart Window}
