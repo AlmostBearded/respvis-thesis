@@ -979,22 +979,23 @@ when the user clicks on the menu item.
 
 
 
+
 \section{Legend Module}
 
-The Legend Module in the \code{src/lib/legend/} directory consists
-only of the \code{legend.ts} file, which contains the implementation
-of a Legend Component.  Legends are used to visualize scales whose
+The Legend Module in the \code{src/lib/legend/} directory currently
+comprises a sigle file \code{legend.ts}, containing the implementation
+of the Legend Component. Legends are used to visualize scales whose
 abstract values are not mapped to spatial dimensions in a coordinate
-system but to other visual properties such as colors, shapes, or
-sizes.  The Legend implemented in this module illustrates such scales
+system, but to other visual properties such as colors, shapes, or
+sizes. The Legend implemented in this module illustrates such scales
 by creating labeled, configurable symbols for every mapping and,
 therefore, this component is best suited for the visualization of
-discrete value mappings.  Continuous data dimensions can still be
+discrete value mappings. Continuous data dimensions can still be
 visualized with this component, but they must be approximated by
 dividing the continuous domain of values into equal discrete steps.
 An example demonstrating the use of the Legend Module can be found in
 the \code{legend.html} file in the \code{src/examples/} folder, and an
-excerpt of this example can be seen in Listing~\ref{list:Legend} with
+excerpt of this example can be seen in Listing~\ref{list:Legend}, with
 its rendering shown in Figure~\ref{fig:Legend}.
 
 \begin{samepage}
@@ -1012,12 +1013,12 @@ its rendering shown in Figure~\ref{fig:Legend}.
   caption={[Source Code of Legend Example]%
 The source code of the example implemented in the \code{legend.html}
 file in the \code{src/examples/} directory. When executed, this code
-results in the three Legends seen in Figure~\ref{fig:Legend}.
+results in the three Legends shown in Figure~\ref{fig:Legend}.
 Non-essential parts of the source code have been removed to focus on
-Legend-related configurations.  The horizontal Legend has been
-configured with the same data object as the rectangle symbol Legend,
-but the items of the horizontal Legend have been laid out horizontally
-via the \code{flex-direction: row} CSS property.
+Legend-related configurations. The horizontal Legend is configured
+with the same data object as the rectangle symbol Legend, but the
+items of the horizontal Legend are laid out horizontally via the
+\code{flex-direction: row} CSS property.
 },
 ]{listings/legend.html}
 \end{samepage}
@@ -1029,11 +1030,10 @@ via the \code{flex-direction: row} CSS property.
 \includegraphics[keepaspectratio,width=\linewidth / 2,height=\fullh]
 {diagrams/legend.pdf}
 \caption[Legend Example]{%
-These are the three resulting Legends that are being rendered by the
-source code in Listing~\ref{list:Legend}.  One Legend has been
-configured to have rectangles as symbols, one has been configured to
-have circles as symbols, and the last one has been configured with
-rectangle symbols but with horizontally laid out items.
+The three Legends resulting from the source code in
+Listing~\ref{list:Legend}. The first Legend has been configured to have
+rectangles as symbols, the second to have circles as
+symbols, and the third with rectangle symbols horizontally laid out.
 \imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:Legend}
@@ -1043,39 +1043,39 @@ rectangle symbols but with horizontally laid out items.
 
 A data object for the configuration of a Legend is defined by the
 \code{Legend} interface, which contains properties to describe the
-title, labels, and symbols of a Legend.  Symbols are configured via
-functions that take the boundaries calculated by the Layouter into
+title, labels, and symbols of a Legend. Symbols are configured via
+functions which take the boundaries calculated by the Layouter into
 account to set the \code{d} attributes of \code{<path>} elements.
 Legend symbols are rendered as \code{<path>} elements because these
 enable the rendering of arbitrary symbols that can be changed
 dynamically, whereas the usage of \code{<rect>} or \code{<circle>}
-elements would be much more restricting.  A disadvantage of using
+elements would be much more restrictive. A disadvantage of using
 \code{<path>} elements is that, since they require manual
 configuration of exact shapes via path definition strings, their usage
 is more tedious than the usage of more restricted SVG elements, and
 they require slightly more annotation effort when it comes to
-accessibility.  Colors of individual items in a Legend are indirectly
+accessibility. Colors of individual items in a Legend are indirectly
 configured via \code{data-style} attributes on items whose values are
-specified in the \code{Legend} data objects.  Some style classes, such
+specified in the \code{Legend} data objects. Some style classes, such
 as the \code{categorical-x} classes for categorical styling, are
 already provided by RespVis and handled in the library's distributable
-CSS file.  Furthermore, custom style classes can easily be added by
-simply handling them in user-specified CSS rules.  \code{Legend} data
+CSS file. Furthermore, custom style classes can easily be added by
+simply handling them in user-specified CSS rules. \code{Legend} data
 objects can be created with the \code{legendData} function, which
-receives a partial input object in which the properties that are not
+receives a partial input object in which the properties which are not
 of interest to the calling code are not required to be set and are
 populated with default values.
 
-A Legend is rendered into elements that have a \code{Legend} data
-object bound on them using the \code{legendRender} function.  This
+A Legend is rendered into elements which have a \code{Legend} data
+object bound on them using the \code{legendRender} function. This
 function sets the \code{legend} class on the root element, attaches a
 \code{<text>} element with which the title of the Legend is shown, and
 attaches a \code{<g>} element into which the individual items of the
-Legend are rendered via a data join.  To perform the data join with
+Legend are rendered via a data join. To perform the data join with
 which the items of the Legend are created, one \code{LegendItem} data
 object per item to be rendered is needed to describe individual legend
 items, and these are generated via transformation of the bound
-\code{Legend} data object.  Via a data join with these data objects,
+\code{Legend} data object. Via a data join with these data objects,
 one \code{<g>} element with the \code{legend-item} class is created
 for every legend item, to which a \code{<path>} element for the symbol
 and a \code{<text>} element for the associated label are attached.
@@ -1083,10 +1083,11 @@ The operations performed during this data join can be directly
 modified via the custom \code{enter}, \code{update}, and \code{exit}
 events, which are dispatched on the root element of the Legend and
 which respectively contain the data join's enter, update, or exit
-Selection in a property of the event object.  Also, the
+selection in a property of the event object. Also, the
 \code{legendRender} function sets the \code{data-style} and
 \code{data-key} attributes on the legend item elements to values
 configured on the bound \code{Legend} data object.
+
 
 
 
