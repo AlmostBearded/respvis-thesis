@@ -1636,19 +1636,37 @@ better compare subcategory contributions to category totals.
 
 \section{Point Module}
 
-Point Charts, also commonly known as Scatter Charts or Scatter Plots,
+Point charts, also commonly known as scatter charts or scatter plots,
 show the relationship between two variables by plotting them as points
-in a Cartesian coordinate system.  Each variable is used for
-determining a point's position on one of the coordinate system's Axes,
-and typically, these variables contain quantitative data.  However,
-the data type of the variables used to position points is not relevant
-as long as their values can be mapped to spatial dimensions via
-scales.  Point Charts are particularly suitable for discovering
-potential correlations and patterns between variables.  They can also
-visualize more than two variables simultaneously by encoding
-additional ones via colors and sizes of points.  Point Charts that
-encode an additional variable as the sizes of points are called Bubble
-Charts.
+in a cartesian coordinate system. Each of the two variable determines
+a point's position on one of the coordinate system's two Axes, and
+typically, these variables contain quantitative data. However, the
+data type of the variables used to position points is not relevant, as
+long as their values can be mapped to spatial dimensions via scales.
+Point charts are particularly suitable for discovering potential
+correlations and patterns between variables. They can also visualize
+more than two variables simultaneously by encoding additional
+variables via the colors, sizes, and shapes of the plotted points.
+Point charts which encode an additional variable as the sizes of
+points are called bubble charts.
+
+
+The Point Module is located in the \code{src/lib/point/} directory of
+the RespVis library and contains the implementation of Point Series,
+Point Charts, and Point Chart Windows. Point Series render a
+collection of \code{<circle>} elements, whose center positions are
+calculated by mapping arrays of X and Y values into the bounding boxes
+of the Series' root elements via X and Y scales. The colors of points
+are specified as style classes, and their radiuses can be configured,
+meaning that it is also possible to create Bubble Charts with this
+implementation. As with other Series, individual elements of Point
+Series are rendered via a data join using an array of data objects
+created through transforming the bound Series data object, and this
+data join can be customized by providing custom \code{enter},
+\code{update}, and \code{exit} event listeners. Point Charts are
+Cartesian Charts which contain Point Series in their draw areas and two
+Axes visualizing the scales used to render the Point Series.
+
 
 \begin{samepage}
 \lstinputlisting[%
@@ -1663,58 +1681,44 @@ Charts.
   numbers=left,
   label=list:PointChartWindow,
   caption={[Point Chart Window Example]%
-The source code that creates the Point Chart Window shown in
-Figure~\ref{fig:PointChartWindow}.  The Point Chart Window is
-configured with a bound data object that is initialized with the
+Example source code to create the Point Chart Window shown in
+Figure~\ref{fig:PointChartWindow}. The Point Chart Window is
+configured with a bound data object initialized with the
 \code{chartWindowPointData} function and rendered with the
-\code{chartWindowPointRender} function.  Since no special responsive
+\code{chartWindowPointRender} function. Since no special responsive
 behavior is desired in this example, the default resize behavior is
 attached to the Chart Window via the \code{chartWindowPointAutoResize}
 function.
 },
 ]{listings/point-chart-window.js}
 \end{samepage}
-  
+
+
+Point Chart Windows are Chart Windows which contain Point Charts
+nested into Layouters to handle the render process of these Charts so
+that their elements can be laid out with CSS, and decorate them with a
+Toolbar. Currently, the Toolbars of Point Chart Windows only contain
+SVG Download Tools because only a limited number of Tools, not suited
+for application on Point Charts, have been developed so far. Further
+Tools that can also be applied to Point Charts, such as Zoom and
+Quantitative Filter Tools, are planned for development, and once these
+are available, they will be added to the default Tools attached to the
+Toolbars of Point Chart Windows. Example source code to create a
+scalable Point Chart Window can be found in
+Listing~\ref{list:PointChartWindow}, and the resulting visualization
+is shown in Figure~\ref{fig:PointChartWindow}.
+
+
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/point-chart-window.png}
 \caption[Point Chart Window Example]{%
-The resulting Point Chart Window of the source code in
+The Point Chart Window resulting from the source code in
 Listing~\ref{list:PointChartWindow}.
 \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:PointChartWindow}
 \end{figure}
   
-
-
-The Point Module is located in the \code{src/lib/point/} directory of
-the RespVis library and contains the implementation of Point Series,
-Point Charts, and Point Chart Windows.  Point Series render a
-collection of \code{<circle>} elements whose center positions are
-calculated by mapping arrays of X and Y values into the bounding boxes
-of the Series' root elements via X and Y scales.  The colors of points
-are specified as style classes, and their radiuses can be configured,
-meaning that it is also possible to create Bubble Charts with this
-implementation.  As with other Series, individual elements of Point
-Series are rendered via a data join using an array of data objects
-created through transforming the bound Series data object, and this
-data join can be customized by providing custom \code{enter},
-\code{update}, and \code{exit} event listeners.  Point Charts are
-Cartesian Charts that contain Point Series in their draw areas and two
-Axes visualizing the scales used to render the Point Series.  Point
-Chart Windows are Chart Windows that contain Point Charts nested into
-Layouters, handle the render process of these Charts so that their
-elements can be laid out with CSS, and decorate them with a Toolbar.
-Currently, the Toolbars of Point Chart Windows only contain SVG
-Download Tools because only a limited number of Tools, not suited for
-application on Point Charts, have been developed so far.  Further
-Tools that can also be applied to Point Charts, such as Zoom and
-Quantitative Filter Tools, are planned for development, and once these
-are available, they will be added to the default Tools attached to the
-Toolbars of Point Chart Windows.  The source code to create a scalable
-Point Chart Window can be found in
-Listing~\ref{list:PointChartWindow}, and the visualization resulting
-from this source code is shown in Figure~\ref{fig:PointChartWindow}.
