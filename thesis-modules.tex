@@ -994,9 +994,9 @@ discrete value mappings. Continuous data dimensions can still be
 visualized with this component, but they must be approximated by
 dividing the continuous domain of values into equal discrete steps.
 An example demonstrating the use of the Legend Module can be found in
-the \code{legend.html} file in the \code{src/examples/} folder, and an
-excerpt of this example can be seen in Listing~\ref{list:Legend}, with
-its rendering shown in Figure~\ref{fig:Legend}.
+the \code{legend.html} file in the \code{src/examples/} folder. An
+excerpt from this example can be seen in Listing~\ref{list:Legend},
+with its rendering shown in Figure~\ref{fig:Legend}.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -1185,75 +1185,78 @@ good reason not to.
 
 \section{Bar Module}
 
-Bar Charts are used to compare the values of quantitative variables,
-hereafter referred to as values, that are uniquely associated with
-distinct values of qualitative variables, hereafter referred to as
-categories, by visualizing these variables as rectangles whose lengths
-are proportional to the quantitative values.  An example of variables
-that can be plotted using a Bar Chart would be countries with their
-populations, people with their ages, and browsers with their market
-shares.  Bar Charts have already been in use for quite a long time,
-with one of the earliest documented occurrences being
-\textcite{CommercialAndPoliticalAtlas}, and they are still among the
-most frequently encountered types of visualizations in the modern web.
+A bar chart is used to compare the values of a quantitative variable
+(values) uniquely associated with the distinct values of a qualitative
+variable (categories), using labelled rectangles whose lengths are
+proportional to the values. Examples of datasets suitable for plotting
+with a bar chart would be countries with their populations, people
+with their ages, and web browsers with their market shares. Bar charts
+have been in use for many centuries, with one of the earliest
+documented occurrences being \textcite{CommercialAndPoliticalAtlas},
+and are among the most frequently encountered types of visualizations
+in the modern web.
 
-The bars of a Bar Chart can either be horizontally or vertically
-oriented.  In Horizontal Bar Charts, sometimes also called Row Charts,
-categories are spread in equal intervals across the Y-Axis to define
+The bars of a bar chart can be either horizontally or vertically
+oriented. In horizontal bar charts, sometimes also called row charts,
+categories are spread in equal intervals across the y-axis to define
 the positions and heights of bars, and the associated values of
-categories are mapped on the X-Axis to determine their widths.
-Conversely, in Vertical Bar Charts, sometimes also called Column
-Charts, categories are spread in equal intervals across the X-Axis to
+categories are mapped on the x-axis to determine their widths.
+Conversely, in vertical bar charts, sometimes also called column
+charts, categories are spread in equal intervals across the x-axis to
 determine the positions and widths of bars, and the values of
-categories are mapped on the Y-Axis to determine their heights.
-Horizontal Bar Charts are better suited for display in narrow contexts
-than Vertical Bar Charts because category labels can be positioned
-more easily without having to rotate them and because these Charts can
+categories are mapped on the y-axis to determine their heights.
+Horizontal bar charts are better suited for display in narrow contexts
+than vertical bar charts, because category labels can be positioned
+more easily without having to rotate them and because these charts can
 be vertically extended by having the user scroll vertically, which is
-strongly preferable to horizontal scrolling.
+strongly preferable to scrolling horizontally.
+
 
 The Bar Module is located in the \code{src/lib/bars/} directory of the
 RespVis library and contains components to create Single-Series,
 Grouped Multi-Series, and Stacked Multi-Series Bar Charts that can be
-used in different situations.  For every type of Bar Chart, the Bar
+used in different situations. For every type of Bar Chart, the Bar
 Module provides a respective Series Component to render only the
 actual bars, a Chart Component to render a full Chart including bars,
 axes, and possible legends, and a Chart Window Component to render a
 full Chart embedded into a Layouter with additional tools provided via
-a Toolbar.  Higher-level components are more convenient to use, but
+a Toolbar. Higher-level components are more convenient to use, but
 they also impose more assumptions, and therefore restrictions, on
-lower-level components contained within them.  The implementations of
-the different types of Bar Charts and when which type is best used is
+lower-level components contained within them. The implementations of
+the different types of Bar Charts and when to best use which type is
 described in the following sections.
+
+
+
 
 
 \subsection{Single-Series Bars}
 
-Single-Series Bar Charts are what most people think of when thinking
-of Bar Charts.  They consist of only a single series of bars and can
+Single-series bar charts are what most people think of when thinking
+of bar charts. They consist of only a single series of bars and can
 therefore only visualize differences between categories associated
-with a singular quantitative value.  Categories of Single-Series Bar
-Charts are mapped to spatial dimensions via a band scale that
-partitions available space into equal intervals (bands) with
-configurable paddings between them.  Thus, the width of bars is
+with a single quantitative value at a time. The categories of a
+Single-Series Bar Chart are mapped to spatial dimensions via a band
+scale which partitions available space into equal intervals (bands)
+with configurable padding between them. Thus, the width of bars is
 calculated via the total number of categories, the range they are
-spread on, and the paddings between them.  The mapping of quantitative
-values to spatial dimensions in a Single-Series Bar Chart is performed
-using a continuous scale that maps abstract quantitative values stored
-in a dataset into a range of values between two extremes via a
-continuous interpolations function.  In most cases, a linear
-interpolation via a linear scale is used to map quantitative values,
-but visualization authors can choose other forms of interpolation,
-such as logarithmic interpolation via a logarithmic scale.
+spread on, and the padding between them. The mapping of quantitative
+values to spatial dimensions in a single-series bar chart is performed
+using a continuous scale which maps quantitative values stored in a
+dataset into a range of values between two extremes via a continuous
+interpolation function. In most cases, linear interpolation via a
+linear scale is used to map quantitative values, but visualization
+authors can choose other forms of interpolation, such as logarithmic
+interpolation via a logarithmic scale.
 
-Bar Series render collections of \code{<rect>} elements that represent
+Bar Series render collections of \code{<rect>} elements representing
 the bars in a Bar Chart's draw area, and they are the lowest-level
-components required for rendering Bar Charts.  Their implementation is
+components required for rendering Bar Charts. Their implementation is
 located in the \code{series-bar.ts} file of the Bar Module and
 contains the \code{SeriesBar} interface describing data objects to
 configure Bar Series, the \code{seriesBarData} function to create
 these data objects from partial data objects, and the
-\code{seriesBarRender} function to render Bar Series.  The
+\code{seriesBarRender} function to render Bar Series. The
 \code{SeriesBar} interface inherits Tooltip configuration properties
 from the \code{SeriesConfigTooltips} interface described in
 Section~\ref{sec:TooltipModule} and adds additional properties to
@@ -1263,95 +1266,71 @@ or horizontally, and properties to configure their colors and keys.
 After the desired \code{SeriesBar} data objects have been created and
 bound to \code{<svg>} or \code{<g>} elements, the
 \code{seriesBarRender} function can be used to render Bar Series on
-these elements.  During rendering, the bound \code{SeriesBar} data
+these elements. During rendering, the bound \code{SeriesBar} data
 object is transformed into an array of \code{Bar} data objects, and a
 data join with these data objects is performed to render the
-individual bars.  The output range of the scales used to map
+individual bars. The output range of the scales used to map
 categories and values to spatial dimensions is set to the dimensions
 of the Bar Series element's bounding box that has been previously
 calculated and stored in the \code{bounds} attribute by the Layouter.
 With these scales, the dimensions of bars are calculated, and enter,
 update, and exit transitions are utilized to interpolate them towards
-these new dimensions so that changes in visualization are easier to
-track, which leads to an improved experience for users.  As with all
+these new dimensions, so that changes in visualization are easier to
+track, which leads to an improved experience for users. As with all
 other Series, the \code{enter}, \code{update}, and \code{exit} events
-containing the respective data join Selections are dispatched on the
+containing the respective data join selections are dispatched on the
 Series' root element and allow the injection of custom behavior into
 the different phases of the Series' data join.
 
 Bar Charts are Cartesian Charts, as discussed in
-Section~\ref{sec:Chart}, that display a Bar Series with optional
+Section~\ref{sec:Chart}, which display a Bar Series with optional
 labels in their draw area and render the scales used to map categories
-and values to spatial dimensions as Axes.  Their implementation can be
+and values to spatial dimensions as Axes. Their implementation can be
 found in the \code{chart-bar.ts} file of the Bar Module, which
 contains the \code{ChartBar} interface to describe data objects used
 for the configuration of Bar Charts, the \code{chartBarData} function
 to create a fully initialized \code{ChartBar} data object from a
 partial input object, and the \code{chartBarRender} function to render
-Bar Charts on \code{<svg>} or \code{<g>} elements to which
-\code{ChartBar} data objects have been bound.  The \code{ChartBar}
+Bar Charts as \code{<svg>} or \code{<g>} elements to which
+\code{ChartBar} data objects have been bound. The \code{ChartBar}
 interface inherits all properties of the \code{ChartCartesian} and
 \code{SeriesBar} interfaces and adds additional properties for the
-configuration of bar labels.  It is not necessary to manually specify
+configuration of bar labels. It is not necessary to manually specify
 all the offered properties of this interface because the
 \code{chartBarData} function initializes all of them with sensible
-defaults that are derived from the properties callers are interested
-in and which have been specified in the partial data object passed to
-this function.  The \code{chartBarRender} function is quite
-fundamental as it simply initializes a Cartesian Chart and renders a
-Bar Series whose configuration is derived from the \code{ChartBar}
-data object bound to the Chart's element and an optional series of
-labels to annotate the bars of the Bar Series into the Cartesian
-Chart's draw area.  Furthermore, the scales used for rendering the Bar
-Series are visualized as the Left and Bottom Axes of the Cartesian
-Chart, and a \code{mouseover} event listener that highlights bars and
-their corresponding ticks on the category axis is attached to bars.
+defaults derived from the properties callers are interested in and
+which have been specified in the partial data object passed to this
+function. The \code{chartBarRender} function simply initializes a
+Cartesian Chart and renders a Bar Series whose configuration is
+derived from the \code{ChartBar} data object bound to the Chart's
+element and an optional series of labels to annotate the bars of the
+Bar Series into the Cartesian Chart's draw area. Furthermore, the
+scales used for rendering the Bar Series are visualized as Left and
+Bottom Axes of the Cartesian Chart, and a \code{mouseover} event
+listener to highlight bars and their corresponding ticks on the
+category axis is attached to bars.
 
-Bar Chart Windows are high-level components that wrap a Bar Chart into
-a Layouter so its elements can be laid out with CSS, and they also add
-a Toolbar containing tools to filter a Bar Chart's categories and
-download the SVG document representing them.  Their implementation can
+Bar Chart Windows are high-level components which wrap a Bar Chart
+into a Layouter so its elements can be laid out with CSS. They also
+add a Toolbar containing tools to filter a Bar Chart's categories and
+download an SVG version of the current chart. Their implementation can
 be found in the \code{chart-window-bar.ts} file of the Bar Module,
 which contains the \code{ChartWindowBar} interface to describe data
 objects for the configuration of Bar Chart Windows, the
 \code{chartWindowBarData} function to create a fully initialized
 \code{ChartWindowBar} data object from a partial input object
 containing only relevant properties, and the
-\code{chartWindowBarRender} function to render a Bar Chart Window on a
+\code{chartWindowBarRender} function to render a Bar Chart Window as a
 \code{<div>} element onto which a \code{ChartWindowBar} data object
-has been bound.  The \code{ChartWindowBar} interface inherits all
+has been bound. The \code{ChartWindowBar} interface inherits all
 properties of the \code{ChartBar} interface to configure the wrapped
 Bar Chart and adds additional properties needed for the filtering of
-categories.  Bar Chart Windows are rendered with the
+categories. Bar Chart Windows are rendered with the
 \code{chartWindowBarRender} function, which renders a Toolbar
 including a Nominal Filtering Tool for categories and an SVG Download
 Tool, initializes the nested Bar Chart with the filtered values, and
 renders it, according to the render process required by the Layouter
-defined in Section~\ref{sec:Layouter}, twice with a layout computation
-step between both renderings.  By default, Bar Chart Windows are not
-automatically updated when the viewport size changes or if their
-categories are filtered.  Instead, a custom \code{resize} event
-listener in which the Chart Window is responsively reconfigured
-according to the changed viewport size and subsequently rerendered via
-the \code{chartWindowBarRender} function has to be attached to the
-Chart Window's element.  Furthermore, Bar Chart Windows dispatch
-custom \code{categoryfilter} events containing the currently active
-categories whenever categories are activated or deactivated via the
-Nominal Filtering Tool.  These events can be used to responsively
-reconfigure Bar Chart Windows concerning the newly active categories
-by adding a custom \code{categoryfilter} event listener that updates
-the configuration of the Bar Chart Window accordingly and rerenders
-it.  If no special configuration is required when the viewport size or
-the category filtering changes, then the
-\code{chartWindowBarAutoResize} and
-\code{chartWindowBarAutoFilterCategories} functions can be used to
-attach custom \code{resize} and \code{categoryfilter} event listeners
-that implement the default behavior.  A simple example of how a
-scalable Bar Chart Window with filterable categories can be created is
-shown in Listing~\ref{list:BarChartWindow} and the resulting
-visualization of this code can be seen in
-Figure~\ref{fig:BarChartWindow}.
-
+defined in Section~\ref{sec:Layouter}.
 
 
 \begin{samepage}
@@ -1367,11 +1346,11 @@ Figure~\ref{fig:BarChartWindow}.
   numbers=left,
   label=list:BarChartWindow,
   caption={[Bar Chart Window Example]%
-The example source code that creates the Bar Chart Window seen in
-Figure~\ref{fig:BarChartWindow}.  This Bar Chart Window is configured
+The example source code to create the Bar Chart Window shown in
+Figure~\ref{fig:BarChartWindow}. This Bar Chart Window is configured
 with the bound data object initialized with the
 \code{chartWindowBarData} function and rendered with the
-\code{chartWindowBarRender} function.  Since no special responsive
+\code{chartWindowBarRender} function. Since no special responsive
 behavior is desired in this example, the default resize and category
 filter behavior is attached to the Chart Window via the
 \code{chartWindowBarAutoResize} and
@@ -1381,15 +1360,38 @@ filter behavior is attached to the Chart Window via the
 \end{samepage}
   
 
+By default, Bar Chart Windows are not automatically updated when the
+viewport size changes or if their categories are filtered. Instead, a
+custom \code{resize} event listener is attached to the Chart Window's
+element, in which the Chart Window is responsively reconfigured
+according to the changed viewport size and subsequently rerendered via
+the \code{chartWindowBarRender} function. Furthermore, Bar Chart
+Windows dispatch custom \code{categoryfilter} events containing the
+currently active categories whenever categories are activated or
+deactivated via the Nominal Filtering Tool. These events can be used
+to responsively reconfigure Bar Chart Windows according to the
+currently active categories by adding a custom \code{categoryfilter}
+event listener which updates the configuration of the Bar Chart Window
+accordingly and rerenders it. If no special configuration is required
+when the viewport size or the category filtering changes, then the
+\code{chartWindowBarAutoResize} and
+\code{chartWindowBarAutoFilterCategories} functions can be used to
+attach custom \code{resize} and \code{categoryfilter} event listeners
+to implement the default behavior. A simple example of how a scalable
+Bar Chart Window with filterable categories can be created is shown in
+Listing~\ref{list:BarChartWindow} and the resulting visualization is
+shown in Figure~\ref{fig:BarChartWindow}.
+
+
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/bar-chart-window.png}
 \caption[Bar Chart Window Example]{%
 The Bar Chart Window resulting from the example code in
-Listing~\ref{list:BarChartWindow}.  \imgcredit{Image created by the
-  author of this thesis using RespVis.}
+Listing~\ref{list:BarChartWindow}.
+\imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:BarChartWindow}
 \end{figure}
@@ -1397,68 +1399,69 @@ Listing~\ref{list:BarChartWindow}.  \imgcredit{Image created by the
 
 
 
+
+
 \subsection{Grouped Bars}
 
-Grouped Bar Charts, sometimes also called Clustered or Multi-Series
-Bar Charts, consist of multiple series of bars and are used to
+Grouped bar charts, sometimes also called clustered or multi-series
+bar charts, consist of multiple series of bars and are used to
 visualize differences between categories where each category is
-associated with a series of quantitative variables.  Every category
+associated with a number of quantitative variables. Every category
 must be associated with the same number of quantitative variables,
 effectively splitting categories into subcategories, and all values
 assigned to these subcategories must be comparable with one another,
-meaning they must have the same units and scales.  As with
-Single-Series Bar Charts, categories in Grouped Bar Charts are also
+meaning they must have the same units and scales. As with
+single-series bar charts, categories in grouped bar charts are also
 mapped to spatial dimensions using band scales, but here, two
-different band scales have to be applied.  The category band scale
-divides all the available space along either the X or Y-Axis into
+different band scales have to be applied. The category band scale
+divides the available space along either the x or y-axis into
 equal intervals based on the number of categories, whereas the
 subcategory band scale further divides these intervals into even
-smaller intervals based on the number of subcategories.  Quantitative
+smaller intervals based on the number of subcategories. Quantitative
 values are again mapped to spatial dimensions via a single continuous
-scale that must be used for all of them.
+scale which must be used for all of them.
 
 The Bar Module provides the Grouped Bar Series, Grouped Bar Chart, and
 Grouped Bar Chart Window Components, which are very similar to their
-Single-Series Bar Chart counterparts, to render Grouped Bar Charts in
-different levels of hierarchy.  Grouped Bar Series are the
-lowest-level components of these and render a collection of
-\code{<rect>} elements meant for display in the draw area of a Grouped
-Bar Chart.  The difference between a Grouped Bar Series and a
-Single-Series Bar Series is that this one offers additional properties
-needed for the configuration of subcategories and that other
-properties that specified as one-dimensional arrays in Single-Series
-Bar Series are here required to hold two-dimensional arrays so that
-their values can be assigned to the two-dimensionally grouped bars.
-All bars that belong to the same subcategory have the same style to
-simplify their comparison across all categories.  Grouped Bar Charts
-are Cartesian Charts that contain a Grouped Bar Series with optional
-labels in their draw area, Left and Bottom Axes that visualize the
-scales used by this Grouped Bar Series, and a Legend that describes
-the different subcategories.  These Charts also attach event listeners
-to various elements to highlight bars, labels, ticks on the category
-axis, and Legend items that semantically belong together.  Grouped Bar
-Chart Windows are the highest-level components to render
-visualizations based on Grouped Bars.  They contain Grouped Bar Charts
+Single-Series Bar Chart counterparts, to render grouped bar charts in
+different levels of hierarchy. Grouped Bar Series are the lowest-level
+components of these and render a collection of \code{<rect>} elements
+meant for display in the draw area of a Grouped Bar Chart. The
+difference between a Grouped Bar Series and a Single-Series Bar Series
+is that this one offers additional properties needed for the
+configuration of subcategories and that other properties specified as
+one-dimensional arrays in Single-Series Bar Series are here required
+to hold two-dimensional arrays so that their values can be assigned to
+the two-dimensionally grouped bars. All bars belonging to the same
+subcategory have the same style to simplify their comparison across
+all categories. Grouped Bar Charts are Cartesian Charts which contain a
+Grouped Bar Series with optional labels in their draw area, Left and
+Bottom Axes that visualize the scales used by this Grouped Bar Series,
+and a Legend that describes the different subcategories. These Charts
+also attach event listeners to various elements to highlight bars,
+labels, ticks on the category axis, and Legend items that semantically
+belong together.
+
+Grouped Bar Chart Windows are the highest-level components to render
+visualizations based on Grouped Bars. They contain Grouped Bar Charts
 wrapped inside Layouters and render them following the render process
 defined in Section~\ref{sec:Layouter} to allow positioning of their
-elements via CSS.  Furthermore, they decorate their nested Charts with
+elements via CSS. Furthermore, they decorate their nested Charts with
 Toolbars containing tools to download them as SVG documents and filter
-their categories and subcategories.  Every time the user interacts
-with these Nominal Filtering Tools to change the configuration of
-displayed categories and subcategories, the \code{categoryfilter} and
-\code{subcategoryfilter} events are being dispatched, respectively
-containing the newly active categories and subcategories.
-Visualization authors can either implement special resize and filter
-behavior by attaching custom listeners to these events, or they can
-activate the default behavior via the
-\code{chartWindowBarGroupedAutoResize},
+their categories and subcategories. Every time the user interacts with
+these Nominal Filtering Tools to change the configuration of displayed
+categories and subcategories, the \code{categoryfilter} and
+\code{subcategoryfilter} events are dispatched, containing the newly
+active categories and subcategories respectively. Visualization
+authors can either implement special resize and filter behavior by
+attaching custom listeners to these events, or can activate the
+default behavior via the \code{chartWindowBarGroupedAutoResize},
 \code{chartWindowBarGroupedAutoFilterCategories}, and
 \code{chartWindowBarGroupedAutoFilterSubcategories} functions.
 Example code to create a scalable Grouped Bar Chart Window whose
-categories and subcategories can be filtered via the Toolbar can be
-seen in Listing~\ref{list:GroupedBarChartWindow} and the visualization
-resulting from this code is shown in
-Figure~\ref{fig:GroupedBarChartWindow}.
+categories and subcategories can be filtered via the Toolbar is shown
+in Listing~\ref{list:GroupedBarChartWindow} and the resulting
+visualization is shown in Figure~\ref{fig:GroupedBarChartWindow}.
 
 
 
@@ -1475,11 +1478,11 @@ Figure~\ref{fig:GroupedBarChartWindow}.
   numbers=left,
   label=list:GroupedBarChartWindow,
   caption={[Grouped Bar Chart Window Example]%
-This source code creates the Grouped Bar Chart Window shown in
-Figure~\ref{fig:GroupedBarChartWindow}.  The Grouped Bar Chart Window
-is configured via a bound data object that is initialized with the
+Example source code to create the Grouped Bar Chart Window shown in
+Figure~\ref{fig:GroupedBarChartWindow}. The Grouped Bar Chart Window
+is configured via a bound data object which is initialized with the
 \code{chartWindowBarGroupedData} function and rendered with the
-\code{chartWindowBarGroupedRender} function.  Since no special
+\code{chartWindowBarGroupedRender} function. Since no special
 responsive behavior is desired in this example, the default resize,
 category filter, and subcategory filter behavior is attached to the
 Chart Window via the \code{chartWindowBarGroupedAutoResize},
@@ -1496,63 +1499,67 @@ Chart Window via the \code{chartWindowBarGroupedAutoResize},
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {images/grouped-bar-chart-window.png}
 \caption[Grouped Bar Chart Window Example]{%
-
-The resulting Grouped Bar Chart Window from the example source code in
-Listing~\ref{list:GroupedBarChartWindow}.  The Tool Menu popup has
-been manually displaced to not cover the legend.  \imgcredit{Image
-  created by the author of this thesis using RespVis.}
+The Grouped Bar Chart Window resulting from the example source code in
+Listing~\ref{list:GroupedBarChartWindow}. The Tool Menu popup has
+been manually displaced to not cover the legend.
+\imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:GroupedBarChartWindow}
 \end{figure}
 
 
 
+
+
+
+
+
 \subsection{Stacked Bars}
 
-Stacked Bar Charts are Multi-Series Bar Charts in which individual
-series of bars are rendered as stacks rather than as clusters.  Since
-the bars of Stacked Bar Charts do not share a common baseline, these
-Charts are not well-suited for comparing individual subcategories
+Stacked bar charts are multi-series bar charts in which individual
+series of bars are rendered as stacks rather than as clusters. Since
+the bars of stacked bar charts do not share a common baseline, these
+charts are not well-suited for comparing individual subcategories
 across multiple categories but rather for approximating the
-contributions of subcategories to the totals of their categories.  A
+contributions of subcategories to the totals of their categories. A
 bar's color is determined by its subcategory so that all bars that
-have the same subcategory are colored equally.  Percent Stacked Bar
-Charts are variants of Stacked Bar Charts in which the totals of all
-categories are transformed to equal 100\% by using the quantitative
-values of subcategories as ratios of a whole.  Due to this
-transformation, all stacks of bars are of equal length, which means
-the information about their totals is being lost, but on the contrary,
-the share that subcategories contribute to their categories is
-emphasized more strongly than in ordinary Stacked Bar Charts.  Bar
-stacks are created by splitting the category axis into equal intervals
-via a band scale into which bars representing the different
-subcategories are stacked on top of one another.  The lengths of
-stacked bars are proportional to their quantitative values and are
-calculated via a continuous scale that maps these values into the
-range of the value axis.
+have the same subcategory are colored equally. Percent stacked bar
+charts are variants of stacked bar charts, in which the totals of all
+categories are transformed to equal 100\% using the quantitative
+values of subcategories as ratios of a whole. Due to this
+transformation, all stacks of bars are of equal length, meaning the
+information about their totals is lost, but the share subcategories
+contribute to their categories is emphasized more strongly than in
+ordinary stacked bar charts. Bar stacks are created by splitting the
+category axis into equal intervals via a band scale into which bars
+representing the different subcategories are stacked on top of one
+another. The lengths of stacked bars are proportional to their
+quantitative values and are calculated via a continuous scale which
+maps these values into the range of the value axis.
+
 
 The RespVis library provides a Series, a Chart, and a Chart Window
 Component to render Stacked Bar Charts, all of which are highly
-similar to their Grouped Bar counterparts.  Bars in Stacked Bar Series
-are two-dimensionally grouped (category/subcategory), and
-configuration properties that affect individual bars are specified as
-two-dimensional arrays.  The main difference between Stacked Bar
-Series and Grouped Bar Series lies in how the positions and extents of
-bars are calculated.  Stacked Bar Charts are, just like Grouped Bar
-Charts, Cartesian Charts that consist of a Stacked Bar Series with
-optional labels, two Axes, and a Legend.  Furthermore, Stacked Bar
-Chart Windows are also equivalent to Grouped Bar Chart Windows as they
-wrap a Stacked Bar Chart into a Layouter, manage their render process,
-and decorate it with a Toolbar containing two Nominal Filtering Tools
-to filter categories and subcategories.  Percent Stacked Bar Charts
-can either be rendered by directly setting percental values that lead
-to all category totals summing up to 100\% or by enabling the
+similar to their Grouped Bar counterparts. Bars in Stacked Bar Series
+are grouped two-dimensionally (category/subcategory), and
+configuration properties affecting individual bars are specified as
+two-dimensional arrays. The main difference between Stacked Bar Series
+and Grouped Bar Series lies in how the positions and extents of bars
+are calculated. Stacked Bar Charts are, just like Grouped Bar Charts,
+Cartesian Charts consisting of a Stacked Bar Series with optional
+labels, two Axes, and a Legend. Furthermore, Stacked Bar Chart Windows
+are also equivalent to Grouped Bar Chart Windows as they wrap a
+Stacked Bar Chart into a Layouter, manage their render process, and
+decorate it with a Toolbar containing two Nominal Filtering Tools to
+filter categories and subcategories. Percent Stacked Bar Charts can be
+rendered either by directly setting percentual values that lead to all
+category totals summing up to 100\% or by enabling the
 \code{valuesAsRatios} configuration property, which causes
-quantitative values to be treated as ratios that are transformed to
-percental shares of their category totals during rendering.
-Listing~\ref{list:StackedBarChartWindow} shows the necessary RespVis
-code to create the scalable Stacked Bar Chart Window whose categories
-and subcategories can be filtered displayed in
+quantitative values to be treated as ratios which are transformed to
+percentual shares of their category totals during rendering.
+Listing~\ref{list:StackedBarChartWindow} shows example RespVis
+code to create a scalable Stacked Bar Chart Window whose categories
+and subcategories can be filtered, the chart itself is shown in
 Figure~\ref{fig:StackedBarChartWindow}.
  
 
@@ -1569,26 +1576,32 @@ Figure~\ref{fig:StackedBarChartWindow}.
   numbers=left,
   label=list:StackedBarChartWindow,
   caption={[Stacked Bar Chart Window Example]%
-The source code that creates the Stacked Bar Chart Window shown in
-Figure~\ref{fig:StackedBarChartWindow}.  The Stacked Bar Chart Window
-is configured with the bound data object that is initialized via the
+Example source code to create the Stacked Bar Chart Window shown in
+Figure~\ref{fig:StackedBarChartWindow1}. The Stacked Bar Chart Window
+is configured with the bound data object initialized via the
 \code{chartWindowBarStackedData} function and rendered with the
-\code{chartWindowBarStackedRender} function.  Since no special
+\code{chartWindowBarStackedRender} function. Since no special
 responsive behavior is desired in this example, the default resize,
 category filter, and subcategory filter behavior is attached to the
 Chart Window via the \code{chartWindowBarStackedAutoResize},
 \code{chartWindowBarStackedAutoFilterCategories}, and
 \code{chartWindowBarStackedAutoFilterSubcategories} functions.
+Setting the \code{valuesAsRatios} variable to \code{true}
+would result in the Percent Stacked Bar Chart shown in
+Figure~\ref{fig:StackedBarChartWindow2}.
 },
 ]{listings/stacked-bar-chart-window.js}
 \end{samepage}
+
+
+
 
 
 \begin{figure}[tp]
 \centering
 \subfloat[Stacked Bar Chart]{%
 \hspace{1cm}
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/stacked-bar-chart-window.png}
 \hspace{1cm}
 \label{fig:StackedBarChartWindow1}
@@ -1596,14 +1609,14 @@ Chart Window via the \code{chartWindowBarStackedAutoResize},
 \hspace{1cm}
 \subfloat[Percent Stacked Bar Chart]{%
 \hspace{1cm}
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {images/percent-stacked-bar-chart-window.png}
 \hspace{1cm}
 \label{fig:StackedBarChartWindow2}
 }
 \caption[Stacked Bar Chart Window Example]{%
-The Stacked Bar Charts rendered by the source code in
-Listing~\ref{list:StackedBarChartWindow}.  The Tool Menu popup has
+The Stacked Bar Chart and Percent Stacked Bar Chart rendered by the source
+code in Listing~\ref{list:StackedBarChartWindow}. The Tool Menu popup has
 been manually displaced to not cover the legend.
 \subref{fig:StackedBarChartWindow1} An ordinary Stacked Bar Chart to
 compare category totals and subcategory contributions to these totals.
@@ -1614,6 +1627,8 @@ better compare subcategory contributions to category totals.
 \label{fig:StackedBarChartWindow}
 \end{figure}
   
+
+
 
 
 
