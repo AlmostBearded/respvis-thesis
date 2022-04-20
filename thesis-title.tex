@@ -21,7 +21,7 @@
     \begin{spacing}{1.1}
         \Huge\sffamily\bfseries
         RespVis:\\
-        A Low-Level, D3-Based Library\\
+        A Browser-Based, D3 Extension Library\\
         for Creating Responsive SVG Charts
     \end{spacing}
 
@@ -59,7 +59,7 @@
     \begin{spacing}{1.1}
         \huge\sffamily\bfseries
         RespVis:\\
-        A Low-Level, D3-Based Library\\
+        A Browser-Based, D3 Extension Library\\
         for Creating Responsive SVG Charts
     \end{spacing}
 
@@ -77,7 +77,7 @@
 
     \vspace{5mm}
 
-    {\normalsize\sffamily Diplom-Ingenieur}  % todo: shouldn't this be "Master of Science"?
+    {\normalsize\sffamily Master of Science}
 
     \vspace{5mm}
 
@@ -110,13 +110,13 @@
 
     \vspace{1cm}
 
-    {\normalsize\sffamily Graz, \thisdate}
+    {\normalsize\sffamily Villach, \thisdate}
 
 
 
     \vfill
 
-    {\footnotesize\sffamily \copyright ~ Copyright \thisyear by Peter Oberrauner,
+    {\footnotesize\sffamily \copyright ~ Copyright \thisyear{} by Peter Oberrauner,
         except as otherwise noted.}
 
     {\footnotesize\sffamily This work is placed under a
@@ -147,8 +147,8 @@
         \begin{spacing}{1.1}
             \huge\sffamily\bfseries
             RespVis:\\
-            Ein Low-Level Komponenten-Basiertes Framework\\
-            zum Erstellen von Responsiven SVG Diagrammen
+            Eine Browser-Basierte, D3 Erweiterungsbibliothek\\
+            zur Erstellung von Responsiven SVG Diagrammen
         \end{spacing}
 
         \vspace{2cm}
@@ -165,6 +165,7 @@
 
         \vspace{5mm}
 
+        \TODO{Should this also be Master of Science?}
         {\normalsize\sffamily Diplom-Ingenieur}
 
         \vspace{5mm}
@@ -198,7 +199,7 @@
 
         \vspace{1cm}
 
-        {\normalsize\sffamily Graz, \thisdate}
+        {\normalsize\sffamily Villach, \thisdate}
 
 
         \vspace{1cm}
@@ -209,7 +210,7 @@
 
         \vfill
 
-        {\footnotesize\sffamily \copyright ~ Copyright \thisyear von Peter Oberrauner, sofern
+        {\footnotesize\sffamily \copyright ~ Copyright \thisyear{} von Peter Oberrauner, sofern
             nicht anders gekennzeichnet.}
 
         {\footnotesize\sffamily Diese Arbeit steht unter der Creative Commons
@@ -290,6 +291,7 @@
     }
 
 \end{otherlanguage}
+\TODO{Sign only printed version or add signature to the digital version?}
 
 
 
@@ -305,17 +307,11 @@
     {\Large\sffamily\bfseries Abstract}
 \end{center}
 
-\TODO{Write Abstract}
-
-keywords:
-
-\begin{itemize}
-    \item responsive, visualisation, component-based, low-level, framework
-    \item bar chart, line chart, scatterplot, ...  [parcoord]
-    \item JavaScript, TypeScript, D3
-    \item SVG, Canvas, WebGL
-    \item Node, gulp, rollup
-\end{itemize}
+RespVis is an open-source, browser-based library for rendering responsive information visualizations as SVG documents whose elements are mostly styled and positioned via CSS.
+It is implemented as a NodeJS package in TypeScript and designed as an extension of D3, thus offering the complete flexibility of D3's convenient document manipulation API to its users.
+RespVis consists of various packages containing modules to render low-level visualization components like axes, legends, and series of graphical primitives and high-level premade visualizations for common chart types like bar charts, line charts, and point charts.
+The modules provided by RespVis can be used to create responsive visualizations by either  composing them from low-level components or by responsively changing the configurations of premade, high-level visualizations.
+One of the main contributions of RespVis is its custom layouter, which enables the various components of a chart to be positioned via any of the CSS layout mechanisms like Grid and Flexbox supported by browsers.
 
 
 
