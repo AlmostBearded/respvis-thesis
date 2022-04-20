@@ -1133,28 +1133,27 @@ Components. Tooltips are merely HTML \code{<div>} elements with the
 initialized with the \code{tooltip} function. Their visibility,
 position, and content is controlled via the \code{tooltipShow},
 \code{tooltipHide}, \code{tooltipPosition}, and \code{tooltipContent}
-functions in the \code{tooltip.ts} file of the Tooltip Module. Due to
-the support of multiple simultaneous Tooltips, all of these functions
-have to be passed the Tooltip element they should affect or a
-\code{null} value in place of it to indicate usage of a default
-element attached to the body of the active document. Tooltips are
-shown and hidden via the \code{tooltipShow} and \code{tooltipHide}
-functions, which respectively add or remove the \code{show} class to
-the classes of the Tooltip element. The actual showing and hiding is
-done in CSS by setting the \code{opacity} property of the element
-depending on whether or not the \code{show} class is set. Positions
-of Tooltips are configured via the \code{tooltipPosition} function.
-This function calculates positions through an anchor position in
-viewport coordinates and a directional offset from that anchor.
-Specifying the anchor position is necessary, but the directional
-offset can be omitted to have a sensible one chosen by the
-\code{tooltipPosition} function, so that the Tooltip is always placed
-inside the visible area of the browser. The actual positioning is
-again done in CSS by setting a combination of the \code{left},
-\code{right}, \code{bottom}, and \code{top} properties depending on
-the offset direction of the Tooltip. A Tooltip's content can be set
-with the \code{tooltipContent} function, which sets the Tooltip's inner
-HTML to the HTML string passed to the function.
+functions in the \code{tooltip.ts} file of the Tooltip Module. Since
+RespVis supports multiple simultaneous Tooltips, all of these
+functions have to be passed the Tooltip element they should affect.
+Alternatively, passing a \code{null} value operates on the default
+Tooltip. Tooltips are shown and hidden via the \code{tooltipShow} and
+\code{tooltipHide} functions, which respectively add or remove the
+\code{show} class to the classes of the Tooltip element. The actual
+showing and hiding is done in CSS by setting the \code{opacity}
+property of the element depending on whether or not the \code{show}
+class is set. Positions of Tooltips are configured via the
+\code{tooltipPosition} function.  This function calculates positions
+through an anchor position in viewport coordinates and a directional
+offset from that anchor.  Specifying the anchor position is necessary,
+but the directional offset can be omitted to have a sensible one
+chosen by the \code{tooltipPosition} function, so that the Tooltip is
+always placed inside the visible area of the browser. The actual
+positioning is again done in CSS by setting a combination of the
+\code{left}, \code{right}, \code{bottom}, and \code{top} properties
+depending on the offset direction of the Tooltip. A Tooltip's content
+can be set with the \code{tooltipContent} function, which sets the
+Tooltip's inner HTML to the HTML string passed to the function.
 
 Apart from Tooltips, the Tooltip Module also contains utility
 functions to simplify the setup and handling of Tooltips on
@@ -1236,7 +1235,7 @@ Single-series bar charts are what most people think of when thinking
 of bar charts. They consist of only a single series of bars and can
 therefore only visualize differences between categories associated
 with a single quantitative value at a time. The categories of a
-Single-Series Bar Chart are mapped to spatial dimensions via a band
+single-series bar chart are mapped to spatial dimensions via a band
 scale which partitions available space into equal intervals (bands)
 with configurable padding between them. Thus, the width of bars is
 calculated via the total number of categories, the range they are
@@ -1249,38 +1248,39 @@ linear scale is used to map quantitative values, but visualization
 authors can choose other forms of interpolation, such as logarithmic
 interpolation via a logarithmic scale.
 
-Bar Series render collections of \code{<rect>} elements representing
-the bars in a Bar Chart's draw area, and they are the lowest-level
-components required for rendering Bar Charts. Their implementation is
-located in the \code{series-bar.ts} file of the Bar Module and
-contains the \code{SeriesBar} interface describing data objects to
-configure Bar Series, the \code{seriesBarData} function to create
-these data objects from partial data objects, and the
-\code{seriesBarRender} function to render Bar Series. The
-\code{SeriesBar} interface inherits Tooltip configuration properties
-from the \code{SeriesConfigTooltips} interface described in
-Section~\ref{sec:TooltipModule} and adds additional properties to
-configure the used categories and values, the scales to map them to
-spatial dimensions, whether or not bars should be oriented vertically
-or horizontally, and properties to configure their colors and keys.
-After the desired \code{SeriesBar} data objects have been created and
-bound to \code{<svg>} or \code{<g>} elements, the
-\code{seriesBarRender} function can be used to render Bar Series on
-these elements. During rendering, the bound \code{SeriesBar} data
-object is transformed into an array of \code{Bar} data objects, and a
-data join with these data objects is performed to render the
-individual bars. The output range of the scales used to map
-categories and values to spatial dimensions is set to the dimensions
-of the Bar Series element's bounding box that has been previously
-calculated and stored in the \code{bounds} attribute by the Layouter.
-With these scales, the dimensions of bars are calculated, and enter,
-update, and exit transitions are utilized to interpolate them towards
-these new dimensions, so that changes in visualization are easier to
-track, which leads to an improved experience for users. As with all
-other Series, the \code{enter}, \code{update}, and \code{exit} events
-containing the respective data join selections are dispatched on the
-Series' root element and allow the injection of custom behavior into
-the different phases of the Series' data join.
+In RespVis, the Bar Series module renders collections of \code{<rect>}
+elements representing the bars in a Bar Chart's draw area, and they
+are the lowest-level components required for rendering Bar
+Charts. Their implementation is located in the \code{series-bar.ts}
+file of the Bar Module and contains the \code{SeriesBar} interface
+describing data objects to configure Bar Series, the
+\code{seriesBarData} function to create these data objects from
+partial data objects, and the \code{seriesBarRender} function to
+render Bar Series. The \code{SeriesBar} interface inherits Tooltip
+configuration properties from the \code{SeriesConfigTooltips}
+interface described in Section~\ref{sec:TooltipModule} and adds
+additional properties to configure the used categories and values, the
+scales to map them to spatial dimensions, whether or not bars should
+be oriented vertically or horizontally, and properties to configure
+their colors and keys.  After the desired \code{SeriesBar} data
+objects have been created and bound to \code{<svg>} or \code{<g>}
+elements, the \code{seriesBarRender} function can be used to render
+Bar Series on these elements. During rendering, the bound
+\code{SeriesBar} data object is transformed into an array of
+\code{Bar} data objects, and a data join with these data objects is
+performed to render the individual bars. The output range of the
+scales used to map categories and values to spatial dimensions is set
+to the dimensions of the Bar Series element's bounding box that has
+been previously calculated and stored in the \code{bounds} attribute
+by the Layouter.  With these scales, the dimensions of bars are
+calculated, and enter, update, and exit transitions are utilized to
+interpolate them towards these new dimensions, so that changes in
+visualization are easier to track, which leads to an improved
+experience for users. As with all other Series, the \code{enter},
+\code{update}, and \code{exit} events containing the respective data
+join selections are dispatched on the Series' root element and allow
+the injection of custom behavior into the different phases of the
+Series' data join.
 
 Bar Charts are Cartesian Charts, as discussed in
 Section~\ref{sec:Chart}, which display a Bar Series with optional
@@ -1358,7 +1358,7 @@ filter behavior is attached to the Chart Window via the
 },
 ]{listings/bar-chart-window.js}
 \end{samepage}
-  
+
 
 By default, Bar Chart Windows are not automatically updated when the
 viewport size changes or if their categories are filtered. Instead, a
@@ -1421,26 +1421,27 @@ smaller intervals based on the number of subcategories. Quantitative
 values are again mapped to spatial dimensions via a single continuous
 scale which must be used for all of them.
 
-The Bar Module provides the Grouped Bar Series, Grouped Bar Chart, and
-Grouped Bar Chart Window Components, which are very similar to their
-Single-Series Bar Chart counterparts, to render grouped bar charts in
-different levels of hierarchy. Grouped Bar Series are the lowest-level
-components of these and render a collection of \code{<rect>} elements
-meant for display in the draw area of a Grouped Bar Chart. The
-difference between a Grouped Bar Series and a Single-Series Bar Series
-is that this one offers additional properties needed for the
-configuration of subcategories and that other properties specified as
-one-dimensional arrays in Single-Series Bar Series are here required
-to hold two-dimensional arrays so that their values can be assigned to
-the two-dimensionally grouped bars. All bars belonging to the same
-subcategory have the same style to simplify their comparison across
-all categories. Grouped Bar Charts are Cartesian Charts which contain a
-Grouped Bar Series with optional labels in their draw area, Left and
-Bottom Axes that visualize the scales used by this Grouped Bar Series,
-and a Legend that describes the different subcategories. These Charts
-also attach event listeners to various elements to highlight bars,
-labels, ticks on the category axis, and Legend items that semantically
-belong together.
+In RespVis, the Bar Module provides the Grouped Bar Series, Grouped
+Bar Chart, and Grouped Bar Chart Window Components, which are very
+similar to their Single-Series Bar Chart counterparts, to render
+grouped bar charts in different levels of hierarchy. Grouped Bar
+Series are the lowest-level components of these and render a
+collection of \code{<rect>} elements meant for display in the draw
+area of a Grouped Bar Chart. The difference between a Grouped Bar
+Series and a Single-Series Bar Series is that this one offers
+additional properties needed for the configuration of subcategories
+and that other properties specified as one-dimensional arrays in
+Single-Series Bar Series are here required to hold two-dimensional
+arrays so that their values can be assigned to the two-dimensionally
+grouped bars. All bars belonging to the same subcategory have the same
+style to simplify their comparison across all categories. Grouped Bar
+Charts are Cartesian Charts which contain a Grouped Bar Series with
+optional labels in their draw area, Left and Bottom Axes that
+visualize the scales used by this Grouped Bar Series, and a Legend
+that describes the different subcategories. These Charts also attach
+event listeners to various elements to highlight bars, labels, ticks
+on the category axis, and Legend items that semantically belong
+together.
 
 Grouped Bar Chart Windows are the highest-level components to render
 visualizations based on Grouped Bars. They contain Grouped Bar Charts
