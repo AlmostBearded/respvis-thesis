@@ -1,5 +1,14 @@
 \chapter{Introduction}
+\label{chap:Introduction}
 
-This thesis introduces RespVis, a component-based framework for creating responsive SVG charts which is built on standard browser technologies like HTML, SVG and JavaScript.
+This thesis introduces RespVis, a browser-based software library for rendering responsive visualizations as SVG documents, whose elements are mostly styled and positioned via CSS.
+The first part of this thesis, Chapters~\ref{chap:WebTechnologies} to \ref{chap:ResponsiveInformationVisualization}, offers a broad view on other works in the field into which this work is embedded. Chapter~\ref{chap:WebTechnologies} introduces the various technologies used on the web, the different ways of embedding graphics into web pages, and the different layout engines that have been considered for laying out SVG elements.
+Chapter~\ref{chap:InfoVis} gives an overview of the field of information visualization, its history, and some of the more popular software libraries used to create information visualizations for the web.
+Chapter~\ref{chap:ResponsiveInformationVisualization} gives more detailed insights into different patterns that can be applied to visualizations to make them responsive and also demonstrates these patterns via concrete examples from both academic and other sources.
 
-\TODO{Outline the various chapters}
+The second part of this thesis, Chapters~\ref{chap:RespVis} to \ref{chap:Outlook}, discusses the technical details of RespVis. 
+Chapter~\ref{chap:RespVis} introduces the library, its design pillars, naming conventions, and project setup.
+Chapter~\ref{chap:Modules} describes the implementation of RespVis by examining its different packages and their modules. 
+It also talks about the details of the implementation and implications of the custom layouter that enables laying out the elements of SVG-based visualizations using CSS layout mechanisms.
+Chapter~\ref{chap:Usage} demonstrates the usage of RespVis' modules to create responsive visualizations and explains how different responsive patterns can be applied to them.
+Finally, Chapter~\ref{chap:Outlook} gives an outlook about upcoming topics and potential future work to be done on the library. 
