@@ -201,87 +201,89 @@ visualizations:
 
 
 
+
 \section{Bar Charts}
 \label{sec:BarChartsUsage}
 
-Bar Charts are used to compare categories associated with quantitative
+Bar charts are used to compare categories associated with quantitative
 values by visualizing them as bars whose lengths depend on the
-quantitative dimension of the data.  In the case of Multi-Series Bar
-Charts like Grouped and Stacked Bar Charts, categories are further
-divided into subcategories associated with quantitative values and
-compared with one another rather than categories themselves.  Bars in
-Multi-Series Bar Charts are usually colored based on their
-subcategories which is why these Charts often include Legends to
-visualize this color encoding.
+quantitative dimension of the data. In the case of multi-series bar
+charts, like grouped bar charts and stacked bar charts, categories are
+further divided into subcategories associated with quantitative values
+and compared with one another rather than categories themselves. Bars
+in multi-series bar charts are usually colored based on their
+subcategories, which is why these charts often include legends to
+explain the color coding.
 
-The different responsive patterns applicable to Bar Charts have
+
+
+The different responsive patterns applicable to bar charts have
 already been discussed in Section~\ref{sec:BarChartExamples}, and the
 focus here lies on demonstrating their implementation using RespVis
-Bar Chart Windows.  Listing~\ref{list:BarChartPatterns} demonstrates
+Bar Chart Windows. Listing~\ref{list:BarChartPatterns} demonstrates
 how some of these patterns can be implemented to create the responsive
-Bar Chart shown in Figure~\ref{fig:BarChartPatterns}.  In practice,
-the responsive patterns that can be applied to different variants of
-Bar Charts are very similar, which is why this section does not
+Bar Chart shown in Figure~\ref{fig:BarChartPatterns}. In practice, the
+responsive patterns which can be applied to different variants of Bar
+Charts are very similar, which is why this section does not
 differentiate between them.
 
 
 The following responsive patterns can be applied to RespVis Bar Charts:
 \begin{itemize}
 \item \liintro{Rescale draw area}: Scaling a Bar Chart to fit into the
-  available space is done automatically by their render functions.  By
-  default, Axes and Legends only take up necessary space, and the
-  remaining space is filled with the Chart's draw area.  Bars and
-  labels in this draw area are automatically scaled and positioned to
-  fit into the allocated space.
+  available space is done automatically by their render functions. By
+  default, Axes and Legends only take up as much space as necessary,
+  and the remaining space is filled with the Chart's draw area. Bars
+  and labels in this draw area are automatically scaled and positioned
+  to fit into the allocated space.
 
-\item \liintro{Reduce bar padding}: Reducing the paddings between bars
-  frees up space that can be used by the bars themselves.  Paddings
+\item \liintro{Reduce bar padding}: Reducing the padding between bars
+  frees up space that can be used by the bars themselves. Padding
   can be controlled via the \code{padding} function on the
   \code{categoryScale} property of a Bar Chart's data object.
 
 \item \liintro{Simplify bar labels}: When reducing the width of Bar
-  Charts, bar labels could start overlapping one another, and it might
-  be a good idea to shorten them, if possible.  These labels can be
+  Charts, bar labels might start overlapping one another, and it might
+  be a good idea to shorten them, if possible. Bar labels can be
   configured using the \code{labels} property of a Bar Chart's data
   object.
 
 \item \liintro{Remove bar labels}: An alternative to prevent bar
-  labels from overlapping is to hide some or even all of them.  The
+  labels from overlapping is to hide some or even all of them. The
   best way of implementing this is to hide them via the CSS
   \code{opacity} or \code{display} properties.
 
-\item \liintro{Transpose Chart}: By default, Bar Charts are rendered
-  with vertical bars, and transposing would make them horizontal.
-  Horizontal Bar Charts are better suited for narrow spaces because
-  bar labels and the tick labels of the Axis representing categories
-  are easier to place.  Furthermore, Horizontal Bar Charts are allowed
-  to extend outside the visible viewport because vertical scrolling is
-  strongly preferred over horizontal scrolling.  Bar Charts can be
-  transposed by setting the \code{flipped} property on their data
-  objects.
+\item \liintro{Transpose Chart}: By default, a Bar Chart is rendered
+  with vertical bars, transposing it would make the bars horizontal.
+  Horizontal Bar Charts are better suited for narrow spaces, because
+  the bar labels and Axis tick labels of the categories are easier to
+  place. Furthermore, Horizontal Bar Charts are allowed to extend
+  outside the visible viewport because vertical scrolling is more
+  acceptable than horizontal scrolling. A Bar Chart can be transposed
+  by setting the \code{flipped} property on its data object.
 
 \item \liintro{Remove bars}: Sometimes it might be required to reduce
-  the number of bars to maintain a good user experience.  Bars
+  the number of bars to maintain a good user experience. Bars
   representing certain categories or subcategories can be hidden by
   declaring them as inactive via the \code{activeCategories} and
   \code{activeSubcategories} properties on a Bar Chart's data object.
   Using these properties is easier than manually adapting the
   \code{categories}, \code{values}, \code{categoryScale}, and
   \code{valueScale} properties on the data object. Furthermore,
-  categories and subcategories that have been hidden via the
+  categories and subcategories which have been hidden via the
   \code{activeCategories} and \code{activeSubcategories} properties
-  can also be unhidden by users via a Chart's Toolbar if they are
-  interested in the additional data.
+  can also be unhidden by users via a Chart's Toolbar, if they wish to
+  see the additional data.
 
-\item \liintro{Apply Axis patterns}: Since Bar Charts usually contain
-  two Axes to visualize the spatial mappings of categories and values,
-  all responsive patterns mentioned in Section~\ref{sec:AxesUsage}
-  should also be applied to Bar Charts.
+\item \liintro{Apply Axis responsive patterns}: Since a Bar Chart
+  usually contains two Axes to visualize the spatial mappings of
+  categories and values, all the Axis responsive patterns described in
+  Section~\ref{sec:AxesUsage} can and should be applied to Bar Charts.
 
-\item \liintro{Apply Legend patterns}: For Multi-Series Bar Charts
-  that contain Legends to visualize the color mapping of bars, the
-  responsive patterns mentioned in Section~\ref{sec:LegendsUsage}
-  should be applied.
+\item \liintro{Apply Legend responsive patterns}: For a Multi-Series
+  Bar Chart containing a Legend, the Legend responsive patterns
+  mentioned in Section~\ref{sec:LegendsUsage} can and should be
+  applied.
 \end{itemize}
 
 
@@ -300,10 +302,10 @@ The following responsive patterns can be applied to RespVis Bar Charts:
   label=list:BarChartPatterns,
   caption={[Implementation of a Responsive RespVis Bar Chart]%
 The implementation of the responsive Bar Chart shown in
-Figure~\ref{fig:BarChartPatterns}.  Depending on the screen's width,
+Figure~\ref{fig:BarChartPatterns}. Depending on the screen's width,
 Axis tick labels are rotated, bar labels are simplified, and on very
-narrow screens, the whole Chart is transposed.  Non-essential parts
-have been removed for clarity reasons.
+narrow screens, the whole Chart is transposed. Non-essential parts
+have been removed for clarity.
 },
 ]{listings/bar-chart-patterns.html}
 \end{samepage}
@@ -313,8 +315,8 @@ have been removed for clarity reasons.
 
 
 \begin{figure}[tp]
-\newcommand{\respscale}{0.5}
-\centering
+\newcommand{\respscale}{0.55}
+%\centering
 \subfloat[][60rem]{%
   \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-bar-60rem.pdf}%
   \label{fig:BarChartPatterns60rem}%
@@ -324,27 +326,30 @@ have been removed for clarity reasons.
   \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-bar-40rem.pdf}%
   \label{fig:BarChartPatterns40rem}%
 }
+\hfill
 \subfloat[][30rem]{%
   \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-bar-30rem.pdf}%
   \label{fig:BarChartPatterns30rem}%
 }
 \caption[Responsive RespVis Bar Chart]{%
-The resulting responsive Bar Chart that is rendered from the
-implementation in Listing~\ref{list:BarChartPatterns}.
-\subref{fig:BarChartPatterns60rem} At a viewport size of 60rem, the
-Chart is not yet transposed, bar labels are shown with a precision of
-four digits above bars, and tick labels of the bottom axis are not
-rotated.  \subref{fig:BarChartPatterns40rem} At a viewport size of
-40rem, bar labels are shown with a precision of three digits above
-bars, and tick labels of the bottom axis are rotated by 45 degrees.
-\subref{fig:BarChartPatterns30rem} At a viewport size of 30rem, the
-Chart is transposed, bar labels are shown with a precision of two
-digits to the right of bars, and bottom axis tick labels are still
+The responsive Bar Chart resulting from the implementation in
+Listing~\ref{list:BarChartPatterns}.
+\subref{fig:BarChartPatterns60rem} At a viewport width of 60rem, the
+Chart is not yet transposed, bar labels are shown above the bars with
+four digits of precision, and the bottom axis tick labels are not
+rotated. \subref{fig:BarChartPatterns40rem} At a viewport width of
+40rem, bar labels are shown with three digits of precision, and the
+bottom axis tick labels are rotated by 45 degrees.
+\subref{fig:BarChartPatterns30rem} At a viewport width of 30rem, the
+Chart is transposed, bar labels are shown with two digits of precision
+to the right of bars, and the (newly) bottom axis tick labels are
 rotated by 45 degrees.
 \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:BarChartPatterns}
 \end{figure}
+
+
 
 
 
