@@ -1,22 +1,22 @@
-\chapter{Usage}
+\chapter{RespVis Usage}
 \label{chap:Usage}
 
-This chapter demonstrates how different responsive patterns can be
+This chapter discusses how different responsive patterns can be
 implemented using the components provided by the various RespVis
-packages outlined in Chapter~\ref{chap:Modules}.  The
+packages outlined in Chapter~\ref{chap:Modules}. The
 \code{src/examples} directory of the RespVis library contains examples
-that show how the library can be used to create different kinds of
-charts with varying degrees of responsiveness.  Even though users can
-compose custom charts out of low-level components like Series, Axes,
-and Legends, all examples in this chapter focus on creating responsive
-visualizations using high-level Chart Windows.  These Chart Windows
-represent convenient interfaces that allow visualization authors to
-focus on responsive configuration rather than on laborious tasks like
-setting up a Chart's structure and handling the render processes of
-their nested components.
+showing how the library can be used to create different kinds of
+charts with varying degrees of responsiveness. Users can compose
+custom charts with low-level components like Series, Axes, and
+Legends. However, all the examples in this chapter focus on creating
+responsive visualizations using higher-level Chart Windows. Chart
+Windows represent convenient interfaces which allow visualization
+authors to focus on responsive configuration, rather than on laborious
+tasks like setting up a Chart's structure and handling the render
+processes of their nested components.
 
-All examples provided by the RespVis library follow the same basic
-structure outlined in Listing~\ref{list:ExampleStructure}:
+All the examples provided by the RespVis library follow the same basic
+structure, outlined in Listing~\ref{list:ExampleStructure}, namely:
 \begin{enumerate}
 \item Import the RespVis CSS file \code{respvis.css}.  This file
   contains the necessary default styling of visualizations rendered by
@@ -26,25 +26,28 @@ structure outlined in Listing~\ref{list:ExampleStructure}:
   therefore the functionality of both libraries needs to be imported
   from either IIFE or ES modules to create visualizations with
   RespVis.
+% KA TODO: this step is not shown in Listing 7.1 !!
+
 
 \item Attach a \code{<div>} element to the element into which the
   Chart Window should be rendered.
+% KA TODO: mention id="chart"
 
-\item Bind a fully-initialized data object to the \code{<div>} element
-  that represents the render configuration of the Chart Window.  This
-  data object is usually created by deriving default properties from a
+\item Bind a fully-initialized data object to the \code{<div>} element,
+  containing the render configuration of the Chart Window. This data
+  object is usually created by deriving default properties from a
   partial object via one of the \code{chartWindowXData} functions.
 
 \item Render the Chart Window using the appropriate
   \code{chartWindowXRender} function.
 
 \item Attach a \code{resize} event listener to the \code{<div>}
-  element.  This event listener should update the Chart Window's bound
-  data object based on media queries and rerender it.  Theoretically,
+  element. This event listener should update the Chart Window's bound
+  data object based on media queries and rerender it. Theoretically,
   it is possible to use the actual viewport size in pixels for
   responsive configuration decisions, but it is strongly recommended
   to use media queries via the \code{window.matchMedia} function
-  instead.  The usage of media queries allows a Chart's JavaScript
+  instead. Using media queries allows a Chart's JavaScript
   configuration to be based on the same media queries that might be
   used for the CSS configuration of the same Chart.
 \end{enumerate}
@@ -64,8 +67,8 @@ structure outlined in Listing~\ref{list:ExampleStructure}:
   numbers=left,
   label=list:ExampleStructure,
   caption={[Structure of Examples]%
-The common structure of all responsive examples provided by RespVis.
-Some parts have been removed to not distract from the essential ones.
+The basic structure of all responsive examples provided by RespVis.
+Some parts have been removed, so as not to distract the essential parts.
 },
 ]{listings/example-structure.html}
 \end{samepage}
@@ -74,19 +77,20 @@ Some parts have been removed to not distract from the essential ones.
 
 Since one of the core premises of RespVis is to enable the
 configuration of SVG-based visualizations with CSS, many responsive
-patterns can be implemented without JavaScript.  In general,
-everything that does not affect the content or behavior of a Chart
-should be handled in CSS, which includes configuring presentation
-attributes and the layout of laid-out elements.  Configuration changes
-that affect a Chart's content or behavior, like changing the
-visualized data, texts, or interaction mechanisms, still need to be
-applied in JavaScript.  Knowing what kind of configuration is better
-done in CSS or JavaScript is not immediately obvious and can be
-confusing to figure out for developers unfamiliar with RespVis.  There
-are plans to allow configuring even more in CSS, but this requires
-that data is also accessible there, which would cause a rather
-extensive refactoring and, therefore, will be considered for a future
-release of the library.
+patterns can be implemented without JavaScript. In general, everything
+which does not affect the content or behavior of a Chart should be
+handled in CSS, including the configuration of presentation attributes
+and the layout of laid-out elements. Configuration changes which
+affect a Chart's content or behavior, like changing the visualized
+data, texts, or interaction mechanisms, still need to be applied in
+JavaScript. Knowing what kind of configuration is better done in CSS
+or JavaScript is not immediately obvious and can be confusing to
+figure out for developers unfamiliar with RespVis. There are plans to
+allow configuring even more in CSS, but this would require extensive
+redesign and refactoring and, therefore, will be considered for a
+future release of the library.
+
+
 
 
 
@@ -94,32 +98,31 @@ release of the library.
 \section{Axes}
 \label{sec:AxesUsage}
 
-Axes are used to visualize the spatial mapping of abstract values by
-rendering abstract values as ticks at the spatial positions to which
-they are being mapped.  In addition to ticks, an Axis also contains an
-optional title and subtitle to describe the visualized data further.
-Axis-related responsive patterns are of great importance because
-nearly every Chart includes Axes, and often improving their
-responsiveness alone can already significantly improve a user's
-experience.
+Axes are used to visualize the spatial mapping of abstract values, by
+rendering abstract values as ticks at the appropriate spatial
+positions to which they are being mapped. In addition to ticks, an
+Axis also contains an optional title and an optional subtitle to
+describe the axis. Axis-related responsive patterns are of great
+importance, since nearly every Chart includes Axes, and often
+improving their responsiveness alone can already significantly improve
+a user's experience.
 
-The following list contains all the responsive patterns that can be
-applied to Axes and explains how they can be implemented for RespVis
+The following responsive patterns can be applied to Axes in RespVis
 visualizations:
 \begin{itemize}
 \item \liintro{Rotate tick labels}: One of the most effective ways to
   prevent tick labels from overlapping is rotating them by up to 90
-  degrees because all the available information is preserved and only
-  presented differently.  Tick labels can be rotated by setting a
+  degrees. All the available information is preserved and only
+  presented differently. Tick labels can be rotated by setting a
   rotation in the CSS \code{transform} property on them and modifying
   their CSS \code{text-anchor} property accordingly.
 
-\item \liintro{Simplify tick labels}: In some cases rotating tick
+\item \liintro{Simplify tick labels}: In some cases, rotating tick
   labels may not be desired, or labels might still overlap after
-  rotation.  The next best thing that can be done in these cases is to
-  shorten tick labels if shorter textual representations exist.  The
-  D3 Axis object used for rendering ticks is accessible via the
-  \code{configureAxis} function property on an Axis' data object.  How
+  rotation. The next best thing in these cases is to shorten the tick
+  labels, if shorter textual representations exist. The D3 Axis
+  object used for rendering ticks is accessible via the
+  \code{configureAxis} function property on an Axis' data object. How
   exactly tick labels are shortened is specified as a formatting
   callback set via the D3 Axis' \code{tickFormat} function.
 
@@ -129,18 +132,18 @@ visualizations:
   D3 Axis' \code{ticks} or \code{tickValues} function, or via the CSS
   \code{display} property. A D3 Axis' \code{ticks} function allows
   specifying the desired number of ticks that shall be rendered, and
-  the D3 Axis' render function will decide how many ticks to create
-  based on this number and other contributing factors.  The
-  \code{tickValues} function of a D3 Axis allows for much more control
-  than the \code{ticks} function because it is used to specify the
-  exact abstract values for which ticks shall be rendered.
+  the D3 Axis' render function decides how many ticks to create based
+  on this number and other contributing factors. The \code{tickValues}
+  function of a D3 Axis allows for much more control than the
+  \code{ticks} function, because it is used to specify the exact
+  values for which ticks shall be rendered.
 
 \item \liintro{Simplify title/subtitle}: Since Axes do not just
-  contain ticks but also titles and subtitles, these should not be
-  ignored when optimizing the responsiveness of Axes.  One of the
-  things that can be done is to simplify titles/subtitles by
-  specifying shorter textual representations via the \code{title} and
-  \code{subtitle} properties on Axes' data objects.
+  contain ticks, but also optional titles and subtitles, these should
+  not be ignored when optimizing the responsiveness of Axes. Titles
+  and subtitles can be simplfied by specifying shorter text strings
+  via the \code{title} and \code{subtitle} properties on Axes' data
+  objects.
 
 \item \liintro{Relocate title/subtitle}: The titles and subtitles of
   Axes can be relocated by modifying the Axes' grid layouts via the
@@ -158,14 +161,13 @@ visualizations:
 \label{sec:LegendsUsage}
 
 Legends visualize the non-spatial mapping of abstract values such as
-mappings to colors, shapes, and sizes via labeled symbols and are
-needed in any visualization that uses such encodings.  They are
-essential and frequently encountered parts of visualizations and, as
-such, must not be ignored when optimizing a visualization's
-responsiveness.
+mappings to colors, shapes, and sizes via labeled symbols. They are
+used to explain a visual encoding to a viewer and are frequently
+encountered. As such, Legends must not be ignored when optimizing a
+visualization's responsiveness.
 
-The following list shows how different responsive patterns that can be
-applied to Legends are implemented for RespVis visualizations:
+The following responsive patterns can be applied to Legends in RespVis
+visualizations:
 \begin{itemize}
 \item \liintro{Relocate Legend}: A Legend's position in its containing
   Chart can be controlled by directly modifying the Chart's grid
@@ -175,25 +177,24 @@ applied to Legends are implemented for RespVis visualizations:
   \code{data-legend-position} attribute.
 
 \item \liintro{Simplify title}: A Legend's title can be shortened by
-  specifying a shorter textual representation for it via the
-  \code{title} property on a Chart's data object.
+  specifying a shorter text string for it via the \code{title}
+  property on a Chart's data object.
 
-\item \liintro{Remove title}: If the title can not be further
-  shortened or if it does not convey too much important information,
+\item \liintro{Remove title}: If the title cannot be further
+  shortened, or if it does not convey too much important information,
   it can be hidden via the CSS \code{display} property.
 
 \item \liintro{Simplify symbol labels}: If the symbol labels can be
   shortened, this can be done via the \code{labels} property on a
-  Legend's data object.  This property allows the specification of the
-  text content of all labels as an array of string values.
+  Legend's data object. This property allows the specification of the
+  text strings of all labels as an array of string values.
 
 \item \liintro{Relocate labeled symbols}: Changing the layout of
   labeled symbols is one of the most effective responsive patterns
-  applicable to Legends.  By default, labeled symbols are laid out
-  using CSS Flexbox layouting.  Thus, whether labeled symbols are laid
+  applicable to Legends. By default, labeled symbols are laid out
+  using CSS Flexbox layouting. Thus, whether labeled symbols are laid
   out horizontally or vertically can be controlled using the CSS
   \code{flex-direction} property on their container element.
-
 \end{itemize}
 
 
@@ -223,8 +224,8 @@ the responsive patterns that can be applied to different variants of
 Bar Charts are very similar, which is why this section does not
 differentiate between them.
 
-The following list shows the implementation of different responsive
-patterns that can be applied on RespVis Bar Charts:
+
+The following responsive patterns can be applied to RespVis Bar Charts:
 \begin{itemize}
 \item \liintro{Rescale draw area}: Scaling a Bar Chart to fit into the
   available space is done automatically by their render functions.  By
@@ -374,8 +375,7 @@ Chart Windows.  For this purpose, Listing~\ref{list:LineChartPatterns}
 demonstrates how some of these patterns can be combined to create the
 responsive Line Chart shown in Figure~\ref{fig:LineChartPatterns}.
 
-The following list shows the implementation of different responsive
-patterns that can be applied on RespVis Line Charts:
+The following responsive patterns can be applied to RespVis Line Charts:
 \begin{itemize}
 \item \liintro{Rescale draw area}: As for Bar Charts, Line Charts are
   automatically scaled by their render functions.  The default
@@ -401,9 +401,9 @@ patterns that can be applied on RespVis Line Charts:
   by providing shorter textual representations for them via the
   \code{labels} property on a Line Chart's data object.
 
-\item \liintro{Remove marker labels}: Sometimes shortening labels may not be
-  possible, desired, or effective enough and an alternative to prevent
-  them from overlapping is to remove some or all of them.  The
+\item \liintro{Remove marker labels}: Sometimes shortening labels may
+  not be possible, desired, or effective enough and an alternative to
+  prevent them from overlapping is to remove some or all of them.  The
   recommended way to remove marker labels is to hide them via the CSS
   \code{opacity} or \code{display} properties.
 
@@ -522,8 +522,8 @@ Chart Windows.  Listing~\ref{list:PointChartPatterns} shows how some
 of these patterns can be implemented to create the responsive Point
 Chart displayed in Figure~\ref{fig:PointChartPatterns}.
 
-The following list shows the implementation of different responsive
-patterns that can be applied on RespVis Point Charts:
+The following responsive patterns can be applied to RespVis Point
+Charts:
 \begin{itemize}
 \item \liintro{Rescale draw area}: As with other Cartesian Charts, the
   draw areas of Point Charts and their contents are automatically
