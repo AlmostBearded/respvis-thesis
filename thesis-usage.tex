@@ -15,9 +15,11 @@ authors to focus on responsive configuration, rather than on laborious
 tasks like setting up a Chart's structure and handling the render
 processes of their nested components.
 
-All the examples provided by the RespVis library follow the same basic
-structure, outlined in Listing~\ref{list:ExampleStructure}, namely:
+All the example visualizations provided by the RespVis library follow
+the same basic structure, outlined in
+Listing~\ref{list:ExampleStructure}, namely:
 \begin{enumerate}
+% KA TODO: indicate which line numbers in Listing 7.1 !!
 \item Import the RespVis CSS file \code{respvis.css}.  This file
   contains the necessary default styling of visualizations rendered by
   the RespVis library.
@@ -26,12 +28,9 @@ structure, outlined in Listing~\ref{list:ExampleStructure}, namely:
   therefore the functionality of both libraries needs to be imported
   from either IIFE or ES modules to create visualizations with
   RespVis.
-% KA TODO: this step is not shown in Listing 7.1 !!
 
-
-\item Attach a \code{<div>} element to the element into which the
-  Chart Window should be rendered.
-% KA TODO: mention id="chart"
+\item Attach a new \code{<div>} element to the root \code{<div>}
+  element (the one with \code{id=\"chart\"}) [Line 7].
 
 \item Bind a fully-initialized data object to the \code{<div>} element,
   containing the render configuration of the Chart Window. This data
