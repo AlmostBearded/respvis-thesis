@@ -1,19 +1,62 @@
 \chapter{Outlook and Future Work}
 \label{chap:Outlook}
 
-Many things could still be done to the RespVis library that would not change its core mechanisms but improve the user's and visualization author's experience.
-One of the most apparent improvements would be the addition of further Series, Charts, and Chart Windows to extend the range of realizable visualizations and enable the creation of things like Parallel Coordinates, Pie, Heatmap, and other Charts.
-In addition to supporting more types of Charts, the RespVis library would benefit from additional Tools that could be added to the Toolbars of Chart Windows to provide easy access to supplementary operations like interval-based numerical filtering and zooming.
-The improvements that could be made to already existing functionality include improving interactions via the application of Delaunay triangulation \parencite{Delaunay, DelaunayAlgorithms} to find the closest interactable element to the cursor position, improving downloaded SVGs through optimizing and formatting their document contents, and improving responsive styling via the application of the newly proposed CSS Container Queries \parencite{CSSContainment3}. 
+Many things could still be done to the RespVis library that would not
+change its core mechanisms, but would improve both the end user's and
+visualization author's experience. One of the most apparent
+improvements would be the addition of further Series, Charts, and
+Chart Windows to extend the range of realizable visualizations and
+enable the creation of things like parallel coordinates, pie charts,
+heatmaps, and other charts. In addition to supporting more types of
+charts, the RespVis library would benefit from additional tools which
+could be added to the Toolbars of Chart Windows to provide easy access
+to supplementary operations like interval-based numerical filtering
+and zooming. The improvements that could be made to already existing
+functionality include improving interactions via the application of
+Delaunay triangulation \parencite{Delaunay,DelaunayAlgorithms} to find
+the closest interactable element to the cursor position, improving
+downloaded SVGs through optimizing and formatting their document
+contents, and improving responsive styling via the application of the
+newly proposed CSS Container Queries \parencite{CSSContainment3} when
+they become available in browsers.
 
-The layouting of SVG elements could be improved by separating visualizations into different <div> elements that can be natively laid out by browsers.
-With such a layouting mechanism, the custom Layouter could be removed, and the render process imposed by it, which effectively forces every laid out element to be rendered twice, would not be necessary.
-The elimination of the custom Layouter and its render process would improve performance and be much less complex to implement and understand.
-The downside of this change would be that visualizations are not directly rendered as pure and complete SVG documents anymore but as multiple SVG documents representing separate parts of the visualization.
-This separation into multiple SVG documents would not be a problem for displaying visualizations in browsers, and for downloading them, individual parts could be merged back into pure and complete SVG documents during an additional download pre-processing step.
+The layouting of SVG elements could be improved by separating
+visualizations into different <div> elements that can be natively laid
+out by browsers. With such a layouting mechanism, the custom Layouter
+could be removed, and the render process imposed by it, which
+effectively forces every laid out element to be rendered twice, would
+be unnecessary. The elimination of the custom Layouter and its render
+process would improve performance and be much less complex to
+implement and understand. The downside of this change would be that
+visualizations are not directly rendered as pure and complete SVG
+documents anymore, but rather as multiple SVG documents representing
+separate parts of the visualization. This separation into multiple SVG
+documents would not be a problem for displaying visualizations in
+browsers. To download such a visualization, its individual parts could
+be merged back into a pure and complete SVG document during an
+additional download pre-processing step.
 
-Custom visualizations are rather tedious to create with the current implementation because visualization authors must manually set up their structure, propagate data through the component hierarchy, and handle the Layouter's render process.
-The creation of custom visualizations could be simplified by introducing generic Chart Windows that would enable the definition of visualizations using a data structure potentially similar to visualization grammars like Vega \parencite{Vega}.
-The data structure of generic Chart Windows would have to include the actual abstract data that should be visualized and define the transformations of this data into scales, Axes, Legends, and Series.
-During rendering, the render functions of such generic Chart Windows could then create custom visualizations that reflect the configuration stored in these data structures.
-In addition to simplifying the creation of custom visualizations, generic Chart Windows would also enable responsively changing a visualizations encoding, like, for example, turning Point Charts into Heatmap Charts.
+Custom visualizations are rather tedious to create with the current
+implementation, because visualization authors must manually set up
+their structure, propagate data through the component hierarchy, and
+handle the Layouter's render process. The creation of custom
+visualizations could be simplified by introducing generic Chart
+Windows that would enable the definition of visualizations using a
+data structure potentially similar to visualization grammars like Vega
+\parencite{Vega}.
+% KA TODO or Cicero or Vega-Lite ??
+The data structure of generic Chart Windows would have to include the
+actual abstract data that should be visualized and define the
+transformations of this data into scales, Axes, Legends, and Series.
+During rendering, the render functions of such generic Chart Windows
+could then create custom visualizations to reflect the configuration
+stored in these data structures. In addition to simplifying the
+creation of custom visualizations, generic Chart Windows would also
+enable responsively changing a visualization's encoding, like, for
+example, turning Point Charts into Heatmap Charts.
+
+
+% KA TODO  small multiples?
+
+
+
