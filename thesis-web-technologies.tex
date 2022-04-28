@@ -67,10 +67,10 @@ A CSS style sheet can either be embedded directly in HTML documents
 using a \elname{<style>} element or can be defined externally and
 linked to using a \elname{<link>} element. This characteristic of
 being able to externally describe the presentation of documents brings
-great flexibility. Multiple documents with different content can reuse
-the same presentation by linking to the same CSS file. Conversely,
-alternative style sheets can be applied to the same HTML content to
-achieve a different styling.
+great flexibility because multiple documents with different content
+can reuse the same presentation by linking to the same CSS file.
+Conversely, alternative style sheets can be applied to the same HTML
+content to achieve a different styling.
 
 CSS was initially proposed by \textcite{CSSProposal} and standardized
 into CSS1 by the W3C in 1996 \parencite{CSS1}. Throughout its history,
@@ -203,33 +203,34 @@ through the deprecation of Internet Explorer
 implementations of current Flexbox standards \parencite{CSSFlexbox},
 and, in most cases, fallback styling is no longer necessary.
 
-Flexbox layouting is enabled for child elements by setting the
-\cssname{display:flex} property on a container element. The direction
-of the layout can then be specified using the \cssname{flex-direction}
-property which can be set to either \cssname{row} or \cssname{column}.
+Flexbox layouting is enabled for child elements by setting the CSS
+\cssname{display} property to \code{flex} on a container element. The
+direction of the layout can then be specified using the CSS
+\cssname{flex-direction} property which can be set to either
+\code{row} or \code{column}.
 %
 The items inside a Flexbox container can have either a fixed or a
 relative size. When items should be sized relative to the size of
 their containers, the proportions of how the available space should be
 divided can be controlled using ratios. These ratios can be set on
-item elements via the \cssname{flex} property.
+item elements via the CSS \cssname{flex} property.
 
 Another important feature of Flexbox layout is the controllable
 spacing of items, which can be specified separately for both the main
 axis and the cross axis of the layout. Spacing along the main axis can
-be configured with the \cssname{justify-content} property, which can
-take a number of different values and is illustrated in
+be configured with the CSS \cssname{justify-content} property, which
+can take a number of different values and is illustrated in
 Figure~\ref{fig:FlexboxJustifyContent}. Alignment of items on the
-cross axis is achieved either by the \cssname{align-items} property on
-the container element or the \cssname{align-self} property on the
-items themselves.
+cross axis is achieved either by the CSS \cssname{align-items}
+property on the container element or the CSS \cssname{align-self}
+property on the items themselves.
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
 {images/flexbox-justify-content.png}
-\caption[Flexbox \cssname{justify-content} Property]{
-The \cssname{justify-content} property is used to distribute
+\caption[Flexbox CSS \cssname{justify-content} Property]{
+The CSS \cssname{justify-content} property is used to distribute
 items along the main axis of a Flexbox container. 
 \imgcredit{Image created by the author of this thesis.}
 }
@@ -238,7 +239,7 @@ items along the main axis of a Flexbox container.
 
 
 This section only grazed the surface of what is possible with the
-Flexbox layout module. There are many more useful properties like
+Flexbox layout module. There are many more useful CSS properties like
 \cssname{flex-grow}, \cssname{flex-shrink}, and \cssname{flex-wrap}.
 For a more detailed look at this topic it is recommended to review the
 specification \parencite{CSSFlexbox} and read the excellent tutorial
@@ -263,37 +264,37 @@ bugs. However, in 2017 the major browsers Chrome, Firefox, Safari, and
 Edge removed the need for vendor prefixes and implementations are now
 considered stable \parencite{CanIUseCSSGrid}.
 
-Grid layout of elements is enabled by setting the
-\cssname{display:grid} property on their container. The grid in which
-items shall be laid out is then defined using the
+Grid layout of elements is enabled by setting the CSS
+\cssname{display} property to \code{grid} on their container. The grid
+in which items shall be laid out is then defined using the CSS
 \cssname{grid-template-rows} and \cssname{grid-template-columns}
-properties. In addition, the \cssname{grid-template} property can be
-used as a shorthand to simultaneously specify both the rows and
+properties. In addition, the CSS \cssname{grid-template} property can
+be used as a shorthand to simultaneously specify both the rows and
 columns of a grid.
 %
 Item elements need to specify the cell of the grid into which they
-shall be positioned. This is done with the \cssname{grid-row} and
+shall be positioned. This is done with the CSS \cssname{grid-row} and
 \cssname{grid-column} properties, which take the corresponding row and
 column indices as values. Items can also be configured to span
 multiple cells by specifying index ranges as the values of those
 properties.
 
-Every cell in a grid can also be assigned a specific name via the
+Every cell in a grid can also be assigned a specific name via the CSS
 \cssname{grid-template-areas} property on the grid container element.
 The items within the grid can then position themselves in specifically
-named grid cells using the \cssname{grid-area} property instead of
+named grid cells using the CSS \cssname{grid-area} property instead of
 directly setting the row and column indices. The benefit of
-positioning items this way is that the structure of the grid can
-be freely changed without having to respecify the cells in which items
+positioning items this way is that the structure of the grid can be
+freely changed without having to respecify the cells in which items
 belong. As long as the new layout still specifies the same names of
 cells somewhere in the grid, the items will be automatically placed at
 their new positions.
 
 There are also properties which control the layout of items within
 grid cells and the layout of grid cells themselves. Similar to
-Flexbox, this can be configured with the \cssname{align-items} and
+Flexbox, this can be configured with the CSS \cssname{align-items} and
 \cssname{justify-items} properties for laying out within grid cells,
-and the \cssname{align-content} and \cssname{justify-content}
+and the CSS \cssname{align-content} and \cssname{justify-content}
 properties for laying out the grid cells themselves. The latter
 \cssname{*-content} properties only make sense when the cells do not
 cover the full area of the grid. For a visual comparison between the
@@ -351,10 +352,10 @@ JavaScript was initially created by Netscape in 1995
 \parencite{JSFirstRelease}. Before that, websites were only able to
 display static content, which drastically limited the usefulness of
 the web. Microsoft seemingly saw JavaScript as a potentially
-revolutionary development, because they reverse-engineered the
-Netscape's implementation and published their own version of the
-language for Internet Explorer in 1996 \parencite{JSIERelease}. The
-two implementations were noticeably different from one another and the
+revolutionary development, because they reverse-engineered Netscape's
+implementation and published their own version of the language for
+Internet Explorer in 1996 \parencite{JSIERelease}. The two
+implementations were noticeably different from one another and the
 uncontested monopoly of the Internet Explorer
 \parencite{BrowserMarketShareEarly} held back standardization efforts
 undertaken by Netscape \parencite{ECMAScript1}. When Firefox was
@@ -364,15 +365,10 @@ share of the market \parencite{BrowserMarketShare}, as shown in
 Figure~\ref{fig:BrowserMarketShare}. Galvanized by this new market
 reality, all major browser vendors collaborated on the standardization
 of JavaScript as ECMAScript 5 in 2009 \parencite{ECMAScript5}. Since
-then, JavaScript has been continuously developed and its latest,
-widely support version, ECMAScript 6, was released in 2015
-\parencite{ECMAScript6}.
-
-% KA TODO
-% What about ES 2015, 2016, 2017, 2018, ... ?
-% https://en.wikipedia.org/wiki/ECMAScript
-% ECMAScript specifications through ES7 are well-supported in major web browsers. 
-% https://kangax.github.io/compat-table/es2016plus/
+then, JavaScript has been continuously developed and its later
+versions ECMAScript 2015 to 2021
+\parencite{ECMAScript6, ECMAScript7, ECMAScript8, ECMAScript9, ECMAScript10, ECMAScript11, ECMAScript12}
+are widely supported.
 
 
 \begin{figure}[tp]
@@ -412,8 +408,8 @@ Another important Web API in the context of this work is the
 \modname{ResizeObserver} API. It provides the ability to observe an
 element's size and respond to changes, which increases the responsive
 capabilities of websites. Previously, scripts could only respond to
-changes in the overall viewport size via the \lstinline{resize} event
-on the \lstinline{window} object, but this meant that changes of an
+changes in the overall viewport size via the \code{resize} event
+on the \code{window} object, but this meant that changes of an
 individual element's size through attribute changes could not be
 detected. This limitation is fixed with the \modname{ResizeObserver}
 API, which is already fully supported by all modern browsers, even
@@ -451,17 +447,12 @@ JavaScript lies in its provision of a static type system.
 
 The extension of JavaScript with a static type system brings many
 benefits, including the improved tooling which comes with
-type-annotated code. Tools such as linters are able to point out
-errors early in development and assist developers with automated
-fixes, improved code completion, and code navigation.  Additionally,
-studies like \textcite{ToTypeOrNotToType} looked at software bugs in
-publicly available codebases and found that 15\% of them could have
-been prevented with static type checking.
-
-% KA TODO
-% Ref for linters, maybe:
-% https://github.com/caramelomartins/awesome-linters
-
+type-annotated code. Tools such as linters \parencite{ESLint} are able
+to point out errors early in development and assist developers with
+automated fixes, improved code completion, and code navigation.
+Additionally, studies like \textcite{ToTypeOrNotToType} looked at
+software bugs in publicly available codebases and found that 15\% of
+them could have been prevented with static type checking.
 
 The TypeScript type system was designed to support JavaScript
 constructs as completely as possible, via structural types and unified
@@ -591,16 +582,16 @@ Vector graphics describe an image in terms of objects and shapes, such
 as lines, circles, polygons, and text. They can be scaled freely
 without loss of quality. Scalable Vector Graphics (SVG) is an
 XML-based format for vector graphics. It was initially published by
-the W3C in 1999 \parencite{SVG1} and the most recent version SVG 1.1
-was released in 2011 \parencite{SVG11}.
-% KA not true: SVG 2
-Graphics in an SVG file can be specified in a normalised coordinate
-space (inside a viewBox), enabling them to be freely scaled. Since
-SVG files are XML, they can be created with any text editor, but
-numerous tools and editors exist which create or export SVG.
-% KA list some examples: Illustrator, Inkscape, a charting tool
-A simple example of an SVG document containing a single circle can be
-seen in Listing~\ref{list:SVG}, with its visualization shown in
+the W3C in 1999 \parencite{SVG1}, SVG 1.1 \parencite{SVG11} is the
+latest version that is widely supported by browsers, and support for
+SVG 2 \parencite{SVG2} is currently on its way. Graphics in an SVG
+file can be specified in a normalised coordinate space (inside a
+viewBox), enabling them to be freely scaled. Since SVG files are XML,
+they can be created with any text editor, but numerous tools and
+editors such as Inkscape \parencite{Inkscape} and Illustrator
+\parencite{Illustrator} exist to create or export SVG. A simple example
+of an SVG document containing a single circle can be seen in
+Listing~\ref{list:SVG}, with its visualization shown in
 Figure~\ref{fig:SVG}.
 
 \begin{samepage}
@@ -610,14 +601,13 @@ Figure~\ref{fig:SVG}.
   belowskip=\floatsep,
   xleftmargin=0cm,              % no extra margins for floats
   xrightmargin=0cm,             % no extra margins for floats
-  language=XML,
   basicstyle=\footnotesize\ttfamily,
   frame=shadowbox,
   numbers=left,
   label=list:SVG,
   caption={%
 [SVG Document Containing a Circle]%
-A simple SVG document containing a circle element.
+A simple SVG document containing a \elname{<circle>} element.
 The visual representation of this document in different sizes
 is shown in Figure~\ref{fig:SVG}.
 }
@@ -671,38 +661,32 @@ animate SVG elements when they are rendered in a browser. Using CSS to
 separate presentation from content has many benefits, which were
 already described in Section~\ref{sec:CSS}. Unfortunately, it is not
 possible to style every SVG attribute with CSS, only so-called
-presentation attributes like \cssname{fill} and \cssname{stroke-width}
+presentation attributes like \attrname{fill} and \attrname{stroke-width}
 are available through CSS. These presentation attributes are listed in
 the SVG specification \parencite{SVG11} and will be extended by
 additional attributes like \cssname{x}, \cssname{y}, \cssname{width}
 and \cssname{height} in upcoming releases \parencite{SVG2}.
-% KA what does SVG2 say about presentation attributes
-
-
-
 
 
 \subsection{Canvas (2D)}
 \label{sec:Canvas2D}
 
-\TODO{Link to the correct specification introducing canvas (https://www.w3.org/standards/history/2dcontext)}
-
-% HERE this ref is to living standard, not to HTML5
-The canvas element was introduced in HTML5 \parencite{HTML} and is
-used to define a two-dimensional, rectangular region in a document
-which can be drawn into by scripts. Even though rendering of dynamic
-graphics as canvas elements is often faster than representing them as
-SVG documents, their use is explicitly discouraged by the WHATWG when
-another suitable representation is possible. The reasons for this are
-that canvas elements are not compatible with other web technologies
-like CSS or the DOM Web API and because the resulting rendering
-provides only very limited possibilities for accessibility.
+The \elname{<canvas>} element was introduced in HTML5
+\parencite{HTML5} and is used to define a two-dimensional, rectangular
+region in a document which can be drawn into by scripts. Even though
+rendering of dynamic graphics as \elname{<canvas>} elements is often
+faster than representing them as SVG documents, their use is
+explicitly discouraged by the WHATWG \parencite{HTML} when another
+suitable representation is possible. The reasons for this are that
+\elname{<canvas>} elements are not compatible with other web
+technologies like CSS or the DOM Web API and because the resulting
+rendering provides only very limited possibilities for accessibility.
 
 The graphics are drawn via a low-level API provided by the rendering
 context of a particular canvas. The two most significant rendering
-contexts are \lstinline{2d} and \lstinline{webgl}.
+contexts are \code{2d} and \code{webgl}.
 
-The \lstinline{2d} rendering context enables platform-independent 2d
+The \code{2d} rendering context enables platform-independent 2d
 rendering via a software renderer, whose API is standardized directly
 in the canvas specification \parencite{Canvas2D}. An example of an
 HTML document containing two differently sized canvases into which
@@ -710,10 +694,6 @@ responsive circles are drawn using a 2d rendering context can be seen
 in Listing~\ref{list:Canvas} with the corresponding visual output in
 Figure~\ref{fig:Canvas}.
 
-
-\TODO{Change size of circle canvases}
-% KA TODO
-% make this example 100x100 and 250x250 pixel canvases.
 
 \begin{samepage}
 \lstinputlisting[%
@@ -738,20 +718,20 @@ The visual representation of this document is shown in Figure~\ref{fig:Canvas}.
 
 \begin{figure}[tp]
 \centering
-\subfloat[64-pixel canvas.]{%
+\subfloat[100-pixel canvas.]{%
 \hspace{1cm}
-\includegraphics[scale=1]{images/canvas64.png}
+\includegraphics[scale=1]{images/canvas100.png}
 \hspace{1cm}
 \label{fig:Canvas1}
 }
 \hspace{1cm}
-\subfloat[640-pixel canvas.]{%
-\includegraphics[scale=1]{images/canvas640.png}
+\subfloat[250-pixel canvas.]{%
+\includegraphics[scale=1]{images/canvas250.png}
 \label{fig:Canvas2}
 }
 \caption[Canvas With Responsive Circles]{
-Responsive rendering of graphics inside canvas elements has to be
-implemented manually by calculating everything relative to the canvas' dimensions. 
+Responsive rendering of graphics inside \elname{<canvas>} elements has to be
+implemented manually by calculating everything relative to its dimensions. 
 This figure shows the visual output
 of the canvas example in Listing~\ref{list:Canvas}. 
 \imgcredit{Image created by the author of this thesis.}
@@ -768,27 +748,13 @@ of the canvas example in Listing~\ref{list:Canvas}.
 \subsection{Canvas (WebGL)}
 \label{sec:CanvasWebGL}
 
-The \lstinline{webgl} rendering context enables 3d drawing through the
-WebGL version 1 API \parencite{WebGL1}. The \lstinline{webgl2}
+The \code{webgl} rendering context enables 3d drawing through the
+WebGL version 1 API \parencite{WebGL1}. The \code{webgl2}
 rendering context enables 3d drawing through the WebGL version 2 API
-\parencite{WebGL2}. Three-dimensional rendering through WebGL
-hardware-accelerated and is often much faster than rendering via
-Canvas 2d or SVG.
-
-% KA  this is not true: the features are there, just not always
-%     accelerated by hardware.
-%
-% The availability of individual features depends on the client's
-% hardware. It is therefore recommendable to only use three-dimensional
-% rendering when the requirements do not allow for any of the
-% alternatives.
-
-% No: in terms of performance, prefer WebGL if it is available.
-
-
-
-
-
+\parencite{WebGL2}. WebGL-based rendering is hardware-accelerated and
+often much faster than rendering via a 2d canvas or SVG. It is also
+possible to render 2d graphics using a WebGL render context, but the
+necessary setup and rendering API is rather complex.   
 
 
 
@@ -800,7 +766,7 @@ visual components based on input components annotated with layout
 constraints. These layout constraints describe the size and position
 of components and their relationships between each other in a syntax
 understood by the layout engine. For browser-based layout engines, the
-input components are normally declared as HTML documents which are
+input components are normally declared as HTML documents, which are
 constrained using CSS. More low-level layout engines require custom
 formats, which usually involve a hierarchy of objects constrained
 using specific properties. The most relevant layout engines in the
@@ -825,7 +791,7 @@ Some notable browser engines are WebKit \parencite{WebKit}, Blink
 In a browser engine, the layout of elements is constrained with CSS,
 which yields great flexibility as already described in
 Section~\ref{sec:CSS}. A range of mechanisms is available to precisely
-control the layout of elements, like the Flexible Box and Grid Layout
+control the layout of elements, like the Flexible Box and Grid layout
 modules, which can also be used in combination.
 
 The layout module of a browser engine can only be invoked directly by
@@ -837,10 +803,10 @@ necessarily have to be visible, and they could also be removed from
 the document after the layout has been acquired, meaning they do not
 need to be noticeable at all. A strong limitation of using browser
 engines to calculate layouts is that it requires a browser runtime to
-work and, even though there are solutions like Electron available,
-which enable development of desktop applications using web
-technologies, this limitation forces applications into a very specific
-stack of technologies.
+work and, even though there are solutions like Electron
+\parencite{Electron} available, which enable development of desktop
+applications using web technologies, this limitation forces
+applications into a very specific stack of technologies.
 
 
 
@@ -855,7 +821,7 @@ maintained by Facebook as an open-source project since 2016
 high-performance library which can be used across all platforms. Yoga
 is implemented in C/C++, which works on a myriad of devices, with
 bindings available for other platforms like JavaScript, Android, and
-iOS. Yoga has been widely adopted and is used to perform layouting in
+iOS. It has been widely adopted and is used to perform layouting in
 major frameworks such as React Native \parencite{ReactNative}, Litho
 \parencite{Litho}, and ComponentKit \parencite{ComponentKit}.
 
@@ -892,22 +858,21 @@ writing, the project has not been updated in nearly two years.
 \section{Responsive Web Design}
 \label{sec:RWD}
 
-\TODO{Also mention Marcotte's book and not only the article here.}
-
 Influenced by the increasing use of mobile devices and their vastly
 varying screen sizes, responsive web design has established itself as
 the predominant way of designing web pages. The core idea of
 responsive web design is that instead of designing pages for different
 types of devices, website authors create a single design for a page,
 which adapts to the characteristics of the consuming device. The term
-\enquote{Responsive Web Design} was defined by
-\textcite{Marcotte-ALA-RWD}, where the author differentiates between
-flexible and responsive web designs. A flexible web design, which
-merely fluidly scales blocks of content to make them fit into the
-width of a browser window, is not enough to provide a good experience
-for users. Such designs will work well enough for similarly sized
-viewports to the one they were created for, but they will lead to
-noticeable artifacts on lower resolutions.
+\enquote{Responsive Web Design} was initially defined by
+\textcite{Marcotte-ALA-RWD} and later compiled into a book
+\parencite{ResponsiveWebDesign}, in which the author differentiates
+between flexible and responsive web designs. A flexible web design,
+which merely fluidly scales blocks of content to make them fit into
+the width of a browser window, is not enough to provide a good
+experience for users. Such designs will work well enough for similarly
+sized viewports to the one they were created for, but they will lead
+to noticeable artifacts on lower resolutions.
 
 These problems can be avoided by positioning the individual components
 of a page in a manner which provides them with enough space to render
