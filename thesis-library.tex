@@ -54,7 +54,7 @@ JavaScript.
 The RespVis Layouter enables the responsive layout of visualization
 components using the syntax of CSS Flexbox or CSS Grid, by calculating
 the bounding boxes of SVG elements from the CSS configuration of a
-shadow \code{<div>} hierarchy. The Layouter offers visualization
+shadow \elname{<div>} hierarchy. The Layouter offers visualization
 authors comparable configurability to what they are used to when
 laying out HTML elements. For example, a legend can be configured to
 be placed to the right of a chart in a wider view, and beneath the
@@ -69,7 +69,7 @@ chart in a narrower view, using familiar CSS constructs.
 Every RespVis visualization should be rendered as a pure and complete
 SVG document. An SVG document is considered \emph{pure}, if it
 contains only elements defined in the SVG namespace. This means that
-it must not contain any \code{<foreignObject>} elements, which embed
+it must not contain any \elname{<foreignObject>} elements, which embed
 elements of an XML namespace other than SVG, for example to embed HTML
 elements inside an SVG. RespVis does not support rendering to HTML
 canvas elements, because graphics rendered there cannot be styled by
@@ -178,8 +178,8 @@ levels of abstraction, as shown in Figure~\ref{fig:Layers}. Components
 in higher layers make more assumptions about their content than
 components in lower layers. The bottom-most layer with the lowest
 level of abstraction consists of visual Primitives, represented by
-basic SVG elements like \code{<rect>}, \code{<circle>}, and
-\code{<text>}. These Primitives do not require any data to be bound to
+basic SVG elements like \elname{<rect>}, \elname{<circle>}, and
+\elname{<text>}. These Primitives do not require any data to be bound to
 them and are simply rendered by setting their attributes to the
 desired values.
 
@@ -198,7 +198,7 @@ contain increasingly higher-level components.
 
 
 The second layer comprises composite components such as Axes, Legends,
-and Series. These are usually rendered as \code{<svg>} or \code{<g>}
+and Series. These are usually rendered as \elname{<svg>} or \elname{<g>}
 elements containing only primitive elements. The components in this
 layer are the lowest-level components which are configured using
 structured data bound to their elements. Series components are
@@ -215,7 +215,7 @@ components users can work with, but RespVis contains an additional
 layer above them, formed by Chart Window Components. Chart Windows are
 wrapper components around Charts. Unlike the previously discussed
 lower layers, Chart Windows are not rendered as SVG elements but as
-HTML \code{<div>} elements. Their purpose is to nest Charts into a
+HTML \elname{<div>} elements. Their purpose is to nest Charts into a
 Layouter Component, render them in a three-phased rendering process,
 and provide an optional toolbar for them. Toolbars are customizable
 and can hold different tools for different types of chart.
@@ -416,7 +416,7 @@ directory when building the project. Every example consists of an HTML
 file which imports all the requirements such as \code{respvis.js} and
 \code{respvis.css} as well as external dependencies such as D3. It
 then invokes the necessary RespVis functionality within a
-\code{<script>} tag embedded in the body of the HTML document. In
+\elname{<script>} tag embedded in the body of the HTML document. In
 addition to individual example files, the \code{examples} directory
 also contains a \code{vendor} directory, which contains third-party
 dependencies, and a \code{data} directory containing data imported by
@@ -559,7 +559,7 @@ publicly accessible interface. This object is usually stored in a
 variable to allow interactions with the module after its creation.
 IIFE modules are plain JavaScript and do not require any modern
 features to be supported by browsers. They are simply loaded in web
-documents like any other JavaScript resource via a \code{<script>}
+documents like any other JavaScript resource via a \elname{<script>}
 element. The example in Listing~\ref{list:IIFE} illustrates the IIFE
 module format.
 
@@ -598,9 +598,9 @@ widely supported by modern browsers. Since the individual modules of
 the RespVis library are built as ES modules anyway, Rollup mostly only
 has to merge them to create a valid, combined ES module. ES modules
 are natively supported in browsers, so they can be loaded directly in
-a HTML document using a \code{<script>} element. However, it is
+a HTML document using a \elname{<script>} element. However, it is
 necessary to mark them as modules via the \code{type="module"}
-attribute on the loading \code{<script>} element, so that browsers can
+attribute on the loading \elname{<script>} element, so that browsers can
 interpret them accordingly.
 
 

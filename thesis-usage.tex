@@ -29,10 +29,10 @@ Listing~\ref{list:ExampleStructure}, namely:
   from either IIFE or ES modules to create visualizations with
   RespVis.
 
-\item Attach a new \code{<div>} element to the root \code{<div>}
+\item Attach a new \elname{<div>} element to the root \elname{<div>}
   element (the one with \code{id=\"chart\"}) [Line 7].
 
-\item Bind a fully-initialized data object to the \code{<div>} element,
+\item Bind a fully-initialized data object to the \elname{<div>} element,
   containing the render configuration of the Chart Window. This data
   object is usually created by deriving default properties from a
   partial object via one of the \code{chartWindowXData} functions.
@@ -40,7 +40,7 @@ Listing~\ref{list:ExampleStructure}, namely:
 \item Render the Chart Window using the appropriate
   \code{chartWindowXRender} function.
 
-\item Attach a \code{resize} event listener to the \code{<div>}
+\item Attach a \code{resize} event listener to the \elname{<div>}
   element. This event listener should update the Chart Window's bound
   data object based on media queries and rerender it. Theoretically,
   it is possible to use the actual viewport size in pixels for

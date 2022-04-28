@@ -134,7 +134,7 @@ effect. For this reason, the
 \code{elementComputedStyleWithoutDefaults} function has been
 implemented to calculate the computed style of an element and remove
 all default-valued properties from the returned style declaration
-object.  This is implemented by adding a \code{<style-dummy>} element
+object.  This is implemented by adding a \elname{<style-dummy>} element
 as a sibling of the element of interest, getting the computed styles
 of both elements, and calculating the difference between them.  To
 accelerate these calculations, the
@@ -192,16 +192,16 @@ these typing improvements, this module also provides the
 are used to distiguish between Selections and Transitions.
 
 
-Utilities for dealing with \code{<text>} elements can be found in the
+Utilities for dealing with \elname{<text>} elements can be found in the
 Text Utilities Module in file \code{utilities/text.ts}, which contains
 basic functionality to set specific \code{data-*} attributes to
-specific values on \code{<text>} elements. The Text Utility Module
+specific values on \elname{<text>} elements. The Text Utility Module
 holds functions that set \code{data-*} attributes controlling the
-horizontal and vertical alignment of \code{<text>} elements, as well
+horizontal and vertical alignment of \elname{<text>} elements, as well
 as their orientation.  Horizontal and vertical alignment is configured
 using the \code{textAlignHorizontal} and \code{textAlignVertical}
 functions, which respectively set the \code{data-align-h} and
-\code{data-align-v} attribute on \code{<text>} elements to the value
+\code{data-align-v} attribute on \elname{<text>} elements to the value
 passed into either function as a string enum parameter of type
 \code{HorizontalAlignment} or \code{VerticalAlignment}.  The
 \code{HorizontalAlignment} enum represents the string values
@@ -212,13 +212,13 @@ passed into either function as a string enum parameter of type
 used in Selectors of various CSS rules to declare different values for
 the \code{text-anchor} and \code{dominant-baseline} properties.  Text
 orientation is set using the \code{textOrientation} function, which
-sets the \code{data-orientation} attribute on \code{<text>} elements
+sets the \code{data-orientation} attribute on \elname{<text>} elements
 to the value specified via the \code{Orientation} string enum
 parameter.  The \code{Orientation} enum represents the values
 \code{\"horizontal\"} and \code{\"vertical\"}.  These
 \code{data-orientation} attribute values are then used in CSS to set
 the \code{text-anchor}, \code{dominant-baseline}, and \code{transform}
-properties of \code{<text>} elements, in order to rotate them
+properties of \elname{<text>} elements, in order to rotate them
 accordingly and position them correctly inside their bounding box
 calculated by the Layouter.
 
@@ -288,7 +288,7 @@ provided by the Position and Size Utility Modules.  The
 \code{rectMinimized} function creates a minimized version of the
 passed \code{Rect} object, which is infinitely small and positioned at
 the original \code{Rect} object's center.  Minimized rectangles are
-used in transitions that grow or shrink \code{<rect>} elements from or
+used in transitions that grow or shrink \elname{<rect>} elements from or
 to their centers.  When declaring a stroke for SVG elements, it is
 drawn exactly on the outline of an element's shape, which means that a
 stroke will extend outside the original bounds of an element by half
@@ -335,13 +335,13 @@ that encloses a rectangle.
 The Path Utility Module is located in the \code{utilities/path.ts}
 file in the Core Module and provides functions to simplify the
 creation of path definitions that can be set as \code{d} attributes on
-\code{<path>} elements.  The \code{pathRect} function uses a
+\elname{<path>} elements.  The \code{pathRect} function uses a
 \code{Rect} object to create a rectangle path definition that can be
-set on \code{<path>} elements instead of using \code{<rect>} elements.
+set on \elname{<path>} elements instead of using \elname{<rect>} elements.
 Similarly, the \code{pathCircle} function uses a \code{Circle} element
-to create a circle path definition that can be set on \code{<path>}
-elements instead of using a \code{<circle>} elements. The reasons for
-using \code{<path>} elements rather than more descriptive shape
+to create a circle path definition that can be set on \elname{<path>}
+elements instead of using a \elname{<circle>} elements. The reasons for
+using \elname{<path>} elements rather than more descriptive shape
 elements is that their shapes can be changed dynamically and it
 is possible to smoothly transition between shapes by interpolating
 their path definition strings.
@@ -398,7 +398,7 @@ more freely. For this reason, many elements of a visualization must be
 positioned at specific locations with specific dimensions, which means
 there is very little profit in laying them out with an elaborate
 layout algorithm. Instead, exactly-positioned elements like the
-\code{<rect>} elements of Bar Series and the \code{<circle>} elements
+\elname{<rect>} elements of Bar Series and the \elname{<circle>} elements
 of Point Series are usually positioned directly via their SVG
 attributes.
 
@@ -409,7 +409,7 @@ layout process shown in Figure~\ref{fig:LayoutProcess}. The three
 phases are:
 \begin{enumerate}
 \item Replication: The structure of the SVG document that shall be
-  laid out is replicated with HTML \code{<div>} elements, because
+  laid out is replicated with HTML \elname{<div>} elements, because
   only HTML elements can be affected by CSS-based positioning. These
   elements are referred to as \enquote{layout elements} and have the
   same classes and \code{data-*} attributes as the SVG elements they
@@ -444,7 +444,7 @@ phases are:
 \caption[Layout Process of the Layouter]{
 The three phases of the layout process of the RespVis Layouter.
 During the replication phase, the SVG document is replicated with HTML
-\code{<div>} elements. Afterwards, these HTML elements are laid out by
+\elname{<div>} elements. Afterwards, these HTML elements are laid out by
 the browser in the layout phase, and the positions of the laid-out
 HTML elements are applied to their respective SVG elements during the
 synchronization phase.  \imgcredit{Image created by the author of this
@@ -456,7 +456,7 @@ synchronization phase.  \imgcredit{Image created by the author of this
 
 
 During the replication process, the structure of an SVG document is
-replicated with HTML \code{<div>} elements, which is implemented via a
+replicated with HTML \elname{<div>} elements, which is implemented via a
 hierarchical D3 data join, in which the original SVG elements are
 bound as data objects to layout elements. The hierarchical data join
 results in a counterpart in the hierarchy of layout elements for each
@@ -542,7 +542,7 @@ The size of dynamically-sized elements depends on the size of their
 content, and since layout elements exist separately from their SVG
 elements and can not access their content, a manual solution had to be
 implemented to set the size of layout elements to the content size of
-their SVG elements when required. \code{<text>} elements are a good
+their SVG elements when required. \elname{<text>} elements are a good
 example of dynamically-sized elements, because their size is rarely
 explicitly declared and usually depends on the size of their textual
 content. The custom \code{--fit-width} and \code{--fit-height} CSS
@@ -560,7 +560,7 @@ calculation of the overall layout.
 
 Layout elements are positioned according to the layout information
 specified in CSS rules during the layout phase. Since layout elements
-are merely \code{<div>} elements which have been styled via CSS rules,
+are merely \elname{<div>} elements which have been styled via CSS rules,
 the browser can position them automatically via its integrated layout
 engine, which happens immediately after they have been created or
 updated in the replication phase.  After the layout phase, the final
@@ -586,19 +586,19 @@ these default attributes, they would have to be set manually on every
 laid-out element in the rendering functions, which would be less
 convenient and lead to duplicated code in various places. For those
 SVG elements which can be mapped directly to rectangular areas, such
-as \code{<svg>} and \code{<rect>} elements, the \code{x}, \code{y},
+as \elname{<svg>} and \elname{<rect>} elements, the \code{x}, \code{y},
 \code{width}, and \code{height} attributes are set to the values of
 the element's bounding boxes. SVG shape elements that have explicit
-sizes and positions but are not rectangular, such as \code{<circle>}
-and \code{<line>} elements, also receive attributes that fit them into
+sizes and positions but are not rectangular, such as \elname{<circle>}
+and \elname{<line>} elements, also receive attributes that fit them into
 their boundaries in a way that was deemed most sensible. Other SVG
-elements that are not explicitly sized, such as \code{<g>} and
-\code{<text>} elements, are merely moved to the correct positions by
+elements that are not explicitly sized, such as \elname{<g>} and
+\elname{<text>} elements, are merely moved to the correct positions by
 setting their \code{transform} attributes to translations so that
 their top-left corners align with the top-left corners of their
 bounding boxes. The Layouter does not automatically reposition
 exactly-positioned elements based on the changed boundary of the
-composite \code{<svg>} or \code{<g>} elements containing them, so this
+composite \elname{<svg>} or \elname{<g>} elements containing them, so this
 has to be implemented manually in the render functions of various
 components.
 
@@ -614,9 +614,9 @@ affecting the layout, the layouting phase, and the second rendering
 phase to render elements affected by the layout. In the first
 rendering phase, all elements and attributes which affect the layout
 of a visualization need to be rendered, which mainly includes laid-out
-container \code{<svg>} and \code{<g>} elements containing
+container \elname{<svg>} and \elname{<g>} elements containing
 exactly-positioned child elements.  Dynamically-sized elements such as
-\code{<text>} elements and axes also need to be fully rendered in this
+\elname{<text>} elements and axes also need to be fully rendered in this
 phase because their content affects the calculation of the overall
 layout. The layouting phase is where the previously-described layout
 process seen in Figure~\ref{fig:LayoutProcess} is executed, including
@@ -732,7 +732,7 @@ visualization with Axes, Legends, and Series. An example of a rendered
 RespVis Chart containing a Left Axis, a Bottom Axis, a Grouped Bar
 Series, a Label Series, and a Legend can be seen in
 Figure~\ref{fig:Chart}. A Chart is typically rendered in the root
-\code{<svg>} element of an SVG document that has at least the
+\elname{<svg>} element of an SVG document that has at least the
 \code{chart} class set in its \code{class} attribute and the
 appropriate SVG namespace set in its \code{xmlns} attribute. These
 attributes can be set in more specific Chart Components either
@@ -794,13 +794,13 @@ fully initialized scales.
 The structure of a Cartesian Chart is rendered with the
 \code{chartCartesianRender} function, which sets the necessary
 attributes and classes on the root element and attaches the draw area
-\code{<svg>} element to it. The draw area is the container element
+\elname{<svg>} element to it. The draw area is the container element
 into which the Series Components of a Chart are rendered. An
-\code{<svg>} element without actual content is not able to receive
+\elname{<svg>} element without actual content is not able to receive
 input events, which means that it would, for example, not be possible
 to capture scroll events to control a zoom interaction when the cursor
 is over the empty area of the draw area. To counter this, a
-transparent \code{<rect>} background element filling the whole draw
+transparent \elname{<rect>} background element filling the whole draw
 area is added, allows input events to be received even in empty areas.
 
 The \code{chartCartesianAxesRender} function is used to render the
@@ -811,7 +811,7 @@ initialized. Charts must first render the Chart's structure using the
 \code{chartCartesianRender} function, followed by the desired Series
 Components, and only then can the Chart's Axes be rendered using the
 \code{chartCartesianAxesRender} function. The
-\code{chartCartesianAxesRender} function creates two \code{<g>}
+\code{chartCartesianAxesRender} function creates two \elname{<g>}
 elements and renders a Left Axis and a Bottom Axes in them. Depending
 on whether the \code{flipped} property in the bound data object is set
 to \code{true} or \code{false}, the \code{xAxis} data object is used
@@ -853,10 +853,10 @@ provided as the highest level of components that can be configured,
 which typically means that additional HTML elements for the runtime
 configuration of Charts have to be created and managed by the
 embedding web page itself.  Chart Windows are rendered with the
-\code{chartWindowRender} function on HTML \code{<div>} elements
+\code{chartWindowRender} function on HTML \elname{<div>} elements
 containing a Chart's SVG document.  Their structure consists of a
-\code{<div>} element in which the Toolbar is rendered, and of another
-\code{<div>} element on which a Layouter is initialized and which
+\elname{<div>} element in which the Toolbar is rendered, and of another
+\elname{<div>} element on which a Layouter is initialized and which
 holds the wrapped Chart's SVG document. An example of a Chart Window
 with an expanded Tool Menu containing two Nominal Filtering Tools and
 an SVG Download Tool can be seen in Figure~\ref{fig:ChartWindow}.
@@ -910,7 +910,7 @@ are rendered as menu items.
 
 Checkbox Series are implemented in the \code{series-checkbox.ts} file
 in the Core Module and render a series of checkboxes consisting of
-checkbox \code{<input>} elements with associated \code{<label>}
+checkbox \elname{<input>} elements with associated \elname{<label>}
 elements. They are configured using data objects in the form of the
 \code{SeriesCheckbox} interface, which contains properties to
 determine the type of checkbox container elements and the labels of
@@ -923,15 +923,15 @@ data objects so that a single data object can be bound to each
 checkbox. Individual \code{Checkbox} data objects contain all the data
 needed to render a single checkbox and are created by transforming the
 \code{SeriesCheckbox} data objects bound on the Series' root element.
-Single checkboxes consist of a container element, an \code{<input>}
-checkbox element, and a \code{<label>} element. In order to
-semantically assign the \code{<label>} elements to their
-\code{<input>} elements, the \code{for} attributes on \code{<label>}
-elements must be set to the ids of their corresponding \code{<input>}
-elements. This requires assigning unique ids to \code{<input>}
+Single checkboxes consist of a container element, an \elname{<input>}
+checkbox element, and a \elname{<label>} element. In order to
+semantically assign the \elname{<label>} elements to their
+\elname{<input>} elements, the \code{for} attributes on \elname{<label>}
+elements must be set to the ids of their corresponding \elname{<input>}
+elements. This requires assigning unique ids to \elname{<input>}
 elements, which are generated via the \code{uuid} function and set as
-\code{id} attributes on the \code{<input>} elements and as \code{for}
-attributes on \code{<label>} elements when the checkbox is first
+\code{id} attributes on the \elname{<input>} elements and as \code{for}
+attributes on \elname{<label>} elements when the checkbox is first
 created. The \code{uuid} function is an alias for the \code{v4}
 function from the \code{uuid} npm package \parencite{UUIDPackage} and
 is used to generate UUIDs (Universally Unique IDentifiers)
@@ -945,7 +945,7 @@ included by default in every Chart Window. SVG documents embedded in
 HTML documents cannot be downloaded by users as easily as raster
 images, which can simply be downloaded with native browser tools.
 Instead, SVG documents must be encoded in \code{Blob} objects and then
-set as as object URLs in the \code{href} attributes of \code{<a>}
+set as as object URLs in the \code{href} attributes of \elname{<a>}
 elements. However, since the presentation of RespVis visualizations is
 mainly configured using CSS, the active CSS properties must first be
 converted to attributes before the SVG document can be downloaded.
@@ -966,8 +966,8 @@ prettily formatted, which results in a rather difficult-to-read file
 and which will be improved in future work. The \code{Blob} object
 containing the SVG document is further transformed into an object URL
 via the \code{URL.createObjectURL} method and set in the \code{href}
-attribute of a newly created \code{<a>} element. This newly created
-\code{<a>} element is then briefly attached to the \code{<body>}
+attribute of a newly created \elname{<a>} element. This newly created
+\elname{<a>} element is then briefly attached to the \elname{<body>}
 element of the active HTML document and clicked using the
 \code{Element.click} method, which initiates the download of the final
 prepared SVG document. Download SVG Tools can be rendered as menu
@@ -1045,12 +1045,12 @@ A data object for the configuration of a Legend is defined by the
 \code{Legend} interface, which contains properties to describe the
 title, labels, and symbols of a Legend. Symbols are configured via
 functions which take the boundaries calculated by the Layouter into
-account to set the \code{d} attributes of \code{<path>} elements.
-Legend symbols are rendered as \code{<path>} elements because these
+account to set the \code{d} attributes of \elname{<path>} elements.
+Legend symbols are rendered as \elname{<path>} elements because these
 enable the rendering of arbitrary symbols that can be changed
-dynamically, whereas the usage of \code{<rect>} or \code{<circle>}
+dynamically, whereas the usage of \elname{<rect>} or \elname{<circle>}
 elements would be much more restrictive. A disadvantage of using
-\code{<path>} elements is that, since they require manual
+\elname{<path>} elements is that, since they require manual
 configuration of exact shapes via path definition strings, their usage
 is more tedious than the usage of more restricted SVG elements, and
 they require slightly more annotation effort when it comes to
@@ -1069,16 +1069,16 @@ populated with default values.
 A Legend is rendered into elements which have a \code{Legend} data
 object bound on them using the \code{legendRender} function. This
 function sets the \code{legend} class on the root element, attaches a
-\code{<text>} element with which the title of the Legend is shown, and
-attaches a \code{<g>} element into which the individual items of the
+\elname{<text>} element with which the title of the Legend is shown, and
+attaches a \elname{<g>} element into which the individual items of the
 Legend are rendered via a data join. To perform the data join with
 which the items of the Legend are created, one \code{LegendItem} data
 object per item to be rendered is needed to describe individual legend
 items, and these are generated via transformation of the bound
 \code{Legend} data object. Via a data join with these data objects,
-one \code{<g>} element with the \code{legend-item} class is created
-for every legend item, to which a \code{<path>} element for the symbol
-and a \code{<text>} element for the associated label are attached.
+one \elname{<g>} element with the \code{legend-item} class is created
+for every legend item, to which a \elname{<path>} element for the symbol
+and a \elname{<text>} element for the associated label are attached.
 The operations performed during this data join can be directly
 modified via the custom \code{enter}, \code{update}, and \code{exit}
 events, which are dispatched on the root element of the Legend and
@@ -1128,7 +1128,7 @@ and cover other important parts of a Chart.
 The Tooltip Module is located in the \code{src/lib/tooltip/} directory
 of the RespVis library and contains the implementation of Tooltips and
 utility functions to simplify the configuration of Tooltips on Series
-Components. Tooltips are merely HTML \code{<div>} elements with the
+Components. Tooltips are merely HTML \elname{<div>} elements with the
 \code{tooltip} class, which are styled via CSS and which can be
 initialized with the \code{tooltip} function. Their visibility,
 position, and content is controlled via the \code{tooltipShow},
@@ -1248,7 +1248,7 @@ linear scale is used to map quantitative values, but visualization
 authors can choose other forms of interpolation, such as logarithmic
 interpolation via a logarithmic scale.
 
-In RespVis, the Bar Series module renders collections of \code{<rect>}
+In RespVis, the Bar Series module renders collections of \elname{<rect>}
 elements representing the bars in a Bar Chart's draw area, and they
 are the lowest-level components required for rendering Bar
 Charts. Their implementation is located in the \code{series-bar.ts}
@@ -1263,7 +1263,7 @@ additional properties to configure the used categories and values, the
 scales to map them to spatial dimensions, whether or not bars should
 be oriented vertically or horizontally, and properties to configure
 their colors and keys.  After the desired \code{SeriesBar} data
-objects have been created and bound to \code{<svg>} or \code{<g>}
+objects have been created and bound to \elname{<svg>} or \elname{<g>}
 elements, the \code{seriesBarRender} function can be used to render
 Bar Series on these elements. During rendering, the bound
 \code{SeriesBar} data object is transformed into an array of
@@ -1291,7 +1291,7 @@ contains the \code{ChartBar} interface to describe data objects used
 for the configuration of Bar Charts, the \code{chartBarData} function
 to create a fully initialized \code{ChartBar} data object from a
 partial input object, and the \code{chartBarRender} function to render
-Bar Charts as \code{<svg>} or \code{<g>} elements to which
+Bar Charts as \elname{<svg>} or \elname{<g>} elements to which
 \code{ChartBar} data objects have been bound. The \code{ChartBar}
 interface inherits all properties of the \code{ChartCartesian} and
 \code{SeriesBar} interfaces and adds additional properties for the
@@ -1321,7 +1321,7 @@ objects for the configuration of Bar Chart Windows, the
 \code{ChartWindowBar} data object from a partial input object
 containing only relevant properties, and the
 \code{chartWindowBarRender} function to render a Bar Chart Window as a
-\code{<div>} element onto which a \code{ChartWindowBar} data object
+\elname{<div>} element onto which a \code{ChartWindowBar} data object
 has been bound. The \code{ChartWindowBar} interface inherits all
 properties of the \code{ChartBar} interface to configure the wrapped
 Bar Chart and adds additional properties needed for the filtering of
@@ -1426,7 +1426,7 @@ Bar Chart, and Grouped Bar Chart Window Components, which are very
 similar to their Single-Series Bar Chart counterparts, to render
 grouped bar charts in different levels of hierarchy. Grouped Bar
 Series are the lowest-level components of these and render a
-collection of \code{<rect>} elements meant for display in the draw
+collection of \elname{<rect>} elements meant for display in the draw
 area of a Grouped Bar Chart. The difference between a Grouped Bar
 Series and a Single-Series Bar Series is that this one offers
 additional properties needed for the configuration of subcategories
@@ -1655,7 +1655,7 @@ points are called bubble charts.
 The Point Module is located in the \code{src/lib/point/} directory of
 the RespVis library and contains the implementation of Point Series,
 Point Charts, and Point Chart Windows. Point Series render a
-collection of \code{<circle>} elements, whose center positions are
+collection of \elname{<circle>} elements, whose center positions are
 calculated by mapping arrays of X and Y values into the bounding boxes
 of the Series' root elements via X and Y scales. The colors of points
 are specified as style classes, and their radiuses can be configured,
