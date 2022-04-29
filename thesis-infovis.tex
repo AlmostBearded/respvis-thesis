@@ -9,11 +9,11 @@ including the rapid scanning, recognition, and recall of visual
 information, as well as the automatic detection of visual patterns. In
 contrast to textual representations of data, the processing of
 well-designed visualizations requires less cognitive effort,
-because it leverages features of the human visual processing
-system. One of these features is \emph{preattentive processing},
-whereby certain visual attributes can be processed very quickly and
-without conscious effort \parencite{PreattentiveProcessing}.
-% KA give an example of a pre-attentive feature
+because it leverages features of the human visual processing system.
+One of these features is \emph{preattentive processing}, whereby
+certain visual attributes such as colors, shapes, and sizes can be
+processed very quickly and without conscious effort
+\parencite{PreattentiveProcessing}.
 
 
 In addition to visuals being easier to assimilate by humans, a purely
@@ -127,7 +127,7 @@ visualization as having three main subfields, as defined by
   real-world objects having inherent 2d or 3d geometry, which
   is used as the basis for visualization.
 \end{enumerate}
-The often-used term \enquote{data visualization} (\emph{DataVis}) is
+The often-used term \enquote{Data Visualization} (\emph{DataVis}) is
 defined as the combination (union) of information visualization and
 geographic visualization.
 
@@ -208,76 +208,16 @@ a user wants to achieve (user intent).
 
 The history of information visualization goes back a long time. One of
 its earliest examples dates back to the \nth{10} Century, when an
-unknown astronomer created the chart about the movement of prominent
-planets \parencite{CommentariiInSomniumScipionis} shown in
-Figure~\ref{fig:PlanetaryMovements}.
-% KA: 1175 is the 12th Century not the 10th
+unknown astronomer added a chart showing the movements of prominent
+planets to the appendix of \parencite{CommentariiInSomniumScipionis}.
 Other noteworthy early visualizations include the first occurrence of
-the principle which \textcite{VisualDisplayOfQuantitativeInformation}
-later called \enquote{small multiples} in the 1626 chart by
-\textcite{RosaUrsina} demonstrating sunspot changes shown in
-Figure~\ref{fig:SunspotChanges}, and the 1644 chart displaying
-longitudinal distance determinations between Toledo and Rome by \textcite{RomeToledoBook} shown in
-Figure~\ref{fig:RomeToledoLongitude}.
-
-
-\begin{figure}[tp]
-\centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
-{images/planetary-movements.png}
-\caption[Chart of Planetary Movements from the \nth{10} Century]{%
-A line chart created by an unknown astronomer in the \nth{10} Century,
-depicting the movements of seven prominent planets.
-\imgcredit{Image extracted from \textcite{BriefHistoryOfDataVis}.
-Original appearance in \textcite{CommentariiInSomniumScipionis}.}
-}
-\label{fig:PlanetaryMovements}
-\end{figure}
-% KA Original appearance in Macrobius [1175] ??
-% Funkhouser 1936 says 10th or 11th Century
-
-
-
-\begin{figure}[tp]
-\centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
-{images/sunspot-changes.png}
-\caption[Chart of Changes in Sunspots from 1626]{%
-The observed changes in sunspots based on recordings
-of two months of data from 1611. It is the first occurrence of the
-principle later called \enquote{small multiples} by
-\textcite{VisualDisplayOfQuantitativeInformation}.
-\imgcredit{Image extracted from \textcite{BriefHistoryOfDataVis}.
-Original appearance in \textcite{RosaUrsina}.}
-}
-\label{fig:SunspotChanges}
-\end{figure}
-
-% https://cudl.lib.cam.ac.uk/view/PR-QQ-AST-00002-00158-B-00003/1
-
-% Tufte, Edward R. and Peter R. Graves-Morris [1983].
-% The Visual Display of Quantitative Information.
-% Graphics Press, 1983. ISBN 1930824130 (cited on pages 19–20).
-% KA: who is Graves-Morris ?
-
-
-
-\begin{figure}[tp]
-\centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
-{images/rome-toledo-longitude.png}
-\caption[Chart of Longitudinal Distance Determinations Between Toledo and Rome From 1644]{%
-A comparison of the twelve known estimates in longitudinal
-distance between Rome and Toledo by various astronomers. The correct
-distance is marked by the arrow beneath. It is considered by \textcite[15]{VisualExplanations} to be the
-first visual representation of statistical data.
-\imgcredit{Image extracted from \textcite{BriefHistoryOfDataVis}.
-Original appearance in \textcite{RomeToledoBook}.}
-}
-\label{fig:RomeToledoLongitude}
-\end{figure}
-
-
+the principle \textcite{VisualDisplayOfQuantitativeInformation} later
+called \enquote{small multiples} in \textcite{RosaUrsina}'s chart
+demonstrating observed changes in sunspots, and what
+\textcite[15]{VisualExplanations} deems to be the first visualization
+of statistical data in \textcite{RomeToledoBook}'s chart displaying
+twelve estimates of the longitudinal distance between Toledo and Rome
+by various astronomers.
 
 
 
@@ -306,11 +246,10 @@ titles, and color-coding.
 Line chart of the expenditure of the British Navy during the \nth{18}
 Century. It was published in 1786 and is considered to be one of the
 first occurrences of a line chart containing components found in
-modern visualizations.
-\imgcredit{Image extracted from Schoenberg Center for
-Electronic Text and Image (SCETI).
-Used under the terms of Creative Commons CC BY 2.5.}
-}
+modern visualizations. \imgcredit{Original appearance in
+\textcite{CommercialAndPoliticalAtlas}. Image extracted from
+\textcite{SCETI} and used under the terms of Creative Commons CC BY
+2.5.}}
 \label{fig:PlayfairLineChart}
 \end{figure}
 
@@ -322,13 +261,12 @@ Used under the terms of Creative Commons CC BY 2.5.}
 {images/playfair-bar-chart.png}
 \caption[Bar Chart by William Playfair from 1786]{%
 Bar chart of England's exports and imports to and from Scotland in
-1781. Published in 1786, it is considered to be one of the
-first occurrences of a bar chart containing most components found in
-modern visualizations.
-\imgcredit{Image extracted from Schoenberg Center
-for Electronic Text and Image (SCETI).
-Used under the terms of Creative Commons CC BY 2.5.}
-}
+1781. Published in 1786, it is considered to be one of the first
+occurrences of a bar chart containing most components found in modern
+visualizations. \imgcredit{Original appearance in
+\textcite{CommercialAndPoliticalAtlas}. Image extracted from
+\textcite{SCETI} and used under the terms of Creative Commons CC BY
+2.5.}}
 \label{fig:PlayfairBarChart}
 \end{figure}
 
@@ -339,63 +277,29 @@ Used under the terms of Creative Commons CC BY 2.5.}
 \includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
 {images/playfair-area-chart.png}
 \caption[Area Chart by William Playfair from 1786]{%
-Area chart of annual revenues of England and France between
-1550 and 1800. Published in 1786, it is considered to be one of
-the first occurrences of an area chart
-containing most components found in modern visualizations.
-\imgcredit{Image extracted from Schoenberg Center
-for Electronic Text and Image (SCETI).
-Used under the terms of Creative Commons CC BY 2.5.}
-}
+Area chart of annual revenues of England and France between 1550 and
+1800. Published in 1786, it is considered to be one of the first
+occurrences of an area chart containing most components found in
+modern visualizations. \imgcredit{Original appearance in
+\textcite{CommercialAndPoliticalAtlas}. Image extracted from
+\textcite{SCETI} and used under the terms of Creative Commons CC BY
+2.5.}}
 \label{fig:PlayfairAreaChart}
 \end{figure}
 
 
 
-
-%% The dot map created by \textcite{ModeOfCommunicationOfCholera} in 1855
-%% to trace cholera outbreaks in London (Figure~\ref{fig:CholeraDotMap})
-%% is undoubtedly one of the most famous and influential visualizations
-%% in history.  Even though it is not directly an information
-%% visualization but rather a geographic one, it has been included here
-%% because of its historic relevance.  This iconic dot map was used to
-%% identify a cluster of cholera-related deaths near a contaminated water
-%% pump on Broad Street, leading to the recognition of cholera as a
-%% waterborne disease.
-%% 
-%% 
-%% \begin{figure}[tp]
-%% \centering
-%% \includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{images/cholera-dot-map.png}
-%% \caption[Dot Map Plotting Cholera Deaths in London From 1855]{%
-%% This iconic chart was created by Dr. John Snow in 1855 to identify a
-%% clustering of cholera-related deaths near Broad Street in London.  It
-%% was used to identify a contaminated water pump and to illustrate the
-%% waterborne nature of the disease.  Since the data is map-based, this
-%% chart is an example of a geographic visualization rather than an
-%% information visualization.
-%% \imgcredit{Image extracted from \textcite{IVISCourseNotes}.
-%% Original appearance in \textcite{ModeOfCommunicationOfCholera}.}
-%% }
-%% \label{fig:CholeraDotMap}
-%% \end{figure}
-
-
-
-
-
-
 It would be amiss not to mention Florence Nightingale (1820--1910)
-\parencite{FlorenceNightingale} when talking about the history of
-information visualization. She was a British statistician, social
-reformer, and the founder of modern nursing and might be the first
-person who used visualizations to persuade others of a need for
-change. During her service as a superintendent of nurses in the
-Crimean War, she realized that a large number of deaths in hospitals
-resulted from preventable diseases which originated in poor sanitary
-conditions. One of her contributions to the field of information
-visualization was the creation of a new type of diagram, called a rose
-diagram or polar-area chart, shown in
+\parencite{FlorenceNightingale, NightingaleBook} when talking about
+the history of information visualization. She was a British
+statistician, social reformer, and the founder of modern nursing and
+might be the first person who used visualizations to persuade others
+of a need for change. During her service as a superintendent of nurses
+in the Crimean War, she realized that a large number of deaths in
+hospitals resulted from preventable diseases which originated in poor
+sanitary conditions. One of her contributions to the field of
+information visualization was the creation of a new type of diagram,
+called a rose diagram or polar-area chart, shown in
 Figure~\ref{fig:NightingalePolarAreaChart}. She used these charts to
 communicate data she collected on the mortality of soldiers during the
 war and to grab the attention of politicians and the public.
@@ -410,9 +314,9 @@ to convince people of a need for more sanitary conditions in
 hospitals. It visualizes the causes of mortality for soldiers during
 the Crimean War and demonstrates that a large percentage of patients
 died from preventable diseases linked to unsanitary environments.
-\imgcredit{Image extracted from Harvard Library.
-Used under the terms of Creative Commons Attribution 4.0.}
-}
+\imgcredit{Original appearance in \textcite{NightingaleBook}. Image
+extracted from \textcite{HarvardLibrary} and used under the terms of
+Creative Commons Attribution 4.0.}}
 \label{fig:NightingalePolarAreaChart}
 \end{figure}
 
