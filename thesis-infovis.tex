@@ -369,10 +369,12 @@ There are many web-based libraries which simplify the rendering of
 interactive visualizations. The approaches used to create and update a
 visualization differ widely between libraries. D3 is a low-level
 library which enables data-driven transformations of documents. Vega
-and Vega-Lite provide a declarative grammar to express the visual and
-interactive characteristics of a visualization. Template-based
-visualization libraries provide a higher-level template-based
-interface which can easily be configured.
+and other grammar-based libraries provide a declarative grammar to
+express the visual and interactive characteristics of a visualization.
+Template-based visualization libraries provide higher-level
+template-based interfaces that visualization authors can simply fill
+with data, which makes them very easy to use but can lead to
+limitations.
 
 
 
@@ -402,7 +404,7 @@ proprietary visual primitives and relies on well established web
 standards like HTML, SVG, and CSS to implement its visual
 representations. This yields great flexibility, because developers
 work directly with web standards implemented in browsers and do not
-need to wait for D3 to support for new features as standards
+need to wait for D3 to support new features as standards
 evolve. If developers chose to switch to a different library, the
 knowledge of web standards gained during their work with D3 might be
 applicable to their future work. The reliance on web standards also
@@ -426,30 +428,29 @@ problem-solving principle which stems from the field of philosophy
 \enquote{entities should not be multiplied beyond necessity}, and when
 applied to API design it means that superfluous functions in an API
 should be avoided. As an example, the background color of a circle
-element can already be set with the generic \lstinline{Selection.attr}
+element can already be set with the generic \code{Selection.attr}
 method to set the \attrname{background-color} attribute of all
 elements in a Selection. Adding an additional
-\lstinline{backgroundColor} method would violate the principle of
+\code{backgroundColor} method would violate the principle of
 parsimony because it would introduce a special method to achieve
 something that was already achievable.
 
 Method chaining is a popular syntax which allows functions to be
 chained after one another. The use of method chaining avoids having to
 store intermediate method results in variables which would not
-otherwise be needed. It is implemented in D3 by returning the
-\lstinline{Selection} on which a modifying method is called as a
-result of that method. Methods which insert new elements into the DOM,
-such as \lstinline{Selection.append} and \lstinline{Selection.insert},
-return a Selection of the newly added elements to enable the creation
-of nested structures. This method chaining syntax is further aided by
-the \lstinline{Selection.call} method, which invokes a callback
-receiving the current Selection as a parameter and returns the
-original Selection to chain further methods on it after the callback
-has been executed. The \lstinline{Selection.call} method enables the
-creation of complex method chaining structures and is widely used by
-developers. A simple example of method chaining in D3 with the
-\lstinline{Selection.call} method can be seen in
-Listing~\ref{list:D3MethodChaining}.
+otherwise be needed. It is implemented in D3 by returning the D3
+Selection on which a modifying method is called as a result of that
+method. Methods which insert new elements into the DOM, such as
+\code{Selection.append} and \code{Selection.insert}, return a D3
+Selection of the newly added elements to enable the creation of nested
+structures. This method chaining syntax is further aided by the
+\code{Selection.call} method, which invokes a callback receiving the
+current Selection as a parameter and returns the original Selection to
+chain further methods on it after the callback has been executed. The
+\code{Selection.call} method enables the creation of complex method
+chaining structures and is widely used by developers. A simple example
+of method chaining in D3 with the \code{Selection.call} method can be
+seen in Listing~\ref{list:D3MethodChaining}.
 
 
 
@@ -461,60 +462,58 @@ Listing~\ref{list:D3MethodChaining}.
   xleftmargin=0cm,              % no extra margins for floats
   xrightmargin=0cm,             % no extra margins for floats
   %
-  language=JavaScript,
   basicstyle=\footnotesize\ttfamily,
   frame=shadowbox,
   numbers=left,
   label=list:D3MethodChaining,
   caption={[D3 Method Chaining]%
 A simple example of method chaining in D3.
-A \elname{h1} element and a \elname{p} element are created
-inside an existing \elname{body} element.
+A \elname{<h1>} element and a \elname{<p>} element are created
+inside an existing \elname{<body>} element.
 },
 ]{listings/d3-method-chaining.js}
 \end{samepage}
 
 
 Selections are the atomic building blocks of D3 and are used to access
-almost any functionality.  Selections are created using the
-\lstinline{d3.select} or \lstinline{d3.selectAll} methods.  These
-methods are built on the \lstinline{querySelector} and
-\lstinline{querySelectorAll} methods of the DOM Selectors API, which
+almost any functionality. They are created using the
+\code{d3.select} or \code{d3.selectAll} methods. These
+methods are built on the \code{querySelector} and
+\code{querySelectorAll} methods of the DOM Selectors API, which
 allow the selection of elements via CSS selectors (see
-Section~\ref{sec:CSS}). The \lstinline{d3.select} and
-\lstinline{d3.selectAll} methods create a Selection containing either
+Section~\ref{sec:CSS}). The \code{d3.select} and
+\code{d3.selectAll} methods create a Selection containing either
 a single element matching the provided selector, or multiple elements
 matching it, respectively. A Selection acts as a wrapper container
 around selected elements to perform frequently performed DOM
 operations on them.  Among others, the element operations provided by
 a Selection include the setting and getting of: attributes using the
-\lstinline{Selection.attr} method, styles using the
-\lstinline{Selection.style} method, properties using the
-\lstinline{Selection.property} method, text or HTML content using the
-\lstinline{Selection.text} or \lstinline{Selection.html} methods, and
-event listeners using the \lstinline{Selection.on} method. Selections
+\code{Selection.attr} method, styles using the
+\code{Selection.style} method, properties using the
+\code{Selection.property} method, text or HTML content using the
+\code{Selection.text} or \code{Selection.html} methods, and
+event listeners using the \code{Selection.on} method. Selections
 also provide wrapper methods to insert additional elements using the
-\lstinline{Selection.append} or \lstinline{Selection.insert} methods,
-as well as to remove them using the \lstinline{Selection.remove}
+\code{Selection.append} or \code{Selection.insert} methods,
+as well as to remove them using the \code{Selection.remove}
 method. Accessing the DOM via this wrapper is less tedious than
 accessing it directly, because the native DOM API is very verbose, and
 also because the method chaining API provided by D3 does not require
 the storage of unnecessary intermediate variables.
 
 An additional feature of D3 is the ability to bind data to elements
-using the \lstinline{Selection.data} and \lstinline{Selection.datum}
-methods. The \lstinline{Selection.datum} method binds a single
-provided data record to all elements in the Selection, whereas the
-\lstinline{Selection.data} method receives an array of data records
-and binds each individual data record to exactly one element.  The
-\lstinline{Selection.data} method performs a join operation between
-data and elements to ensure that exactly one element per data record
-exists. This data join results in three separate Selections: the enter
-Selection, containing the elements which were newly created, the
-update Selection, containing the elements which merely receive new
-data, and the exit Selection, containing the elements which are being
+using the \code{Selection.data} and \code{Selection.datum} methods.
+The \code{Selection.datum} method binds a single provided data record
+to all elements in the Selection, whereas the \code{Selection.data}
+method receives an array of data records and binds each individual
+data record to exactly one element.  The \code{Selection.data} method
+performs a join operation between data and elements to ensure that
+exactly one element per data record exists. This data join results in
+three separate Selections: the enter Selection, containing newly
+created elements, the update Selection, containing elements merely
+receiving new data, and the exit Selection, containing elements being
 removed. Each of these Selections can be individually transformed
-using the \lstinline{Selection.join} method, which can receive three
+using the \code{Selection.join} method, which can receive three
 callbacks for the enter, update, and exit Selections of the data join,
 respectively. This ability to individually control changes to
 entering, updating, and exiting elements is referred to in D3 as the
@@ -552,45 +551,38 @@ complex scenarios involving transitions.
 
 
 D3 also offers a convenient, optional API to perform JavaScript-based
-animations via Transitions, which wrap a Selection and allow the
-animation of various element characteristics.  Transitions are created
-using the \lstinline{Selection.transition} method which creates a
-Transition wrapping the Selection on which it has been called.  The
+animations via D3 Transitions, which wrap a Selection and allow the
+animation of various element characteristics. Transitions are created
+using the \code{Selection.transition} method which creates a
+Transition wrapping the Selection on which it has been called. The
 duration of a Transition is defined using the
-\lstinline{Transition.duration} method and its easing can be
-configured using the \lstinline{Transition.ease} method. It is also
-possibile to interrupt and chain transitions. Transitions provide an
-almost identical API to Selections. The major change is that the
-wrapping methods interpolate towards their target values using the
-given easing function over the given duration instead of setting the
-target value directly. Using D3 Transitions is completely optional and
-developers can choose instead to use other animation technologies,
-like CSS transitions and animations.
+\code{Transition.duration} method and its easing can be configured
+using the \code{Transition.ease} method. It is also possibile to
+interrupt and chain transitions. Transitions provide an almost
+identical API to Selections. The major change is that the wrapping
+methods interpolate towards their target values using the given easing
+function over the given duration instead of setting the target value
+directly. Using Transitions is completely optional and developers can
+choose instead to use other animation technologies, like CSS
+transitions and animations.
 
 At its core, D3 is simply a low-level library to perform data-driven
 document transformations. Even though this generic core technology is
 applicable to a wide range of use cases, D3 was created with a focus
-on creating visualizations. There are many additional modules which
+on creating visualizations. There are many additional packages which
 simplify the higher-level tasks necessary for creating and rendering
-visualizations. All D3 modules follow the same inherent patterns, like
-method chaining and configurable functions. Therefore, despite this
-higher-level functionality being split over multiple modules, a
+visualizations. All D3 packages follow the same inherent patterns,
+like method chaining and configurable functions. Therefore, despite
+this higher-level functionality being split over multiple packages, a
 consistent experience is provided to developers. Listing all available
-modules here would be out of the scope of this work, but some
-noteworthy modules include: \modname{d3-shape} to create visual
-primitives like lines and areas, \modname{d3-scale} to encode abstract
-data dimensions, \modname{d3-axis} to render scales as human-readable
-axes, and many more such as \modname{d3-array}, \modname{d3-layout}
-and \modname{d3-zoom}.
-% KA add a short characterisation of d3-array, d3-layout, and d3-zoom
+packages here would be out of the scope of this work, but some
+noteworthy ones include: \code{d3-shape} to create visual primitives
+like lines and areas, \code{d3-scale} to encode abstract data
+dimensions, and \code{d3-axis} to render scales as human-readable
+axes.
 
 
-
-
-
-
-
-\subsection{Vega and Vega-Lite}
+\subsection{Grammar-Based Visualization Libraries}
 
 Vega \parencite{Vega} is a library consisting of a grammar to describe
 interactive graphics and a parser which translates specifications
@@ -611,7 +603,7 @@ similar to the Grammar of Graphics defined by
 \textcite{GrammarOfGraphics}. At its top level, a Vega specification
 contains properties to configure sizing and padding of the container
 of a visualization. Every specification also contains a data section,
-which either defines data or specifies where to load it from.  The
+which either defines data or specifies where to load it from. The
 Vega grammar also supports various forms of data transformation which
 can successively be applied to a dataset to perform various
 transformations like filtering, deriving additional fields, or
@@ -669,7 +661,7 @@ but limiting, or by manually modifying the visualization in various
 callbacks, which is flexible but tedious and not serializable. The
 ability to describe custom interactions using a serializable,
 data-driven grammar is what sets Vega apart from other declarative
-visualization librarie \parencite{ReactiveVega}. This approach offers
+visualization libraries \parencite{ReactiveVega}. This approach offers
 the flexibility of callback-driven interactions, while still remaining
 fully serializable and declarative. The grammar to define interactions
 is based on the syntax of event-driven functional reactive programming
@@ -703,11 +695,11 @@ display a tooltip when hovering over bars.
 The necessary additions to the static bar chart specification in
 Listing~\ref{list:VegaStaticBarChart} to display a tooltip when
 hovering over bars. It demonstrates the basic functionality of signals
-in Vega. When the mouse hovers over a \elname{rect} mark, the tooltip
-signal will receive the value of the \elname{rect}'s bound data
-record. The \elname{tooltip} signal will be reset to an empty object when the
-mouse leaves the \elname{rect} mark. It is then used in the newly
-added \elname{text} mark section of the specification to define the
+in Vega. When the mouse hovers over a \code{rect} mark, the tooltip
+signal will receive the value of the \code{rect}'s bound data
+record. The \code{tooltip} signal will be reset to an empty object when the
+mouse leaves the \code{rect} mark. It is then used in the newly
+added \code{text} mark section of the specification to define the
 position, text, and visibility of the tooltip whenever an update
 occurs.
 },
@@ -767,51 +759,62 @@ combined.
 ]{listings/vega-lite-bar-chart.json}
 \end{samepage}
 
-
-
-
-
+Another very interesting development in the field of visualization
+grammars that is related to responsive visualizations is the recently
+developed Cicero \parencite{Cicero}, a declarative visualization
+grammar for responsive visualizations. It is an extension of Vega-Lite
+and includes a compiler that can compile Cicero specifications into
+Vega-Lite specifications. Due to this compilation into Vega-Lite,
+Cicero does not require a custom renderer but can rely on Vega-Lite to
+do the rendering. The main addition of Cicero to Vega-Lite consists of
+a declarative grammar to describe responsive transformations that
+transform a source visualization into a responsive version of itself.
+Responsive transformations are declared in terms of a \emph{specifier}
+selecting the elements to be transformed, an \emph{action} that should
+be performed on these elements, and an \emph{option} further defining
+the action. Cicero's transformation grammar simplifies reusing
+responsive transformations across different visualizations and is an
+improvement to Vega-Lite's workflow of having to create completely
+separate specifications for each responsive version of a
+visualization. 
 
 
 
 \subsection{Template-Based Visualization Libraries}
 
-Template-based visualization libraries work by providing templates for
-possible types of visualizations and allowing users to customize them.
-These types of visualization libraries are easier to use than D3 or
-Vega because they offer a concise form of configuration which does not
-require users to have detailed knowledge over the underlying rendering
-technology or complex, non-standardized domain specific languages.
-Even though these types of libraries are usually flexible enough to
-create a huge range of visualizations, at some point users may run
-into limitations. Some of these limitations can only be worked around
-by writing custom source code, which requires a deep understanding of
-the underlying library. This effectively eliminates the ease-of-use
-benefit of these types of libraries for users who run into these
-limitations.
+Template-based visualization libraries work by providing high-level
+templates for possible types of visualizations and allowing users to
+customize them. These types of visualization libraries are easier to
+use than D3 or Vega because they offer a concise form of configuration
+which does not require users to have detailed knowledge over the
+underlying rendering technology or complex, non-standardized domain
+specific languages. Even though these types of libraries are usually
+flexible enough to create a huge range of visualizations, at some
+point users may run into limitations. Some of these limitations can
+only be worked around by writing custom source code, which requires a
+deep understanding of the underlying library. This effectively
+eliminates the ease-of-use benefit of these types of libraries for
+users who run into these limitations.
 
 For this thesis, a total of 20 template-based JavaScript visualization
 libraries were examined and compared according to factors such as
-their rendering technology, usage popularity (number of downloads),
-open-source popularity, license, and recent development activity.  In
-terms of rendering technology, most libraries render visualizations as
-either SVG documents or canvas elements, although some implement a
-hybrid renderer which can be configured to render as either one of
-them. Usage popularity was measured by the cumulative package
-downloads from the npm package manager over the previous twelve
-months. This was deemed one of the most relevant metrics for the
-comparison, because it reflects actual user behavior and gives an
-indication on how widespread a library is used in practice. The 20
-libraries found in the initial collection phase were filtered by their
-usage popularity and recent development activity to remove those which
-were not sufficiently used or no longer maintained. This filtering
-step yielded the following ten libraries: (1) ChartJS
-\parencite{ChartJS}, (2) Highcharts \parencite{Highcharts}, (3)
-ECharts \parencite{ECharts}, (4) ApexCharts \parencite{ApexCharts},
-(5) PlotlyJS \parencite{PlotlyJS}, (6) C3JS \parencite{C3JS}, (7)
-Chartist \parencite{Chartist}, (8) amCharts \parencite{amCharts}, (9)
-billboardJS \parencite{billboardJS}, and (10) D3FC \parencite{D3FC}.
-These ten libraries were selected for further consideration.
+their rendering technology (SVG or Canvas), usage popularity (last
+year's npm package downloads), open-source popularity (stars on
+GitHub), license (free or commercial), and recent development activity
+(commits on GitHub). Usage popularity was deemed one of the most
+relevant metrics for the comparison, because it reflects actual user
+behavior and gives an indication on how widespread a library is used
+in practice. The 20 libraries found in the initial collection phase
+were filtered by their usage popularity and recent development
+activity to remove those which were not sufficiently used or no longer
+maintained. This filtering step yielded the following ten libraries:
+(1) ChartJS \parencite{ChartJS}, (2) Highcharts
+\parencite{Highcharts}, (3) ECharts \parencite{ECharts}, (4)
+ApexCharts \parencite{ApexCharts}, (5) PlotlyJS \parencite{PlotlyJS},
+(6) C3JS \parencite{C3JS}, (7) Chartist \parencite{Chartist}, (8)
+amCharts \parencite{amCharts}, (9) billboardJS
+\parencite{billboardJS}, and (10) D3FC \parencite{D3FC}. These ten
+libraries were selected for further consideration.
 
 Eight of the ten libraries are completely free to use without
 restrictions, amCharts has a free license for users who are
@@ -819,13 +822,14 @@ comfortable with an attribution logo on their visualizations, and
 Highcharts offers a free license option for non-profit, educational
 and personal applications. Nine of the libraries implement an
 SVG-based renderer, two of which (ECharts and D3FC) also offer
-alternative rendering to Canvas elements for high-performance
-scenarios, and only ChartJS solely targets canvas-based rendering.
-Eight libraries are very actively maintained with most of them showing
-development activity within the last month. C3JS and Chartist seem to
-be no longer actively maintained, but were included nontheless in the
-deeper evaluation, due to their historic and thematic relevance and
-because they are still widely used.
+alternative rendering to \elname{<canvas>} elements (D3FC also via
+WebGL) for high-performance scenarios, and only ChartJS solely targets
+\elname{<canvas>}-based rendering. Eight libraries are very actively
+maintained with most of them showing development activity within the
+last month. C3JS and Chartist seem to be no longer actively
+maintained, but were included nontheless in the deeper evaluation, due
+to their historic and thematic relevance and because they are still
+widely used.
 
 Template-based visualization libraries have a strong inclination
 towards designing their APIs according to principles of declarative
@@ -890,16 +894,16 @@ passed to the creation function.
 
 
 The only library in the deeper evaluation which does not provide a
-high-level declarative configuration API is D3FC.  The design
-philosophy of D3FC is based on the idea of \enquote{unboxing} D3.
-Even though many visualization libraries are implemented on top of D3,
-it is usually hidden behind public APIs which are easier to work with
-but do not provide the full flexibility of D3. D3FC exposes a
+high-level declarative configuration API is D3FC. The design
+philosophy of D3FC is based on the idea of \enquote{unboxing} D3. Even
+though many visualization libraries are implemented on top of D3, it
+is usually hidden behind public APIs which are easier to work with but
+do not provide the full flexibility of D3. D3FC exposes a
 component-based interface which closely follows design patterns
 frequently encountered when working with D3. These components form
 higher-level building blocks upon which advanced visualizations can be
 built. They are also highly configurable and in those cases where the
-options for configuration are not sufficient, a decorator pattern is
+options for configuration are not sufficient, a decorator pattern
 allows users to hook into the underlying D3 functionality and inject
 custom code into the various stages of the general update pattern at
 the core of D3. Code demonstrating the usage of D3FC can be seen in
@@ -949,15 +953,15 @@ Chartist, amCharts, billboardJS, and D3FC) support the styling of
 elements in their created visualizations with CSS, which requires
 rendering as SVG documents, since only document-based visualizations
 can be affected by CSS. The styling of visualizations with CSS is
-powerful, because it leads to a separation of concerns and designers
-can make use of CSS-inherent mechanisms to configure responsive
-styles.  Unfortunately, CSS-based styling is only of limited
-applicability because not all CSS properties affect SVG elements, as
+powerful, because it leads to a separation of concerns and
+visualization authors can make use of CSS-inherent mechanisms to
+configure responsive styles. Unfortunately, CSS-based styling is
+inherently limited because only CSS properties representing
+presentational SVG attributes can be applied on SVG elements, as
 described in Section~\ref{sec:SVG}.
-% KA  not sure about this last sentence??
 
 To responsively configure other visualization characteristics, such as
-their type, data, and layout, designers have to resort to
+their type, data, and layout, visualization authors have to resort to
 configuration mechanisms offered by the libraries. Four libraries
 (Highcharts, ApexCharts, Chartist, and amCharts) provide the
 possibility to specify rule-based responsive configurations as part of
@@ -967,18 +971,18 @@ consist of a condition part which specifies when to apply the rule,
 and a configuration part which specifies the configuration options
 which should be set when applying the rule. Even though this is a
 convenient form of responsive configuration, if the desired conditions
-can not be expressed via the provided declarative properties,
-designers have to fall back to more generic mechanisms which are also
-applicable to other libraries. The mechanisms for responsive
-configuration in the other libraries are more generic, because they do
-not offer these configurations as part of their declarative
-interfaces. This means that developers need to trigger responsive
-configurations themselves by manually reconfiguring visualizations via
-their APIs in custom resize or media query event listeners. Nearly all
-libraries provide a means to dynamically resize visualizations and
-update their data, type, and options. The exceptions are
-C3JS, which only supports dynamic changes of some options, and
-Chartist, which does not support changing a visualization's type at all.
+can not be expressed via the provided declarative properties, authors
+have to fall back to more generic mechanisms which are also applicable
+to other libraries. The mechanisms for responsive configuration in the
+other libraries are more generic, because they do not offer these
+configurations as part of their declarative interfaces. This means
+that developers need to trigger responsive configurations themselves
+by manually reconfiguring visualizations via their APIs in custom
+\code{resize} event listeners. Nearly all libraries provide a means to
+dynamically resize visualizations and update their data, type, and
+options. The exceptions are C3JS, which only supports dynamic changes
+of some options, and Chartist, which does not support changing a
+visualization's type at all.
 
 
 
@@ -1001,7 +1005,3 @@ the x-axis and y-axis titles are removed if the chart is narrower than
 },
 ]{listings/highcharts-responsive.js}
 \end{samepage}
-
-% KA  Is the value in pixels?  How about ems?
-
-
