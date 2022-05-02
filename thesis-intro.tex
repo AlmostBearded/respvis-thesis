@@ -53,18 +53,21 @@ libraries, it can be hard to extend visualizations beyond the intended
 configurations.
 
 
-
-This thesis introduces RespVis, a new software library for creating
+This thesis presents RespVis, a new software library for creating
 presentational information visualizations for the web with a strong
 emphasis on responsiveness. RespVis is an open-source library
-\parencite{RespVisGitHub}, which has been designed as an extension of
-D3 and focuses on rendering visualizations as SVG documents. Its API
-has intentionally been kept as minimal as possible and only allows the
-configuration of data which affects a visualization's content or
-behavior. CSS is used to style and largely position a visualization's
-content. The main contribution of this work lies in a custom layouter
-which uses the browser's own layout engine to enable the positioning
-of SVG-based visualization components, which would otherwise be
+\parencite{RespVisGitHub} written in TypeScript, which is designed as
+an extension of D3 and focuses on rendering visualizations as
+composite SVG documents. RespVis relies on CSS to style and position a
+visualization's content, its JavaScript API has intentionally been
+kept as minimal as possible. Visualization authors can use CSS media
+queries in combination with Flexbox and Grid to position chart
+components (such as title, axes, legend, and the chart itself)
+responsively.
+
+The main contribution of this work lies in a custom layouter which
+uses the browser's own layout engine to enable the positioning of
+SVG-based visualization components, which would otherwise be
 unaffected by CSS layouting. Allowing visualization authors to
 configure the layout of visualization components with CSS layouting
 mechanisms like Flexbox and Grid leads to better responsive

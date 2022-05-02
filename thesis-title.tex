@@ -312,18 +312,22 @@ responsive information visualizations and charts as composite SVG
 documents, whose elements are styled and positioned via CSS. It is
 implemented as a NodeJS package in TypeScript and is designed as an
 extension of D3, thus offering the flexibility of D3's convenient
-document manipulation API to its users. RespVis consists of various
-packages containing modules to render lower-level visualization
-components like axes, legends, and series of graphical primitives and
-higher-level premade visualizations for common chart types like bar
-charts, line charts, and point charts (scatterplots). The modules
-provided by RespVis can be used to create responsive visualizations by
-either composing them from the lower-level components or by
-responsively changing the configurations of the premade, higher-level
-visualizations. One of the main contributions of RespVis is its custom
-layouter, which enables the various components of a chart to be
-positioned via any browser-supported CSS layout mechanism like Grid
-and Flexbox.
+document manipulation API to its users. Visualization authors can use
+CSS media queries in combination with Flexbox and Grid to position
+chart components (such as title, axes, legend, and the chart itself)
+responsively. The main contribution of RespVis is its custom layouter,
+which enables the various components of a chart to be positioned via
+any browser-supported CSS layout mechanism.
+
+RespVis consists of various packages containing modules to render
+lower-level visualization components like axes, legends, and series of
+graphical primitives and higher-level premade visualizations for
+common chart types like bar charts, line charts, and point charts
+(scatterplots). The modules provided by RespVis can be used to create
+responsive visualizations by either composing them from the
+lower-level components or by responsively changing the configurations
+of the premade, higher-level visualizations.
+
 
 
 
