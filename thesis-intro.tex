@@ -15,96 +15,104 @@ characteristics. The academic field of responsive visualization is
 still in its early stages, but some research from various authors
 regarding scalable visualizations
 \parencite{BuildingRespDataVisForTheWeb,LearningRespDataVis}, design
-patterns \parencite{RespVis,TechniquesForFlexibleRespVisDesign,
+patterns
+\parencite{RespVisTalk,RespVisPage,RespVis,TechniquesForFlexibleRespVisDesign,
   DesignPatternsTradeOffsRespVis}, and tools
-\parencite{TechniquesForFlexibleRespVisDesign,Cicero} has already been
-done and continues to emerge.
+\parencite{TechniquesForFlexibleRespVisDesign} has already been done
+and continues to emerge.
+
+% KA TODO where best to cite Cicero here?
 
 Many different software libraries to create visualizations for the web
 exist, but they all have their shortcomings regarding usability,
-extensibility, and responsiveness.  One of the most popular libraries
-for creating visualizations is D3, which provides a low-level API to
-transform HTML and SVG documents based on data.  This document-based
-approach is quite powerful as it allows users to create whatever
-visualizations they wish for without being hindered by the limitations
-of a custom renderer.  However, building visualizations by manually
-setting up their entire structure and behavior can be tedious and
-requires deep knowledge about D3 and the underlying rendering standard
-like SVG.  Other visualization libraries like Vega \parencite{Vega}
-focus on a grammar-based approach to rendering visualizations.
-Visualization grammars are very expressive and allow users to focus on
-a visualization's high-level specification, but they tend to be rather
-complex and are not always easy to understand.  Furthermore, since the
+extensibility, and responsiveness. One of the most popular libraries
+for creating visualizations is D3 \parencite{D3,D3JS}, which provides
+a low-level API to transform HTML and SVG documents based on
+data. This document-based approach is rather powerful, as it allows
+users to create whatever visualizations they wish, without being
+hindered by the limitations of a custom renderer. However, building
+visualizations by manually setting up their entire structure and
+behavior can be tedious and requires deep knowledge of JavaScript
+programming, D3, and the underlying rendering standard SVG.
+%
+Other visualization libraries like Vega \parencite{Vega} focus on a
+grammar-based approach to rendering visualizations. Visualization
+grammars are very expressive and allow users to focus on a
+visualization's high-level specification, but they tend to be rather
+complex and are not always easy to understand. Furthermore, since the
 actual rendering is abstracted away, visualization authors are limited
 to the capabilities offered by a library's high-level API, which can
-lead to configurability restrictions.  Yet other types of
-visualization libraries are based on template-based configuration,
-meaning that visualization authors only need to provide data in a
-predefined format and the library then renders predefined
-visualizations using this data.  These template-based visualization
-libraries are usually easy to use, but same as with grammar-based
+lead to restricted configurability.
+%
+Yet other types of visualization libraries are based on template-based
+configuration, meaning that visualization authors only need to provide
+data in a predefined format and the library then renders predefined
+visualizations using this data. These template-based visualization
+libraries are usually easy to use, but as with grammar-based
 libraries, it can be hard to extend visualizations beyond the intended
-configuration capabilities.
+configurations.
+
+
 
 This thesis introduces RespVis, a new software library for creating
 presentational information visualizations for the web with a strong
-emphasis on responsiveness.  RespVis is an open-source library
-\parencite{RespVisGitHub} that has been designed as an extension of D3
-and focuses on rendering visualizations as SVG documents.  Its API has
-intentionally been kept as minimal as possible and only allows the
-configuration of data that affects a visualization's content or
-behavior.  Instead, CSS is used to style and largely position a
-visualization's content.  The main contribution of this work lies in a
-custom layouter that uses the browser's own layout engine to enable
-the positioning of SVG-based visualization components, which would
-otherwise be unaffected by CSS layouting.  Allowing visualization
-authors to configure the layout of visualization components with CSS
-layouting mechanisms like Flexbox and Grid leads to better responsive
+emphasis on responsiveness. RespVis is an open-source library
+\parencite{RespVisGitHub}, which has been designed as an extension of
+D3 and focuses on rendering visualizations as SVG documents. Its API
+has intentionally been kept as minimal as possible and only allows the
+configuration of data which affects a visualization's content or
+behavior. CSS is used to style and largely position a visualization's
+content. The main contribution of this work lies in a custom layouter
+which uses the browser's own layout engine to enable the positioning
+of SVG-based visualization components, which would otherwise be
+unaffected by CSS layouting. Allowing visualization authors to
+configure the layout of visualization components with CSS layouting
+mechanisms like Flexbox and Grid leads to better responsive
 capabilities than merely allowing them to style components with CSS.
-Additionally, the usage of CSS for styling and positioning allows the
+Additionally, the use of CSS for styling and positioning allows the
 application of other tools frequently used for responsive design like
 media queries, and it also means that styles can easily be configured
-and overwritten via the CSS cascade.  Since RespVis mainly renders and
+and overwritten via the CSS cascade. Since RespVis renders and
 configures visualizations using standardized web technologies such as
-SVG and CSS, visualization authors can work with technologies all web
-developers are already familiar with and do not have to learn a
-complex domain-specific language.  Furthermore, this focus on
-standardized web technologies also means that visualizations can
-easily be extended beyond foreseen use cases, meaning that it is less
-likely that visualization authors are limited by restrictions of the
-library's API.
+HTML, SVG, and CSS, visualization authors can work with technologies
+all web developers are already familiar with and do not have to learn
+a complex domain-specific language. Furthermore, the focus on standard
+web technologies means that visualizations can easily be extended
+beyond foreseen use cases, and it is less likely that visualization
+authors are limited by restrictions of the library's API.
 
-The first part of this thesis, Chapters~\ref{chap:WebTechnologies} to
-\ref{chap:ResponsiveInformationVisualization}, offers a broad view on
-other works in the field into which this work is
+
+
+The first part of this thesis, in Chapters~\ref{chap:WebTechnologies}
+to \ref{chap:ResponsiveInformationVisualization}, offers a broad view
+of the technologies and related work into which this work is
 embedded. Chapter~\ref{chap:WebTechnologies} introduces the various
-web technologies onto which RespVis has been built, the different ways
-of embedding graphics into web pages, and the different layout engines
-that have been considered for laying out SVG elements.
+web technologies upon which RespVis is built, the different ways of
+embedding graphics into web pages, and the different layout engines
+which were considered for laying out SVG chart elements.
 Chapter~\ref{chap:InfoVis} gives an overview of the field of
-information visualization and its history.  Furthermore, some of the
+information visualization and its history. Furthermore, some of the
 more popular software libraries like D3, grammar-based libraries like
 Vega, and template-based libraries like Highcharts used to create
 information visualizations for the web are examined and compared
 regarding their capabilities to make visualizations responsive.
-Chapter~\ref{chap:ResponsiveInformationVisualization} further
-specializes on the research around responsive visualizations.
+Chapter~\ref{chap:ResponsiveInformationVisualization} looks in more
+detail at the research around responsive visualizations.
 Specifically, the topic of responsive patterns is introduced, and
 their application is demonstrated with concrete examples from both
 academic and other sources.
 
-The second part of this thesis, Chapters~\ref{chap:RespVis} to
+The second part of this thesis, in Chapters~\ref{chap:RespVis} to
 \ref{chap:Outlook}, discusses the technical details of RespVis.
 Chapter~\ref{chap:RespVis} introduces the library, its design pillars,
-naming conventions, and project setup.  Chapter~\ref{chap:Modules}
-describes RespVis' implementation by examining the different packages
-and modules into which the library has been split.  This chapter also
-discusses the implementation and implications of the custom layouter
-that enables laying out the elements of SVG-based visualizations using
-CSS layout mechanisms.  Furthermore, Chapter~\ref{chap:Usage}
-demonstrates the usage of RespVis' modules to create responsive
-visualizations and explains how different responsive patterns can be
-applied to them.  Finally, Chapter~\ref{chap:Outlook} gives an outlook
-on upcoming topics and potential future work to be done on the
-library.
+naming conventions, and project setup. Chapter~\ref{chap:Modules}
+describes the implementation of RespVis by examining the various
+packages and modules of the library. This chapter also discusses the
+implementation and implications of the custom layouter which enables
+layout of the elements of SVG-based visualizations using CSS layout
+mechanisms. Chapter~\ref{chap:Usage} demonstrates the usage of
+RespVis' modules to create responsive visualizations and explains how
+different responsive patterns can be implemented. Finally,
+Chapter~\ref{chap:Outlook} looks at potential future work to be done
+on the library.
 
