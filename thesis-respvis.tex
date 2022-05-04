@@ -12,17 +12,17 @@ embedded inside web pages. For a web page to be responsive, any
 embedded content such as visualizations and charts must also be
 responsive.
 
-Visual elements require proper sizing and spacing to be of
-value. Merely scaling visualizations to fit into their allocated space
-is insufficient to provide a seamless experience to users, as has
-already been discussed in Section~\ref{sec:RWD}. Even more elaborate
-automated visualization scaling techniques \parencite{ViSizer,
-MobileVisFixer, SemanticResizing} only lead to minor improvements
-compared to the more laborious approach of manually adapting a
-visualization's design. Another factor which is often ignored is the
-different methods of interaction inherent to specific types of
-devices, such as touch and keyboard interaction. For example, to
-ensure that data points remain selectable on less precise input
+Visual elements require proper sizing and spacing to be of value.
+Merely scaling visualizations to fit into their allocated space is
+insufficient to provide a seamless experience to visualization
+consumers, as has already been discussed in Section~\ref{sec:RWD}.
+Even more elaborate automated visualization scaling techniques
+\parencite{ViSizer, MobileVisFixer, SemanticResizing} only lead to
+minor improvements compared to the more laborious approach of manually
+adapting a visualization's design. Another factor which is often
+ignored is the different methods of interaction inherent to specific
+types of devices, such as touch and keyboard interaction. For example,
+to ensure that data points remain selectable on less precise input
 devices such as touchscreens, a visualisation might adapt by reducing
 the data density and increasing the size of individual elements. The
 goal of responsive visualizations is that they should adapt themselves
@@ -60,7 +60,7 @@ on the research in this field. It discusses the differences between
 responsive web design and responsive visualization design and stresses
 that visualizations must not be seen as mere images embedded in a
 website but that they must adapt to device characteristics to deliver
-a satisfactory user experience. Furthermore,
+a satisfactory visualization consumer experience. Furthermore,
 \textcite{Horak-2021-Responsive-Vis} continue to go into details about
 various factors affecting a visualization's responsive design and give
 an overview of high-level design strategies (called design patterns in
@@ -97,7 +97,8 @@ than to add them (11.3\%). Another interesting finding was that most
 visualizations (88.7\%) implemented no change at all for their
 interactions, while some (10\%) even removed interactive capabilities
 completely. Only very few visualizations (5.6\%) improved the
-experience of mobile users by adapting interactions accordingly.
+experience of mobile visualization consumers by adapting interactions
+accordingly.
 
 
 
@@ -140,7 +141,7 @@ Category & Targets & Description \\
 \midrule
 Data & Records, Fields, Level & Data is the information which is encoded in a visualization. \\
 Encoding & & Encodings are the visual forms in which data is represented. \\
-Interaction & Feature, Trigger, Feedback & Interactions define how users can engage with visualizations. \\
+Interaction & Feature, Trigger, Feedback & Interactions define how visualization consumers can engage with visualizations. \\
 Narrative & Sequencing, Annotations, Emphases, Text & This category groups targets based on the story a visualization should convey. \\
 References/Layout & Labels, References, Layout, Size & References represent additional information which makes visualizations easier to understand, and a layout describes how the individual visual components are placed. \\
 \bottomrule
@@ -487,11 +488,11 @@ rotating labels and recomposing ticks, can also be applied.
 
 Another technique is to temporarily hide some dimensions, based on
 some criteria. When automatically hiding dimensions, it is necessary
-to apply compensation patterns, giving the user additional controls to
-configure which dimensions are displayed and override the system's
-hiding behavior. An example of a responsive parallel coordinates chart
-incorporating some of these patterns can be seen in
-Figure~\ref{fig:RespParCoordExample}.
+to apply compensation patterns, giving the visualization consumer
+additional controls to configure which dimensions are displayed and
+override the system's hiding behavior. An example of a responsive
+parallel coordinates chart incorporating some of these patterns can be
+seen in Figure~\ref{fig:RespParCoordExample}.
 %
 If reducing the chart's complexity is not appropriate, an alternative
 is to transpose the chart, so its dimensions are laid out vertically
@@ -540,7 +541,7 @@ and vertical scrolling can be used to explore the full chart.
 }
 \hfill
 \subfloat[][%
-30rem, user-configured dimensions
+30rem, consumer-configured dimensions
 ]
 {%
 \includegraphics[valign=b,scale=\respparcoordscale]
@@ -548,8 +549,7 @@ and vertical scrolling can be used to explore the full chart.
 \label{fig:RespParCoordExample5}%
 }
 \caption[Responsive Parallel Coordinates Chart Example]
-{
-A responsive parallel coordinates chart at different display widths.
+{ A responsive parallel coordinates chart at different display widths.
 \subref{fig:RespParCoordExample1} At larger widths, all dimensions are
 shown. \subref{fig:RespParCoordExample2} Dimensions are removed based
 on their priority, dimension labels are rotated by 45 degrees, and a
@@ -558,11 +558,10 @@ dimensions. \subref{fig:RespParCoordExample3} Further dimensions are
 removed. \subref{fig:RespParCoordExample4} Further dimensions are
 removed, and dimension labels are rotated by 90 degrees.
 \subref{fig:RespParCoordExample5} The dimension configuration panel
-has been opened, and the user has taken control over which dimensions
-to show.
-\imgcredit{Screenshots of \textcite{RespVisPage} created by the author of this thesis.
-Used with kind permission by Keith Andrews.}
-}
+has been opened, and the visualization consumer has taken control over
+which dimensions to show. \imgcredit{Screenshots of
+\textcite{RespVisPage} created by the author of this thesis. Used with
+kind permission by Keith Andrews.} }
 \label{fig:RespParCoordExample}
 \end{figure}
 

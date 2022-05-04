@@ -4,13 +4,13 @@
 The source code of RespVis is structured into modules written in the
 ES module format. Currently, all individual modules are combined into
 a single, monolithic library bundle during the build process, but this
-will be changed in the future so that users can import only the
-modules they need. The reason for this is that most users will likely
-require only a subset of all the features included in the library, and
-it would unnecessarily increase the size of their bundles to import
-them all. A good example of this is D3, which also separates its
-extensive collection of functionality into different modules which can
-be successively added to a project as the need arises.
+will be changed in the future so that visualization authors can import
+only the modules they need. The reason for this is that most authors
+will likely require only a subset of all the features included in the
+library, and it would unnecessarily increase the size of their bundles
+to import them all. A good example of this is D3, which also separates
+its extensive collection of functionality into different modules which
+can be successively added to a project as the need arises.
 
 At the time of writing, the RespVis library comprises five modules:
 \modname{Core Module}, \modname{Legend Module}, \modname{Tooltip
@@ -942,31 +942,32 @@ attributes.
 The SVG Download Tool is implemented in the
 \code{tools/tool-download-svg.ts} file of the Core Module and is
 included by default in every Chart Window. SVG documents embedded in
-HTML documents cannot be downloaded by users as easily as raster
-images, which can simply be downloaded with native browser tools.
-Instead, SVG documents must be encoded in \code{Blob} objects and then
-set as as object URLs in the \code{href} attributes of \elname{<a>}
-elements. However, since the presentation of RespVis visualizations is
-mainly configured using CSS, the active CSS properties must first be
-converted to attributes before the SVG document can be downloaded.
-For this, a clone of the whole SVG document is made to set attributes
-on the cloned elements without affecting the rendered visualization.
-After the document has been cloned, attributes reflecting the active
-CSS configuration of the original elements are set on cloned elements.
-The active CSS configuration of the original elements is calculated
-using the \code{elementComputedStyleWithoutDefaults} utility function,
-which yields a list of CSS properties and their values, only
-containing properties that are not set to defaults. After setting all
-the necessary attributes on cloned elements, the string representation
-of the cloned document is calculated using the
-\code{Element.innerHTML} property and encoded in a \code{Blob} object
-with the content type \code{image/svg+xml}. At present, the string
-representation of the SVG document is not processed further or
-prettily formatted, which results in a rather difficult-to-read file
-and which will be improved in future work. The \code{Blob} object
-containing the SVG document is further transformed into an object URL
-via the \code{URL.createObjectURL} method and set in the \code{href}
-attribute of a newly created \elname{<a>} element. This newly created
+HTML documents cannot be downloaded by web consumers as easily as
+raster images, which can simply be downloaded with native browser
+tools. Instead, SVG documents must be encoded in \code{Blob} objects
+and then set as as object URLs in the \code{href} attributes of
+\elname{<a>} elements. However, since the presentation of RespVis
+visualizations is mainly configured using CSS, the active CSS
+properties must first be converted to attributes before the SVG
+document can be downloaded. For this, a clone of the whole SVG
+document is made to set attributes on the cloned elements without
+affecting the rendered visualization. After the document has been
+cloned, attributes reflecting the active CSS configuration of the
+original elements are set on cloned elements. The active CSS
+configuration of the original elements is calculated using the
+\code{elementComputedStyleWithoutDefaults} utility function, which
+yields a list of CSS properties and their values, only containing
+properties that are not set to defaults. After setting all the
+necessary attributes on cloned elements, the string representation of
+the cloned document is calculated using the \code{Element.innerHTML}
+property and encoded in a \code{Blob} object with the content type
+\code{image/svg+xml}. At present, the string representation of the SVG
+document is not processed further or prettily formatted, which results
+in a rather difficult-to-read file and which will be improved in
+future work. The \code{Blob} object containing the SVG document is
+further transformed into an object URL via the
+\code{URL.createObjectURL} method and set in the \code{href} attribute
+of a newly created \elname{<a>} element. This newly created
 \elname{<a>} element is then briefly attached to the \elname{<body>}
 element of the active HTML document and clicked using the
 \code{Element.click} method, which initiates the download of the final
@@ -974,7 +975,7 @@ prepared SVG document. Download SVG Tools can be rendered as menu
 items in a Chart Window's Tool Menu with the
 \code{toolDownloadSVGRender} function, which initializes them and
 triggers the download of the SVG document embedded in the Chart Window
-when the user clicks on the menu item.
+when a visualization consumer clicks on the menu item.
 
 
 
@@ -1060,11 +1061,11 @@ specified in the \code{Legend} data objects. Some style classes, such
 as the \code{categorical-x} classes for categorical styling, are
 already provided by RespVis and handled in the library's distributable
 CSS file. Furthermore, custom style classes can easily be added by
-simply handling them in user-specified CSS rules. \code{Legend} data
-objects can be created with the \code{legendData} function, which
-receives a partial input object in which the properties which are not
-of interest to the calling code are not required to be set and are
-populated with default values.
+simply handling them in custom CSS rules. \code{Legend} data objects
+can be created with the \code{legendData} function, which receives a
+partial input object in which the properties which are not of interest
+to the calling code are not required to be set and are populated with
+default values.
 
 A Legend is rendered into elements which have a \code{Legend} data
 object bound on them using the \code{legendRender} function. This
@@ -1101,12 +1102,13 @@ expansive to be shown all the time. The more information a
 visualization shows simultaneously, the more cognitive effort is
 required to interpret it. Detailed information which may be valuable
 but is not absolutely necessary for understanding a visualization's
-core message is only shown via a Tooltip when the user interacts with
-an element in whose context this information stands. Since Tooltips
-are only shown explicitly after user interaction, they may overlap and
-cover other elements of a Chart which would otherwise be too important
-to hide. An example of a Bar Chart in which additional information is
-displayed via a Tooltip can be seen in Figure~\ref{fig:Tooltip}.
+core message is only shown via a Tooltip when a visualization consumer
+interacts with an element in whose context this information stands.
+Since Tooltips are only shown explicitly after consumer interaction, they
+may overlap and cover other elements of a Chart which would otherwise
+be too important to hide. An example of a Bar Chart in which
+additional information is displayed via a Tooltip can be seen in
+Figure~\ref{fig:Tooltip}.
 
 
 \begin{figure}[tp]
@@ -1207,8 +1209,8 @@ categories are mapped on the y-axis to determine their heights.
 Horizontal bar charts are better suited for display in narrow contexts
 than vertical bar charts, because category labels can be positioned
 more easily without having to rotate them and because these charts can
-be vertically extended by having the user scroll vertically, which is
-strongly preferable to scrolling horizontally.
+be vertically extended by having visualization consumers scroll
+vertically, which is strongly preferable to scrolling horizontally.
 
 
 The Bar Module is located in the \code{src/lib/bars/} directory of the
@@ -1276,11 +1278,11 @@ by the Layouter.  With these scales, the dimensions of bars are
 calculated, and enter, update, and exit transitions are utilized to
 interpolate them towards these new dimensions, so that changes in
 visualization are easier to track, which leads to an improved
-experience for users. As with all other Series, the \code{enter},
-\code{update}, and \code{exit} events containing the respective data
-join selections are dispatched on the Series' root element and allow
-the injection of custom behavior into the different phases of the
-Series' data join.
+experience for visualization consumers. As with all other Series, the
+\code{enter}, \code{update}, and \code{exit} events containing the
+respective data join selections are dispatched on the Series' root
+element and allow the injection of custom behavior into the different
+phases of the Series' data join.
 
 Bar Charts are Cartesian Charts, as discussed in
 Section~\ref{sec:Chart}, which display a Bar Series with optional
@@ -1449,19 +1451,20 @@ wrapped inside Layouters and render them following the render process
 defined in Section~\ref{sec:Layouter} to allow positioning of their
 elements via CSS. Furthermore, they decorate their nested Charts with
 Toolbars containing tools to download them as SVG documents and filter
-their categories and subcategories. Every time the user interacts with
-these Nominal Filtering Tools to change the configuration of displayed
-categories and subcategories, the \code{categoryfilter} and
-\code{subcategoryfilter} events are dispatched, containing the newly
-active categories and subcategories respectively. Visualization
-authors can either implement special resize and filter behavior by
-attaching custom listeners to these events, or can activate the
-default behavior via the \code{chartWindowBarGroupedAutoResize},
+their categories and subcategories. Every time a visualization
+consumer interacts with these Nominal Filtering Tools to change the
+configuration of displayed categories and subcategories, the
+\code{categoryfilter} and \code{subcategoryfilter} events are
+dispatched, containing the newly active categories and subcategories
+respectively. Visualization authors can either implement special
+resize and filter behavior by attaching custom listeners to these
+events, or can activate the default behavior via the
+\code{chartWindowBarGroupedAutoResize},
 \code{chartWindowBarGroupedAutoFilterCategories}, and
-\code{chartWindowBarGroupedAutoFilterSubcategories} functions.
-Example code to create a scalable Grouped Bar Chart Window whose
-categories and subcategories can be filtered via the Toolbar is shown
-in Listing~\ref{list:GroupedBarChartWindow} and the resulting
+\code{chartWindowBarGroupedAutoFilterSubcategories} functions. Example
+code to create a scalable Grouped Bar Chart Window whose categories
+and subcategories can be filtered via the Toolbar is shown in
+Listing~\ref{list:GroupedBarChartWindow} and the resulting
 visualization is shown in Figure~\ref{fig:GroupedBarChartWindow}.
 
 

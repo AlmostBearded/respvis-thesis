@@ -6,7 +6,7 @@ ever-growing amounts of available data, visualizations which
 effectively communicate this data are an essential part of it.
 Motivated by the increasing variety of devices used to access the web,
 responsive design has been established as one of the core pillars of
-designing web content to ensure that it is easily accessible to users
+designing web content to ensure that it is easily accessible to consumers
 regardless of the characteristics of their devices. Even though most
 web content is already designed responsively, charts and
 visualizations are often only embedded in a static form, which does
@@ -22,28 +22,33 @@ patterns
 and continues to emerge.
 
 
+
 Many different software libraries to create visualizations for the web
 exist, but they all have their shortcomings regarding usability,
-extensibility, and responsiveness. One of the most popular libraries
-for creating visualizations is D3 \parencite{D3,D3JS}, which provides
-a low-level API to transform HTML and SVG documents based on
-data. This document-based approach is rather powerful, as it allows
-users to create whatever visualizations they wish, without being
-hindered by the limitations of a custom renderer. However, building
-visualizations by manually setting up their entire structure and
-behavior can be tedious and requires deep knowledge of JavaScript
-programming, D3, and the underlying rendering standard SVG.
+extensibility, and responsiveness. Regarding terminology, this thesis
+distinguishes between two user types of visualization libraries:
+visualization authors, creating visualizations using a library, and
+visualization consumers, viewing visualizations in their browsers. One
+of the most popular libraries for creating visualizations is D3
+\parencite{D3,D3JS}, which provides a low-level API to transform HTML
+and SVG documents based on data. This document-based approach is
+rather powerful, as it allows users to create whatever visualizations
+they wish, without being hindered by the limitations of a custom
+renderer. However, building visualizations by manually setting up
+their entire structure and behavior can be tedious and requires deep
+knowledge of JavaScript programming, D3, and the underlying rendering
+standard SVG.
 %
 Other visualization libraries like Vega \parencite{Vega} and its
 extensions such as Cicero \parencite{Cicero}, which extends Vega
 specifications with responsive transformations, focus on a
 grammar-based approach to rendering visualizations. Visualization
-grammars are very expressive and allow users to focus on a
-visualization's high-level specification, but they tend to be rather
-complex and are not always easy to understand. Furthermore, since the
-actual rendering is abstracted away, visualization authors are limited
-to the capabilities offered by a library's high-level API, which can
-lead to restricted configurability.
+grammars are very expressive and allow visualization authors to focus
+on a visualization's high-level specification, but they tend to be
+rather complex and are not always easy to understand. Furthermore,
+since the actual rendering is abstracted away, visualization authors
+are limited to the capabilities offered by a library's high-level API,
+which can lead to restricted configurability.
 %
 Yet other types of visualization libraries are based on template-based
 configuration, meaning that visualization authors only need to provide

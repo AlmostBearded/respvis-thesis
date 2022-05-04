@@ -104,7 +104,7 @@ Axis also contains an optional title and an optional subtitle to
 describe the axis. Axis-related responsive patterns are of great
 importance, since nearly every Chart includes Axes, and often
 improving their responsiveness alone can already significantly improve
-a user's experience.
+a visualization consumer's experience.
 
 The following responsive patterns can be applied to Axes in RespVis
 visualizations:
@@ -262,17 +262,18 @@ The following responsive patterns can be applied to RespVis Bar Charts:
   by setting the \code{flipped} property on its data object.
 
 \item \liintro{Remove bars}: Sometimes it might be required to reduce
-  the number of bars to maintain a good user experience. Bars
-  representing certain categories or subcategories can be hidden by
-  declaring them as inactive via the \code{activeCategories} and
-  \code{activeSubcategories} properties on a Bar Chart's data object.
-  Using these properties is easier than manually adapting the
-  \code{categories}, \code{values}, \code{categoryScale}, and
-  \code{valueScale} properties on the data object. Furthermore,
-  categories and subcategories which have been hidden via the
-  \code{activeCategories} and \code{activeSubcategories} properties
-  can also be unhidden by users via a Chart's Toolbar, if they wish to
-  see the additional data.
+  the number of bars to maintain a good visualization consumer
+  experience. Bars representing certain categories or subcategories
+  can be hidden by declaring them as inactive via the
+  \code{activeCategories} and \code{activeSubcategories} properties on
+  a Bar Chart's data object. Using these properties is easier than
+  manually adapting the \code{categories}, \code{values},
+  \code{categoryScale}, and \code{valueScale} properties on the data
+  object. Furthermore, categories and subcategories which have been
+  hidden via the \code{activeCategories} and
+  \code{activeSubcategories} properties can also be unhidden by
+  consumers via a Chart's Toolbar, if they wish to see the additional
+  data.
 
 \item \liintro{Apply Axis responsive patterns}: Since a Bar Chart
   usually contains two Axes to visualize the spatial mappings of
@@ -412,16 +413,16 @@ The following responsive patterns can be applied to RespVis Line Charts:
 
 \item \liintro{Transpose Chart}: Even though Line Charts are less
   frequently transposed than Bar Charts, there are still situations
-  when transposing a Line Chart could improve the user's experience.
-  One such situation would be a Line Chart with so many data points
-  that a Horizontal Line Chart with limited width is too
-  dense. Transposing such a chart into a Vertical Line Chart might
-  reduce the data density by allowing the Chart to extend outside the
-  visible viewport and having users scroll vertically. Furthermore,
-  Vertical Line Charts are useful for heavily annotated Line Charts
-  because labels are much easier to place than in horizontal
-  ones. Line Charts can be transposed by setting the \code{flipped}
-  property on their data objects.
+  when transposing a Line Chart could improve the visualization
+  consumer's experience. One such situation would be a Line Chart with
+  so many data points that a Horizontal Line Chart with limited width
+  is too dense. Transposing such a chart into a Vertical Line Chart
+  might reduce the data density by allowing the Chart to extend
+  outside the visible viewport and having consumers scroll vertically.
+  Furthermore, Vertical Line Charts are useful for heavily annotated
+  Line Charts because labels are much easier to place than in
+  horizontal ones. Line Charts can be transposed by setting the
+  \code{flipped} property on their data objects.
 
 \item \liintro{Apply Axis patterns}: As with all charts which use axes
   to visualize spatial mappings, the responsive Axis patterns
@@ -551,13 +552,14 @@ Charts:
   better to hide them via the CSS \code{opacity} or \code{display}
   properties.
 
-\item \liintro{Zoom draw area}: Zooming allows users to view data at
-  various levels of detail. A Point Chart can be zoomed by adjusting
-  the domains of the scales handling the spatial encoding of data,
-  which are the \code{xScale} and \code{yScale} properties of the data
-  object of the Point Chart. To simplify the setup and handling of
-  zooming interaction, the D3 Zoom Module \parencite{D3Zoom} can be
-  used, which is illustrated in Listing~\ref{list:PointChartPatterns}.
+\item \liintro{Zoom draw area}: Zooming allows visualization consumers
+  to view data at various levels of detail. A Point Chart can be
+  zoomed by adjusting the domains of the scales handling the spatial
+  encoding of data, which are the \code{xScale} and \code{yScale}
+  properties of the data object of the Point Chart. To simplify the
+  setup and handling of zooming interaction, the D3 Zoom Module
+  \parencite{D3Zoom} can be used, which is illustrated in
+  Listing~\ref{list:PointChartPatterns}.
 
 \item \liintro{Apply Axis patterns}: As with all Cartesian charts
   which use Axes to visualize spatially-encoded data, the
