@@ -398,20 +398,20 @@ hierarchy and its associated data and functions. In addition to the
 querying of elements, the DOM also defines functionality to mutate
 them and their attributes, as well as functionality for handling and
 dispatching events. It also exposes the mechanism of
-\modname{MutationObservers}, which are used to observe changes of
+MutationObservers, which are used to observe changes of
 attributes and children in the document tree. The initial
 specification of the DOM was published in 1997 \parencite{DOM1}. It
 is currently maintained as a living standard by the WHATWG
 \parencite{DOM}.
 
 Another important Web API in the context of this work is the
-\modname{ResizeObserver} API. It provides the ability to observe an
+ResizeObserver API. It provides the ability to observe an
 element's size and respond to changes, which increases the responsive
 capabilities of websites. Previously, scripts could only respond to
 changes in the overall viewport size via the \code{resize} event
 on the \code{window} object, but this meant that changes of an
 individual element's size through attribute changes could not be
-detected. This limitation is fixed with the \modname{ResizeObserver}
+detected. This limitation is fixed with the ResizeObserver
 API, which is already fully supported by all modern browsers, even
 though it has so far only been published as an editor's draft
 \parencite{ResizeObserver}.

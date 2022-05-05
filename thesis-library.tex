@@ -392,21 +392,22 @@ implementation files of the library in the \code{src/lib/} directory
 and examples in the \code{src/examples/} directory. The
 \code{src/lib/} directory contains all TypeScript source files of the
 library. They are partitioned into packages formed around the thematic
-affinity of the various components. The Core package contains the core
-functionality of the library and is a prerequisite for all the other
-packages. It includes the Layouter, Chart base functionality, Chart
-Window base functionality, and various utility functions. The Legend
-package contains modules to render legends consisting of a title and
-configurable labeled symbols. The Tooltip package contains functions
-to show and hide tooltips, modify their contents, and position them.
-It also contains helper functions for Series to prevent the
-replication of tooltip-related code in their data creation and
-rendering functions. The Bars, Lines, and Points packages contain the
-necessary modules to render Series, Charts, and Chart Windows for bar,
-grouped bar, stacked bar, line, and point visualizations. At the
-moment, all these packages are built into a combined one, but there
-are plans to also distribute them separately to allow users of the
-library to import only the packages they need.
+affinity of the various components. The Core package
+contains the core functionality of the library and is a prerequisite
+for all the other packages. It includes the Layouter, Chart base
+functionality, Chart Window base functionality, and various utility
+functions. The Legend package contains modules to render
+legends consisting of a title and configurable labeled symbols. The
+Tooltip package contains functions to show and hide
+tooltips, modify their contents, and position them. It also contains
+helper functions for Series to prevent the replication of
+tooltip-related code in their data creation and rendering functions.
+The Bars, Lines, and Points packages
+contain the necessary modules to render Series, Charts, and Chart
+Windows for bar, grouped bar, stacked bar, line, and point
+visualizations. At the moment, all these packages are built into a
+combined one, but there are plans to also distribute them separately
+to allow users of the library to import only the packages they need.
 
 The \code{src/examples/} directory holds the source files of the
 developed examples. These examples are distributed alongside the
