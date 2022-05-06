@@ -325,11 +325,11 @@ Creative Commons Attribution 4.0.}}
 
 Modern visualizations benefit from the interactive nature of the
 devices used to consume them. They can be more complex than static
-visualizations, because various interaction techniques enable users to
-navigate large amounts of data and make sense of it. High-D by
-Macrofocus \parencite{HighD} is a representative example of a modern
-interactive visual analytics tool, and is shown in
-Figure~\ref{fig:HighD}.
+visualizations, because various interaction techniques enable
+visualization consumers to navigate large amounts of data and make
+sense of it. High-D by Macrofocus \parencite{HighD} is a
+representative example of a modern interactive visual analytics tool,
+and is shown in Figure~\ref{fig:HighD}.
 
 \begin{figure}[tp]
 \centering
@@ -348,7 +348,7 @@ specialized in analyzing multidimensional data.
 
 It is out of the scope of this work to provide a full account of the
 long and eventful history of information visualization. This section
-only provides a brief and very selective view of the topic.  More
+only provides a brief and very selective view of the topic. More
 comprehensive works for further reading include
 \textcite{BriefHistoryOfDataVis}, \textcite{Meirelles-2013},
 \textcite{HistoryOfInformationGraphics}, and
@@ -486,7 +486,7 @@ Section~\ref{sec:CSS}). The \code{d3.select} and
 a single element matching the provided selector, or multiple elements
 matching it, respectively. A Selection acts as a wrapper container
 around selected elements to perform frequently performed DOM
-operations on them.  Among others, the element operations provided by
+operations on them. Among others, the element operations provided by
 a Selection include the setting and getting of: attributes using the
 \code{Selection.attr} method, styles using the
 \code{Selection.style} method, properties using the
@@ -506,7 +506,7 @@ using the \code{Selection.data} and \code{Selection.datum} methods.
 The \code{Selection.datum} method binds a single provided data record
 to all elements in the Selection, whereas the \code{Selection.data}
 method receives an array of data records and binds each individual
-data record to exactly one element.  The \code{Selection.data} method
+data record to exactly one element. The \code{Selection.data} method
 performs a join operation between data and elements to ensure that
 exactly one element per data record exists. This data join results in
 three separate Selections: the enter Selection, containing newly
@@ -791,18 +791,18 @@ visualization.
 \subsection{Template-Based Visualization Libraries}
 
 Template-based visualization libraries work by providing high-level
-templates for possible types of visualizations and allowing users to
-customize them. These types of visualization libraries are easier to
-use than D3 or Vega because they offer a concise form of configuration
-which does not require users to have detailed knowledge over the
-underlying rendering technology or complex, non-standardized domain
-specific languages. Even though these types of libraries are usually
-flexible enough to create a huge range of visualizations, at some
-point users may run into limitations. Some of these limitations can
-only be worked around by writing custom source code, which requires a
-deep understanding of the underlying library. This effectively
-eliminates the ease-of-use benefit of these types of libraries for
-users who run into these limitations.
+templates for possible types of visualizations and allowing
+visualization authors to customize them. These types of visualization
+libraries are easier to use than D3 or Vega because they offer a
+concise form of configuration which does not require authors to have
+detailed knowledge over the underlying rendering technology or
+complex, non-standardized domain specific languages. Even though these
+types of libraries are usually flexible enough to create a huge range
+of visualizations, at some point authors may run into limitations.
+Some of these limitations can only be worked around by writing custom
+source code, which requires a deep understanding of the underlying
+library. This effectively eliminates the ease-of-use benefit of these
+types of libraries for authors who run into these limitations.
 
 For this thesis, a total of 20 template-based JavaScript visualization
 libraries were examined and compared according to factors such as
@@ -841,25 +841,26 @@ widely used.
 
 Template-based visualization libraries have a strong inclination
 towards designing their APIs according to principles of declarative
-programming.  APIs following these principles allow users to describe
-a desired state they want the underlying system to be in.  This is in
-strong contrast to the typical imperative way of designing APIs in
-which users are instead given a set of tools to query and modify a
-system's state. The difference can be summarized in simple terms as
-follows: With declarative APIs, users specify what state shall be
-achieved, whereas with imperative APIs, users specify how a certain
-state is achieved. Declarative APIs are typically built on top of
-lower-level imperative APIs and can therefore be seen as a higher
-level of abstraction over them. They are popular among developers
-because they are expressive, easy to use and effectively encapsulate
-complexity which would otherwise have to be handled by users. An often
-overlooked disadvantage of declarative APIs is that they frequently
-only provide high-level access to a system and that more specific use
-cases might not be achievable if they can not be expressed in the
-domain-specific language defined by the API. In many cases, it makes
-sense to provide additional imperative APIs for users which require a
-lower level of access to the system to implement functionality not
-achievable via the declarative parts of the interface.
+programming. APIs following these principles allow authors to
+describe a desired state they want the underlying system to be in.
+This is in strong contrast to the typical imperative way of designing
+APIs in which authors are instead given a set of tools to query and
+modify a system's state. The difference can be summarized in simple
+terms as follows: With declarative APIs, developers specify what state
+shall be achieved, whereas with imperative APIs, developers specify
+how a certain state is achieved. Declarative APIs are typically built
+on top of lower-level imperative APIs and can therefore be seen as a
+higher level of abstraction over them. They are popular among
+developers because they are expressive, easy to use and effectively
+encapsulate complexity which would otherwise have to be handled by
+developers. An often overlooked disadvantage of declarative APIs is
+that they frequently only provide high-level access to a system and
+that more specific use cases might not be achievable if they can not
+be expressed in the domain-specific language defined by the API. In
+many cases, it makes sense to provide additional imperative APIs for
+developers which require a lower level of access to the system to
+implement functionality not achievable via the declarative parts of
+the interface.
 
 All of the evaluated libraries, except D3FC, expose declarative
 interfaces in the form of nested configuration objects which are used
@@ -912,10 +913,10 @@ frequently encountered when working with D3. These components form
 higher-level building blocks upon which advanced visualizations can be
 built. They are also highly configurable and in those cases where the
 options for configuration are not sufficient, a decorator pattern
-allows users to hook into the underlying D3 functionality and inject
-custom code into the various stages of the general update pattern at
-the core of D3. Code demonstrating the usage of D3FC can be seen in
-Listing~\ref{list:D3FC}.
+allows visualization authors to hook into the underlying D3
+functionality and inject custom code into the various stages of the
+general update pattern at the core of D3. Code demonstrating the usage
+of D3FC can be seen in Listing~\ref{list:D3FC}.
 
 
 \begin{samepage}

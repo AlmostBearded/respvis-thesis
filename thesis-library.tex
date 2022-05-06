@@ -2,19 +2,20 @@
 \chapter{The RespVis Library}
 \label{chap:RespVis}
 
-RespVis is an open-source D3 extension library for creating responsive
-SVG charts \parencite{RespVisGitHub}. It enables the use of CSS for
-the responsive styling and layout of visualizations. RespVis renders
-visualizations as pure and complete SVG documents, meaning that the
-whole visualization is contained in one SVG document and includes no
-elements of other XML namespaces. RespVis is designed as an extension
-to D3, rather than a wrapper around it. Unlike most other
-visualization libraries built on top of D3, RespVis does not hide it
-behind a custom API. Rather, users invoke RespVis functionality by
-binding specially structured data to D3 Selections, which render
-visual components using render functions to transform the bound data
-into some form of visual representation. Furthermore, RespVis espouses
-the strong separation between data and code and applies strong static
+RespVis is an open-source \parencite{RespVisGitHub} D3 extension
+library for creating responsive SVG charts \parencite{RespVisLive}. It
+enables the use of CSS for the responsive styling and layout of
+visualizations. RespVis renders visualizations as pure and complete
+SVG documents, meaning that the whole visualization is contained in
+one SVG document and includes no elements of other XML namespaces.
+RespVis is designed as an extension to D3, rather than a wrapper
+around it. Unlike most other visualization libraries built on top of
+D3, RespVis does not hide it behind a custom API. Rather,
+visualization authors invoke RespVis functionality by binding
+specially structured data to D3 Selections, which render visualization
+components using render functions to transform the bound data into
+some form of visual representation. Furthermore, RespVis espouses the
+strong separation between data and code and applies strong static
 type-checking through the use of TypeScript.
 
 
@@ -26,33 +27,30 @@ type-checking through the use of TypeScript.
 
 The design of the RespVis library is guided by six principles:
 \begin{enumerate}
-\item Responsive Styling and Layout via CSS.
-\item Visualizations are Pure, Complete SVG Documents.
-\item Extend Rather Than Wrap D3.
-\item Separation of Data and Code.
+\item Style and Layout via CSS.
+\item Pure and Complete SVG Documents.
+\item Extend D3.
+\item Separate Data and Code.
 \item Strong Static Type-Checking with TypeScript.
 \item Layered Component Hierarchy.
 \end{enumerate}
 
 
 
-\subsection{Responsive Styling and Layout via CSS}
-
-% KA distinguish styling with CSS from layout with CSS
-% vis layout with CSS is the really innovative thing
+\subsection{Style and Layout via CSS}
 
 Every part of a visualization that can be configured with CSS should
 be configured with CSS. The visual appearance and layout of HTML
 elements can already be configured by CSS. Many presentation
 attributes of SVG elements can also be styled with CSS. However,
 CSS-based layouting cannot be applied to SVG elements, which seriously
-limits the responsive layout of SVG charts. Without powerful CSS
-layout technologies like Flexbox and Grid, all the individual
-components of an SVG chart have to be positioned manually via
-JavaScript.
+limits the responsive capabilities of using CSS for SVG charts.
+Without powerful CSS layout technologies like Flexbox and Grid, all
+the individual components of an SVG chart have to be positioned
+manually via JavaScript.
 
-The RespVis Layouter enables the responsive layout of visualization
-components using the syntax of CSS Flexbox or CSS Grid, by calculating
+The RespVis Layouter enables the layouting of visualization
+components using powerful CSS-based layout mechanisms such as Flexbox and Grid, by calculating
 the bounding boxes of SVG elements from the CSS configuration of a
 shadow \elname{<div>} hierarchy. The Layouter offers visualization
 authors comparable configurability to what they are used to when
@@ -64,7 +62,7 @@ chart in a narrower view, using familiar CSS constructs.
 
 
 
-\subsection{Visualizations are Pure, Complete SVG Documents}
+\subsection{Pure and Complete SVG Documents}
 
 Every RespVis visualization should be rendered as a pure and complete
 SVG document. An SVG document is considered \emph{pure}, if it
@@ -87,25 +85,26 @@ SVG file, which can be further processed using a wide range of tools.
 
 
 
-\subsection{Extend Rather Than Wrap D3}
+\subsection{Extend D3}
 
 RespVis is designed as a library which extends D3, rather than a
 wrapper around D3. Compared to other visualization libraries which
 wrap a layer around D3, it does not provide an entirely new interface
-to users, but uses D3 Selections as the core interface with which to
-interact. The typical workflow of invoking RespVis functionality is to
-bind data objects of a specific structure to the elements of a
-Selection and then to visualize this data by calling a render function
-to transform it into visual marks. If D3 were hidden behind a custom
-API, its powerful capabilities would not be directly accessible to
-users of the library, and would need to be exposed manually through
-special mechanisms. By designing RespVis as an extension of D3, users
-can continue to leverage its expressive and concise API and author
-their documents using data joins and the general update pattern.
+to visualization authors, but uses D3 Selections as the core interface
+with which to interact. The typical workflow of invoking RespVis
+functionality is to bind data objects of a specific structure to the
+elements of a Selection and then to visualize this data by calling a
+render function to transform it into visual marks. If D3 were hidden
+behind a custom API, its powerful capabilities would not be directly
+accessible to users of the library, and would need to be exposed
+manually through special mechanisms. By designing RespVis as an
+extension of D3, visualization authors can continue to leverage its
+expressive and concise API and author their documents using data joins
+and the general update pattern.
 
 
 
-\subsection{Separation of Data and Code}
+\subsection{Separate Data and Code}
 
 In RespVis, data and code are decoupled from each other. Everything in
 RespVis is built from functions and objects without using any classes.
@@ -208,17 +207,18 @@ using a data join and the general update pattern.
 The third layer consists of Chart components. Charts are composite
 components which can also include other composite components. They are
 the visual entities which represent complete visualizations and are
-usually composed of axes, series, and legend components.
+usually composed of axes, series, and legends.
 
 In many other visualization libraries, charts are the highest-level
-components users can work with, but RespVis contains an additional
-layer above them, formed by Chart Window Components. Chart Windows are
-wrapper components around Charts. Unlike the previously discussed
-lower layers, Chart Windows are not rendered as SVG elements but as
-HTML \elname{<div>} elements. Their purpose is to nest Charts into a
-Layouter Component, render them in a three-phased rendering process,
-and provide an optional toolbar for them. Toolbars are customizable
-and can hold different tools for different types of chart.
+components visualization authors can work with, but RespVis contains
+an additional layer above them, formed by Chart Window components.
+Chart Windows are wrapper components around Charts. Unlike the
+previously discussed lower layers, Chart Windows are not rendered as
+SVG elements but as HTML \elname{<div>} elements. Their purpose is to
+nest Charts into a Layouter component, render them in a three-phased
+rendering process, and provide an optional toolbar for them. Toolbars
+are customizable and can hold different tools for different types of
+chart.
 
 
 
@@ -236,13 +236,13 @@ of the group to which an entity belongs and are then further narrowed
 down by successively adding more words until the exact entity is
 accurately described. This convention is referred to as
 \enquote{top-down naming} in this thesis. An example of the top-down
-naming convention can be seen in the \code{d3-scale}
-\parencite{D3Scale} and \code{d3-axis} \parencite{D3Axis} modules, in
+naming convention can be seen in the D3 Scale
+\parencite{D3Scale} and D3 Axis \parencite{D3Axis} packages, in
 which entities are called things like \code{scaleLinear},
 \code{scaleOrdinal}, \code{axisBottom}, and \code{axisLeft} rather
 than \code{linearScale}, \code{ordinalScale}, \code{bottomAxis}, and
 \code{leftAxis}. Since this is the exact opposite of how these
-entities would be called in natural English language, using such names
+entities would be called in natural English, using such names
 can feel odd for the uninitiated. However, experience shows working
 with APIs which follow such a naming convention is easier than with
 those which do not, since users of such APIs can easily discover
@@ -289,19 +289,20 @@ a visual representation are always named in the form of
 
 RespVis is a NodeJS \parencite{NodeJS} project hosted as an
 open-source project on GitHub \parencite{RespVisGitHub}. It is
-implemented in TypeScript and grouped into different modules by
+implemented in TypeScript and grouped into different packages by
 thematic affinity. The TypeScript source files are compiled
 (transpiled) to JavaScript and bundled into one combined library
-package, which users can then import into their projects.
+package, which visualization authors can then import into their
+projects.
 %
 The Rollup module bundler \parencite{Rollup} is used to perform
 compilation and bundling. In addition to the bundled JavaScript
-library, users are required to import an accompanying CSS file
-containing default styling for the generated visualizations. The
-project also contains examples demonstrating usage of the library to
-create various charts. These examples are HTML files which import the
-required files and contain JavaScript to invoke RespVis functionality
-to create and update visualizations.
+library, visualization authors are required to import an accompanying
+CSS file containing default styling for the generated visualizations.
+The project also contains examples demonstrating usage of the library
+to create various charts. These examples are HTML files which import
+the required files and contain JavaScript to invoke RespVis
+functionality to create and update visualizations.
 %
 The Gulp \parencite{Gulp} task runner is used to automate the build
 process of the library, including the preparation of the output
@@ -327,37 +328,39 @@ seen in Figure~\ref{fig:RespVisDirTree}.
 \begin{minipage}{0.9\textwidth}
 \begin{footnotesize}
   \dirtree{%
-  .1 package.json.
-  .1 gulpfile.js.
-  .1 tsconfig.json.
-  .1 src/.
-  .2 index.html.
-  .2 respvis.css.
-  .2 lib/.
-  .3 core/.
-  .3 legend/.
-  .3 bars/.
-  .3 points/.
-  .3 tooltip/.
-  .2 examples/.
-  .3 data/.
-  .3 vendor/.
-  .3 bar.html.
-  .3 \dots.
-  .1 dist/.
-  .2 respvis.js.
-  .2 respvis.js.map.
-  .2 respvis.min.js.
-  .2 respvis.min.js.gz.
-  .2 respvis.min.js.map.
-  .2 respvis.css.
-  .2 index.html.
-  .2 examples/.
-  .3 data/.
-  .3 vendor/.
-  .3 bar.html.
-  .3 \dots.
-  .1 node\_modules.
+  .1 /.
+  .2 dist/.
+  .3 examples/.
+  .4 data/.
+  .4 vendor/.
+  .4 bar.html.
+  .4 \dots.
+  .3 index.html.
+  .3 respvis.css.
+  .3 respvis.[m]js.
+  .3 respvis.[m]js.map.
+  .3 respvis.min.[m]js.
+  .3 respvis.min.[m]js.gz.
+  .3 respvis.min.[m]js.map.
+  .2 node\_modules.
+  .2 src/.
+  .3 lib/.
+  .4 bars/.
+  .4 core/.
+  .4 legend/.
+  .4 lines/.
+  .4 points/.
+  .4 tooltip/.
+  .3 examples/.
+  .4 data/.
+  .4 vendor/.
+  .4 bar.html.
+  .4 \dots.
+  .3 index.html.
+  .3 respvis.css.
+  .2 gulpfile.js.
+  .2 package.json.
+  .2 tsconfig.json.
   }
 \end{footnotesize}
 \end{minipage}
@@ -368,18 +371,17 @@ seen in Figure~\ref{fig:RespVisDirTree}.
 }
 \label{fig:RespVisDirTree}
 \end{figure}
-% KA These are not in alphabetical or listing order??
 
 
 The root directory of the RespVis project contains the necessary
 project configuration files for NodeJS, TypeScript, and Gulp. The
 NodeJS configuration file, \code{package.json}, describes the
-meta-data of the NodeJS project. It is used to specify the project's
+meta-data of the NodeJS package. It is used to specify the project's
 dependencies to other packages and is required for every NodeJS
-project so that it can be uploaded to the npm package registry
+package so that it can be uploaded to the npm package registry
 \parencite{npm}. The TypeScript configuration file,
 \code{tsconfig.json}, specifies the configuration the TypeScript
-compiler uses to compile the libraries' TypeScript source files into
+compiler uses to compile the library's TypeScript source files into
 their JavaScript counterparts. The Gulp configuration file,
 \code{gulpfile.js}, is used to describe atomic, recurring tasks and
 compositions of them. These tasks can then be invoked via the Gulp
@@ -389,25 +391,23 @@ The \code{src/} directory at the root of the project contains all the
 implementation files of the library in the \code{src/lib/} directory
 and examples in the \code{src/examples/} directory. The
 \code{src/lib/} directory contains all TypeScript source files of the
-library. They are partitioned into modules formed around the thematic
-affinity of the various components.
-% KA styling of module names
-The \code{core} module contains the core functionality of the library
-and is a prerequisite for all the other modules. It includes the
-Layouter, Chart base functionality, Chart Window base functionality,
-and various utility functions. The \code{legend} module contains a
-Legend Component, which renders a Legend consisting of a title and
-configurable labeled symbols. The \code{tooltip} module contains
-functions to show and hide tooltips, modify their contents, and
-position them. It also contains helper functions for Series Components
-to prevent the replication of tooltip-related code in their data
-creation and rendering functions. The \code{bars} and \code{points}
-modules contain the necessary Series, Chart, and Chart Window
-Components to render bar, grouped bar, stacked bar, and point
-visualizations. At the moment, all these modules are built into a
-combined package, but there are plans to also distribute them
-separately to allow users of the library to import only those packages
-they need.
+library. They are partitioned into packages formed around the thematic
+affinity of the various components. The Core package
+contains the core functionality of the library and is a prerequisite
+for all the other packages. It includes the Layouter, Chart base
+functionality, Chart Window base functionality, and various utility
+functions. The Legend package contains modules to render
+legends consisting of a title and configurable labeled symbols. The
+Tooltip package contains functions to show and hide
+tooltips, modify their contents, and position them. It also contains
+helper functions for Series to prevent the replication of
+tooltip-related code in their data creation and rendering functions.
+The Bars, Lines, and Points packages
+contain the necessary modules to render Series, Charts, and Chart
+Windows for bar, grouped bar, stacked bar, line, and point
+visualizations. At the moment, all these packages are built into a
+combined one, but there are plans to also distribute them separately
+to allow users of the library to import only the packages they need.
 
 The \code{src/examples/} directory holds the source files of the
 developed examples. These examples are distributed alongside the
@@ -426,8 +426,8 @@ In addition to configuration files and the \code{src/} directory, the
 root directory also contains two directories which are automatically
 generated during the build process. These are the \code{node_modules/}
 and \code{dist/} directories. The \code{node_modules/} directory
-exists in every NodeJS project. It is created when installing the
-dependencies of a NodeJS project and contains a cached copy of every
+exists in every NodeJS package. It is created when installing the
+dependencies of a package and contains a cached copy of every
 direct and indirect dependency. The \code{dist/} directory is
 generated by the Gulp build tasks and contains all the files necessary
 to distribute a built version of the RespVis library.
@@ -439,14 +439,14 @@ the more modern ES modules format, both of which are explained in more
 detail in Section~\ref{sec:Rollup}. Bundles containing the \code{.js}
 extension in their file name contain IIFE source code, whereas bundles
 containing the \code{.mjs} extension contain ES module source code.
-Furthermore, these bundles are also distributed in minimized
-versions. The \code{dist/respvis.[m]js} file contains the unmodified
-JavaScript bundle that can be used by library consumers who require
-readable code, \code{dist/respvis.min.[m]js} contains the minified
-JavaScript bundle, and \code{dist/respvis.min.[m]js.gz} contains the
-minified JavaScript bundle that has additionally been compressed in
-the GZIP format \parencite{GZIP}. Alongside these code bundles, the
-Rollup creates source maps for the \code{dist/respvis.[m]js} and
+Furthermore, these bundles are also distributed in minimized versions.
+The \code{dist/respvis.[m]js} file contains the unmodified JavaScript
+bundle that can be used by library consumers who require readable
+code, \code{dist/respvis.min.[m]js} contains the minified JavaScript
+bundle, and \code{dist/respvis.min.[m]js.gz} contains the minified
+JavaScript bundle that has additionally been compressed in the GZIP
+format \parencite{GZIP}. Alongside these code bundles, Rollup creates
+source maps for the \code{dist/respvis.[m]js} and
 \code{dist/respvis.min.[m]js} bundles: \code{dist/respvis.[m]js.map}
 and \code{dist/respvis.min.[m]js.map}, respectively. These source maps
 are interpreted by developer tools in browsers to map from certain
@@ -477,33 +477,32 @@ directory also contains usage examples of RespVis in the
 NodeJS is a standalone JavaScript runtime \parencite{NodeJS}, built on
 top of the V8 JavaScript engine \parencite{V8}, which is an
 open-source and multi-platform runtime for the execution of JavaScript
-code. NodeJS allows JavaScript code to be run outside of web
-browsers. NodeJS is heavily used for server-side development to unify
-the technology stack of web developers and allow them to use
-JavaScript for both client-side and server-side development. However,
-with the appropriate project setup, NodeJS can be used for any kind of
+code. NodeJS allows JavaScript code to be run outside of web browsers.
+NodeJS is heavily used for server-side development to unify the
+technology stack of web developers and allow them to use JavaScript
+for both client-side and server-side development. However, with the
+appropriate project setup, NodeJS can be used for any kind of
 development, and it can be set up as a powerful framework to develop
 client-side applications as done in this project. One of the most
 important tools in the NodeJS environment is the npm package manager
-\parencite{npm}, which exists to simplify the sharing of source code
-modules and the dependency management of a module. The npm package
-registry hosts a huge number of open-source modules for NodeJS
-projects, which can easily be imported and used to create new
-projects.
+\parencite{npm}, which exists to simplify the sharing of packages and
+their dependency management. The npm package registry hosts a huge
+number of packages that can easily be imported and used to create new
+ones.
 
 RespVis is developed as an npm package. Every npm package is
 configured via a \code{package.json} file. This file contains all the
 necessary meta-data for a package to make it identifiable and provide
 information about what the package contains. The \code{package.json}
-file also lists all the dependencies of a package, so they can easily
-be updated and downloaded during an installation process. A package
-can rely upon both normal dependencies and development
-dependencies. Normal dependencies of a package are required for it to
-work at run time and need to be installed alongside it. Development
-dependencies are only required during development and are only
-installed when installing a local package. The \code{package.json}
-file is located in the root directory of the RespVis package and can
-be seen in Listing~\ref{list:PackageJSON}.
+file also lists all the dependencies of a package, so they can
+automatically be updated and downloaded during an installation
+process. A package can rely upon both normal dependencies and
+development dependencies. Normal dependencies of a package are
+required for it to work at run time and need to be installed alongside
+it. Development dependencies are only required during development and
+are only installed when installing a local package. The
+\code{package.json} file is located in the root directory of the
+RespVis package and can be seen in Listing~\ref{list:PackageJSON}.
 
 
 \begin{samepage}
@@ -599,9 +598,9 @@ the RespVis library are built as ES modules anyway, Rollup mostly only
 has to merge them to create a valid, combined ES module. ES modules
 are natively supported in browsers, so they can be loaded directly in
 a HTML document using a \elname{<script>} element. However, it is
-necessary to mark them as modules via the \code{type="module"}
-attribute on the loading \elname{<script>} element, so that browsers can
-interpret them accordingly.
+necessary to mark them as modules by setting the \attrname{type}
+attribute to \code{module} on the loading \elname{<script>} element,
+so that browsers can interpret them accordingly.
 
 
 The core package of Rollup is only able to create mostly unmodified
@@ -624,7 +623,7 @@ configuration for the TypeScript compiler is taken from the
 \code{tsconfig.json} file at the root directory of the project.
 
 The Rollup output plugins used during the bundling process are
-\code{rollup-plugin-terser} and \code{rollup-plugin-gzip}.  These
+\code{rollup-plugin-terser} and \code{rollup-plugin-gzip}. These
 plugins do not affect every created bundle, but are used to
 selectively transform the contents of specific bundles. The
 \code{rollup-plugin-terser} plugin is used to create minified versions
@@ -764,13 +763,13 @@ tasks.
 
 The private \code{cleanDist} and \code{cleanNodeModules} tasks are
 used to delete the \code{dist/} and \code{node_modules/} directories,
-respectively. The \code{cleanDist} task is exported under a different
-name as the public \code{clean} task. This task is necessary because
-without cleaning the \code{dist/} directory before every rebuild,
-redundant files from previous builds that might have disappeared in
-the meantime would cause littering and confusion. Therefore, this task
-is executed as the first step of the \code{build} task. The public
-\code{cleanAll} task is composed of the private \code{cleanDist} and
+respectively. The \code{cleanDist} task is additionally exported as
+the public \code{clean} task. This task is necessary because without
+cleaning the \code{dist/} directory before every rebuild, redundant
+files from previous builds that might have disappeared in the meantime
+would cause littering and confusion. Therefore, this task is executed
+as the first step of the \code{build} task. The public \code{cleanAll}
+task is composed of the private \code{cleanDist} and
 \code{cleanNodeModules} tasks. It is manually executed by a developer
 to delete the currently cached dependencies of the project, to then
 reinstall them from scratch.

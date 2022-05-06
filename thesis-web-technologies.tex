@@ -92,7 +92,7 @@ specific module of the overall CSS specification.
 
 A CSS style sheet contains a collection of rules. Each rule consists
 of a selector and a block of style declarations. Selectors are defined
-in a custom syntax and are used to match HTML elements.  All elements
+in a custom syntax and are used to match HTML elements. All elements
 which are matched by the selector of a rule will have the rule's style
 declarations applied to them. The selector syntax is fairly
 straightforward when selecting elements of a certain type, but also
@@ -398,20 +398,20 @@ hierarchy and its associated data and functions. In addition to the
 querying of elements, the DOM also defines functionality to mutate
 them and their attributes, as well as functionality for handling and
 dispatching events. It also exposes the mechanism of
-\modname{MutationObservers}, which are used to observe changes of
+MutationObservers, which are used to observe changes of
 attributes and children in the document tree. The initial
 specification of the DOM was published in 1997 \parencite{DOM1}. It
 is currently maintained as a living standard by the WHATWG
 \parencite{DOM}.
 
 Another important Web API in the context of this work is the
-\modname{ResizeObserver} API. It provides the ability to observe an
+ResizeObserver API. It provides the ability to observe an
 element's size and respond to changes, which increases the responsive
 capabilities of websites. Previously, scripts could only respond to
 changes in the overall viewport size via the \code{resize} event
 on the \code{window} object, but this meant that changes of an
 individual element's size through attribute changes could not be
-detected. This limitation is fixed with the \modname{ResizeObserver}
+detected. This limitation is fixed with the ResizeObserver
 API, which is already fully supported by all modern browsers, even
 though it has so far only been published as an editor's draft
 \parencite{ResizeObserver}.
@@ -754,7 +754,7 @@ rendering context enables 3d drawing through the WebGL version 2 API
 \parencite{WebGL2}. WebGL-based rendering is hardware-accelerated and
 often much faster than rendering via a 2d canvas or SVG. It is also
 possible to render 2d graphics using a WebGL render context, but the
-necessary setup and rendering API is rather complex.   
+necessary setup and rendering API is rather complex. 
 
 
 
@@ -779,7 +779,7 @@ context of this work are summarized in the following sections.
 The purpose of a browser engine is to transform document and any
 additional resources, like CSS, into a visual representation. A
 browser engine is a core component of every web browser, and it is
-responsible for laying out elements and rendering them.  The
+responsible for laying out elements and rendering them. The
 terminology of browser engines is ill-defined, with them sometimes
 also being referred to as layout or render engines. Theoretically, the
 layout and render processes could be separated into different
