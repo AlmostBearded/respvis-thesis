@@ -40,7 +40,7 @@ Figure~\ref{fig:Packages}.
 \includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
 {diagrams/respvis-packages.pdf}
 \caption[Packages of RespVis]{
-The six packages of the RespVis library and some of their modules. The
+The six packages of the RespVis library and their most important modules. The
 directional arrows indicate dependencies between packages.
 \imgcredit{Image created by the author of this thesis using
 \href{https://diagrams.net/}{diagrams.net}.}
@@ -56,22 +56,20 @@ directional arrows indicate dependencies between packages.
 
 \section{Core Package}
 
-The implementation of the Core package is located in the
-\code{src/lib/core/} directory of the project and contains the
-necessary core modules of the library. It forms the base on which all
-other packages depend and includes various utility functions, the
-Layouter module, Axis module, Chart base
-module, and Chart Window base module. RespVis heavily relies
-on utility functions to reuse recurring operations, and the
-Core package contains utilities which simplify the handling
-of arrays, elements, D3 Selections, texts, positions, sizes,
-rectangles, circles, and paths. The Layouter module enables
-the layout of SVG elements with CSS. The Axis module has
-been included in the Core package because axes are important
-visualization components which occur in nearly all visualizations.
-Lastly, the Core package offers Chart and
-Chart Window base modules for the creation of more
-specialized Chart and Chart Window modules.
+The Core package is located in the \code{src/lib/core/} directory of
+the project and contains the necessary core modules of the library. It
+forms the base on which all other packages depend and includes various
+utility functions, the Layouter module, Axis module, Chart base
+module, and Chart Window base module. RespVis heavily relies on
+utility functions to reuse recurring operations, and the Core package
+contains utilities which simplify the handling of arrays, elements, D3
+Selections, texts, positions, sizes, rectangles, circles, and paths.
+The Layouter module enables the layout of SVG elements with CSS. The
+Axis module has been included in the Core package because axes are
+important visualization components which occur in nearly all
+visualizations. Lastly, the Core package offers Chart and Chart Window
+base modules for the creation of more specialized Chart and Chart
+Window modules.
 
 
 \subsection{Utility Modules}
@@ -1634,9 +1632,100 @@ better compare subcategory contributions to category totals.
 
 
 
+\section{Line Package}
+
+Line charts show trends in data by plotting individual data records as
+regularly-spaced markers that are connected by lines. The variables
+used to position markers can be of any type as long as they can be
+spatially encoded via scales. Usually, continuous scales are used to
+map abstract variables to marker positions, but depending on the
+variable's data types, any suitable type of scale that maps into the
+respective axis' range can be used. It can be distinguished between
+single-series and multi-series line charts, where single-series line
+charts visualize two-dimensional data via a single line, and
+multi-series line charts visualize multi-dimensional data via multiple
+lines. In multi-series line charts, every individual line represents a
+different variable and is usually uniquely colored. This color
+encoding is frequently visualized via a legend.  
+
+The Line package is located in the \code{src/lib/line/} directory of
+the RespVis library and contains modules to render Line Series, Line
+Charts, and Line Chart Windows. A Line Series renders a collection of
+\elname{<path>} elements representing polylines, whose individual
+points are calculated by mapping arrays of x and y values into the
+bounding box of the Series' root element via x and y scales. Line
+Series support rendering multiple polylines by specifying multiple
+arrays of y values that can all be mapped via the same scale. The
+colors of individual polylines are specified via style classes.
+Individual \elname{<path>} elements are rendered via a data join using
+an array of data objects created by transforming the bound Series data
+object. Just like with other Series, this data join can be customized
+via custom \code{enter}, \code{update}, and \code{exit} event
+listeners. 
+
+Line Charts are Cartesian Charts that contain a Line Series, multiple
+optional Point Series for the markers of individual lines, and
+optional labels for these markers. Additionally, if a Line Chart
+renders multiple lines and color-encodes them, a Legend is rendered by
+the Line Chart. Marker labels and tooltips can be configured via the
+Chart's data object. Furthermore, Line Charts attach mouse event
+listeners to lines, markers, and legend items to highlight related
+elements when hovering over one of them.
+
+Line Chart Windows wrap a Line Chart into a Layouter, handle their
+render process so that their elements can be laid out with CSS, and
+decorate them with a Toolbar. By default, the Toolbars of Line Chart
+Windows only contain an SVG Download Tool because only a limited
+number of Tools have been developed so far, and they are not
+necessarily applicable to Line Charts. Depending on the type of data
+visualized by a Line Chart, a Nominal Filtering Tool could be added to
+the Toolbar. Once additional tools for different types of data, like a
+tool to filter quantitative values, have been developed, they could
+also be added to a Line Chart's Toolbar. Example source code to create
+the scalable Line Chart Window shown in
+Figure~\ref{fig:LineChartWindow} can be found in
+Listing~\ref{list:LineChartWindow}.
 
 
 
+
+
+\begin{samepage}
+\lstinputlisting[%
+  float=tp,
+  aboveskip=\floatsep,
+  belowskip=\floatsep,
+  xleftmargin=0cm,              % no extra margins for floats
+  xrightmargin=0cm,             % no extra margins for floats
+  %
+  basicstyle=\footnotesize\ttfamily,
+  frame=shadowbox,
+  numbers=left,
+  label=list:LineChartWindow,
+  caption={[Code of Line Chart Window Example]%
+The source code to create the Line Chart Window shown in
+Figure~\ref{fig:LineChartWindow}. The Line Chart Window is
+configured with a bound data object initialized with the
+\code{chartWindowLineData} function and rendered with the
+\code{chartWindowLineRender} function. Since no special responsive
+behavior is desired in this example, the default resize behavior is
+attached to the Chart Window via the \code{chartWindowLineAutoResize}
+function.
+},
+]{listings/line-chart-window.js}
+\end{samepage}
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
+{images/line-chart-window.png}
+\caption[Line Chart Window Example]{%
+The Line Chart Window resulting from the source code in
+Listing~\ref{list:LineChartWindow}.
+\imgcredit{Image created by the author of this thesis using RespVis.}
+}
+\label{fig:LineChartWindow}
+\end{figure}
 
 \section{Point Package}
 
@@ -1670,6 +1759,8 @@ can be customized by providing custom \code{enter}, \code{update}, and
 \code{exit} event listeners. Point Charts are Cartesian Charts which
 contain Point Series in their draw areas and two Axes visualizing the
 scales used to render the Point Series.
+
+
 
 
 \begin{samepage}
