@@ -759,16 +759,17 @@ combined.
 ]{listings/vega-lite-bar-chart.json}
 \end{samepage}
 
-Another very interesting development in the field of visualization
-grammars that is related to responsive visualizations is the recently
-developed Cicero \parencite{Cicero}, a declarative visualization
-grammar for responsive visualizations. It is an extension of Vega-Lite
-and includes a compiler that can compile Cicero specifications into
-Vega-Lite specifications. Due to this compilation into Vega-Lite,
-Cicero does not require a custom renderer but can rely on Vega-Lite to
-do the rendering. The main addition of Cicero to Vega-Lite consists of
-a declarative grammar to describe responsive transformations that
-transform a source visualization into a responsive version of itself.
+
+
+Another interesting development in the field of visualization grammars
+is Cicero \parencite{Cicero}, a declarative visualization grammar for
+responsive visualizations. An extended Vega-Lite syntax is used to
+describe an initial visualization. A separate Cicero specification
+contains rules about how to modify or transform the visualization in
+certain situations. The Cicero compiler then creates a transformed
+version of the visualization in the extended Vega-Lite syntax, which
+is rendered by an extended version of the Vega-Lite compiler.
+%
 Responsive transformations are declared in terms of a \emph{specifier}
 selecting the elements to be transformed, an \emph{action} that should
 be performed on these elements, and an \emph{option} further defining
@@ -776,7 +777,14 @@ the action. Cicero's transformation grammar simplifies reusing
 responsive transformations across different visualizations and is an
 improvement to Vega-Lite's workflow of having to create completely
 separate specifications for each responsive version of a
-visualization. 
+visualization.
+
+% KA  Cicero uses its own custom extended compiler/renderer
+
+
+
+
+
 
 
 
