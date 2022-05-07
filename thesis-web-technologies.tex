@@ -144,7 +144,18 @@ specificity will be applied. If multiple rules have the same
 specificity, the one defined last in the document tree will overwrite
 all previous ones.
 
-
+Sizes of CSS properties can be expressed in many different units.
+Absolute units like px (pixels), cm (centimeters), and mm
+(millimeters) can be used to express fixed sizes and properties
+declared in such units will result in these exact sizes in the
+resulting output. Relative units like em (relative to font size), rem
+(relative to root font size), and \% (relative to parent) are relative
+to some other property. In general, relative units are better suited
+for sizing properties on screens because screen sizes can vary greatly
+and absolute units are better suited for sizing properties on output
+media whose sizes are more fixed, such as print. CSS properties that
+affect the layout of elements should preferably be specified in rem
+units.
 
 
 
