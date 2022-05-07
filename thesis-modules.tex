@@ -520,60 +520,23 @@ an SVG element's layout element via the same selector extended by the
 classes and \attrname{data-*} attributes in their selectors, the
 properties of corresponding layout elements can be directly configured
 in the same rules, since these selectors will also match them. An
-example of a replicated layout element tree of an SVG document can be
-seen in Listing~\ref{list:LayouterStructure}. An example of CSS rules
-to set various properties of SVG elements and their layout elements
-can be seen in Listing~\ref{list:LayouterCSS}.
+example of how an SVG document is replicated with \elname{<div>}
+layout elements can be seen in Figure~\ref{fig:LayouterReplication}.
 
-
-\begin{samepage}
-\lstinputlisting[%
-  float=tp,
-  aboveskip=\floatsep,
-  belowskip=\floatsep,
-  xleftmargin=0cm,              % no extra margins for floats
-  xrightmargin=0cm,             % no extra margins for floats
-  %
-  basicstyle=\footnotesize\ttfamily,
-  frame=shadowbox,
-  numbers=left,
-  label=list:LayouterStructure,
-  caption={[Replicated Layout Structure of an SVG Document]%
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+{diagrams/respvis-layouter-replication.pdf}
+\caption[Replication of an SVG Document via Layouter]{%
 The replicated layout element structure of an SVG document. Every SVG
 element has a corresponding layout element that has the same classes
 and \attrname{data-*} attributes. In addition to the classes of the
 original SVG element, every layout element also has the \code{layout}
 class to allow specific targeting of layout elements via CSS
-selectors.
-},
-]{listings/layouter-structure.html}
-\end{samepage}
-
-
-\begin{samepage}
-\lstinputlisting[%
-  float=tp,
-  aboveskip=\floatsep,
-  belowskip=\floatsep,
-  xleftmargin=0cm,              % no extra margins for floats
-  xrightmargin=0cm,             % no extra margins for floats
-  %
-  basicstyle=\footnotesize\ttfamily,
-  frame=shadowbox,
-  numbers=left,
-  label=list:LayouterCSS,
-  caption={[CSS Rules to Style SVG]%
-These CSS rules are used to configure the layout and style of an SVG
-document that is being laid out by the Layouter. Since the
-selectors of these CSS rules only use \attrname{class} and
-\attrname{data-*} attributes to match elements, the same rule can be
-used to configure the properties of an SVG element and its
-corresponding layout element. The structure of the SVG document and
-its replicated layout elements can be seen in
-Listing~\ref{list:LayouterStructure}.
-},
-]{listings/layouter-css.css}
-\end{samepage}
+selectors. \imgcredit{Image created by the author of this thesis using
+\href{https://diagrams.net/}{diagrams.net}.} }
+\label{fig:LayouterReplication}
+\end{figure}
 
 
 The size of dynamically-sized elements depends on the size of their
