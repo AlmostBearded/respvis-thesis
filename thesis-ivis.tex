@@ -779,10 +779,6 @@ improvement to Vega-Lite's workflow of having to create completely
 separate specifications for each responsive version of a
 visualization.
 
-% KA  Cicero uses its own custom/extended Vega-Lite compiler/renderer
-
-
-
 
 
 
@@ -815,14 +811,46 @@ behavior and gives an indication on how widespread a library is used
 in practice. The 20 libraries found in the initial collection phase
 were filtered by their usage popularity and recent development
 activity to remove those which were not sufficiently used or no longer
-maintained. This filtering step yielded the following ten libraries:
-(1) ChartJS \parencite{ChartJS}, (2) Highcharts
-\parencite{Highcharts}, (3) ECharts \parencite{ECharts}, (4)
-ApexCharts \parencite{ApexCharts}, (5) PlotlyJS \parencite{PlotlyJS},
-(6) C3JS \parencite{C3JS}, (7) Chartist \parencite{Chartist}, (8)
-amCharts \parencite{amCharts}, (9) billboardJS
-\parencite{billboardJS}, and (10) D3FC \parencite{D3FC}. These ten
-libraries were selected for further consideration.
+maintained. This filtering step yielded the ten libraries shown in
+Table~\ref{tab:ComparedTemplateBasedLibraries}: (1) ChartJS
+\parencite{ChartJS}, (2) Highcharts \parencite{Highcharts}, (3)
+ECharts \parencite{ECharts}, (4) ApexCharts \parencite{ApexCharts},
+(5) PlotlyJS \parencite{PlotlyJS}, (6) C3JS \parencite{C3JS}, (7)
+Chartist \parencite{Chartist}, (8) amCharts \parencite{amCharts}, (9)
+billboardJS \parencite{billboardJS}, and (10) D3FC \parencite{D3FC}.
+These ten libraries were selected for further consideration.
+
+
+
+\begin{table}[tp]
+\tablestretch
+\rowcolors{2}{}{tablerowcolour}
+\centering
+\begin{small}
+\begin{tabularx}{\linewidth}{Xm{2.3cm}lm{1.8cm}lm{4cm}}
+\toprule
+Name & Renderer & GitHub Stars & Yearly NPM \newline Downloads & Last Commit & Free? \\
+\midrule
+ChartJS & Canvas(2d) & 54.9k & 71M & < 1 month & Yes \\
+Highcharts & SVG & 10.3k & 30.3M & < 1 month & Yes (for non-commercial) \\
+ECharts & SVG \newline Canvas(2d) & 48.2k & 15.2M & < 1 month & Yes \\
+ApexCharts & SVG & 10.7k & 10.1M & < 1 month & Yes \\
+PlotlyJS & SVG & 14k & 5.2M & < 1 month & Yes \\
+C3JS & SVG & 9.1k & 4.5M & > 1 year & Yes \\
+Chartist & SVG & 12.7k & 4.4M & > 1 year & Yes \\
+amCharts & SVG & 1k & 3.2M & < 3 months & Yes (with watermark) \\
+billboardJS & SVG & 4.9k & 0.4M & < 1 month & Yes \\
+D3FC & SVG \newline Canvas(2d) \newline Canvas(WebGL) & 1k & 0.3M & < 1 month & Yes \\
+\bottomrule
+\end{tabularx}
+\end{small}
+\caption[Compared Template-Based Information Visualization Libraries]{
+  The ten template-based information visualization libraries that have
+  been chosen for comparison because of their popularity and recent
+  development activity. }
+\label{tab:ComparedTemplateBasedLibraries}
+\end{table}
+
 
 Eight of the ten libraries are completely free to use without
 restrictions, amCharts has a free license for users who are
