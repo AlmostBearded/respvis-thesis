@@ -408,10 +408,60 @@ layout algorithm. Instead, exactly-positioned elements like the
 elements of Point Series are usually positioned directly via their SVG
 attributes.
 
+
+Using the Layouter requires a more complex rendering process than
+would be needed if the boundaries of elements would already be known
+before rendering them. The way the Layouter works, elements affecting
+the layout need to be rendered before calculating it, and afterward,
+when the positions and sizes of elements are known, the visualization
+needs to be rerendered in its final form. This leads to the
+three-phased rendering process shown in
+Figure~\ref{fig:RenderProcess}. These three phases are the first
+render phase to render elements affecting the layout, the layout
+phase, and the second render phase to render elements affected by the
+layout. The elements affecting the layout of the visualization are
+mainly laid-out container \elname{<svg>} and \elname{<g>} elements
+containing exactly-positioned child elements. Dynamically-sized
+elements such as \elname{<text>} elements and axes also need to be
+fully rendered in the first render phase. The layout phase is where
+the Layouter calculates the layout of a visualization using the
+layout process described in the following paragraphs. In the second
+render phase, the bounding boxes calculated during the layout phase
+are used to perform a second rendering of the complete visualization.
+Here, every element affected by the layout, i.e. nearly every element,
+is rendered at its final position with its final dimensions. In
+theory, the two render phases could be implemented as separate
+functions, but it is more convenient to just invoke the same render
+function twice and perform some operations only if the boundaries of
+elements have already been calculated.
+
+\begin{figure}[tp]
+\centering
+\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+{diagrams/respvis-render-process.pdf}
+\caption[Render Process When Using the Layouter]{%
+The three phases of the render process when using the RespVis
+Layouter. During the first render phase, every element that affects
+the layout needs to be rendered. The second phase consists of the
+layout process performed by the Layouter. The layout process includes
+the replication phase in which laid-out SVG elements are replicated
+with \elname{<div>} elements, the layout phase in which these
+\elname{<div>} elements are automatically being laid out by the
+browser, and the synchronization phase in which the bounding boxes of
+the laid out \elname{<div>} elements are being set as
+\attrname{bounds} attributes on the original SVG elements. In the
+second render phase, after the layout of the visualization has been
+calculated, the calculated boundaries are used to rerender all
+elements of the visualization at their final positions with their
+final dimensions. \imgcredit{Image created by the author of this
+thesis using \href{https://diagrams.net/}{diagrams.net}.} }
+\label{fig:RenderProcess}
+\end{figure}
+
 The Layouter Module can be found in the \code{layouter.ts} file of the
 Core package. The main function of this module is the
 \code{layouterCompute} function which implements the three-phased
-layout process shown in Figure~\ref{fig:LayoutProcess}. The three
+layout process shown in Figure~\ref{fig:RenderProcess}. The three
 phases are:
 \begin{enumerate}
 \item Replication: The structure of the SVG document that shall be
@@ -439,26 +489,6 @@ phases are:
   attributes on different types of SVG elements that aim to represent
   the boundaries of individual elements.
 \end{enumerate}
-
-
-
-
-\begin{figure}[tp]
-\centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
-{diagrams/respvis-layout-process.pdf}
-\caption[Layout Process of the Layouter]{
-The three phases of the layout process of the RespVis Layouter.
-During the replication phase, the SVG document is replicated with HTML
-\elname{<div>} elements. Afterwards, these HTML elements are laid out by
-the browser in the layout phase, and the positions of the laid-out
-HTML elements are applied to their respective SVG elements during the
-synchronization phase. \imgcredit{Image created by the author of this
-  thesis using \href{https://diagrams.net/}{diagrams.net}.}
-}
-\label{fig:LayoutProcess}
-\end{figure}
-
 
 
 During the replication process, the structure of an SVG document is
@@ -611,56 +641,7 @@ of the composite \elname{<svg>} or \elname{<g>} elements containing
 them, so this has to be implemented manually in the render functions
 of various components.
 
-Using the Layouter requires a more complex rendering process
-than would be needed if the boundaries of elements would already be
-known before rendering them. The way the Layouter works,
-some elements need to be rendered before calculating the layout, and
-afterward, when the positions and sizes of elements are known, the
-visualization needs to be rerendered in its final form. This rendering
-process consists of the three phases shown in
-Figure~\ref{fig:RenderProcess}. The three phases of the render process
-are the first rendering phase to render elements affecting the layout,
-the layouting phase, and the second rendering phase to render elements
-affected by the layout. In the first rendering phase, all elements and
-attributes which affect the layout of a visualization need to be
-rendered, which mainly includes laid-out container \elname{<svg>} and
-\elname{<g>} elements containing exactly-positioned child elements.
-Dynamically-sized elements such as \elname{<text>} elements and axes
-also need to be fully rendered in this phase because their content
-affects the calculation of the overall layout. The layouting phase is
-where the previously-described layout process seen in
-Figure~\ref{fig:LayoutProcess} is executed, including the bounding box
-calculation of laid-out elements and their persistence as attributes
-which can be accessed during the second rendering phase. In the second
-rendering phase, the previously-calculated bounding boxes of elements
-are used to perform a second rendering of the complete visualization.
-Here, every element affected by the layout, i.e. nearly every element,
-is rendered at its final position with its final dimensions. In
-theory, the two rendering phases of components could be implemented as
-separate functions, but it is more convenient to invoke the same
-render function twice and perform some operations only if the
-appropriate \attrname{bounds} attribute has already been set.
 
-
-\begin{figure}[tp]
-\centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
-{diagrams/respvis-render-process.pdf}
-\caption[Render Process When Using the Layouter]{%
-The three phases of the render process when using
-the RespVis Layouter. During the first render phase, every element
-that affects the layout needs to be rendered. The layout phase of the
-render process is equivalent to the layout process described in
-Figure~\ref{fig:LayoutProcess}. In this phase, the Layouter
-calculates the final positions and sizes of laid-out elements and
-stores them in attributes on these elements. During the second render
-phase, the boundary informations calculated in the previous phase is
-utilized to rerender all elements of the visualization at their final
-positions with their final dimensions. \imgcredit{Image created by
-the author of this thesis using \href{https://diagrams.net/}{diagrams.net}.}
-}
-\label{fig:RenderProcess}
-\end{figure}
 
 
 
