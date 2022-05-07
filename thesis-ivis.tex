@@ -717,7 +717,7 @@ resulting graphics, making Vega a good base on which to build further
 libraries and tools. Many tools have already been built on top of Vega
 \parencite{Voyager,Lyra,CompassQL}. Most noteworthy is Vega-Lite
 \parencite{VegaLite}. Vega-Lite is described as a \enquote{high-level
-  grammar of interactive graphics}, which summarizes its difference to
+grammar of interactive graphics}, which summarizes its difference to
 Vega fairly well. Vega-Lite is a higher-level grammar than Vega,
 allowing authors to write specifications for common visualizations in
 a much more concise form. Specifications written in Vega-Lite are then
@@ -731,7 +731,11 @@ configurations are not suitable, Vega-Lite also offers the possibility
 to override them. Since Vega-Lite specifications are simply compiled
 into Vega ones, it is a sensible choice to use Vega-Lite as a primary
 tool to describe visualizations, and switch to Vega for more exotic
-cases which are not easily achievable in Vega-Lite. To illustrate the
+cases which are not easily achievable in Vega-Lite. Additionally,
+tools like \textcite{TechniquesForFlexibleRespVisDesign} simplify
+designing responsive versions of Vega-Lite visualizations by allowing
+visualization authors to preview and edit multiple responsive versions
+at the same time in a convenient user interface. To illustrate the
 difference between a Vega and a Vega-Lite specification,
 Listing~\ref{list:VegaLiteBarChart} shows a Vega-Lite version of the
 Vega bar chart specification from
