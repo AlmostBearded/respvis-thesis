@@ -25,20 +25,14 @@
 <script type="module">
   import { /* ... */  } from './path/to/respvis.mjs';
   import { years, averageOpens } from './path/to/data/google-stock.js';
-
   const data = {
-    subtitle: '2004 to 2022',
-    xValues: years,
-    yValues: [averageOpens],
+    subtitle: '2004 to 2022', xValues: years, yValues: [averageOpens],
     xAxis: { title: 'Years' },
     yAxis: { title: 'Average Open Prices', subtitle: '[USD]' },
   };
-
   const chart = d3.select('#chart').append('div')
-    .datum(chartWindowLineData(data))
-    .call(chartWindowLineRender)
+    .datum(chartWindowLineData(data)).call(chartWindowLineRender)
     .on('resize', handleResize);
-
   function handleResize() {
     const wide = window.matchMedia('(min-width: 40rem)').matches;
     const widest = window.matchMedia('(min-width: 60rem)').matches;

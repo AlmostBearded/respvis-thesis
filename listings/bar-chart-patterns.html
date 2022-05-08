@@ -21,24 +21,18 @@
 <script type="module">
   import { /* ... */  } from './path/to/respvis.mjs';
   import { sites, revenues, years } from './path/to/data/company.js';
-
   const data = {
-    categories: sites,
-    subcategories: years,
-    values: revenues,
+    categories: sites, subcategories: years, values: revenues,
     labels: { labels: revenues.flat().map((r) => d3.format('.2s')(r)) },
     legend: { title: 'Years' },
-    xAxis: { title: 'Site' },
-    yAxis: { title: 'Revenue', subtitle: '[USD]' },
+    xAxis: { title: 'Site' }, yAxis: { title: 'Revenue', subtitle: '[USD]' },
   };
-
   const chart = d3.select('#chart').append('div')
     .datum(chartWindowBarGroupedData(data))
     .call(chartWindowBarGroupedAutoFilterCategories(data))
     .call(chartWindowBarGroupedAutoFilterSubcategories(data))
     .call(chartWindowBarGroupedRender)
     .on('resize', handleResize);
-
   function handleResize() {
     const wide = window.matchMedia('(min-width: 40rem)').matches;
     const widest = window.matchMedia('(min-width: 60rem)').matches;
