@@ -3,9 +3,10 @@
   <link rel="stylesheet" href="./path/to/respvis.css" />
   <style>
     #chart { width: 100%; height: 75vh; min-height: 25rem; }
+    /* show subtitle on wide screens */
+    @media (max-width: 40rem) { .chart .header .subtitle { display: none; } }
     /* show axis only on wide screens */ 
-    .axis { display: none; }
-    @media (min-width: 40rem) { .axis { display: block; } }
+    @media (max-width: 40rem) { .axis { display: none; } }
     /* show more ticks the wider the screen */
     .tick { display: none; }
     @media (min-width: 40rem) { .tick:nth-of-type(2n + 1) { display: block; } }
@@ -26,6 +27,7 @@
   import { years, averageOpens } from './path/to/data/google-stock.js';
 
   const data = {
+    subtitle: '2004 to 2022',
     xValues: years,
     yValues: [averageOpens],
     xAxis: { title: 'Years' },
@@ -40,6 +42,8 @@
   function handleResize() {
     const wide = window.matchMedia('(min-width: 40rem)').matches;
     const widest = window.matchMedia('(min-width: 60rem)').matches;
+    /* longer title on wide screens */
+    data.title = wide ? 'Open Prices of the Google Stock' : 'Google Stock Prices';
     // shorten price tick labels using scientific notation on <60rem screens
     const priceTickFormat = widest ? d3.format(',') : d3.format('.2s');
     data.yAxis.configureAxis = (axis) => axis.tickFormat(priceTickFormat);
