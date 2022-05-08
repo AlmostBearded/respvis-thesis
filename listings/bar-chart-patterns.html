@@ -3,32 +3,40 @@
   <link rel="stylesheet" href="./path/to/respvis.css" />
   <style>
     #chart { width: 100%; height: 75vh; min-height: 25rem; }
-    /* rotate bottom axis tick labels on <60rem screens */
-    @media (max-width: 60rem) {
-      .axis-bottom .tick text { transform: rotate(-45deg); text-anchor: end; }
-    }
+    /* legend below draw area on narrow screens */
+    @media (max-width: 40rem) { .chart {
+        grid-template: 'axis-left draw-area' 1fr
+          '. axis-bottom' auto
+          '. legend' auto / auto 1fr; }}
+    /* hide legend title on narrow screens */
+    @media (max-width: 40rem) { .legend .title { display: none; } }
+    /* row-layout of legend items on narrow screens */
+    @media (max-width: 40rem) { .legend .items { flex-direction: row; } }
+    /* hide every second y-axis tick on narrow screens */
+    @media (max-width: 40rem) { .axis-y .tick:nth-of-type(2n) { display: none; } }
   </style>
 </head>
 <body><div id="chart"></div></body>
 <script src="./path/to/d3.js"></script>
 <script type="module">
   import { /* ... */  } from './path/to/respvis.mjs';
-  import { cities, populations } from './path/to/data/austrian-cities.js';
+  import { sites, revenues, years } from './path/to/data/company.js';
 
   const data = {
-    categories: cities,
-    values: populations,
-    xAxis: { title: 'City' },
-    yAxis: { 
-      title: 'Population', 
-      configureAxis: (a) => a.tickFormat(d3.format('.2s')) 
-    },
+    categories: sites,
+    subcategories: years,
+    values: revenues,
+    labels: { labels: revenues.flat().map((r) => d3.format('.2s')(r)) },
+    legend: { title: 'Years' },
+    xAxis: { title: 'Site' },
+    yAxis: { title: 'Revenue', subtitle: '[USD]' },
   };
 
   const chart = d3.select('#chart').append('div')
-    .datum(chartWindowBarData(data))
-    .call(chartWindowBarAutoFilterCategories)
-    .call(chartWindowBarRender)
+    .datum(chartWindowBarGroupedData(data))
+    .call(chartWindowBarGroupedAutoFilterCategories(data))
+    .call(chartWindowBarGroupedAutoFilterSubcategories(data))
+    .call(chartWindowBarGroupedRender)
     .on('resize', handleResize);
 
   function handleResize() {
@@ -38,10 +46,10 @@
     data.flipped = !wide;
     // move labels from top to right of bars in transposed chart
     data.labels.relativePositions =  !wide ? { x: 1, y: 0.5 } : { x: 0.5, y: 0 };
-    // gradually shorten labels by decreasing scientific notation precision
-    const labelPrecision = !wide ? 2 : !widest ? 3 : 4;
-    data.labels.labels = populations.map(d3.format(`.${labelPrecision}s`));
-    chart.datum(chartWindowBarData(data)).call(chartWindowBarRender);
+    // simplify y-axis tick labels using scientific notation on narrow screens
+    const yTickFormat = largeWidth ? d3.format(',') : d3.format('.1s');
+    data.yAxis.configureAxis = (a) => a.tickFormat(yTickFormat);
+    chart.datum(chartWindowBarGroupedData(data)).call(chartWindowBarGroupedRender);
   }
 </script>
 </html>

@@ -10,4 +10,4 @@ select('#chart')
   )
   .call(chartWindowBarRender)
   .call(chartWindowBarAutoResize)
-  .call(chartWindowBarAutoFilterCategories); 
+  .call(chartWindowBarAutoFilterCategories()); 

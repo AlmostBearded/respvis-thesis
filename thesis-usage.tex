@@ -297,13 +297,12 @@ The following responsive patterns can be applied to RespVis Bar Charts:
   frame=shadowbox,
   numbers=left,
   label=list:BarChartPatterns,
-  caption={[Implementation of a Responsive RespVis Bar Chart]%
-The implementation of the responsive Bar Chart shown in
+  caption={[Implementation of a Responsive RespVis Grouped Bar Chart]%
+The implementation of the responsive Grouped Bar Chart shown in
 Figure~\ref{fig:BarChartPatterns}. Depending on the available width,
-Axis tick labels are rotated, bar labels are simplified, and on very
-narrow screens, the whole Chart is transposed. Non-essential parts
-have been removed for clarity.
-},
+Axis tick labels are simplified, the Legend title is hidden, the
+Legend is moved below the draw area, and the whole Chart is
+transposed. Non-essential parts have been removed for clarity.},
 ]{listings/bar-chart-patterns.html}
 \end{samepage}
 
@@ -328,19 +327,17 @@ have been removed for clarity.
   \includegraphics[valign=b,scale=\respscale]{diagrams/respvis-bar-30rem.pdf}%
   \label{fig:BarChartPatterns30rem}%
 }
-\caption[Responsive RespVis Bar Chart]{%
-The responsive Bar Chart resulting from the implementation in
+\caption[Responsive RespVis Grouped Bar Chart]{%
+The responsive Grouped Bar Chart resulting from the implementation in
 Listing~\ref{list:BarChartPatterns}.
-\subref{fig:BarChartPatterns60rem} At a width of 60rem, the
-Chart is not yet transposed, bar labels are shown above the bars with
-four digits of precision, and the bottom axis tick labels are not
-rotated. \subref{fig:BarChartPatterns40rem} At a width of
-40rem, bar labels are shown with three digits of precision, and the
-bottom axis tick labels are rotated by 45 degrees.
-\subref{fig:BarChartPatterns30rem} At a width of 30rem, the
-Chart is transposed, bar labels are shown with two digits of precision
-to the right of bars, and the (newly) bottom axis tick labels are
-rotated by 45 degrees.
+\subref{fig:BarChartPatterns60rem} At a width of 60rem, the Chart is
+not yet transposed and revenue axis tick labels are not yet
+abbreviated. \subref{fig:BarChartPatterns40rem} At a width of 40rem,
+revenue axis tick labels are abbreviated using scientific notation.
+\subref{fig:BarChartPatterns30rem} At a width of 30rem, the Chart is
+transposed, bar labels are moved to the right of bars, the Legend
+title is hidden, the Legend is moved below the draw area, Legend items
+are laid out in a row, and every second revenue axis tick is hidden.
 \imgcredit{Image created by the author of this thesis using RespVis.}
 }
 \label{fig:BarChartPatterns}

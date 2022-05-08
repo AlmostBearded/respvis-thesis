@@ -20,5 +20,5 @@ select('#chart')
   )
   .call(chartWindowBarStackedRender)
   .call(chartWindowBarStackedAutoResize)
-  .call(chartWindowBarStackedAutoFilterCategories)
-  .call(chartWindowBarStackedAutoFilterSubcategories);
+  .call(chartWindowBarStackedAutoFilterCategories())
+  .call(chartWindowBarStackedAutoFilterSubcategories());

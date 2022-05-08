@@ -16,5 +16,5 @@ select('#chart')
   )
   .call(chartWindowBarGroupedRender)
   .call(chartWindowBarGroupedAutoResize)
-  .call(chartWindowBarGroupedAutoFilterCategories)
-  .call(chartWindowBarGroupedAutoFilterSubcategories);
+  .call(chartWindowBarGroupedAutoFilterCategories())
+  .call(chartWindowBarGroupedAutoFilterSubcategories());
