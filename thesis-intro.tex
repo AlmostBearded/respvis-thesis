@@ -6,14 +6,14 @@ ever-growing amounts of available data, visualizations which
 effectively communicate this data are an essential part of it.
 Motivated by the increasing variety of devices used to access the web,
 responsive design has been established as one of the core pillars of
-designing web content to ensure that it is easily accessible to consumers
-regardless of the characteristics of their devices. Even though most
-web content is already designed responsively, charts and
+designing web content to ensure that it is easily accessible to
+consumers regardless of the characteristics of their devices. Even
+though most web content is already designed responsively, charts and
 visualizations are often only embedded in a static form, which does
 not adapt or only minimally adapts to different device
-characteristics. The academic field of responsive visualization is
-still in its early stages, but some research from various authors
-regarding scalable visualizations
+characteristics. The field of responsive visualization is still in its
+early stages, but some research from various authors regarding
+scalable visualizations
 \parencite{BuildingRespDataVisForTheWeb,LearningRespDataVis}, design
 patterns
 \parencite{RespVisTalk,RespVisPage,RespVis,TechniquesForFlexibleRespVisDesign,
@@ -26,18 +26,18 @@ and continues to emerge.
 Many different software libraries to create visualizations for the web
 exist, but they all have their shortcomings regarding usability,
 extensibility, and responsiveness. Regarding terminology, this thesis
-distinguishes between two user types of visualization libraries:
-visualization authors, creating visualizations using a library, and
-visualization consumers, viewing visualizations in their browsers. One
-of the most popular libraries for creating visualizations is D3
-\parencite{D3,D3JS}, which provides a low-level API to transform HTML
-and SVG documents based on data. This document-based approach is
-rather powerful, as it allows users to create whatever visualizations
-they wish, without being hindered by the limitations of a custom
-renderer. However, building visualizations by manually setting up
-their entire structure and behavior can be tedious and requires deep
-knowledge of JavaScript programming, D3, and the underlying rendering
-standard SVG.
+distinguishes between two types of users of visualization libraries:
+\emph{visualization authors}, who create visualizations using a
+library, and \emph{visualization consumers}, who view visualizations
+in their browsers. One of the most popular libraries for creating
+visualizations is D3 \parencite{D3,D3JS}, which provides a low-level
+API to transform HTML and SVG documents based on data. This
+document-based approach is rather powerful, as it allows users to
+create whatever visualizations they wish, without being hindered by
+the limitations of a custom renderer. However, building visualizations
+by manually setting up their entire structure and behavior can be
+tedious and requires deep knowledge of JavaScript programming, D3, and
+the underlying rendering standard SVG.
 %
 Other visualization libraries like Vega \parencite{Vega} and its
 extensions such as Cicero \parencite{Cicero}, which extends Vega
@@ -50,7 +50,7 @@ since the actual rendering is abstracted away, visualization authors
 are limited to the capabilities offered by a library's high-level API,
 which can lead to restricted configurability.
 %
-Yet other types of visualization libraries are based on template-based
+Yet other types of visualization libraries use template-based
 configuration, meaning that visualization authors only need to provide
 data in a predefined format and the library then renders predefined
 visualizations using this data. These template-based visualization
@@ -64,7 +64,7 @@ presentational information visualizations for the web with a strong
 emphasis on responsiveness. RespVis is an open-source library
 \parencite{RespVisGitHub} written in TypeScript, which is designed as
 an extension of D3 and focuses on rendering visualizations as
-composite SVG documents. RespVis relies on CSS to style and position a
+composite SVG documents. RespVis uses CSS to style and position a
 visualization's content, its JavaScript API has intentionally been
 kept as minimal as possible. Visualization authors can use CSS media
 queries in combination with Flexbox and Grid to position chart
@@ -82,10 +82,10 @@ Additionally, the use of CSS for styling and positioning allows the
 application of other tools frequently used for responsive design like
 media queries, and it also means that styles can easily be configured
 and overwritten via the CSS cascade. Since RespVis renders and
-configures visualizations using standardized web technologies such as
-HTML, SVG, and CSS, visualization authors can work with technologies
-all web developers are already familiar with and do not have to learn
-a complex domain-specific language. Furthermore, the focus on standard
+configures visualizations using standard web technologies like HTML,
+SVG, and CSS, visualization authors can work with technologies all web
+developers are already familiar with and do not have to learn a
+complex domain-specific language. Furthermore, the focus on standard
 web technologies means that visualizations can easily be extended
 beyond foreseen use cases, and it is less likely that visualization
 authors are limited by restrictions of the library's API.
