@@ -10,29 +10,27 @@ most authors will likely require only a subset of all the features
 included in the library, and it would unnecessarily increase the size
 of their bundles to import them all. A good example of this is D3,
 which also separates its extensive collection of functionality into
-different packages which can be successively added to a project as the
-need arises.
+different packages, which can be successively added to a project as
+the need arises.
 
 At the time of writing, the RespVis library comprises six packages:
-the Core package, Legend package,
-Tooltip package, Bar package, and Point
-package, each containing various modules grouped by thematic
-similarity. The Core package holds the core functionality of
-the library which all other packages depend on. This packages includes
-the Layouter and Axis modules, Chart and
-Chart Window base modules, and various utility functions and
-types. The Legend package contains a Legend module
-to visualize non-spatial data via labeled symbols. The
-Tooltip package holds functions to control the display,
-placement, and content of tooltips, as well as utility functions to
-simplify their configuration and initialization in Series
-modules. The Bar package distinguishes between
-single-series, grouped, and stacked bars and includes various
-low-level and high-level modules to render each of those types.
-Similarly, the Line and Point packages contains
-low-level and high-level modules to visualize point and line charts.
-The different packages and the dependencies between them are shown in
-Figure~\ref{fig:Packages}.
+the Core package, Legend package, Tooltip package, Bar package, and
+Point package, each containing various modules grouped by thematic
+similarity. The Core package holds the core functionality of the
+library which all other packages depend on. This packages includes the
+Layouter and Axis modules, Chart and Chart Window base modules, and
+various utility functions and types. The Legend package contains a
+Legend module to visualize non-spatial data via labeled symbols. The
+Tooltip package holds functions to control the display, placement, and
+content of tooltips, as well as utility functions to simplify their
+configuration and initialization in Series modules. The Bar package
+distinguishes between single-series, grouped, and stacked bars and
+includes various low-level and high-level modules to render each of
+those types. Similarly, the Line and Point packages contain low-level
+and high-level modules to visualize line charts and point charts
+(scatterplots), respectively. The different packages and the
+dependencies between them are shown in Figure~\ref{fig:Packages}.
+
 
 
 \begin{figure}[tp]
@@ -58,9 +56,9 @@ directional arrows indicate dependencies between packages.
 
 The Core package is located in the \code{src/lib/core/} directory of
 the project and contains the necessary core modules of the library. It
-forms the base on which all other packages depend and includes various
-utility functions, the Layouter module, Axis module, Chart base
-module, and Chart Window base module. RespVis heavily relies on
+forms the base upon which all other packages depend, and includes
+various utility functions, the Layouter module, Axis module, Chart
+base module, and Chart Window base module. RespVis heavily relies on
 utility functions to reuse recurring operations, and the Core package
 contains utilities which simplify the handling of arrays, elements, D3
 Selections, texts, positions, sizes, rectangles, circles, and paths.
@@ -70,6 +68,8 @@ important visualization components which occur in nearly all
 visualizations. Lastly, the Core package offers Chart and Chart Window
 base modules for the creation of more specialized Chart and Chart
 Window modules.
+
+
 
 
 \subsection{Utility Modules}
@@ -109,12 +109,11 @@ a partitioned version of the input array with each chunk containing
 the number of items specified by the partition size parameter.
 
 
-The Element Utility module located at
-\code{utilities/elements.ts} in the Core package contains
-functions and constants related to elements in a document. The
-\code{elementRelativeBounds} function is used to calculate the
-bounding box of an element relative to the bounding box of its parent
-in viewport coordinates. Internally, it uses the
+The Element Utility module located at \code{utilities/elements.ts} in
+the Core package contains functions and constants related to elements
+in a document. The \code{elementRelativeBounds} function is used to
+calculate the bounding box of an element relative to the bounding box
+of its parent in viewport coordinates. Internally, it uses the
 \code{getBoundingClientRect} function, which returns the actual
 bounding box of an element in viewport coordinates and, as opposed to
 other ways of accessing this information, this function also takes
@@ -135,14 +134,13 @@ effect. For this reason, the
 implemented to calculate the computed style of an element and remove
 all default-valued properties from the returned style declaration
 object. This is implemented by adding a \elname{<style-dummy>} element
-as a sibling of the element of interest, getting the computed styles
-of both elements, and calculating the difference between them. To
-accelerate these calculations, the
-\code{elementComputedStyleWithoutDefaults} function accepts an array
-of property names as its second parameter and will only consider the
-properties listed in this array. The constant
-\code{elementSVGPresentationAttrs} array contains the names of all SVG
-presentation attributes listed in the SVG 1.1 specification
+as a sibling of the element of interest, computing the styles of both
+elements, and calculating the difference between them. To accelerate
+these calculations, the \code{elementComputedStyleWithoutDefaults}
+function accepts an array of property names as its second parameter
+and will only consider the properties listed in this array. The
+constant \code{elementSVGPresentationAttrs} array contains the names
+of all SVG presentation attributes listed in the SVG 1.1 specification
 \parencite{SVG11}. As soon as support for SVG 2 \parencite{SVG2} by
 most major browsers has reached maturity, this array will be extended
 to include any newly added presentation attributes. Since only these
@@ -150,19 +148,19 @@ SVG attributes can be styled via CSS, only CSS properties representing
 presentation attributes have to be considered when preparing
 downloadable SVG documents.
 
-D3 Selection utilities are implemented in the Selection
-Utility module in the \code{utilities/selection.ts} file and include
-typing improvements for the D3 \code{Selection}, \code{Transition},
-and \code{SelectionOrTransition} interfaces and type guards to
-distinguish between them. D3 \code{Selection}, \code{Transition}, and
-\code{SelectionOrTransition} interfaces allow the specification of
+D3 Selection utilities are implemented in the Selection Utility module
+in the \code{utilities/selection.ts} file. They include typing
+improvements for the D3 \code{Selection}, \code{Transition}, and
+\code{SelectionOrTransition}\ interfaces, and include type guards to
+distinguish between them. The D3 \code{Selection}, \code{Transition},
+and \code{SelectionOrTransition} interfaces allow the specification of
 four type variables: the type of elements contained in the Selection
 or Transition, the type of data bound to those elements, the type of
 the parents of those elements, and the type of data bound to those
 parents. In most cases, the type variables related to parent elements
 do not influence the logic of code using these interfaces and could be
 omitted to keep it more concise. For this reason, these interfaces
-have been reexported with default types set on all of the type
+have been re-exported with default types set on all of the type
 variables, which means that whenever type variables need to be
 manually specified, only those that need to be set to specific types
 need to be explicitly stated. Further typing improvements have been
@@ -173,8 +171,8 @@ return value, which is wrong because this method will result in a
 \code{null} value when reading an attribute that does not exist. To
 fix this inconsistency and catch potential bugs related to it during
 compilation, the type declaration of the \code{Selection.attr} method
-has been overwritten in the Selection Utility module to
-include \code{null} as a possible return value. A less important but
+has been overwritten in the Selection Utility module to include
+\code{null} as a possible return value. A less important but
 convenient improvement has been made to the type declaration of the
 \code{Selection.dispatch} method, which allows the dispatching of
 custom events with certain parameters that control different aspects
@@ -184,13 +182,12 @@ the implementation of the \code{Selection.dispatch} method will
 provide default values for all of them, but this is not reflected in
 the type declaration of the function, which requires every parameter
 to be set every time the function is called. To fix this, the
-Selection Utility module provides a type declaration
-overwrite for the \code{Selection.dispatch} function that wraps the
-type of the parameters parameter into the native \code{Partial}
-utility type. Apart from these typing improvements, this module also
-provides the \code{isSelection} and \code{isTransition} type guard
-functions that are used to distiguish between D3 Selections and
-Transitions.
+Selection Utility module provides a type declaration overwrite for the
+\code{Selection.dispatch} function that wraps the type of the
+parameters parameter into the native \code{Partial} utility
+type. Apart from these typing improvements, this module also provides
+the \code{isSelection} and \code{isTransition} type guard functions
+that are used to distiguish between D3 Selections and Transitions.
 
 
 Utilities for dealing with \elname{<text>} elements can be found in the
@@ -224,16 +221,16 @@ accordingly and position them correctly inside their bounding box
 calculated by the Layouter.
 
 
-The Core package also contains utilities to simplify
-geometric operations. One of these utility modules is the
-Position Utility module located in the
-\code{utilities/position.ts} file, which contains the \code{Position}
-interface and various functions to perform operations related to it.
-The \code{Position} interface consists of the \code{x} and \code{y}
-number properties. Rounding these properties is necessary to be able
-to correctly compare the equality of two \code{Position} objects and
-to not render unnecessarily long strings when transforming them into
-string representations. This rounding is performed with the
+The Core package also contains utilities to simplify geometric
+operations. One of these utility modules is the Position Utility
+module located in the \code{utilities/position.ts} file, which
+contains the \code{Position} interface and various functions to
+perform operations related to it.  The \code{Position} interface
+consists of the \code{x} and \code{y} number properties. Rounding
+these properties is necessary to be able to correctly compare the
+equality of two \code{Position} objects and to not render
+unnecessarily long strings when transforming them into string
+representations. This rounding is performed with the
 \code{positionRound} function, which allows the specification of the
 number of decimals the properties should be rounded to. Equality
 comparision between two \code{Position} objects can be done with the
@@ -244,16 +241,16 @@ a \code{Position} object into its \code{\"x, y\"} string
 representation, and its counterpart, the \code{positionFromString}
 function, can be used to transform a correctly-formatted string into a
 \code{Position} object. A large part of RespVis consists of modifying
-the attributes of elements. Therefore, the \code{positionToAttrs}
-function can be used to set the \attrname{x} and \attrname{y}
-attributes of elements to the values of the \code{x} and \code{y}
-members of a \code{Position} object, and similarly, the
+the attributes of elements. The \code{positionToAttrs} function can be
+used to set the \attrname{x} and \attrname{y} attributes of elements
+to the values of the \code{x} and \code{y} members of a
+\code{Position} object, and similarly, the
 \code{positionToTransformAttr} function can be used to set the
 \attrname{transform} attribute of elements to a translation
-representing a \code{Position} object. The Position Utility
-module also contains the \code{positionFromAttrs} function, which can
-be used to create a \code{Position} object from an element's
-\attrname{x} and \attrname{y} attributes.
+representing a \code{Position} object. The Position Utility module
+also contains the \code{positionFromAttrs} function, which can be used
+to create a \code{Position} object from an element's \attrname{x} and
+\attrname{y} attributes.
 
 The Size Utility module located in the
 \code{utilities/size.ts} file in the Core package is very
@@ -352,140 +349,141 @@ their path definition strings.
 
 
 
+
+
 \subsection{Layouter Module}
 \label{sec:Layouter}
 
-The Layouter module is the most novel contribution of this
-work. A Layouter wraps around an SVG document and allows
-configuration of the layout of elements in this document with CSS
-mechanisms like Grid and Flexbox. Instead of implementing a custom
-layout algorithm, the Layouter utilises the layout engines
-already built into browsers, which were summarized in
-Section~\ref{sec:BrowserEngines}. Earlier proof of concept
-implementations used the FaberJS \parencite{FaberJS} and Yoga
-\parencite{Yoga} layout engines to compute layouts, but these
-implementations limited layouting to either Grid or Flexbox-based
-constraints. Furthermore, the use of built-in browser functionality in
-the current implementation leads to a reduced bundle size and to
-visualization authors being able to use all the layouting capabilities
-natively offered by browsers.
+The Layouter module is the most significant contribution of this
+work. A Layouter wraps around an SVG document and allows configuration
+of the layout of elements in this document with CSS mechanisms like
+Grid and Flexbox. Instead of implementing a custom layout algorithm,
+the Layouter utilises the layout engines already built into browsers,
+which were summarized in Section~\ref{sec:BrowserEngines}. Earlier
+proof of concept implementations used the FaberJS \parencite{FaberJS}
+and Yoga \parencite{Yoga} layout engines to compute layouts, but these
+implementations limited layouting to either Grid-based or
+Flexbox-based constraints. The use of built-in browser functionality
+in the current implementation leads to visualization authors being
+able to use all the layouting capabilities natively offered by
+browsers, as well as reduced bundle sizes.
 
 CSS has always been the foundation of responsive web design for
-HTML-based websites because of its ability to adapt an element's
+HTML-based websites, because of its ability to adapt an element's
 presentation and the possibility of defining different presentations
 for different contexts via media queries. A large part of the
 responsive power of CSS comes from its ability to change the
 positioning and layout of elements. As already mentioned in previous
 chapters, CSS can style certain aspects of SVG documents, but it is
 not possible to use CSS layouting mechanisms to position SVG elements.
-Even though there are already other visualization libraries such as
-Chartist \parencite{Chartist} and Highcharts \parencite{Highcharts}
-which allow the use of CSS to style visualizations, none of them offer
-the possibility to modify the layout of visualizations via CSS, which
-means that visualization authors have to learn and use custom APIs to
-position elements, limiting the range of possible layouts to those
-supported by the individual libraries.
+Although other visualization libraries such as Chartist
+\parencite{Chartist} and Highcharts \parencite{Highcharts} allow the
+use of CSS to style visualizations, none of them offer the possibility
+to modify the layout of visualizations via CSS. Instead, visualization
+authors have to learn and use custom APIs to position elements,
+limiting the range of possible layouts to those supported by the
+individual libraries.
 
-The RespVis Layouter module distinguishes between laid-out
-and non-laid-out elements, since not every element in a visualization
+The RespVis Layouter module distinguishes between laid-out and
+non-laid-out elements, since not every element in a visualization
 profits from being laid out. The positions and sizes of laid-out
-elements are calculated by the Layouter, whereas
-non-laid-out elements are ignored during the layout process.
-Theoretically, the Layouter could be used to position all
-visualization elements, since all that is necessary is to determine a
-good mapping for each element that maps the rectangular bounding box
-calculated by the Layouter to the desired SVG shape of the
-element. However, the positioning of elements in a visualization is
-constrained more strictly than element positioning in typical HTML
-documents, because the content of a visualization is communicated
-through visual features such as position, size, shape, and poximity of
-elements rather than simply through text which can be positioned much
-more freely. For this reason, many elements of a visualization must be
-positioned at specific locations with specific dimensions, which means
-there is very little profit in laying them out with an elaborate
-layout algorithm. Instead, exactly-positioned elements like the
-\elname{<rect>} elements of Bar Series and the \elname{<circle>}
-elements of Point Series are usually positioned directly via their SVG
-attributes.
+elements are calculated by the Layouter, whereas non-laid-out elements
+are ignored during the layout process.  Theoretically, the Layouter
+could be used to position all visualization elements, since all that
+is necessary is to determine a good mapping for each element that maps
+the rectangular bounding box calculated by the Layouter to the desired
+SVG shape of the element. However, the positioning of elements in a
+visualization is constrained more strictly than element positioning in
+typical HTML documents, since the content of a visualization is
+communicated through visual features such as position, size, shape,
+and poximity of elements, rather than simply through text which can be
+positioned much more freely. For this reason, many elements of a
+visualization must be positioned at specific locations with specific
+dimensions, which means there is very little profit in laying them out
+with an elaborate layout algorithm. Hence, exactly-positioned elements
+like the \elname{<rect>} elements of Bar Series and the
+\elname{<circle>} elements of Point Series are usually positioned
+directly via their SVG attributes.
 
 
 Using the Layouter requires a more complex rendering process than
 would be needed if the boundaries of elements would already be known
 before rendering them. The way the Layouter works, elements affecting
-the layout need to be rendered before calculating it, and afterward,
-when the positions and sizes of elements are known, the visualization
-needs to be rerendered in its final form. This leads to the
-three-phased rendering process shown in
-Figure~\ref{fig:RenderProcess}. These three phases are the first
-render phase to render elements affecting the layout, the layout
-phase, and the second render phase to render elements affected by the
-layout. The elements affecting the layout of the visualization are
-mainly laid-out container \elname{<svg>} and \elname{<g>} elements
-containing exactly-positioned child elements. Dynamically-sized
-elements such as \elname{<text>} elements and axes also need to be
-fully rendered in the first render phase. The layout phase is where
-the Layouter calculates the layout of a visualization using the
-layout process described in the following paragraphs. In the second
-render phase, the bounding boxes calculated during the layout phase
-are used to perform a second rendering of the complete visualization.
-Here, every element affected by the layout, i.e. nearly every element,
-is rendered at its final position with its final dimensions. In
-theory, the two render phases could be implemented as separate
-functions, but it is more convenient to just invoke the same render
-function twice and perform some operations only if the boundaries of
-elements have already been calculated.
+the layout need to be pre-rendered in advance, and afterwards, when
+the positions and sizes of elements are known, the visualization needs
+to be rerendered in its final form. This leads to the three-phased
+rendering process shown in Figure~\ref{fig:RenderProcess}. The three
+phases are: 1.\ the First Render phase to render elements affecting
+the layout, 2.\ the Layout Process, and 3.\ the Second Render phase to
+render elements affected by the layout. The elements affecting the
+layout of the visualization are mainly laid-out container
+\elname{<svg>} and \elname{<g>} elements containing exactly-positioned
+child elements. Dynamically-sized elements such as \elname{<text>}
+elements and axes also need to be fully rendered in the First Render
+phase. The Layout Process is where the Layouter calculates the layout
+of a visualization using the process described in the following
+paragraphs. In the Second Render phase, the bounding boxes calculated
+during the Layout Process are used to perform a second rendering of
+the complete visualization. Here, every element affected by the
+layout, i.e. nearly every element, is rendered at its final position
+with its final dimensions. In theory, the two render phases could be
+implemented as separate functions, but it is more convenient to just
+invoke the same render function twice and perform some operations only
+if the boundaries of elements have already been calculated.
+
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
 {diagrams/respvis-render-process.pdf}
 \caption[Render Process When Using the Layouter]{%
-The three phases of the render process when using the RespVis
-Layouter. During the first render phase, every element that affects
+The three phases of the RespVis Layouter's Render Process:
+First Render, Layout Process, and Second Render.
+During the First Render phase, every element which affects
 the layout needs to be rendered. The second phase consists of the
-layout process performed by the Layouter. The layout process includes
-the replication phase in which laid-out SVG elements are replicated
-with \elname{<div>} elements, the layout phase in which these
-\elname{<div>} elements are automatically being laid out by the
-browser, and the synchronization phase in which the bounding boxes of
-the laid out \elname{<div>} elements are being set as
-\attrname{bounds} attributes on the original SVG elements. In the
-second render phase, after the layout of the visualization has been
-calculated, the calculated boundaries are used to rerender all
-elements of the visualization at their final positions with their
-final dimensions. \imgcredit{Image created by the author of this
-thesis using \href{https://diagrams.net/}{diagrams.net}.} }
+Layout Process performed by the Layouter. The Layout Process includes
+three steps: a) Replication, in which laid-out SVG elements are replicated with
+\elname{<div>} elements, b) Layout, in which these \elname{<div>}
+elements are automatically laid out by the browser, and
+c) Synchronization, in which the bounding boxes of the laid out
+\elname{<div>} elements are set as \attrname{bounds} attributes on the
+original SVG elements. In the Second Render phase, the calculated
+boundaries are used to re-render all elements of the visualization in
+their final positions with their final dimensions.
+\imgcredit{Image created by the author of this
+thesis using \href{https://diagrams.net/}{diagrams.net}.}
+}
 \label{fig:RenderProcess}
 \end{figure}
 
+
 The Layouter Module can be found in the \code{layouter.ts} file of the
 Core package. The main function of this module is the
-\code{layouterCompute} function which implements the three-phased
-layout process shown in Figure~\ref{fig:RenderProcess}. The three
-phases are:
+\code{layouterCompute} function which implements the three-stepped
+Layout Process shown in the middle of
+Figure~\ref{fig:RenderProcess}. The three steps are:
 \begin{enumerate}
-\item Replication: The structure of the SVG document that shall be
-  laid out is replicated with HTML \elname{<div>} elements, because
-  only HTML elements can be affected by CSS-based positioning. These
+\item[a)] Replication: The structure of the SVG document to be laid
+  out is replicated with HTML \elname{<div>} elements, because only
+  HTML elements can be affected by CSS-based positioning. These
   elements are referred to as \enquote{layout elements} and have the
   same classes and \attrname{data-*} attributes as the SVG elements
   they are replicating.
 
-\item Layout: The replicated layout elements are affected by CSS rules
-  to configure their positioning and are automatically laid out by
-  browsers. If the selectors of CSS rules used to style SVG elements
-  only select them using classes and \attrname{data-*} attributes, the
-  layout of these elements can be directly configured in these rules,
-  because the corresponding layout elements have the same classes and
-  \attrname{data-*} attributes and these CSS rules will also be
-  applied to them.
+\item[b)] Layout: The replicated layout elements are affected by CSS
+  rules to configure their positioning and are automatically laid out
+  by browsers. If the selectors of CSS rules used to style SVG
+  elements only select them using classes and \attrname{data-*}
+  attributes, the layout of these elements can be directly configured
+  in these rules, since the corresponding layout elements have the
+  same classes and \attrname{data-*} attributes.
 
-\item Synchronization: In this phase, the positions of layout elements
-  are synchronized with their respective SVG elements. The calculated
-  bounding boxes of layout elements are set as \attrname{bounds}
-  attributes on SVG elements to make the boundary information
-  available in subsequent renderings for the positioning of nested
-  elements. In addition, the Layouter sets different default
+\item[c)] Synchronization: In this step, the positions of layout
+  elements are synchronized with their respective SVG elements. The
+  calculated bounding boxes of layout elements are set as
+  \attrname{bounds} attributes on SVG elements to make the boundary
+  information available in subsequent renderings for the positioning
+  of nested elements. In addition, the Layouter sets different default
   attributes on different types of SVG elements that aim to represent
   the boundaries of individual elements.
 \end{enumerate}
@@ -525,23 +523,25 @@ layout elements can be seen in Figure~\ref{fig:LayouterReplication}.
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
 {diagrams/respvis-layouter-replication.pdf}
 \caption[Replication of an SVG Document via Layouter]{%
 The replicated layout element structure of an SVG document. Every SVG
-element has a corresponding layout element that has the same classes
+element has a corresponding layout element with the same classes
 and \attrname{data-*} attributes. In addition to the classes of the
 original SVG element, every layout element also has the \code{layout}
 class to allow specific targeting of layout elements via CSS
-selectors. \imgcredit{Image created by the author of this thesis using
-\href{https://diagrams.net/}{diagrams.net}.} }
+selectors.
+\imgcredit{Image created by the author of this thesis using
+\href{https://diagrams.net/}{diagrams.net}.}
+}
 \label{fig:LayouterReplication}
 \end{figure}
 
 
 The size of dynamically-sized elements depends on the size of their
-content, and since layout elements exist separately from their SVG
-elements and can not access their content, a manual solution had to be
+content. Since layout elements exist separately from their SVG
+elements and cannot access their content, a manual solution had to be
 implemented to set the size of layout elements to the content size of
 their SVG elements when required. \elname{<text>} elements are a good
 example of dynamically-sized elements, because their size is rarely
@@ -550,59 +550,58 @@ content. The custom CSS \cssname{--fit-width} and
 \cssname{--fit-height} properties were introduced to activate the
 manual copying of dimensions from SVG elements to their layout
 elements. These boolean properties can be set in CSS rules and are
-checked during the replication phase via the
+checked during the Replication step via the
 \code{window.getComputedStyle} method. If at least one of these
 properties is set to \code{true}, the dimensions of the SVG element
 are calculated with the \code{Element.getBoundingClientRect} method
-are set as \cssname{width} or \cssname{height} properties in the
+and are set as \cssname{width} or \cssname{height} properties in the
 \attrname{style} attribute on the corresponding layout element. This
 way, layout elements will have the same sizes as their SVG elements
 and can be properly used in the calculation of the overall layout.
 
 Layout elements are positioned according to the layout information
-specified in CSS rules during the layout phase. Since layout elements
+specified in CSS rules during the Layout step. Since layout elements
 are merely \elname{<div>} elements which have been styled via CSS rules,
 the browser can position them automatically via its integrated layout
 engine, which happens immediately after they have been created or
-updated in the replication phase. After the layout phase, the final
+updated in the Replication step. After the Layout step, the final
 bounding boxes of layout elements can be calculated and used for
 further operations.
 
-In the synchronization phase of the layout process, the
-Layouter calculates the bounding boxes of all layout
-elements and sets this boundary information as attributes on the
-corresponding SVG elements. Bounding boxes of layout elements are
-calculated relative to their parent elements using the
-\code{elementRelativeBounds} utility function, converted to their
-string representations via the \code{rectToString} utility function,
-and set as \attrname{bounds} attributes on corresponding SVG elements.
-These \attrname{bounds} attributes can then be deserialized to
-\code{Rect} objects whenever the bounding boxes of SVG elements are
-needed for calculations in subsequent renderings. In addition to
-setting \attrname{bounds} attributes, the Layouter also sets
-specific default attributes on different types of SVG elements in an
-attempt to automatically fit them into their bounding boxes without
-manually having to set attributes in subsequent renderings. If the
-Layouter would not set these default attributes, they would
-have to be set manually on every laid-out element in the rendering
-functions, which would be less convenient and lead to duplicated code
-in various places. For those SVG elements which can be mapped directly
-to rectangular areas, such as \elname{<svg>} and \elname{<rect>}
-elements, the \attrname{x}, \attrname{y}, \attrname{width}, and
-\attrname{height} attributes are set to the values of the element's
-bounding boxes. SVG shape elements that have explicit sizes and
-positions but are not rectangular, such as \elname{<circle>} and
-\elname{<line>} elements, also receive attributes that fit them into
-their boundaries in a way that was deemed most sensible. Other SVG
-elements that are not explicitly sized, such as \elname{<g>} and
-\elname{<text>} elements, are merely moved to the correct positions by
-setting their \attrname{transform} attributes to translations so that
-their top-left corners align with the top-left corners of their
-bounding boxes. The Layouter does not automatically
-reposition exactly-positioned elements based on the changed boundary
-of the composite \elname{<svg>} or \elname{<g>} elements containing
-them, so this has to be implemented manually in the render functions
-of various components.
+In the Synchronization step of the Layout Process, the Layouter
+calculates the bounding boxes of all layout elements and sets this
+boundary information as attributes on the corresponding SVG
+elements. Bounding boxes of layout elements are calculated relative to
+their parent elements using the \code{elementRelativeBounds} utility
+function, converted to their string representations via the
+\code{rectToString} utility function, and set as \attrname{bounds}
+attributes on corresponding SVG elements.  These \attrname{bounds}
+attributes can then be deserialized to \code{Rect} objects whenever
+the bounding boxes of SVG elements are needed for calculations in
+subsequent renderings. In addition to setting \attrname{bounds}
+attributes, the Layouter also sets specific default attributes on
+different types of SVG elements in an attempt to automatically fit
+them into their bounding boxes without manually having to set
+attributes in subsequent renderings. If the Layouter would not set
+these default attributes, they would have to be set manually on every
+laid-out element in the rendering functions, which would be less
+convenient and lead to duplicated code in various places. For those
+SVG elements which can be mapped directly to rectangular areas, such
+as \elname{<svg>} and \elname{<rect>} elements, the \attrname{x},
+\attrname{y}, \attrname{width}, and \attrname{height} attributes are
+set to the values of the element's bounding boxes. SVG shape elements
+which have explicit sizes and positions but are not rectangular, such
+as \elname{<circle>} and \elname{<line>} elements, also receive
+attributes that fit them into their boundaries in a way that was
+deemed most sensible. Other SVG elements which are not explicitly
+sized, such as \elname{<g>} and \elname{<text>} elements, are merely
+moved to the correct positions by setting their \attrname{transform}
+attributes to translations so that their top-left corners align with
+the top-left corners of their bounding boxes. The Layouter does not
+automatically reposition exactly-positioned elements based on the
+changed boundary of the composite \elname{<svg>} or \elname{<g>}
+elements containing them, so this has to be implemented manually in
+the render functions of various components.
 
 
 
@@ -1194,22 +1193,22 @@ linear scale is used to map quantitative values, but visualization
 authors can choose other forms of interpolation, such as logarithmic
 interpolation via a logarithmic scale.
 
-In RespVis, the Bar Series module renders collections of \elname{<rect>}
-elements representing the bars in a Bar Chart's draw area, and they
-are the lowest-level components required for rendering Bar
-Charts. Their implementation is located in the \code{series-bar.ts}
-file of the Bar package and contains the \code{SeriesBar} interface
-describing data objects to configure Bar Series, the
-\code{seriesBarData} function to create these data objects from
-partial data objects, and the \code{seriesBarRender} function to
+In RespVis, the Bar Series module renders collections of
+\elname{<rect>} elements representing the bars in a Bar Chart's draw
+area, and they are the lowest-level components required for rendering
+Bar Charts. Their implementation is located in the
+\code{series-bar.ts} file of the Bar package and contains the
+\code{SeriesBar} interface describing data objects to configure Bar
+Series, the \code{seriesBarData} function to create these data objects
+from partial data objects, and the \code{seriesBarRender} function to
 render Bar Series. The \code{SeriesBar} interface inherits Tooltip
 configuration properties from the \code{SeriesConfigTooltips}
 interface described in Section~\ref{sec:TooltipPackage} and adds
 additional properties to configure the used categories and values, the
 scales to map them to spatial dimensions, whether or not bars should
 be oriented vertically or horizontally, and properties to configure
-their colors and keys. After the desired \code{SeriesBar} data
-objects have been created and bound to \elname{<svg>} or \elname{<g>}
+their colors and keys. After the desired \code{SeriesBar} data objects
+have been created and bound to \elname{<svg>} or \elname{<g>}
 elements, the \code{seriesBarRender} function can be used to render
 Bar Series on these elements. During rendering, the bound
 \code{SeriesBar} data object is transformed into an array of
@@ -1217,15 +1216,16 @@ Bar Series on these elements. During rendering, the bound
 performed to render the individual bars. The output range of the
 scales used to map categories and values to spatial dimensions is set
 to the dimensions of the Bar Series element's bounding box that has
-been previously calculated and stored in the \attrname{bounds} attribute
-by the Layouter. With these scales, the dimensions of bars are
-calculated, and enter, update, and exit transitions are utilized to
-interpolate them towards these new dimensions, so that changes are easier to track, which leads to an improved
-experience for visualization consumers. As with all other Series, the
-\code{enter}, \code{update}, and \code{exit} events containing the
-respective data join Selections are dispatched on the Series' root
-element and allow the injection of custom behavior into the different
-phases of the Series' data join.
+been previously calculated and stored in the \attrname{bounds}
+attribute by the Layouter. With these scales, the dimensions of bars
+are calculated, and enter, update, and exit transitions are utilized
+to interpolate them towards these new dimensions, so that changes are
+easier to track, which leads to an improved experience for
+visualization consumers. As with all other Series, the \code{enter},
+\code{update}, and \code{exit} events containing the respective data
+join Selections are dispatched on the Series' root element and allow
+the injection of custom behavior into the different phases of the
+Series' data join.
 
 Bar Charts are Cartesian Charts, as discussed in
 Section~\ref{sec:Chart}, which display a Bar Series with optional
