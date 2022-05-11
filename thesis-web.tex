@@ -8,12 +8,12 @@ chapter introduce the web's core technologies: HTML for content, CSS
 for presentation, and JavaScript (JS) for behavior. Next, TypeScript
 is introduced, and the different technologies to embed graphics in web
 pages are discussed. Due to the importance of layouting in this work,
-three different forms of layout engines are compared. Finally, the
-concept of responsive web design is summarized. Since there are many
+three different forms of layout engine are compared. Finally, the
+concept of responsive web design is explained. Since there are many
 things to examine, none of the following sections goes into great
-detail, the aim is to give a summary of the concepts that are
-introduced. For more in-depth information, works referenced in the
-sections below should be consulted.
+detail. The aim is to give a summary of the concepts, for more
+in-depth information, the works referenced in the sections below
+should be consulted.
 
 
 \section{HyperText Markup Language (HTML)}
@@ -21,9 +21,9 @@ sections below should be consulted.
 
 HTML is a document markup language for documents which are to be
 displayed in web browsers. The original proposal and implementation in
-1989 came from Tim Berners-Lee who was a contractor at CERN at the
+1989 came from Tim Berners-Lee, who was a contractor at CERN at the
 time \parencite{TBLProposal}. Over the years, the standard was further
-developed by a range of different entities like the CERN and the
+developed by a range of different entities like CERN and the
 Internet Engineering Task Force (IETF). Nowadays, HTML exists as a
 continuously evolving living standard without specific version
 releases, which is maintained by the Web Hypertext Application
@@ -44,7 +44,7 @@ cases, including:
   closest standard elements.
 
 \item Using \attrname{data-*} attributes to decorate elements with
-  additional data which can be used by scripts. The HTML standard
+  additional data, which can be used by scripts. The HTML standard
   guarantees that these attributes are ignored by browsers.
 
 \item Embedding custom data using \elname{<script type="">} elements,
@@ -62,7 +62,7 @@ Cascading Style Sheets (CSS) apply styling to HTML elements,
 effectively separating presentation from content. In earlier versions
 of HTML \parencite{HTML32}, elements like \elname{<strong>} and
 \elname{<em>} muddied the boundary between presentation and content.
-
+%
 A CSS style sheet can either be embedded directly in HTML documents
 using a \elname{<style>} element or can be defined externally and
 linked to using a \elname{<link>} element. This characteristic of
@@ -71,6 +71,7 @@ great flexibility because multiple documents with different content
 can reuse the same presentation by linking to the same CSS file.
 Conversely, alternative style sheets can be applied to the same HTML
 content to achieve a different styling.
+
 
 CSS was initially proposed by \textcite{CSSProposal} and standardized
 into CSS1 by the W3C in 1996 \parencite{CSS1}. Throughout its history,
@@ -126,8 +127,9 @@ Pattern & Matches \\
 \bottomrule
 \end{tabularx}
 \caption[CSS Selector Syntax]{
-A summary of the CSS 2.1 selector syntax.
-\imgcredit{Table created by the author of this thesis with data from \parencite{CSSSelectors3}.}
+A summary of the CSS Selectors Level 3 syntax.
+\imgcredit{Table created by the author of this thesis
+with data from \parencite{CSSSelectors3}.}
 }
 \label{tab:CSSSelectorSyntax}
 \end{table}
@@ -145,17 +147,18 @@ specificity, the one defined last in the document tree will overwrite
 all previous ones.
 
 Sizes of CSS properties can be expressed in many different units.
-Absolute units like px (pixels), cm (centimeters), and mm
-(millimeters) can be used to express fixed sizes and properties
-declared in such units will result in these exact sizes in the
-resulting output. Relative units like em (relative to font size), rem
-(relative to root font size), and \% (relative to parent) are relative
-to some other property. In general, relative units are better suited
-for sizing properties on screens because screen sizes can vary greatly
-and absolute units are better suited for sizing properties on output
-media whose sizes are more fixed, such as print. CSS properties that
-affect the layout of elements should preferably be specified in rem
-units.
+Absolute units like \code{px} (pixels), \code{cm} (centimeters), and
+\code{mm} (millimeters) can be used to express fixed sizes and
+properties declared in such units will result in these exact sizes in
+the resulting output. Relative units like \code{em} (relative to font
+size), \code{rem} (relative to root font size), \code{\%} (relative to
+parent), \code{vw} (relative to the viewport width), and \code{vh}
+(relative to the viewport height) are relative to some other
+property. In general, relative units are better suited for sizing
+properties on screens because screen sizes can vary greatly and
+absolute units are better suited for sizing properties on output media
+whose sizes are more fixed, such as print. CSS properties which affect
+the layout of elements are typically specified in \code{rem} units.
 
 
 
@@ -163,13 +166,13 @@ units.
 \label{sec:BoxLayout}
 
 All elements in an HTML document are laid out as boxes. The CSS box
-model specifies how every element is wrapped in a rectangular box and
-every box is described by its content and optional surrounding margin,
-border, and padding areas. Margins are used to specify invisible
-spacing between boxes. The border provides a visible frame around the
-content of a box. The padding provides invisible spacing between the
-content and the border. A visual representation of these properties
-can be seen in Figure~\ref{fig:BoxModel}.
+model specifies how every element is wrapped in a rectangular box.
+Every box is described by its content and optional surrounding
+padding, border, and margin areas. The padding provides invisible
+spacing between the content and the border. The border provides a
+visible frame around the content of a box. Margins are used to specify
+invisible spacing outside of the border. A visual representation of
+these properties can be seen in Figure~\ref{fig:BoxModel}.
 
 \begin{figure}[tp]
 \centering
@@ -252,9 +255,9 @@ items along the main axis of a Flexbox container.
 This section only grazed the surface of what is possible with the
 Flexbox layout module. There are many more useful CSS properties like
 \cssname{flex-grow}, \cssname{flex-shrink}, and \cssname{flex-wrap}.
-For a more detailed look at this topic it is recommended to review the
-specification \parencite{CSSFlexbox} and read the excellent tutorial
-by Chris Coyier \parencite{Coyier-FlexboxGuide}.
+For a more detailed look at this topic, it is recommended to review
+the specification \parencite{CSSFlexbox} and read the excellent
+tutorial by Chris Coyier \parencite{Coyier-FlexboxGuide}.
 
 
 
@@ -347,6 +350,7 @@ other sources like \textcite{GridLayoutInCSS} and
 
 
 
+
 \section{JavaScript (JS)}
 \label{sec:JS}
 
@@ -367,7 +371,7 @@ revolutionary development, because they reverse-engineered Netscape's
 implementation and published their own version of the language for
 Internet Explorer in 1996 \parencite{JSIERelease}. The two
 implementations were noticeably different from one another and the
-uncontested monopoly of the Internet Explorer
+uncontested monopoly of Internet Explorer
 \parencite{BrowserMarketShareEarly} held back standardization efforts
 undertaken by Netscape \parencite{ECMAScript1}. When Firefox was
 released in 2004 \parencite{FirefoxFirstRelease} and Chrome in 2008
@@ -377,23 +381,27 @@ Figure~\ref{fig:BrowserMarketShare}. Galvanized by this new market
 reality, all major browser vendors collaborated on the standardization
 of JavaScript as ECMAScript 5 in 2009 \parencite{ECMAScript5}. Since
 then, JavaScript has been continuously developed and its later
-versions ECMAScript 2015 to 2021
-\parencite{ECMAScript6, ECMAScript7, ECMAScript8, ECMAScript9, ECMAScript10, ECMAScript11, ECMAScript12}
+versions ECMAScript 2015 to 2021 \parencite{ECMAScript6, ECMAScript7,
+  ECMAScript8, ECMAScript9, ECMAScript10, ECMAScript11, ECMAScript12}
 are widely supported.
 
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh / 3]{diagrams/browser-market-share.pdf}
-\caption[Desktop Browser Market Share]{
-  Since their release, Firefox and Chrome have contested the monopoly of the Internet Explorer and continuously gained more market share. 
-  Recently, Chrome seems to be gaining an increasingly strong position within the market. 
-  \imgcredit{Image taken from \textcite{BrowserMarketShare}}}
+\includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
+{diagrams/browser-market-share.pdf}
+\caption[Desktop Browser Market Share]{%
+Since their release, Firefox and Chrome have contested the monopoly of
+the Internet Explorer and continuously gained more market share.
+Recently, Chrome seems to be gaining an increasingly strong position
+within the market.
+\imgcredit{Image taken from \textcite{BrowserMarketShare}.}
+}
 \label{fig:BrowserMarketShare}
 \end{figure}
 
 
-RespVis is a browser-based library which is designed to run within the
+RespVis is a browser-based library, designed to run within the
 JavaScript engine of a browser. It builds heavily on widely supported
 Web APIs, which are JavaScript modules specifically meant for
 development of web pages. These Web APIs are standardized by the W3C
