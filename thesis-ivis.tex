@@ -6,14 +6,14 @@ Information visualization seeks to use interactive graphics to assist
 in the analysis and presentation of abstract information. Information
 visualization builds on capabilities of human visual perception,
 including the rapid scanning, recognition, and recall of visual
-information, as well as the automatic detection of visual patterns. In
-contrast to textual representations of data, the processing of
-well-designed visualizations requires less cognitive effort,
-because it leverages features of the human visual processing system.
-One of these features is \emph{preattentive processing}, whereby
-certain visual attributes such as colors, shapes, and sizes can be
-processed very quickly and without conscious effort
-\parencite{PreattentiveProcessing}.
+information, as well as the automatic detection of visual patterns
+\parencite{Ware-InfoVis-Perception-4Ed}. In contrast to textual
+representations of data, the processing of well-designed
+visualizations requires less cognitive effort, because it leverages
+features of the human visual processing system.  One of these features
+is \emph{preattentive processing}, whereby certain visual attributes
+such as colors, shapes, and sizes can be processed very quickly and
+without conscious effort \parencite{PreattentiveProcessing}.
 
 
 In addition to visuals being easier to assimilate by humans, a purely
@@ -134,13 +134,13 @@ geographic visualization.
 
 The main purpose of a visualization usually lies in either analysis or
 presentation of data. Visualizations that are geared toward analysis
-enable experts to explore unexplored data, whereas
-presentation-focused visualizations aim at explaining results and
-insights of data to everybody. RespVis falls under the latter category
-and aims at creating presentational information visualizations by
-allowing visualization authors to fine-tune various aspects of the
-resulting graphical representation rather than offering a wide range
-of exploratory tools to visualization consumers.   
+enable experts to explore unfamiliar data, whereas
+presentation-focused visualizations aim at communicating results and
+insights of data to a wider audience. RespVis falls under the latter
+category and aims at creating presentational information
+visualizations by allowing visualization authors to fine-tune various
+aspects of the resulting graphical representation rather than offering
+a wide range of exploratory tools.
 
 
 Visualizations presented in an interactive medium do not merely
@@ -220,15 +220,15 @@ a user wants to achieve (user intent).
 The history of information visualization goes back a long time. One of
 its earliest examples dates back to the \nth{10} Century, when an
 unknown astronomer added a chart showing the movements of prominent
-planets to the appendix of \parencite{CommentariiInSomniumScipionis}.
+planets to the appendix of \textcite{CommentariiInSomniumScipionis}.
 Other noteworthy early visualizations include the first occurrence of
-the principle \textcite{VisualDisplayOfQuantitativeInformation} later
-called \enquote{small multiples} in \textcite{RosaUrsina}'s chart
-demonstrating observed changes in sunspots, and what
-\textcite[15]{VisualExplanations} deems to be the first visualization
-of statistical data in \textcite{RomeToledoBook}'s chart displaying
-twelve estimates of the longitudinal distance between Toledo and Rome
-by various astronomers.
+the principle Ed Tufte later called \enquote{small multiples}
+\parencite{VisualDisplayOfQuantitativeInformation} in
+\textcite{RosaUrsina}'s chart demonstrating observed changes in
+sunspots, and what \textcite[15]{VisualExplanations} deems to be the
+first visualization of statistical data in \textcite{RomeToledoBook}'s
+chart displaying twelve estimates of the longitudinal distance between
+Toledo and Rome by various astronomers.
 
 
 
@@ -300,6 +300,7 @@ modern visualizations. \imgcredit{Original appearance in
 
 
 
+
 It would be amiss not to mention Florence Nightingale (1820--1910)
 \parencite{FlorenceNightingale, NightingaleBook} when talking about
 the history of information visualization. She was a British
@@ -310,20 +311,21 @@ in the Crimean War, she realized that a large number of deaths in
 hospitals resulted from preventable diseases which originated in poor
 sanitary conditions. One of her contributions to the field of
 information visualization was the creation of a new type of diagram,
-called a rose diagram or polar-area chart, shown in
+called a rose diagram or polar area chart, shown in
 Figure~\ref{fig:NightingalePolarAreaChart}. She used these charts to
 communicate data she collected on the mortality of soldiers during the
-war and to grab the attention of politicians and the public.
+war and to attract the attention of politicians and the public.
+
 
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\thirdh]
 {images/nightingale.jpg}
-\caption[Polar-Area Chart by Florence Nightingale from 1859]{%
-One of the polar-area charts created by Florence Nightingale in 1859
-to convince people of a need for more sanitary conditions in
-hospitals. It visualizes the causes of mortality for soldiers during
-the Crimean War and demonstrates that a large percentage of patients
+\caption[Polar Area Chart by Florence Nightingale from 1859]{%
+One of the polar area charts created by Florence Nightingale in 1859
+to convince people of the need for better sanitary conditions in
+hospitals. It visualizes the causes of mortality of soldiers during
+the Crimean War and demonstrates that a large number of patients
 died from preventable diseases linked to unsanitary environments.
 \imgcredit{Original appearance in \textcite{NightingaleBook}. Image
 extracted from \textcite{HarvardLibrary} and used under the terms of
@@ -383,9 +385,9 @@ library which enables data-driven transformations of documents. Vega
 and other grammar-based libraries provide a declarative grammar to
 express the visual and interactive characteristics of a visualization.
 Template-based visualization libraries provide higher-level
-template-based interfaces that visualization authors can simply fill
-with data, which makes them very easy to use but can lead to
-limitations.
+template-based interfaces which visualization authors can simply fill
+with data, making them very easy to use but inherently limited in
+scope.
 
 
 
@@ -403,11 +405,11 @@ D3 enables data-driven document transformations allowing developers to
 describe documents as functions of data. As an example, developers can
 define transformations which take a dataset and transform it into a
 basic HTML table or into a more sophisticated visualization as an SVG
-chart. This focus on explicitly defining transformations is well
-suited to dynamic visualizations, because developers have complete
-control over the creation, modification, and removal of elements. It
-also sets D3 apart from other visualization libraries, where
-developers define the desired state of a representation using a
+chart. This focus on explicitly defining transformations is
+well-suited to dynamic visualizations, because developers have
+complete control over the creation, modification, and removal of
+elements. It also sets D3 apart from other visualization libraries,
+where developers define the desired state of a representation using a
 declarative domain-specific language.
 
 In contrast to other visualization libraries, D3 contains no
@@ -441,10 +443,10 @@ applied to API design it means that superfluous functions in an API
 should be avoided. As an example, the background color of a circle
 element can already be set with the generic \code{Selection.attr}
 method to set the \attrname{background-color} attribute of all
-elements in a Selection. Adding an additional
-\code{backgroundColor} method would violate the principle of
-parsimony because it would introduce a special method to achieve
-something that was already achievable.
+elements in a Selection. Adding an additional \code{backgroundColor}
+method would violate the principle of parsimony, because it would
+introduce a special method to achieve something that was already
+achievable.
 
 Method chaining is a popular syntax which allows functions to be
 chained after one another. The use of method chaining avoids having to
@@ -593,30 +595,33 @@ dimensions, and \code{d3-axis} to render scales as human-readable
 axes.
 
 
+
+
 \subsection{Grammar-Based Visualization Libraries}
 
-Vega \parencite{Vega} is a library consisting of a grammar to describe
-interactive graphics and a parser which translates specifications
-written in this grammar into static images or web-based views built on
-SVG documents or the Canvas Web API. An interactive visualization in
-Vega is fully described by a specification written in Vega's grammar.
-This grammar is essentially a domain-specific language designed for
-the declarative specification of interactive graphics. Its syntax is
-based on the easy-to-read JavaScript Object Notation (JSON), which is
-among the most frequently used textual serialization formats. Vega
-builds on previous research in the field of declarative visualization
-design \parencite{GrammarOfGraphics}. In contrast to previous work, it
-contains powerful capabilities to declaratively describe interactions
-\parencite{ReactiveVega} in addition to describing visual appearance.
+Vega \parencite{Vega} is a library consisting of two parts: a grammar
+to describe interactive graphics and a parser which translates
+specifications written in this grammar into static images or web-based
+views built on SVG documents or the Canvas Web API. An interactive
+visualization in Vega is fully described by a specification written in
+Vega's grammar. This grammar is essentially a domain-specific language
+designed for the declarative specification of interactive
+graphics. Its syntax is based on the easy-to-read JavaScript Object
+Notation (JSON), which is among the most frequently used textual
+serialization formats. Vega builds on previous research in the field
+of declarative visualization design \parencite{GrammarOfGraphics}. In
+contrast to previous work, it also contains powerful capabilities to
+declaratively describe interactions \parencite{ReactiveVega} in
+addition to describing visual appearance.
 
 The visual aspects of a visualization are described in a grammar
 similar to the Grammar of Graphics defined by
 \textcite{GrammarOfGraphics}. At its top level, a Vega specification
 contains properties to configure sizing and padding of the container
 of a visualization. Every specification also contains a data section,
-which either defines data or specifies where to load it from. The
-Vega grammar also supports various forms of data transformation which
-can successively be applied to a dataset to perform various
+which either defines data or specifies where to load it from. The Vega
+grammar 2supports various forms of data transformation which can
+successively be applied to a dataset to perform various
 transformations like filtering, deriving additional fields, or
 deriving additional datasets. In a majority of cases, the defined data
 will consist of abstract information which is then mapped to visual
@@ -626,9 +631,9 @@ abstract values to visual properties. They can broadly be categorized
 into quantitative scales which map quantitative inputs to quantitative
 outputs, discrete scales which map discrete inputs to discrete
 outputs, and discretizing scales which map quantitative inputs to
-discrete outputs. For spatially encoded dimensions, scales can
-be visualized as axes, whereas non-spatial encodings such as encodings
-as colors, sizes, or shapes can be visualized as legends.
+discrete outputs. For spatially encoded dimensions, scales can be
+visualized as axes, whereas non-spatial encodings such as encodings as
+colors, sizes, or shapes can be visualized as legends.
 
 At the core of every visualization lies the encoding of data as visual
 primitives, which is achieved in Vega via marks. Marks use scales to
@@ -705,7 +710,7 @@ display a tooltip when hovering over bars.
   caption={[Bar Chart with Tooltip in Vega]%
 The necessary additions to the static bar chart specification in
 Listing~\ref{list:VegaStaticBarChart} to display a tooltip when
-hovering over bars. It demonstrates the basic functionality of signals
+hovering over bars. They demonstrate the basic functionality of signals
 in Vega. When the mouse hovers over a \code{rect} mark, the tooltip
 signal will receive the value of the \code{rect}'s bound data
 record. The \code{tooltip} signal will be reset to an empty object when the
@@ -739,12 +744,14 @@ Vega-Lite more convenient for quick authoring of visualizations, since
 many of the details which need to be explicitly stated in a Vega
 specification can be omitted. In those cases where the derived default
 configurations are not suitable, Vega-Lite also offers the possibility
-to override them. Since Vega-Lite specifications are simply compiled
-into Vega ones, it is a sensible choice to use Vega-Lite as a primary
-tool to describe visualizations, and switch to Vega for more exotic
-cases which are not easily achievable in Vega-Lite. Additionally,
-tools like \textcite{TechniquesForFlexibleRespVisDesign} simplify
-designing responsive versions of Vega-Lite visualizations by allowing
+to override them.
+
+Since Vega-Lite specifications are simply compiled into Vega ones, it
+is a sensible choice to use Vega-Lite as a primary tool to describe
+visualizations, and switch to Vega for more exotic cases which are not
+easily achievable in Vega-Lite. Additionally, tools like
+\textcite{TechniquesForFlexibleRespVisDesign} simplify designing
+responsive versions of Vega-Lite visualizations by allowing
 visualization authors to preview and edit multiple responsive versions
 at the same time in a convenient user interface. To illustrate the
 difference between a Vega and a Vega-Lite specification,
@@ -806,11 +813,11 @@ templates for possible types of visualizations and allowing
 visualization authors to customize them. These types of visualization
 libraries are easier to use than D3 or Vega because they offer a
 concise form of configuration which does not require authors to have
-detailed knowledge over the underlying rendering technology or
-complex, non-standardized domain specific languages. Even though these
-types of libraries are usually flexible enough to create a huge range
-of visualizations, at some point authors may run into limitations.
-Some of these limitations can only be worked around by writing custom
+detailed knowledge of the underlying rendering technology or complex,
+non-standardized domain specific languages. Even though these types of
+libraries are usually flexible enough to create a huge range of
+visualizations, at some point authors may run into limitations.  Some
+of these limitations can only be worked around by writing custom
 source code, which requires a deep understanding of the underlying
 library. This effectively eliminates the ease-of-use benefit of these
 types of libraries for authors who run into these limitations.
@@ -872,8 +879,8 @@ restrictions, amCharts has a free license for users who are
 comfortable with an attribution logo on their visualizations, and
 Highcharts offers a free license option for non-profit, educational
 and personal applications. Nine of the libraries implement an
-SVG-based renderer, two of which (ECharts and D3FC) also offer
-alternative rendering to \elname{<canvas>} elements (D3FC also via
+SVG-based renderer, two of which (ECharts and D3FC) also offer the
+alternative of rendering to \elname{<canvas>} elements (D3FC also via
 WebGL) for high-performance scenarios, and only ChartJS solely targets
 \elname{<canvas>}-based rendering. Eight libraries are very actively
 maintained with most of them showing development activity within the
@@ -883,9 +890,9 @@ to their historic and thematic relevance and because they are still
 widely used.
 
 Template-based visualization libraries have a strong inclination
-towards designing their APIs according to principles of declarative
-programming. APIs following these principles allow authors to
-describe a desired state they want the underlying system to be in.
+towards designing their APIs according to the principles of
+declarative programming. APIs following these principles allow authors
+to describe a desired state they want the underlying system to be in.
 This is in strong contrast to the typical imperative way of designing
 APIs in which authors are instead given a set of tools to query and
 modify a system's state. The difference can be summarized in simple
@@ -901,25 +908,25 @@ that they frequently only provide high-level access to a system and
 that more specific use cases might not be achievable if they can not
 be expressed in the domain-specific language defined by the API. In
 many cases, it makes sense to provide additional imperative APIs for
-developers which require a lower level of access to the system to
+developers who require a lower level of access to the system to
 implement functionality not achievable via the declarative parts of
 the interface.
 
 All of the evaluated libraries, except D3FC, expose declarative
-interfaces in the form of nested configuration objects which are used
+interfaces in the form of nested configuration objects, which are used
 to specify the characteristics of individual visualizations. Apart
 from Chartist, all those libraries feature generic high-level creation
 functions. These functions create charts from declarative
-configuration objects, which allow the specification of different
-forms of visualization for different data dimensions. This type of
-interface is demonstrated by the Highcharts code in
+configuration objects, allowing the specification of different forms
+of visualization for different data dimensions. This type of interface
+is demonstrated by the Highcharts code in
 Listing~\ref{list:Highcharts}. Generic chart creation functions seem
 to correlate with the ability to dynamically change the type of
 visualization. Chartist, on the other hand, provides separate chart
 creation functions for each type of chart, and it is not possible to
 alter the type of chart after it has been created. Another limitation
 which may originate from partitioning the API by chart type is that
-mixed charts which combine multiple forms of visualization in one
+mixed charts combining multiple forms of visualization into one
 composite visualization cannot be expressed.
 
 
@@ -1008,24 +1015,24 @@ can be affected by CSS. The styling of visualizations with CSS is
 powerful, because it leads to a separation of concerns and
 visualization authors can make use of CSS-inherent mechanisms to
 configure responsive styles. Unfortunately, CSS-based styling is
-inherently limited because only CSS properties representing
-presentational SVG attributes can be applied on SVG elements, as
+inherently limited, because only CSS properties representing
+presentational SVG attributes can be applied to SVG elements, as
 described in Section~\ref{sec:SVG}.
 
 To responsively configure other visualization characteristics, such as
-their type, data, and layout, visualization authors have to resort to
-configuration mechanisms offered by the libraries. Four libraries
+their type, data, and layout, visualization authors have to rely on
+the configuration mechanisms offered by the libraries. Four libraries
 (Highcharts, ApexCharts, Chartist, and amCharts) provide the
 possibility to specify rule-based responsive configurations as part of
 their declarative interfaces, illustrated in the Highcharts example in
 Listing~\ref{list:HighchartsResponsive}. These declarative rules
 consist of a condition part which specifies when to apply the rule,
-and a configuration part which specifies the configuration options
-which should be set when applying the rule. Even though this is a
-convenient form of responsive configuration, if the desired conditions
-can not be expressed via the provided declarative properties, authors
-have to fall back to more generic mechanisms which are also applicable
-to other libraries. The mechanisms for responsive configuration in the
+and a configuration part which specifies the configuration options to
+be set when the rule is applied. Even though this is a convenient form
+of responsive configuration, if the desired conditions can not be
+expressed via the provided declarative properties, authors have to
+fall back to more generic mechanisms which are also applicable to
+other libraries. The mechanisms for responsive configuration in the
 other libraries are more generic, because they do not offer these
 configurations as part of their declarative interfaces. This means
 that developers need to trigger responsive configurations themselves
