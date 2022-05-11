@@ -1463,7 +1463,7 @@ been manually displaced to not cover the legend.
 
 \subsection{Stacked Bar Modules}
 
-Stacked bar charts are multi-series bar charts in which individual
+Stacked bar charts are multi-series bar charts, in which individual
 series of bars are rendered as stacks rather than as clusters. Since
 the bars of stacked bar charts do not share a common baseline, these
 charts are not well-suited for comparing individual subcategories
@@ -1577,21 +1577,21 @@ better compare subcategory contributions to category totals.
 
 
 
+
 \section{Line Package}
 
 Line charts show trends in data by plotting individual data records as
-regularly-spaced markers that are connected by lines. The variables
-used to position markers can be of any type as long as they can be
-spatially encoded via scales. Usually, continuous scales are used to
-map abstract variables to marker positions, but depending on the
+regularly-spaced markers connected by lines. The variables used to
+position markers can be of any type as long as they can be spatially
+encoded via scales. Usually, continuous scales are used to map
+abstract variables to marker positions, but depending on the
 variable's data types, any suitable type of scale that maps into the
-respective axis' range can be used. It can be distinguished between
-single-series and multi-series line charts, where single-series line
-charts visualize two-dimensional data via a single line, and
-multi-series line charts visualize multi-dimensional data via multiple
-lines. In multi-series line charts, every individual line represents a
-different variable and is usually uniquely colored. This color
-encoding is frequently visualized via a legend.  
+respective axis' range can be used. Single-series line charts
+visualize two-dimensional data via a single line, and multi-series
+line charts visualize multi-dimensional data via multiple lines. In
+multi-series line charts, each line represents a different variable
+and is usually given a unique color. This color encoding is frequently
+visualized via a legend.
 
 The Line package is located in the \code{src/lib/line/} directory of
 the RespVis library and contains modules to render Line Series, Line
@@ -1600,15 +1600,14 @@ Charts, and Line Chart Windows. A Line Series renders a collection of
 points are calculated by mapping arrays of x and y values into the
 bounding box of the Series' root element via x and y scales. Line
 Series support rendering multiple polylines by specifying multiple
-arrays of y values that can all be mapped via the same scale. The
+arrays of y values which can all be mapped via the same scale. The
 colors of individual polylines are specified via style classes.
 Individual \elname{<path>} elements are rendered via a data join using
 an array of data objects created by transforming the bound Series data
-object. Just like with other Series, this data join can be customized
-via custom \code{enter}, \code{update}, and \code{exit} event
-listeners. 
+object. As with other Series, the data join can be customized via
+custom \code{enter}, \code{update}, and \code{exit} event listeners.
 
-Line Charts are Cartesian Charts that contain a Line Series, multiple
+Line Charts are Cartesian Charts which contain a Line Series, multiple
 optional Point Series for the markers of individual lines, and
 optional labels for these markers. Additionally, if a Line Chart
 renders multiple lines and color-encodes them, a Legend is rendered by
@@ -1616,23 +1615,6 @@ the Line Chart. Marker labels and tooltips can be configured via the
 Chart's data object. Furthermore, Line Charts attach mouse event
 listeners to lines, markers, and legend items to highlight related
 elements when hovering over one of them.
-
-Line Chart Windows wrap a Line Chart into a Layouter, handle their
-render process so that their elements can be laid out with CSS, and
-decorate them with a Toolbar. By default, the Toolbars of Line Chart
-Windows only contain an SVG Download Tool because only a limited
-number of Tools have been developed so far, and they are not
-necessarily applicable to Line Charts. Depending on the type of data
-visualized by a Line Chart, a Nominal Filtering Tool could be added to
-the Toolbar. Once additional tools for different types of data, like a
-tool to filter quantitative values, have been developed, they could
-also be added to a Line Chart's Toolbar. Example source code to create
-the scalable Line Chart Window shown in
-Figure~\ref{fig:LineChartWindow} can be found in
-Listing~\ref{list:LineChartWindow}.
-
-
-
 
 
 \begin{samepage}
@@ -1660,6 +1642,24 @@ function.
 ]{listings/line-chart-window.js}
 \end{samepage}
 
+
+
+Line Chart Windows wrap a Line Chart into a Layouter, handle their
+render process so that their elements can be laid out with CSS, and
+decorate them with a Toolbar. By default, the Toolbars of Line Chart
+Windows only contain an SVG Download Tool, because only a limited
+number of Tools have been developed so far, and they are not
+necessarily applicable to Line Charts. Depending on the type of data
+visualized by a Line Chart, a Nominal Filtering Tool could be added to
+the Toolbar. Once additional tools for different types of data, like a
+tool to filter quantitative values, have been developed, they could
+also be added to a Line Chart's Toolbar. Example source code to create
+the scalable Line Chart Window shown in
+Figure~\ref{fig:LineChartWindow} can be found in
+Listing~\ref{list:LineChartWindow}.
+
+
+
 \begin{figure}[tp]
 \centering
 \includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
@@ -1672,12 +1672,16 @@ Listing~\ref{list:LineChartWindow}.
 \label{fig:LineChartWindow}
 \end{figure}
 
+
+
+
+
 \section{Point Package}
 
 Point charts, also commonly known as scatter charts or scatter plots,
 show the relationship between two variables by plotting them as points
 in a Cartesian coordinate system. Each of the two variables determines
-a point's position on one of the coordinate system's two Axes, and
+a point's position on one of the coordinate system's two axes, and
 typically, these variables contain quantitative data. However, the
 data type of the variables used to position points is not relevant, as
 long as their values can be mapped to spatial dimensions via scales.
@@ -1737,9 +1741,9 @@ function.
 Point Chart Windows wrap a Point Chart into a Layouter,
 handle the nested Chart's render process so that their elements can be
 laid out with CSS, and decorate them with a Toolbar. Currently, the
-Toolbars of Point Chart Windows only contain SVG Download Tools
+Toolbars of Point Chart Windows only contain SVG Download Tools,
 because only a limited number of Tools, not suited for application on
-Point Charts, have been developed so far. Further Tools that can also
+Point Charts, have been developed so far. Further Tools which can also
 be applied to Point Charts, such as Zoom and Quantitative Filter
 Tools, are planned for development, and once these are available, they
 will be added to the default Tools attached to the Toolbars of Point
