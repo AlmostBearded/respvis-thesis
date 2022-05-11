@@ -1,7 +1,7 @@
 \chapter{Outlook and Future Work}
 \label{chap:Outlook}
 
-Many things could still be done to the RespVis library that would not
+Many things could still be done to the RespVis library which would not
 change its core mechanisms, but would improve both the visualization
 consumer's and visualization author's experience. One of the most
 apparent improvements would be the addition of further Series, Charts,
@@ -11,15 +11,16 @@ heatmaps, small multiples, and other charts. In addition to supporting
 more types of charts, the RespVis library would benefit from
 additional tools which could be added to the Toolbars of Chart Windows
 to provide easy access to supplementary operations like interval-based
-numerical filtering and zooming. The improvements that could be made
-to already existing functionality include improving interactions via
-the application of Delaunay triangulation
-\parencite{Delaunay,DelaunayAlgorithms} to find the closest
-interactable element to the cursor position, improving downloaded SVGs
-through optimizing and formatting their document contents, and
-improving responsive styling via the application of the newly proposed
-CSS Container Queries \parencite{CSSContainment3} when they become
-available in browsers.
+numerical filtering and zooming.
+%
+Improvements which could be made to already existing functionality
+include improving interactions via the application of Delaunay
+triangulation \parencite{Delaunay,DelaunayAlgorithms} to find the
+closest interactable element to the cursor position, improving
+downloaded SVGs through optimizing and formatting their document
+contents, and improving responsive styling via the application of the
+newly proposed CSS Container Queries \parencite{CSSContainment3} when
+they become available in browsers.
 
 The layouting of SVG elements could be improved by separating
 visualizations into different <div> elements that can be natively laid
@@ -44,20 +45,12 @@ handle the Layouter's render process. The creation of custom
 visualizations could be simplified by introducing generic Chart
 Windows that would enable the definition of visualizations using a
 data structure potentially similar to visualization grammars like Vega
-\parencite{Vega}.
-% KA TODO or Cicero or Vega-Lite ??
-The data structure of generic Chart Windows would have to include the
-actual abstract data that should be visualized and define the
-transformations of this data into scales, Axes, Legends, and Series.
-During rendering, the render functions of such generic Chart Windows
-could then create custom visualizations to reflect the configuration
-stored in these data structures. In addition to simplifying the
-creation of custom visualizations, generic Chart Windows would also
-enable responsively changing a visualization's encoding, like, for
-example, turning Point Charts into Heatmap Charts.
-
-
-% KA TODO  small multiples?
-
-
-
+\parencite{Vega}. The data structure of generic Chart Windows would
+have to include the actual abstract data that should be visualized and
+define the transformations of this data into scales, Axes, Legends,
+and Series. During rendering, the render functions of such generic
+Chart Windows could then create custom visualizations to reflect the
+configuration stored in these data structures. In addition to
+simplifying the creation of custom visualizations, generic Chart
+Windows would also enable responsively changing a visualization's
+encoding, like, for example, turning Point Charts into Heatmap Charts.
