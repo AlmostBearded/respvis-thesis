@@ -616,7 +616,7 @@ the render functions of various components.
 Axes are implemented in the \code{axis.ts} Axis module in the Core
 package and are used to visualize scales that map abstract values to
 spatial dimensions. Currently, only Cartesian axes, distinguished by
-their position relative to a visualization's draw area, are provided
+their position relative to a visualization's drawing area, are provided
 by RespVis, since only Cartesian Charts have been implemented so
 far. Furthermore, the implementation has so far been focused on Left
 and Bottom axes, because they are the most commonly encountered types
@@ -729,24 +729,24 @@ The rendering of Cartesian Charts is split into two functions, which
 have to be called separately, because not all parts of a Cartesian
 Chart can be rendered simultaneously. The general structure of a Chart
 must be rendered before anything else can be rendered, since this
-includes the draw area container element into which individual Series
+includes the drawing area container element into which individual Series
 are rendered. A Chart's Axes need fully initialized scales to be
 rendered correctly. However, the range of a scale, i.e. the range of
 values into which abstract values are mapped, depends on the size of
-the draw area and is only set during the render function of the
+the drawing area and is only set during the render function of the
 individual Series. Therefore, a Cartesian Chart's Axes must be
 rendered after its Series in order to ensure fully initialized scales.
 
 The structure of a Cartesian Chart is rendered with the
 \code{chartCartesianRender} function, which sets the necessary
-attributes and classes on the root element and attaches the draw area
-\elname{<svg>} element to it. The draw area is the container element
+attributes and classes on the root element and attaches the drawing area
+\elname{<svg>} element to it. The drawing area is the container element
 into which the Series of a Chart are rendered. An \elname{<svg>}
 element without actual content is not able to receive input events,
 which means that it would, for example, not be possible to capture
 scroll events to control a zoom interaction when the cursor is over
-the empty area of the draw area. To counter this, a transparent
-\elname{<rect>} background element filling the whole draw area is
+the empty area of the drawing area. To counter this, a transparent
+\elname{<rect>} background element filling the whole drawing area is
 added, allowing input events to be received even in empty areas.
 
 The \code{chartCartesianAxesRender} function is used to render the
@@ -769,10 +769,10 @@ layout. By default, a grid is created which defines the
 \code{axis-left}, \code{axis-bottom}, \code{draw-area}, and
 \code{legend} areas. Most rows and columns of this grid are sized to
 fit their content, with the only exception being the row and column
-containing the draw area, which are set to fill the remaining space
+containing the drawing area, which are set to fill the remaining space
 not occupied by other rows and columns. The default CSS configuration
 of a Cartesian Chart positions a potential Legend to the right of the
-draw area, but this can be changed by either adjusting the grid
+drawing area, but this can be changed by either adjusting the grid
 directly via CSS or activating one of the preconfigured positions via
 the \attrname{data-legend-position} attribute. To simplify setting the
 \attrname{data-legend-position} attribute, the
@@ -1196,7 +1196,7 @@ authors can choose other forms of interpolation, such as logarithmic
 interpolation via a logarithmic scale.
 
 In RespVis, the Bar Series module renders collections of
-\elname{<rect>} elements representing the bars in a Bar Chart's draw
+\elname{<rect>} elements representing the bars in a Bar Chart's drawing
 area, and they are the lowest-level components required for rendering
 Bar Charts. Their implementation is located in the
 \code{series-bar.ts} file of the Bar package and contains the
@@ -1231,7 +1231,7 @@ Series' data join.
 
 Bar Charts are Cartesian Charts, as discussed in
 Section~\ref{sec:Chart}, which display a Bar Series with optional
-labels in their draw area and visualize the scales used to map
+labels in their drawing area and visualize the scales used to map
 categories and values to spatial dimensions as Axes. Their
 implementation can be found in the \code{chart-bar.ts} file of the Bar
 package, which contains the \code{ChartBar} interface to describe data
@@ -1250,7 +1250,7 @@ properties callers are interested in and which have been specified in
 the partial data object passed to this function. The
 \code{chartBarRender} function simply initializes a Cartesian Chart
 and renders a Bar Series and an optional series of labels to annotate
-the bars of the Bar Series into the Cartesian Chart's draw area.
+the bars of the Bar Series into the Cartesian Chart's drawing area.
 Furthermore, the scales used for rendering the Bar Series are
 visualized as Left and Bottom Axes of the Cartesian Chart, and a
 \code{mouseover} event listener to highlight bars and their
@@ -1371,7 +1371,7 @@ Grouped Bar Chart, and Grouped Bar Chart Window modules, which are
 very similar to their Single-Series Bar Chart counterparts, to render
 grouped bar charts in different levels of hierarchy. Grouped Bar
 Series are the lowest-level components of these and render a
-collection of \elname{<rect>} elements meant for display in the draw
+collection of \elname{<rect>} elements meant for display in the drawing
 area of a Grouped Bar Chart. The difference between a Grouped Bar
 Series and a Single-Series Bar Series is that this one offers
 additional properties needed for the configuration of subcategories
@@ -1382,7 +1382,7 @@ grouped bars. All bars belonging to the same subcategory have the same
 style to simplify their comparison across all categories. 
 
 Grouped Bar Charts are Cartesian Charts which contain a Grouped Bar
-Series with optional labels in their draw area, Left and Bottom Axes
+Series with optional labels in their drawing area, Left and Bottom Axes
 that visualize the scales used by this Grouped Bar Series, and a
 Legend that visualizes the color-encoding of subcategories. These
 Charts also attach event listeners to various elements to highlight
@@ -1678,7 +1678,7 @@ Listing~\ref{list:LineChartWindow}.
 
 \section{Point Package}
 
-Point charts, also commonly known as scatter charts or scatter plots,
+Point charts, also commonly known as scatter charts or scatterplots,
 show the relationship between two variables by plotting them as points
 in a Cartesian coordinate system. Each of the two variables determines
 a point's position on one of the coordinate system's two axes, and
@@ -1706,7 +1706,7 @@ rendered via a data join using an array of data objects created
 through transforming the bound Series data object, and this data join
 can be customized by providing custom \code{enter}, \code{update}, and
 \code{exit} event listeners. Point Charts are Cartesian Charts which
-contain Point Series in their draw areas and two Axes visualizing the
+contain Point Series in their drawing areas and two Axes visualizing the
 scales used to render the Point Series.
 
 

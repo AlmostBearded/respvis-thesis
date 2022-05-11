@@ -3,12 +3,11 @@
 
 This chapter discusses how different responsive patterns can be
 implemented using the modules provided by the various RespVis packages
-outlined in Chapter~\ref{chap:Packages}. The \code{src/examples}
+presented in Chapter~\ref{chap:Packages}. The \code{src/examples}
 directory of the RespVis library contains examples showing how the
 library can be used to create different kinds of charts with varying
-degrees of responsiveness. An example of how a news article that
-embeds a responsive RespVis Chart could look like can be seen in
-Figure~\ref{fig:Article}.
+degrees of responsiveness. An example of a news article with an
+embedded RespVis Chart can be seen in Figure~\ref{fig:Article}.
 
 
 \begin{figure}[tp]
@@ -23,19 +22,26 @@ Figure~\ref{fig:Article}.
   \label{fig:Article30rem}%
 }
 \caption[News Article with Embedded RespVis Chart]{%
-An example showing a RespVis Chart Window embedded into the context of a news article. \subref{fig:Article70rem} At 70rem, the content is displayed in its entire width. \subref{fig:Article30rem} At 30rem, the Chart is transposed, its Legend is moved above the draw area, the Legend title is hidden, Axis tick labels are shortened, and less Axis ticks are shown.  
+An example showing a RespVis Chart Window embedded into the context of
+a news article. \subref{fig:Article70rem} At 70rem, the content is
+displayed in its entire width. \subref{fig:Article30rem} At 30rem, the
+chart is transposed, its Legend is moved above the drawing area, the
+legend title is hidden, axis tick labels are shortened, and fewer axis
+ticks are shown.
 \imgcredit{Image created by the author of this thesis.}
 }
 \label{fig:Article}
 \end{figure}
 
-Even though users can manually compose custom charts using low-level modules
-like Series, Axes, and Legends, all the examples in this chapter focus
-on creating responsive visualizations using higher-level Chart
-Windows. Chart Windows represent convenient interfaces which allow
-visualization authors to focus on responsive configuration, rather
-than on laborious tasks like setting up a Chart's structure and
-handling their render process. 
+
+
+Even though users can manually compose custom charts using low-level
+modules like Series, Axes, and Legends, all the examples in this
+chapter focus on creating responsive visualizations using higher-level
+Chart Windows. Chart Windows represent convenient interfaces which
+allow visualization authors to focus on responsive configuration,
+rather than on laborious tasks like setting up a Chart's structure and
+handling their render process.
 
 All the example visualizations provided by the RespVis library follow
 the same basic structure, outlined in
@@ -250,11 +256,11 @@ differentiate between them.
 
 The following responsive patterns can be applied to RespVis Bar Charts:
 \begin{itemize}
-\item \liintro{Rescale draw area}: Scaling a Bar Chart to fit into the
+\item \liintro{Rescale drawing area}: Scaling a Bar Chart to fit into the
   available space is done automatically by their render functions. By
   default, Axes and Legends only take up as much space as necessary,
-  and the remaining space is filled with the Chart's draw area. Bars
-  and labels in this draw area are automatically scaled and positioned
+  and the remaining space is filled with the Chart's drawing area. Bars
+  and labels in this drawing area are automatically scaled and positioned
   to fit into the allocated space.
 
 \item \liintro{Reduce bar padding}: Reducing the padding between bars
@@ -323,8 +329,8 @@ The following responsive patterns can be applied to RespVis Bar Charts:
   caption={[Implementation of a Responsive RespVis Grouped Bar Chart]%
 The implementation of the responsive Grouped Bar Chart shown in
 Figure~\ref{fig:BarChartPatterns}. Depending on the available width,
-Axis tick labels are simplified, the Legend title is hidden, the
-Legend is moved below the draw area, and the whole Chart is
+axis tick labels are simplified, the legend title is hidden, the
+legend is moved below the drawing area, and the whole chart is
 transposed. Non-essential parts have been removed for clarity.},
 ]{listings/bar-chart-patterns.html}
 \end{samepage}
@@ -353,13 +359,13 @@ transposed. Non-essential parts have been removed for clarity.},
 \caption[Responsive RespVis Grouped Bar Chart]{%
 The responsive Grouped Bar Chart resulting from the implementation in
 Listing~\ref{list:BarChartPatterns}.
-\subref{fig:BarChartPatterns60rem} At a width of 60rem, the Chart is
+\subref{fig:BarChartPatterns60rem} At a width of 60rem, the chart is
 not yet transposed and revenue axis tick labels are not yet
 abbreviated. \subref{fig:BarChartPatterns40rem} At a width of 40rem,
 revenue axis tick labels are abbreviated using scientific notation.
-\subref{fig:BarChartPatterns30rem} At a width of 30rem, the Chart is
-transposed, bar labels are moved to the right of bars, the Legend
-title is hidden, the Legend is moved below the draw area, Legend items
+\subref{fig:BarChartPatterns30rem} At a width of 30rem, the chart is
+transposed, bar labels are moved to the right of bars, the legend
+title is hidden, the legend is moved below the drawing area, legend items
 are laid out in a row, and every second revenue axis tick is hidden.
 \imgcredit{Image created by the author of this thesis using RespVis.}
 }
@@ -380,7 +386,7 @@ are laid out in a row, and every second revenue axis tick is hidden.
 Line charts are visualizations which show trends in data by plotting
 markers at regular intervals and connecting them with lines.
 Single-series line charts show trends in two-dimensional data via a
-single line and multi-series line charts show trends in
+single line, and multi-series line charts show trends in
 multi-dimensional data via multiple lines. The different lines in a
 multi-series line chart can be seen as representations of
 subcategories in the data and are usually colored differently to
@@ -398,11 +404,11 @@ shown in Figure~\ref{fig:LineChartPatterns}.
 
 The following responsive patterns can be applied to RespVis Line Charts:
 \begin{itemize}
-\item \liintro{Rescale draw area}: As for Bar Charts, Line Charts are
+\item \liintro{Rescale drawing area}: As for Bar Charts, Line Charts are
   automatically scaled by their render functions. The default behavior
   is that Axes and potential Legends only take up as much space as
   necessary, and whatever space is left is filled with the Chart's
-  draw area. Elements contained in the draw area like lines,
+  drawing area. Elements contained in the drawing area like lines,
   markers, and labels are automatically scaled and positioned to fit
   into the available space.
 
@@ -473,9 +479,9 @@ The following responsive patterns can be applied to RespVis Line Charts:
   caption={[Implementation of a Responsive RespVis Line Chart]%
 The implementation of the responsive Line Chart shown in
 Figure~\ref{fig:LineChartPatterns}. Depending on the available width,
-Axis ticks and markers are hidden, Axis tick labels are simplified,
-and on very narrow screens, Axes are hidden turning the Line Chart
-into a Sparkline. Non-essential parts of the implementation have been
+axis ticks and markers are hidden, axis tick labels are simplified,
+and on very narrow screens, axes are hidden turning the line chart
+into a sparkline. Non-essential parts of the implementation have been
 removed for clarity.
 },
 ]{listings/line-chart-patterns.html}
@@ -546,8 +552,8 @@ displayed in Figure~\ref{fig:PointChartPatterns}.
 The following responsive patterns can be applied to RespVis Point
 Charts:
 \begin{itemize}
-\item \liintro{Rescale draw area}: As with other Cartesian Charts, the
-  draw area of a Point Chart and its contents are automatically
+\item \liintro{Rescale drawing area}: As with other Cartesian Charts, the
+  drawing area of a Point Chart and its contents are automatically
   scaled by the Chart's render functions to fill the space not
   occupied by the Axes and any potential Legend.
 
@@ -569,13 +575,13 @@ Charts:
   better to hide them via the CSS \cssname{opacity} or \cssname{display}
   properties.
 
-\item \liintro{Zoom draw area}: Zooming allows visualization consumers
-  to view data at various levels of detail. A Point Chart can be
-  zoomed by adjusting the domains of the scales handling the spatial
-  encoding of data, which are the \code{xScale} and \code{yScale}
-  properties of the data object of the Point Chart. To simplify the
-  setup and handling of zooming interaction, the D3 Zoom package
-  \parencite{D3Zoom} can be used, which is illustrated in
+\item \liintro{Zoom drawing area}: Zooming allows visualization
+  consumers to view data at various levels of detail. A Point Chart
+  can be zoomed by adjusting the domains of the scales handling the
+  spatial encoding of data, which are the \code{xScale} and
+  \code{yScale} properties of the data object of the Point Chart. To
+  simplify the setup and handling of zooming interaction, the D3 Zoom
+  package \parencite{D3Zoom} can be used, which is illustrated in
   Listing~\ref{list:PointChartPatterns}.
 
 \item \liintro{Apply Axis patterns}: As with all Charts which use Axes
@@ -610,7 +616,7 @@ Charts:
   caption={[Implementation of Responsive RespVis Point Charts]%
 The implementation of the responsive Point Chart shown in
 Figure~\ref{fig:PointChartPatterns}. Depending on the available width,
-Axis ticks are hidden, Axis tick labels are shortened, and point
+axis ticks are hidden, axis tick labels are shortened, and point
 radiuses are reduces. Additionally, zooming is implemented using the
 D3 Zoom package \parencite{D3Zoom}. Non-essential parts of the
 implementation have been removed for clarity.
