@@ -658,7 +658,6 @@ Here, the SVG document from Listing~\ref{list:SVG} is shown.
 \end{figure}
 
 
-
 The encoding in XML leads to SVG being the best format to represent
 graphics in terms of accessibility. Graphics are directly saved in a
 hierarchical and textual form which describes their shapes and how
@@ -680,11 +679,14 @@ animate SVG elements when they are rendered in a browser. Using CSS to
 separate presentation from content has many benefits, which were
 already described in Section~\ref{sec:CSS}. Unfortunately, it is not
 possible to style every SVG attribute with CSS, only so-called
-presentation attributes like \attrname{fill} and \attrname{stroke-width}
-are available through CSS. These presentation attributes are listed in
-the SVG specification \parencite{SVG11} and will be extended by
-additional attributes like \cssname{x}, \cssname{y}, \cssname{width}
-and \cssname{height} in upcoming releases \parencite{SVG2}.
+\emph{presentation attributes} like \attrname{fill} and
+\attrname{stroke-width} are available through CSS. These presentation
+attributes are listed in the SVG specification \parencite{SVG11} and
+are extended by additional attributes like \cssname{x}, \cssname{y},
+\cssname{width} and \cssname{height} in SVG 2 \parencite{SVG2}.
+
+
+
 
 
 \subsection{Canvas (2D)}
@@ -700,18 +702,9 @@ suitable representation is possible. The reasons for this are that
 \elname{<canvas>} elements are not compatible with other web
 technologies like CSS or the DOM Web API and because the resulting
 rendering provides only very limited possibilities for accessibility.
-
 The graphics are drawn via a low-level API provided by the rendering
 context of a particular canvas. The two most significant rendering
 contexts are \code{2d} and \code{webgl}.
-
-The \code{2d} rendering context enables platform-independent 2d
-rendering via a software renderer, whose API is standardized directly
-in the canvas specification \parencite{Canvas2D}. An example of an
-HTML document containing two differently sized canvases into which
-responsive circles are drawn using a 2d rendering context can be seen
-in Listing~\ref{list:Canvas} with the corresponding visual output in
-Figure~\ref{fig:Canvas}.
 
 
 \begin{samepage}
@@ -733,6 +726,15 @@ The visual representation of this document is shown in Figure~\ref{fig:Canvas}.
 }
 ]{listings/canvas.html}
 \end{samepage}
+
+
+The \code{2d} rendering context enables platform-independent 2d
+rendering via a software renderer, whose API is standardized directly
+in the canvas specification \parencite{Canvas2D}. An example of an
+HTML document containing two differently sized canvases into which
+responsive circles are drawn using a 2d rendering context can be seen
+in Listing~\ref{list:Canvas} with the corresponding visual output in
+Figure~\ref{fig:Canvas}.
 
 
 \begin{figure}[tp]
@@ -777,27 +779,35 @@ necessary setup and rendering API is rather complex.
 
 
 
+
+
+
+
+
+
 \section{Layout Engines}
 \label{sec:LayoutEngines}
 
 A layout engine is used to calculate the boundary coordinates of
 visual components based on input components annotated with layout
-constraints. These layout constraints describe the size and position
-of components and their relationships between each other in a syntax
+constraints. The layout constraints describe the size and position of
+components and their relationships between each other in a syntax
 understood by the layout engine. For browser-based layout engines, the
-input components are normally declared as HTML documents, which are
+input components are normally declared as HTML elements, which are
 constrained using CSS. More low-level layout engines require custom
 formats, which usually involve a hierarchy of objects constrained
 using specific properties. The most relevant layout engines in the
 context of this work are summarized in the following sections.
 
 
+
+
 \subsection{Browser Engines}
 \label{sec:BrowserEngines}
 
-The purpose of a browser engine is to transform document and any
+The purpose of a browser engine is to transform a document and any
 additional resources, like CSS, into a visual representation. A
-browser engine is a core component of every web browser, and it is
+browser engine is a core component of every web browser, and is
 responsible for laying out elements and rendering them. The
 terminology of browser engines is ill-defined, with them sometimes
 also being referred to as layout or render engines. Theoretically, the
@@ -826,6 +836,7 @@ work and, even though there are solutions like Electron
 \parencite{Electron} available, which enable development of desktop
 applications using web technologies, this limitation forces
 applications into a very specific stack of technologies.
+
 
 
 
