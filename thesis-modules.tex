@@ -613,23 +613,23 @@ the render functions of various components.
 
 \subsection{Axis Module}
 
-Axes are implemented in the \code{axis.ts} Axis module in
-the Core package and are used to visualize scales that map
-abstract values to spatial dimensions. Currently, only Cartesian axes,
-distinguished by their position relative to a visualization's draw
-area, are provided by RespVis, since only Cartesian Charts have been
-implemented so far. The implementation has so far been focused on Left
+Axes are implemented in the \code{axis.ts} Axis module in the Core
+package and are used to visualize scales that map abstract values to
+spatial dimensions. Currently, only Cartesian axes, distinguished by
+their position relative to a visualization's draw area, are provided
+by RespVis, since only Cartesian Charts have been implemented so
+far. Furthermore, the implementation has so far been focused on Left
 and Bottom axes, because they are the most commonly encountered types
-of Cartesian axes and cover most use cases. An Axis consists
-of ticks, an optional title, and an optional subtitle, where the ticks
-are the actual visualization of a spatial-mapping scale, and the title
-and subtitle can be specified for additional description. An example
-of what a rendered Left and Bottom Axis might look like can
-be seen in Figure~\ref{fig:Axes}.
+of Cartesian axes and cover most use cases. An Axis consists of ticks,
+an optional title, and an optional subtitle, where the ticks are the
+actual visualization of a spatial-mapping scale, and the title and
+subtitle can be specified for additional description. An example of
+what a rendered Left and Bottom Axis might look like can be seen in
+Figure~\ref{fig:Axes}.
 
 \begin{figure}[tp]
 \centering
-\includegraphics[keepaspectratio,width=\linewidth,height=\fullh]
+\includegraphics[keepaspectratio,width=\linewidth,height=\halfh]
 {diagrams/axes.pdf}
 \caption[Axes Example]{%
 A rendered Left Axis with ticks, a title, and a subtitle, and a
@@ -647,7 +647,7 @@ representing the scale to be visualized, the \code{title} and
 \code{subtitle} string properties, and the \code{configureAxis}
 function property, which can be used to configure the underlying D3
 Axis before rendering it. Like most other modules, the Axis module
-consist of two main functions: a data creation function and a render
+consists of two main functions: a data creation function and a render
 function. The \code{axisData} function is used to create an
 \code{Axis} data object from a \code{Partial<Axis>} object parameter,
 where all non-set but required properties are filled with default
@@ -663,13 +663,12 @@ the same elements in a three-row layout, in which the ticks, title,
 and subtitle elements are placed in this order from top to bottom.
 Furthermore, the title and subtitle elements of a Left Axis are
 oriented vertically to save horizontal space using the
-\code{textOrientation} utility function. Internally, the Axis
-module uses the \code{axisBottom} and \code{axisLeft} functions
-from the D3 Axis package \parencite{D3Axis} to render the ticks of an
-Axis. Since these D3 functions use attributes to position and style
-elements, as many of these attributes as possible must be removed
-directly after the ticks have been rendered to enable their
-configuration via CSS.
+\code{textOrientation} utility function. Internally, the Axis module
+uses the \code{axisBottom} and \code{axisLeft} functions from the D3
+Axis package \parencite{D3Axis} to render the ticks of an Axis. Since
+these D3 functions use attributes to position and style elements, as
+many of these attributes as possible must be removed directly after
+the ticks have been rendered to enable their configuration via CSS.
 
 
 
@@ -705,16 +704,16 @@ a Grouped Bar Series, a Label Series, and a Legend.
 
 As mentioned previously, RespVis currently only supports Cartesian
 Charts, which visualize data in a Cartesian coordinate system. The
-Cartesian Chart base module is
-located in the \code{chart-cartesian.ts} file in the Core package. The
+Cartesian Chart base module is located in the
+\code{chart-cartesian.ts} file in the Core package. The
 \code{ChartCartesian} interface describes a data object for the
 configuration of Cartesian Charts via the \code{xAxis} and
-\code{yAxis} \code{Axis} properties which describe the X and Y Axes of
+\code{yAxis} \code{Axis} properties which describe the x and y Axes of
 the Chart respectively. Transposing Axes is a useful pattern to
 improve the responsiveness of visualizations and can be configured
-using the \code{flipped} boolean property of a Cartesian Chart's
-data object. If the \code{flipped} property is set to \code{false},
-the \code{xAxis} object is used to configure the Bottom Axis and the
+using the \code{flipped} boolean property of a Cartesian Chart's data
+object. If the \code{flipped} property is set to \code{false}, the
+\code{xAxis} object is used to configure the Bottom Axis and the
 \code{yAxis} object is used to configure the Left Axis. If it is set
 to \code{true}, it is the other way around.
 
@@ -726,7 +725,7 @@ values. The default values of the \code{xAxis} and \code{yAxis}
 properties are set by the \code{axisData} function from the Axis
 module. The \code{flipped} property is initialized to \code{false}.
 
-The rendering of Cartesian Charts is split into two functions which
+The rendering of Cartesian Charts is split into two functions, which
 have to be called separately, because not all parts of a Cartesian
 Chart can be rendered simultaneously. The general structure of a Chart
 must be rendered before anything else can be rendered, since this
@@ -748,7 +747,7 @@ which means that it would, for example, not be possible to capture
 scroll events to control a zoom interaction when the cursor is over
 the empty area of the draw area. To counter this, a transparent
 \elname{<rect>} background element filling the whole draw area is
-added, allows input events to be received even in empty areas.
+added, allowing input events to be received even in empty areas.
 
 The \code{chartCartesianAxesRender} function is used to render the
 Axes of a Cartesian Chart. This function must only be called on
@@ -1016,21 +1015,21 @@ A Legend is rendered into elements which have a Legend data object
 bound on them using the \code{legendRender} function. This function
 attaches a \elname{<text>} element with which the title of the Legend
 is shown and a \elname{<g>} element into which the individual items of
-the Legend are rendered via a data join. To perform the data join with
-which the items of the Legend are created, one \code{LegendItem} data
-object per item to be rendered is needed to describe individual legend
-items, and these are generated via transformation of the bound Legend
-data object. Via a data join with these data objects, one \elname{<g>}
-element is created for every legend item, to which a \elname{<path>}
-element for the symbol and a \elname{<text>} element for the
-associated label are attached. The operations performed during this
-data join can be directly modified via the custom \code{enter},
-\code{update}, and \code{exit} events, which are dispatched on the
-root element of the Legend and which respectively contain the data
-join's enter, update, or exit selection in a property of the event
-object. Also, the \code{legendRender} function sets the
-\attrname{data-style} and \attrname{data-key} attributes on the legend
-item elements to values configured via the bound data object.
+the Legend are rendered via a data join. To perform the data join, one
+\code{LegendItem} data object per item to be rendered is needed to
+describe individual legend items, and these are generated via
+transformation of the bound Legend data object. Via a data join with
+these data objects, one \elname{<g>} element is created for every
+legend item, to which a \elname{<path>} element for the symbol and a
+\elname{<text>} element for the associated label are attached. The
+operations performed during this data join can be directly modified
+via the custom \code{enter}, \code{update}, and \code{exit} events,
+which are dispatched on the root element of the Legend and which
+respectively contain the data join's enter, update, or exit selection
+in a property of the event object. Also, the \code{legendRender}
+function sets the \attrname{data-style} and \attrname{data-key}
+attributes on the legend item elements to values configured via the
+bound data object.
 
 
 
@@ -1043,14 +1042,14 @@ item elements to values configured via the bound data object.
 Tooltips display additional contextual information which is too
 expansive to be shown all the time. The more information a
 visualization shows simultaneously, the more cognitive effort is
-required to interpret it. Detailed information which may be valuable
+required to interpret it. Detailed information which may be valuable,
 but is not absolutely necessary for understanding a visualization's
-core message is only shown via a Tooltip when a visualization consumer
-interacts with an element in whose context this information stands.
-Since Tooltips are only shown explicitly after consumer interaction, they
-may overlap and cover other elements of a Chart which would otherwise
-be too important to hide. An example of a Bar Chart in which
-additional information is displayed via a Tooltip can be seen in
+core message, is only shown via a Tooltip, displayed when a
+visualization consumer interacts with an element in whose context this
+information stands. Since Tooltips are only shown explicitly after
+consumer interaction, they may overlap and cover other elements of a
+Chart which would otherwise be too important to hide. An example of a
+Bar Chart with additional information in a Tooltip can be seen in
 Figure~\ref{fig:Tooltip}.
 
 
@@ -1060,7 +1059,7 @@ Figure~\ref{fig:Tooltip}.
 {images/tooltip.png}
 \caption[Tooltip Example]{%
 A Bar Chart with an active Tooltip displaying
-additional information from the data record associated with an
+additional information for the data record associated with an
 individual bar. Since a Tooltip is only visible during
 interaction with a particular element, it may sometimes overlap
 and cover other important parts of a Chart.
@@ -1101,6 +1100,7 @@ depending on the offset direction of the Tooltip. A Tooltip's content
 can be set with the \code{tooltipContent} function, which sets the
 Tooltip's inner HTML to the HTML string passed to the function.
 
+
 Apart from Tooltips, the Tooltip package also contains
 utility functions to simplify the setup and handling of Tooltips in
 different Series modules such as the Bar or Point Series modules.
@@ -1122,6 +1122,8 @@ Tooltips and their handling. However, for consistency reasons, the way
 of configuring Tooltips should not differ too much between different
 types of Series, and therefore it is recommended to use the utilities
 provided here unless there is a good reason not to.
+
+% KA TODO  There are no mouse events on touch, how solve?
 
 
 
@@ -1156,19 +1158,19 @@ be vertically extended by having visualization consumers scroll
 vertically, which is strongly preferable to scrolling horizontally.
 
 
-The Bar package is located in the \code{src/lib/bars/} directory of the
-RespVis library and contains modules to create single-series,
-grouped multi-series, and stacked multi-series bar charts that can be
-used in different situations. For every type of bar chart, the Bar
-package provides a respective Series module to render only the
-actual bars, a Chart module to render a full Chart including a Bar Series,
-Axes, and a possible Legend, and a Chart Window module to render a
-full Bar Chart embedded into a Layouter with additional tools provided via
-a Toolbar. Higher-level modules are more convenient to use, but
-they also impose more assumptions, and therefore restrictions, on
-lower-level components contained within them. The implementations of
-the different types of Bar Charts and when to best use which type is
-described in the following sections.
+The Bar package is located in the \code{src/lib/bars/} directory of
+the RespVis library and contains modules to create single-series bar
+charts, grouped multi-series bar charts, and stacked multi-series bar
+charts that can be used in different situations. For every type of bar
+chart, the Bar package provides a respective Series module to render
+only the actual bars, a Chart module to render a full Chart including
+a Bar Series, Axes, and a possible Legend, and a Chart Window module
+to render a full Bar Chart embedded into a Layouter with additional
+tools provided via a Toolbar. Higher-level modules are more convenient
+to use, but they also impose more assumptions, and therefore
+restrictions, on lower-level components contained within them. The
+implementations of the different types of Bar Charts and when to best
+use which type is described in the following sections.
 
 
 
@@ -1186,7 +1188,7 @@ with configurable padding between them. Thus, the width of bars is
 calculated via the total number of categories, the range they are
 spread on, and the padding between them. The mapping of quantitative
 values to spatial dimensions in a single-series bar chart is performed
-using a continuous scale which maps quantitative values stored in a
+using a continuous scale, which maps quantitative values stored in a
 dataset into a range of values between two extremes via a continuous
 interpolation function. In most cases, linear interpolation via a
 linear scale is used to map quantitative values, but visualization
@@ -1231,9 +1233,9 @@ Bar Charts are Cartesian Charts, as discussed in
 Section~\ref{sec:Chart}, which display a Bar Series with optional
 labels in their draw area and visualize the scales used to map
 categories and values to spatial dimensions as Axes. Their
-implementation can be found in the \code{chart-bar.ts} file of the
-Bar package, which contains the \code{ChartBar} interface to
-describe data objects used for the configuration of Bar Charts, the
+implementation can be found in the \code{chart-bar.ts} file of the Bar
+package, which contains the \code{ChartBar} interface to describe data
+objects used for the configuration of Bar Charts, the
 \code{chartBarData} function to create a fully initialized
 \code{ChartBar} data object from a partial input object, and the
 \code{chartBarRender} function to render Bar Charts into
@@ -1242,7 +1244,7 @@ objects have been bound. The \code{ChartBar} interface inherits all
 properties of the \code{ChartCartesian} and \code{SeriesBar}
 interfaces and adds additional properties for the configuration of bar
 labels. It is not necessary to manually specify all the offered
-properties of this interface because the \code{chartBarData} function
+properties of this interface, because the \code{chartBarData} function
 initializes all of them with sensible defaults derived from the
 properties callers are interested in and which have been specified in
 the partial data object passed to this function. The
@@ -1254,27 +1256,27 @@ visualized as Left and Bottom Axes of the Cartesian Chart, and a
 \code{mouseover} event listener to highlight bars and their
 corresponding ticks on the category axis is attached to bars.
 
-Bar Chart Windows wrap a Bar Chart into a Layouter so its
-elements can be laid out with CSS. They also add a Toolbar containing
-tools to filter a Bar Chart's categories and download an SVG version
-of the current chart. Their implementation can be found in the
-\code{chart-window-bar.ts} file of the Bar package, which
-contains the \code{ChartWindowBar} interface to describe data objects
-for the configuration of Bar Chart Windows, the
-\code{chartWindowBarData} function to create a fully initialized
-\code{ChartWindowBar} data object from a partial input object
-containing only relevant properties, and the
-\code{chartWindowBarRender} function to render a Bar Chart Window into
-\elname{<div>} elements onto which a \code{ChartWindowBar} data object
-has been bound. The \code{ChartWindowBar} interface inherits all
-properties of the \code{ChartBar} interface to configure the wrapped
-Bar Chart and adds additional properties needed for the filtering of
-categories. Bar Chart Windows are rendered with the
-\code{chartWindowBarRender} function, which renders a Toolbar
-including a Nominal Filtering Tool for categories and an SVG Download
-Tool, initializes the nested Bar Chart with the filtered values, and
-renders it, according to the render process required by the
-Layouter defined in Section~\ref{sec:Layouter}.
+Bar Chart Windows wrap a Bar Chart into a Layouter, so its elements
+can be laid out with CSS. They also add a Toolbar containing tools to
+filter a Bar Chart's categories and download an SVG version of the
+current chart. Their implementation can be found in the
+\code{chart-window-bar.ts} file of the Bar package, which contains the
+\code{ChartWindowBar} interface to describe data objects for the
+configuration of Bar Chart Windows, the \code{chartWindowBarData}
+function to create a fully initialized \code{ChartWindowBar} data
+object from a partial input object containing only relevant
+properties, and the \code{chartWindowBarRender} function to render a
+Bar Chart Window into \elname{<div>} elements onto which a
+\code{ChartWindowBar} data object has been bound. The
+\code{ChartWindowBar} interface inherits all properties of the
+\code{ChartBar} interface to configure the wrapped Bar Chart and adds
+additional properties needed for the filtering of categories. Bar
+Chart Windows are rendered with the \code{chartWindowBarRender}
+function, which renders a Toolbar including a Nominal Filtering Tool
+for categories and an SVG Download Tool, initializes the nested Bar
+Chart with the filtered values, and renders it, according to the
+render process required by the Layouter defined in
+Section~\ref{sec:Layouter}.
 
 
 \begin{samepage}
@@ -1349,7 +1351,7 @@ Listing~\ref{list:BarChartWindow}.
 
 Grouped bar charts, sometimes also called clustered or multi-series
 bar charts, consist of multiple series of bars and are used to
-visualize differences between categories where each category is
+visualize differences between categories, where each category is
 associated with a number of quantitative variables. Every category
 must be associated with the same number of quantitative variables,
 effectively splitting categories into subcategories, and all values
@@ -1358,12 +1360,11 @@ meaning they must have the same units and scales. As with
 single-series bar charts, categories in grouped bar charts are also
 mapped to spatial dimensions using band scales, but here, two
 different band scales have to be applied. The category band scale
-divides the available space along either the x or y-axis into
-equal intervals based on the number of categories, whereas the
-subcategory band scale further divides these intervals into even
-smaller intervals based on the number of subcategories. Quantitative
-values are again mapped to spatial dimensions via a single continuous
-scale.
+divides the available space along either the x or y-axis into equal
+intervals based on the number of categories, whereas the subcategory
+band scale further divides these intervals into even smaller intervals
+based on the number of subcategories. Quantitative values are again
+mapped to spatial dimensions via a single continuous scale.
 
 In RespVis, the Bar package provides the Grouped Bar Series,
 Grouped Bar Chart, and Grouped Bar Chart Window modules, which are
@@ -1388,13 +1389,13 @@ Charts also attach event listeners to various elements to highlight
 bars, labels, ticks on the category axis, and Legend items that
 semantically belong together.
 
-Grouped Bar Chart Windows contain a Grouped Bar Chart
-wrapped inside Layouter and render it following the render process
-defined in Section~\ref{sec:Layouter} to allow positioning of their
-elements via CSS. Furthermore, they decorate their nested Charts with
-Toolbars containing tools to download them as SVG documents and filter
-their categories and subcategories. Every time a visualization
-consumer interacts with these Nominal Filtering Tools to change the
+Grouped Bar Chart Windows contain a Grouped Bar Chart wrapped inside a
+Layouter and render it following the render process defined in
+Section~\ref{sec:Layouter} to allow positioning of their elements via
+CSS. Furthermore, they decorate their nested Charts with Toolbars
+containing tools to download them as SVG documents and filter their
+categories and subcategories. Every time a visualization consumer
+interacts with these Nominal Filtering Tools to change the
 configuration of displayed categories and subcategories, the
 \code{categoryfilter} and \code{subcategoryfilter} events are
 dispatched, containing the newly active categories and subcategories
@@ -1426,7 +1427,7 @@ visualization is shown in Figure~\ref{fig:GroupedBarChartWindow}.
   caption={[Code of Grouped Bar Chart Window Example]%
 The source code to create the Grouped Bar Chart Window shown in
 Figure~\ref{fig:GroupedBarChartWindow}. The Grouped Bar Chart Window
-is configured via a bound data object which is initialized with the
+is configured via a bound data object, which is initialized with the
 \code{chartWindowBarGroupedData} function and rendered with the
 \code{chartWindowBarGroupedRender} function. Since no special
 responsive behavior is desired in this example, the default resize,
