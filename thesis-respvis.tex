@@ -3,13 +3,13 @@
 \label{chap:ResponsiveInformationVisualization}
 
 A \emph{responsive} visualization is a visualization which adapts
-itself to the available display space and properties of the device
-used to access it. Analogous to responsive web design, the need for
-responsive visualizations arises from the growing variety of devices
-used to consume content and the physical differences between them.
-Visualizations and charts often form significant blocks of content
-embedded inside web pages. For a web page to be responsive, any
-embedded content such as visualizations and charts must also be
+itself to the available display space and characteristics of the
+device used to access it. Analogous to responsive web design, the need
+for responsive visualizations arises from the growing variety of
+devices used to consume content and the physical differences between
+them.  Visualizations and charts often form significant blocks of
+content embedded inside web pages. For a web page to be responsive,
+any embedded content such as visualizations and charts must also be
 responsive.
 
 Visual elements require proper sizing and spacing to be of value.
@@ -51,23 +51,23 @@ when reducing chart complexity, and define optimization of the
 density-message trade-off as one of the main challenges when designing
 responsive visualizations.
 
-One of the most current works summarizing much of the research
-surrounding responsive visualizations is
-\textcite{Lee-2021-Mobile-Vis}. Chapter~2 about responsive
-visualization design \parencite{Horak-2021-Responsive-Vis} is of a
-particular interest for this work as it gives a quite complete summary
-on the research in this field. It discusses the differences between
-responsive web design and responsive visualization design and stresses
-that visualizations must not be seen as mere images embedded in a
-website but that they must adapt to device characteristics to deliver
-a satisfactory visualization consumer experience. Furthermore,
-\textcite{Horak-2021-Responsive-Vis} continue to go into details about
-various factors affecting a visualization's responsive design and give
-an overview of high-level design strategies (called design patterns in
-this work) for responsive visualizations. Lastly, unique challenges
-and opportunities for responsive visualization design are summarized
-to guide researchers to potentially interesting topics for future
-research in this area.
+
+\textcite{Horak-2021-Responsive-Vis} is a recent and quite complete
+summary of research in the field of responsive visualization. It
+discusses the differences between responsive web design and responsive
+visualization design and stresses that visualizations must not be seen
+as mere images embedded in a website, but that they must adapt to
+device characteristics to deliver a satisfactory visualization
+consumer experience. Further, \textcite{Horak-2021-Responsive-Vis} go
+into details about various factors affecting a visualization's
+responsive design and give an overview of high-level design strategies
+(called design patterns in this work) for responsive
+visualizations. Lastly, unique challenges and opportunities for
+responsive visualization design are summarized to guide researchers to
+potentially interesting topics for future research in this area.
+
+
+
 
 
 \section{Responsive Visualization Patterns}
@@ -102,14 +102,45 @@ accordingly.
 
 
 
+\begin{table}[tp]
+\tablestretch
+\rowcolors{2}{}{tablerowcolour}
+\centering
+\begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}l>{\raggedright}p{0.2\textwidth}X<{\kern-\tabcolsep}}
+\toprule
+Category & Targets & Description \\
+\midrule
+Data        & Record, Field, Level &
+Data apects such as records (rows), fields (columns), and level (of aggregation or hierarchy).\\
+Encoding    & &
+Visual representation in large-screen view. \\
+Interaction & Feature, Trigger, Feedback &
+Supported interactions in large-screen view. \\
+Narrative   & Sequencing, Annotations, Emphases, Text &
+Narrative, story-telling elements in large-screen view. \\
+References / Layout & Labels, References, Layout, Size &
+Additional elements such as labels and legends, and
+placement of visual components in large-screen view. \\
+\bottomrule
+\end{tabularx}
+\caption[Targets of Responsive Visualization Patterns]{
+The targets of responsive visualization patterns identified by
+\textcite{DesignPatternsTradeOffsRespVis}.
+\imgcredit{Table adapted from \textcite{DesignPatternsTradeOffsRespVis}.}
+}
+\label{tab:PatternsTargets}
+\end{table}
+
+
+
 The most detailed research on patterns in responsive visualization
 design was performed by \textcite{DesignPatternsTradeOffsRespVis}.
 Following \textcite{TechniquesForFlexibleRespVisDesign}, they
 characterised the responsive visualization strategies according to
 (the same) two dimensions: \emph{targets}, representing what entity is
-changed, and \emph{actions}, representing how entities are changed.
-However, the targets and actions are more finely grained, having a
-number of sub-categories.
+changed from large-screen to small-screen view, and \emph{actions},
+representing how entities are changed. However, the targets and
+actions are more finely grained, having a number of sub-categories.
 %
 Targets are grouped into five distinct categories (Data, Encoding,
 Interaction, Narrative, and References/Layout), with four of the five
@@ -131,45 +162,25 @@ the visualizations they studied. Their explorable online gallery
 demonstrating all the patterns they discovered.
 
 
-\begin{table}[tp]
-\tablestretch
-\rowcolors{2}{}{tablerowcolour}
-\centering
-\begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}l>{\raggedright}p{0.2\textwidth}X<{\kern-\tabcolsep}}
-\toprule
-Category & Targets & Description \\
-\midrule
-Data & Records, Fields, Level & Data is the information which is encoded in a visualization. \\
-Encoding & & Encodings are the visual forms in which data is represented. \\
-Interaction & Feature, Trigger, Feedback & Interactions define how visualization consumers can engage with visualizations. \\
-Narrative & Sequencing, Annotations, Emphases, Text & This category groups targets based on the story a visualization should convey. \\
-References/Layout & Labels, References, Layout, Size & References represent additional information which makes visualizations easier to understand, and a layout describes how the individual visual components are placed. \\
-\bottomrule
-\end{tabularx}
-\caption[Targets of Responsive Visualization Patterns]{
-The targets of responsive visualization patterns identified by
-\textcite{DesignPatternsTradeOffsRespVis}.
-\imgcredit{Table adapted from \textcite{DesignPatternsTradeOffsRespVis}.}
-}
-\label{tab:PatternsTargets}
-\end{table}
-
-
-
 
 \begin{table}[tp]
 \tablestretch
 \rowcolors{2}{}{tablerowcolour}
 \centering
-\begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}l>{\raggedright}p{0.3\textwidth}X<{\kern-\tabcolsep}}
+\begin{tabularx}{\linewidth}{>{\kern-\tabcolsep}l>{\raggedright}p{0.35\textwidth}X<{\kern-\tabcolsep}}
 \toprule
-Category & Actions & Description \\
+Category   & Actions & Description \\
 \midrule
-Recompose & Remove, Add, Replace, Aggregate & Actions which affect the existence of targets. \\
-Rescale &  & Actions which affect the size of targets. \\
-Transpose & Serialize, Parellelize, Axis-Transpose & Actions which affect the orientation of targets. \\
-Reposition & Externalize, Internalize, Fix, Fluid, Relocate & Actions which affect the position of targets. \\
-Compensate & Toggle, Number & Actions which compensate for loss of information. \\
+Recompose  & Remove, Add, Replace, Aggregate &
+Actions affecting the existence of targets. \\
+Rescale    &  &
+Actions affecting the size of targets. \\
+Transpose  & Serialize, Parellelize, Axis-Transpose &
+Actions affecting the orientation of targets. \\
+Reposition & Externalize, Internalize, Fix, Fluid, Relocate &
+Actions affecting the position of targets. \\
+Compensate & Toggle, Number &
+Actions compensating for loss of information. \\
 \bottomrule
 \end{tabularx}
 \caption[Actions of Responsive Visualization Patterns]{%
@@ -182,6 +193,10 @@ The actions of responsive visualization patterns identified by
 
 
 
+
+
+
+
 \section{Responsive Visualization Examples}
 
 The goal of this section is to provide the reader with some
@@ -191,16 +206,16 @@ this section were taken from external academic sources from which
 permissions are more straightforward to procure. These responsive
 visualizations put most of their effort into demonstrating responsive
 patterns rather than communicating messages in their data, and owing
-to this, some of them lack essential features, such as titles and axes
-descriptions, usually present in practice. For more real-life examples
-of responsive visualizations,
-\textcite{DesignPatternsTradeOffsRespVisGallery} should be consulted. 
+to this, some of them lack essential features, such as chart and axis
+titles, usually present in practice. For more real-life examples of
+responsive visualizations,
+\textcite{DesignPatternsTradeOffsRespVisGallery} should be consulted.
 
 The examples in this section are organized by chart type. It would be
-an immense endeavor to bring examples for every pattern used for all
-types of charts, so only a subset which demonstrates some of the most
+an immense endeavor to collect examples for every pattern used for all
+types of charts, so only a subset demonstrating some of the most
 frequently encountered patterns for frequently used types of charts is
-summarized here. The popularity of chart types was judged using the
+presented here. The popularity of chart types was judged using the
 responsive visualization corpus collected in
 \textcite{DesignPatternsTradeOffsRespVisGallery} and the visualization
 corpora from the Quarz news website and academic papers collected by
@@ -322,7 +337,7 @@ created by \textcite{RespVis} which can be seen in
 Figure~\ref{fig:RespLineExample}. In addition to the recomposition of
 ticks, tick labels are rotated to reduce their required horizontal
 space. For exceptionally limited space, it can make sense to remove
-the axes of a line chart entirely and turn it into a sparkline.
+the axes of a line chart entirely, turning it into a sparkline.
 However, it should be noted that by doing this, the consumer of the
 visualization loses information about the type and scale of the
 chart's dimensions. This technique should therefore only be applied in
