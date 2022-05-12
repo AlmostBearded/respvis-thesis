@@ -680,7 +680,7 @@ the ticks have been rendered to enable their configuration via CSS.
 \label{sec:Chart}
 
 Charts are high-level components which represent a complete
-visualization with Axes, Legends, and Series. An example of a rendered
+visualization with a title, Axes, Legends, and Series. An example of a rendered
 RespVis Chart containing a Left Axis, a Bottom Axis, a Grouped Bar
 Series, a Label Series, and a Legend can be seen in
 Figure~\ref{fig:Chart}. A Chart is typically rendered into the root
@@ -766,7 +766,7 @@ to configure the Bottom Axis or Left Axis and the \code{yAxis} data
 object is used to configure the other. 
 
 The elements of a Cartesian Chart are positioned using a CSS Grid
-layout. By default, a grid is created which defines the
+layout. By default, a grid is created which defines the \code{header},
 \code{axis-left}, \code{axis-bottom}, \code{draw-area}, and
 \code{legend} areas. Most rows and columns of this grid are sized to
 fit their content, with the only exception being the row and column
