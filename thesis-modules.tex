@@ -1100,11 +1100,10 @@ depending on the offset direction of the Tooltip. A Tooltip's content
 can be set with the \code{tooltipContent} function, which sets the
 Tooltip's inner HTML to the HTML string passed to the function.
 
-
-Apart from Tooltips, the Tooltip package also contains
-utility functions to simplify the setup and handling of Tooltips in
-different Series modules such as the Bar or Point Series modules.
-Interfaces describing the data objects of Series can inherit from the
+Apart from Tooltips, the Tooltip package also contains utility
+functions to simplify the setup and handling of Tooltips in different
+Series modules such as the Bar or Point Series modules. Interfaces
+describing the data objects of Series can inherit from the
 \code{SeriesConfigTooltips} interface to add additional properties for
 the configuration of Tooltips to these data objects. Among these
 properties is a property to enable the Tooltips of the Series and
@@ -1112,9 +1111,9 @@ properties to specify the contents and positions of individual
 Tooltips based on their associated context-element and the current
 cursor position. In addition to the \code{SeriesConfigTooltips}
 interface, the \code{seriesConfigTooltipsHandleEvents} function is
-provided to automatically set \code{mouseover}, \code{mousemove}, and
-\code{mouseout} event listeners on Series to automatically update the
-visibility, content, and position of Tooltips based on the
+provided to automatically set \code{pointerover}, \code{pointermove},
+and \code{pointerout} event listeners on Series to automatically
+update the visibility, content, and position of Tooltips based on the
 \code{SeriesConfigTooltips} properties stored in the Series' data
 object. The usage of these utilities is optional, and Series modules
 are free to provide their own properties for the configuration of
@@ -1122,10 +1121,6 @@ Tooltips and their handling. However, for consistency reasons, the way
 of configuring Tooltips should not differ too much between different
 types of Series, and therefore it is recommended to use the utilities
 provided here unless there is a good reason not to.
-
-% KA TODO  There are no mouse events on touch, how solve?
-
-
 
 
 
@@ -1252,9 +1247,9 @@ the partial data object passed to this function. The
 and renders a Bar Series and an optional series of labels to annotate
 the bars of the Bar Series into the Cartesian Chart's drawing area.
 Furthermore, the scales used for rendering the Bar Series are
-visualized as Left and Bottom Axes of the Cartesian Chart, and a
-\code{mouseover} event listener to highlight bars and their
-corresponding ticks on the category axis is attached to bars.
+visualized as Left and Bottom Axes of the Cartesian Chart, and pointer
+event listener to highlight bars and their corresponding ticks on the
+category axis are attached to bars.
 
 Bar Chart Windows wrap a Bar Chart into a Layouter, so its elements
 can be laid out with CSS. They also add a Toolbar containing tools to
@@ -1612,7 +1607,7 @@ optional Point Series for the markers of individual lines, and
 optional labels for these markers. Additionally, if a Line Chart
 renders multiple lines and color-encodes them, a Legend is rendered by
 the Line Chart. Marker labels and tooltips can be configured via the
-Chart's data object. Furthermore, Line Charts attach mouse event
+Chart's data object. Furthermore, Line Charts attach pointer event
 listeners to lines, markers, and legend items to highlight related
 elements when hovering over one of them.
 
