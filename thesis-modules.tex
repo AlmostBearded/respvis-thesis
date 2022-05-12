@@ -708,15 +708,14 @@ Charts, which visualize data in a Cartesian coordinate system. The
 Cartesian Chart base module is located in the
 \code{chart-cartesian.ts} file in the Core package. The
 \code{ChartCartesian} interface describes a data object for the
-configuration of Cartesian Charts via the \code{xAxis} and
-\code{yAxis} \code{Axis} properties which describe the x and y Axes of
-the Chart respectively. Transposing Axes is a useful pattern to
-improve the responsiveness of visualizations and can be configured
-using the \code{flipped} boolean property of a Cartesian Chart's data
-object. If the \code{flipped} property is set to \code{false}, the
-\code{xAxis} object is used to configure the Bottom Axis and the
-\code{yAxis} object is used to configure the Left Axis. If it is set
-to \code{true}, it is the other way around.
+configuration of Cartesian Charts via the \code{xAxis}, \code{yAxis},
+\code{title}, and \code{subtitle} properties. Transposing Axes is a
+useful pattern to improve the responsiveness of visualizations and can
+be configured using the \code{flipped} boolean property of a Cartesian
+Chart's data object. If the \code{flipped} property is set to
+\code{false}, the \code{xAxis} object is used to configure the Bottom
+Axis and the \code{yAxis} object is used to configure the Left Axis.
+If it is set to \code{true}, it is the other way around.
 
 The \code{chartCartesianData} function is used to create a
 Cartesian Chart's data object. This function gets a partial data
