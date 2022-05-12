@@ -412,7 +412,7 @@ before rendering them. The way the Layouter works, elements affecting
 the layout need to be pre-rendered in advance, and afterwards, when
 the positions and sizes of elements are known, the visualization needs
 to be rerendered in its final form. This leads to the three-phased
-rendering process shown in Figure~\ref{fig:RenderProcess}. The three
+render process shown in Figure~\ref{fig:RenderProcess}. The three
 phases are: 1.\ the First Render phase to render elements affecting
 the layout, 2.\ the Layout Process, and 3.\ the Second Render phase to
 render elements affected by the layout. The elements affecting the
@@ -489,7 +489,7 @@ Figure~\ref{fig:RenderProcess}. The three steps are:
 \end{enumerate}
 
 
-During the replication process, the structure of an SVG document is
+During the Replication step, the structure of an SVG document is
 replicated with HTML \elname{<div>} elements, which is implemented via
 a hierarchical D3 data join, in which the original SVG elements are
 bound as data objects to layout elements. The hierarchical data join
